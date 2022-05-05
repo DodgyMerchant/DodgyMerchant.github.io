@@ -1,0 +1,39 @@
+:root {
+  --colprim1: black;
+  --colprim2: black;
+  --colsec1: black;
+  --colsec2: black;
+  --coltext1: black;
+  --coltext2: black;
+}
+
+html {
+  font-size: 100%;
+  /* line-height: 1.5rem; */
+  /* box-sizing: border-box; */
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+  html {
+    scroll-behavior: initial;
+  }
+}
+
+/* #region title*/
+
+.title-section {
+}
+
+.title-title {
+}
+
+.title-image {
+}
+
+/* #endregion */
+/* #region */
+
+/* #endregion */
