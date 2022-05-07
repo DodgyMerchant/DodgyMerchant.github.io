@@ -42,6 +42,16 @@ img {
   display: block;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome,
+  dge, Opera and Firefox */
+}
+
 /* #endregion root*/
 /* #region title*/
 
@@ -50,8 +60,6 @@ img {
   --coltitle2: #55aad8;
   --coltitle3: #7660c5;
   --coltitle4: #9811b0;
-  --dist: 6px;
-  --mult: 10;
 
   position: absolute;
   font-family: "Koulen";
@@ -61,27 +69,11 @@ img {
   line-height: 0%;
   display: flex;
   align-items: center;
-}
-#title1 {
-  color: var(--coltitle1);
-  --mult: 0;
-}
-#title2 {
-  color: var(--coltitle2);
-  --mult: 1;
-}
-#title3 {
-  color: var(--coltitle3);
-  --mult: 2;
-}
-#title4 {
-  color: var(--coltitle4);
-  --mult: 3;
-}
 
-.title-title {
-  top: calc(var(--dist) * var(--mult));
-  left: calc(var(--dist) * var(--mult));
+  /* multi text shadow */
+  color: var(--coltitle1);
+  text-shadow: 6px 6px 0 var(--coltitle2), 12px 12px 0 var(--coltitle3),
+    18px 18px 0 var(--coltitle4);
 }
 
 .title-bg {
@@ -95,6 +87,9 @@ img {
 
 /* #endregion */
 /* #region nav*/
+
+.project-title {
+}
 
 /* #endregion */
 /* #region content*/
