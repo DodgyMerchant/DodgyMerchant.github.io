@@ -1,4 +1,4 @@
-/* #region root */
+/* #region general */
 
 :root {
   --colprim1: black;
@@ -11,7 +11,7 @@
 
 html {
   font-size: 100%;
-  line-height: 1.5rem;
+  /* line-height: 1.5rem; */
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
@@ -23,26 +23,108 @@ html {
     scroll-behavior: initial;
   }
 }
-/* #endregion root*/
-/* #region title*/
 
-.title-section {
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-.title-group {
-  flex: auto;
+body {
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
 }
 
-.title-title {
-  font-family: "Koulen";
-}
-
-.title-image {
-  max-width: 100%;
+img {
+  width: 100%;
+  height: auto;
   display: block;
 }
 
+/* #endregion root*/
+/* #region title*/
+
+.title-title {
+  --coltitle1: #31feee;
+  --coltitle2: #55aad8;
+  --coltitle3: #7660c5;
+  --coltitle4: #9811b0;
+  --dist: 6px;
+  --mult: 10;
+
+  position: absolute;
+  font-family: "Koulen";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 128px;
+  line-height: 0%;
+  display: flex;
+  align-items: center;
+}
+#title1 {
+  color: var(--coltitle1);
+  --mult: 0;
+}
+#title2 {
+  color: var(--coltitle2);
+  --mult: 1;
+}
+#title3 {
+  color: var(--coltitle3);
+  --mult: 2;
+}
+#title4 {
+  color: var(--coltitle4);
+  --mult: 3;
+}
+
+.title-title {
+  top: calc(var(--dist) * var(--mult));
+  left: calc(var(--dist) * var(--mult));
+}
+
+.title-image {
+  width: 100%;
+}
+
 /* #endregion */
-/* #region */
+/* #region nav*/
+
+/* #endregion */
+/* #region content*/
+
+#content-section {
+  /* size */
+  min-height: 800px;
+
+  /* content */
+  background-color: #a691a8;
+
+  /* flex */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.content-article {
+  font-size: 1rem;
+  font-weight: normal;
+  padding: 5px;
+  width: 200px;
+  height: 200px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: aqua;
+}
+.content-article h2 {
+  margin: 0;
+}
+.content-article img {
+  width: 320px;
+  height: 180px;
+  background-color: blanchedalmond;
+}
 
 /* #endregion */
