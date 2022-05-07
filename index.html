@@ -9,42 +9,61 @@
       href="https://fonts.googleapis.com/css?family=Koulen"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Document</title>
+    <script src="js/template.js"></script>
+    <title>Dodgy_Merchant</title>
   </head>
   <body>
-    <!-- #region -->
-    <section class="title-section">
-      <div class="title-group">
-        <h1 class="title-title">Dodgy_Merchant</h1>
-        <img src="img/momma.png" alt="a nice looking cat" class="title-image" />
-      </div>
+    <header class="title-header">
+      <h1 class="title-title" id="title4">Dodgy_Merchant</h1>
+      <h1 class="title-title" id="title3">Dodgy_Merchant</h1>
+      <h1 class="title-title" id="title2">Dodgy_Merchant</h1>
+      <h1 class="title-title" id="title1">Dodgy_Merchant</h1>
+      <div class="title-bg"></div>
+    </header>
+    <section class="nav-section">
+      <h1 class="project-title">Projects</h1>
+      <nav class="topic-bar">
+        <h2>Navigation</h2>
+        <ul class="topic">
+          <li>Design</li>
+          <li>Coding</li>
+          <li>Games</li>
+        </ul>
+      </nav>
+      <nav class="filter-bar">
+        <ul class="filter-bar">
+          <li>Design</li>
+          <li>Coding</li>
+          <li>Games</li>
+          <li>Games</li>
+          <li>Games</li>
+          <li>Games</li>
+          <li>Games</li>
+          <li>Games</li>
+          <li>Games</li>
+        </ul>
+      </nav>
     </section>
-    <!-- #endregion -->
-    <!-- #region topic bar-->
-    <nav class="topic-bar">
-      <h2>Navigation</h2>
-      <ul>
-        <li>Design</li>
-        <li>Coding</li>
-        <li>Games</li>
-      </ul>
-      <ul class="topic-bar-flags">
-        <li>Design</li>
-        <li>Coding</li>
-        <li>Games</li>
-      </ul>
-    </nav>
-    <!-- #endregion -->
-    <template> </template>
-
-    <!-- #region -->
-
-    <!-- #endregion -->
-    <!-- #region -->
-
-    <!-- #endregion -->
-    <!-- #region -->
-
-    <!-- #endregion -->
+    <section id="content-section">
+      <template id="content-template">
+        <article class="content-article">
+          <h2>Project Name</h2>
+          <h3>
+            Sub Headline Text. One or Two lines of text to describe the project.
+          </h3>
+          <img src="" alt="placeholder image" />
+          <p>
+            Projekt TEXTETETET TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            TEXT TEXT
+          </p>
+        </article>
+      </template>
+      <!-- create content with JS-->
+      <script>
+        CreateContentTemplates();
+      </script>
+    </section>
+    <footer></footer>
   </body>
 </html>
