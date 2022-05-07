@@ -84,8 +84,13 @@ img {
   left: calc(var(--dist) * var(--mult));
 }
 
-.title-image {
+.title-bg {
   width: 100%;
+  height: 231px;
+  left: 0px;
+  top: 0px;
+
+  background: linear-gradient(to bottom right, #1f1264 0%, #7c0f61 100%);
 }
 
 /* #endregion */
