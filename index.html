@@ -57,27 +57,29 @@
         </ul>
       </nav>
     </section>
-    <template id="content-template">
-      <article id="content-article">
-        <h2 id="content-headline">Project Name</h2>
-        <h3 id="content-subline">
-          Sub Headline Text. One or Two lines of text to describe the project.
-        </h3>
-        <img id="content-img" src="" alt="placeholder image" />
-        <p id="content-text">
-          Projekt TEXTETETET TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-          TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-          TEXT
-        </p>
-      </article>
-    </template>
-    <section id="content-section"></section>
-    <!-- create content with JS-->
-    <script src="js/template.js"></script>
-    <!--setup-->
-    <script>
-      ContentCreate();
-    </script>
+    <section id="content-section">
+      <template id="content-template">
+        <article id="content-article">
+          <h2 id="content-headline">Project Name</h2>
+          <h3 id="content-subline">
+            Sub Headline Text. One or Two lines of text to describe the project.
+          </h3>
+          <img id="content-img" src="" alt="placeholder image" />
+          <p id="content-text">
+            Projekt TEXTETETET TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            TEXT TEXT
+          </p>
+        </article>
+      </template>
+      <section id="content-destination"></section>
+      <!-- create content with JS-->
+      <script src="js/template.js"></script>
+      <!--setup-->
+      <script>
+        ContentCreate();
+      </script>
+    </section>
     <footer></footer>
   </body>
 </html>

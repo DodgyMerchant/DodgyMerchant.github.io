@@ -7,6 +7,9 @@
   --colsec2: black;
   --coltext1: black;
   --coltext2: black;
+
+  --colbgouter: #06021a;
+  --colbginner: #1f1264;
 }
 
 html {
@@ -34,6 +37,12 @@ body {
   margin: 0 auto;
   padding: 0;
   min-height: 100vh;
+  background: linear-gradient(
+    90deg,
+    var(--colbgouter) 0%,
+    var(--colbginner) 50%,
+    var(--colbgouter) 100%
+  );
 }
 
 img {
@@ -92,6 +101,7 @@ img {
 }
 
 #project-title {
+  background-color: #06021a;
 }
 
 /* individual li elements */
@@ -142,7 +152,7 @@ img {
 /* #endregion */
 /* #region content*/
 
-#content-section {
+#content-destination {
   /* size */
   min-height: 800px;
 
