@@ -14,7 +14,7 @@ if (supportsTemplate) {
 }
 
 //setup container for content
-const container = document.getElementById("content-section");
+const container = document.getElementById("content-destination");
 const template = document.getElementById("content-template").content;
 
 function ContentCreate() {
