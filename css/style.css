@@ -20,6 +20,9 @@
 	--colTitleBG1: var(--colPalette1);
 	--colTitleBG2: var(--colPalette3);
 
+	/* text */
+	--colText: black;
+
 	/*nav*/
 	--colTopic1: #edf2f4;
 	--colTopicHover: #d7ced6;
@@ -134,6 +137,7 @@ img {
 
 li a {
 	text-decoration: none;
+	color: var(--colText);
 }
 
 /* #endregion */
