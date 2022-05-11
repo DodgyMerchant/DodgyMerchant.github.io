@@ -37,17 +37,20 @@
 					<h1 id="title-title">Dodgy_Merchant<br />Portfolio</h1>
 				</div>
 			</div>
-			<!-- Whole Page Navigation -->
-			<nav id="navigation" class="navspan">
-				<ul>
-					<li class="Fheight noselect"><a href="#about-section">About</a></li>
-					<li class="Fheight noselect"><a href="#project-section">Projects</a></li>
-				</ul>
-			</nav>
 		</header>
+		<!-- Whole Page Navigation -->
+		<nav id="navigation" class="navspan">
+			<ul>
+				<li class="Fheight selectNone"><a href="#about-div">About</a></li>
+				<li class="Fheight selectNone">
+					<a href="#project-section">Projects</a>
+				</li>
+			</ul>
+		</nav>
+		
 		<main id="page-main">
 			<!-- About me -->
-			<section id="about-section">
+			<div id="about-div">
 				<article>
 					<header>
 						<h2>Dodgy_Merchant / Malte Bönig</h2>
@@ -60,46 +63,48 @@
 						TEXT.
 					</p>
 				</article>
-			</section>
+				<aside></aside>
+			</div>
 			<!-- Project section -->
 			<section id="project-section">
 				<header>
 					<h2 id="project-title">Projects</h2>
-					<!-- filter nav -->
-					<nav id="filter-nav">
-						<!-- filter button -->
-						<button
-							id="filter-button"
-							class="sidebutton Fheight noselect"
-							onclick="filterlisttoggle()"
-						>
-							Filters
-						</button>
-						<!-- filter nav menu -->
-						<ul id="filter-list" class="noselect" style="display: none">
-							<li class="sidebutton">Design</li>
-							<li class="sidebutton">Code</li>
-							<li class="sidebutton">Game</li>
-							<li class="sidebutton">HTML</li>
-							<li class="sidebutton">Java</li>
-							<li class="sidebutton">JavaScript</li>
-							<li class="sidebutton">C++</li>
-							<li class="sidebutton">C#</li>
-							<li class="sidebutton">GML</li>
-							<li class="sidebutton">GameMaker</li>
-							<li class="sidebutton">Unity</li>
-							<li class="sidebutton">UE</li>
-						</ul>
-					</nav>
-					<!-- topic nav  -->
-					<nav id="topic-nav" class="navspan">
-						<ul class="noselect">
-							<li class="Fheight"><a>Design</a></li>
-							<li class="Fheight"><a>Coding</a></li>
-							<li class="Fheight"><a>Games</a></li>
-						</ul>
-					</nav>
+					
 				</header>
+				<!-- filter nav -->
+				<nav id="filter-nav">
+					<!-- filter button -->
+					<button
+						id="filter-button"
+						class="sidebutton Fheight selectNone"
+						onclick="filterlisttoggle()"
+					>
+						Filters
+					</button>
+					<!-- filter nav menu -->
+					<ul id="filter-list" class="selectNone" style="display: none">
+						<li class="sidebutton">Design</li>
+						<li class="sidebutton">Code</li>
+						<li class="sidebutton">Game</li>
+						<li class="sidebutton">HTML</li>
+						<li class="sidebutton">Java</li>
+						<li class="sidebutton">JavaScript</li>
+						<li class="sidebutton">C++</li>
+						<li class="sidebutton">C#</li>
+						<li class="sidebutton">GML</li>
+						<li class="sidebutton">GameMaker</li>
+						<li class="sidebutton">Unity</li>
+						<li class="sidebutton">UE</li>
+					</ul>
+				</nav>
+				<!-- topic nav  -->
+				<nav id="topic-nav" class="navspan">
+					<ul class="selectNone">
+						<li class="Fheight"><a>Design</a></li>
+						<li class="Fheight"><a>Coding</a></li>
+						<li class="Fheight"><a>Games</a></li>
+					</ul>
+				</nav>
 				<!-- content -->
 				<div id="content-div">
 					<!-- only the template -->
@@ -114,14 +119,14 @@
 							</header>
 							<img id="content-img" src="" alt="placeholder image" />
 							<p id="content-text">
-								Projekt TEXTETETET TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+								Project TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 								TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-								TEXT TEXT TEXT
+								TEXT TEXT
 							</p>
 						</article>
 					</template>
 					<!-- destination for generated content -->
-					<section id="content-destination"></section>
+					<di id="content-destination"></di>
 					<!-- first time setup for content-->
 					<script src="js/template.js"></script>
 					<!-- create content with JS-->
@@ -132,6 +137,15 @@
 			</section>
 		</main>
 		<!-- footer -->
-		<footer></footer>
+		<footer>
+			<p class="selectNone">
+				Contact me:
+				<a class="selectAll" href="mailto:admin@dodgymerchant.dev"
+					>admin@dodgymerchant.dev
+				</a>
+			</p>
+		</footer>
 	</body>
 </html>
+
+
