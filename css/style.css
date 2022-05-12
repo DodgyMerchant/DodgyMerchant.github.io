@@ -245,12 +245,22 @@ li a {
 /* #region -about*/
 
 /* #endregion -about*/
-/* #region -topic nav*/
 
+/* #region -projects*/
+
+#project-div {
+}
+#project-div header {
+}
 #project-title {
 	background-color: #d4d2e1;
 }
 
+/* #region --topic nav*/
+
+#topic-nav {
+	/* float: right; */
+}
 #topic-nav ul {
 }
 #topic-nav ul li {
@@ -262,25 +272,28 @@ li a {
 #topic-nav ul li a {
 }
 
-/* #endregion -topic nav*/
-/* #region -filter nav*/
+/* #endregion --topic nav*/
+/* #region --filter nav*/
 
 /*for all filters and the topic filter button*/
 .sidebutton {
-	width: 100%;
+	/* width: 100%; */
+	width: 125px;
+	/* max-width: 125px;
+	min-width: 50px; */
 	padding: 5px 10px;
 }
 
 #filter-nav {
-	/* display: none; */
 	background-color: var(--colNavBG);
 	float: left;
-	min-width: 50px;
-	max-width: 125px;
-	height: 1000px;
-}
-#filter-list {
-	display: none;
+	/* try flex */
+	/* display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: stretch; */
+	/* try table */
+	display: table;
 }
 
 #filter-button {
@@ -289,7 +302,11 @@ li a {
 #filter-button:hover {
 	background-color: var(--colFilterTHover);
 }
-
+#filter-list {
+	/* display: none; */
+	display: none;
+	/* flex: 1 1 auto; */
+}
 #filter-list li {
 	height: fit-content;
 	text-align: left;
@@ -299,8 +316,8 @@ li a {
 	background-color: var(--colFilterHover);
 }
 
-/* #endregion -filter nav*/
-/* #region -content*/
+/* #endregion --filter nav*/
+/* #region --content*/
 
 #content-div {
 	height: inherit;
@@ -310,7 +327,7 @@ li a {
 	align-items: stretch;
 }
 
-/* #region --generated content*/
+/* #region ---generated content*/
 
 #content-destination {
 	/* size */
@@ -349,11 +366,23 @@ li a {
 	height: auto;
 	background-color: blanchedalmond;
 }
-/* #endregion --generated content*/
+/* #endregion ---generated content*/
 
-/* #endregion -content*/
+/* #endregion --content*/
+
+/* #endregion -projects*/
+
 /* #endregion main page*/
+/* #region footer*/
 
+footer {
+	background: var(--colFilter);
+	color: var(--colText);
+	padding: 1rem 4rem;
+	height: calc(1rem * 4);
+}
+
+/* #endregion footer*/
 /* #region media*/
 
 @media screen and (max-width: 300px) {

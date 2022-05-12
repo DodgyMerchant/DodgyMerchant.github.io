@@ -43,11 +43,10 @@
 			<ul>
 				<li class="Fheight selectNone"><a href="#about-div">About</a></li>
 				<li class="Fheight selectNone">
-					<a href="#project-section">Projects</a>
+					<a href="#project-div">Projects</a>
 				</li>
 			</ul>
 		</nav>
-		
 		<main id="page-main">
 			<!-- About me -->
 			<div id="about-div">
@@ -66,10 +65,9 @@
 				<aside></aside>
 			</div>
 			<!-- Project section -->
-			<section id="project-section">
+			<div id="project-div">
 				<header>
 					<h2 id="project-title">Projects</h2>
-					
 				</header>
 				<!-- filter nav -->
 				<nav id="filter-nav">
@@ -77,12 +75,13 @@
 					<button
 						id="filter-button"
 						class="sidebutton Fheight selectNone"
-						onclick="filterlisttoggle()"
+						onclick="filterlisttoggle('filter-list')"
 					>
 						Filters
 					</button>
 					<!-- filter nav menu -->
-					<ul id="filter-list" class="selectNone" style="display: none">
+					<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
+					<ul id="filter-list" class="selectNone">
 						<li class="sidebutton">Design</li>
 						<li class="sidebutton">Code</li>
 						<li class="sidebutton">Game</li>
@@ -134,7 +133,7 @@
 						ContentCreate();
 					</script>
 				</div>
-			</section>
+			</div>
 		</main>
 		<!-- footer -->
 		<footer>
@@ -147,5 +146,3 @@
 		</footer>
 	</body>
 </html>
-
-
