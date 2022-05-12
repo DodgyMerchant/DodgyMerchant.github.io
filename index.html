@@ -69,35 +69,16 @@
 				<header>
 					<h2 id="project-title">Projects</h2>
 				</header>
-				<!-- filter nav -->
-				<nav id="filter-nav">
+				<!-- topic nav  -->
+				<nav id="topic-nav" class="navspan">
 					<!-- filter button -->
 					<button
 						id="filter-button"
 						class="sidebutton Fheight selectNone"
-						onclick="filterlisttoggle('filter-list')"
+						onclick="displayToggle('filter-list')"
 					>
 						Filters
 					</button>
-					<!-- filter nav menu -->
-					<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
-					<ul id="filter-list" class="selectNone">
-						<li class="sidebutton">Design</li>
-						<li class="sidebutton">Code</li>
-						<li class="sidebutton">Game</li>
-						<li class="sidebutton">HTML</li>
-						<li class="sidebutton">Java</li>
-						<li class="sidebutton">JavaScript</li>
-						<li class="sidebutton">C++</li>
-						<li class="sidebutton">C#</li>
-						<li class="sidebutton">GML</li>
-						<li class="sidebutton">GameMaker</li>
-						<li class="sidebutton">Unity</li>
-						<li class="sidebutton">UE</li>
-					</ul>
-				</nav>
-				<!-- topic nav  -->
-				<nav id="topic-nav" class="navspan">
 					<ul class="selectNone">
 						<li class="Fheight"><a>Design</a></li>
 						<li class="Fheight"><a>Coding</a></li>
@@ -106,6 +87,25 @@
 				</nav>
 				<!-- content -->
 				<div id="content-div">
+					<!-- filter nav -->
+					<nav id="filter-nav">
+						<!-- filter nav menu -->
+						<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
+						<ul id="filter-list" class="selectNone">
+							<li class="sidebutton">Design</li>
+							<li class="sidebutton">Code</li>
+							<li class="sidebutton">Game</li>
+							<li class="sidebutton">HTML</li>
+							<li class="sidebutton">Java</li>
+							<li class="sidebutton">JavaScript</li>
+							<li class="sidebutton">C++</li>
+							<li class="sidebutton">C#</li>
+							<li class="sidebutton">GML</li>
+							<li class="sidebutton">GameMaker</li>
+							<li class="sidebutton">Unity</li>
+							<li class="sidebutton">UE</li>
+						</ul>
+					</nav>
 					<!-- only the template -->
 					<template id="content-template">
 						<article id="content-article">

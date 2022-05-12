@@ -259,7 +259,6 @@ li a {
 /* #region --topic nav*/
 
 #topic-nav {
-	/* float: right; */
 }
 #topic-nav ul {
 }
@@ -286,24 +285,17 @@ li a {
 
 #filter-nav {
 	background-color: var(--colNavBG);
-	float: left;
-	/* try flex */
-	/* display: flex;
-	flex-flow: column nowrap;
-	justify-content: flex-start;
-	align-items: stretch; */
-	/* try table */
-	display: table;
 }
 
 #filter-button {
 	text-align: center;
+	float: left;
 }
 #filter-button:hover {
 	background-color: var(--colFilterTHover);
 }
 #filter-list {
-	/* display: none; */
+	--rememberDisplay: block;
 	display: none;
 	/* flex: 1 1 auto; */
 }
