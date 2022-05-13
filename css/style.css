@@ -23,19 +23,33 @@
 	/* text */
 	--colText: black;
 
-	/*nav*/
+	/* ////// NAV ////// */
+	/* Page Nav */
+	--colPageNav: #edf2f4;
+	--colPageNavHover: #d7ced6;
+	--colPageNavBG: #e6ecefe0;
+	--colPageNavText: black;
+	/*Topic Bar*/
 	--colTopic1: #edf2f4;
 	--colTopicHover: #d7ced6;
-
-	--colFilterT: #edf2f4; /*the filter button on the topic bar*/
-	--colFilterTHover: #d7ced6; /*the filter button on the topic bar*/
+	--colTopicBG: #e6ecefe0;
+	--colTopicText: black;
+	/* Filter Button */
+	--colFilterButton: #edf2f4; /*the filter button on the topic bar*/
+	--colFilterButtonHover: #d7ced6; /*the filter button on the topic bar*/
+	--colFilterButtonText: black;
+	/* filter List */
 	--colFilter: #edf2f4;
 	--colFilterHover: #d7ced6;
-	--colNavBG: #e6ecefe0;
+	--colFilterBG: #e6ecefe0;
+	--colFilterText: black;
 
 	/* #endregion COLORS*/
 	/* #region SIZES*/
-	--mainwidth: 1200px;
+	--mainWidth: 500px;
+
+	/* filter */
+	--filterWidth: calc(1rem * 5.6);
 	/* #endregion SIZES*/
 }
 
@@ -59,6 +73,8 @@ html {
 *::before,
 *::after {
 	box-sizing: inherit;
+	margin-block: 0;
+	padding-inline: 0;
 }
 
 body {
@@ -95,59 +111,6 @@ img {
 /* #endregion -utility classes*/
 
 /* #endregion root*/
-/* #region general nav*/
-
-/* general menu item formatting */
-#navigation ul,
-#topic-nav ul,
-#filter-list {
-	margin: 0;
-	padding: 0;
-}
-#navigation ul li,
-#topic-nav ul li,
-.sidebutton {
-	list-style: none;
-	cursor: pointer;
-	border: 1px solid rgb(28, 27, 27);
-	font-size: 1rem;
-}
-
-/*all buttons with height to font ration*/
-.Fheight {
-	--heightMult: 2.7; /*button height = font height x VAL*/
-	height: calc(1em * var(--heightMult));
-}
-
-.navspan ul {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-around;
-	align-items: stretch;
-}
-.navspan ul li {
-	padding: 0;
-	flex-grow: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: var(--colTopic1);
-}
-.navspan ul li:hover {
-	background-color: var(--colTopicHover);
-}
-.navspan ul li a {
-	width: auto;
-	height: auto;
-}
-
-li a {
-	text-decoration: none;
-	color: var(--colText);
-}
-
-/* #endregion */
-
 /* #region header page*/
 /* #region -title*/
 #title-base {
@@ -213,33 +176,153 @@ li a {
 }
 
 /* #endregion -title*/
-/* #region -navigation*/
 
-/* affected by general nav, uses .navspan */
-#navigation {
+/* #endregion header page*/
+/* #region nav */
+/* 
+
+.navspan li:hover {
+	background-color: var(--colTopicHover);
+}
+
+*/
+
+/* #region general nav*/
+/* all nav links and buttons */
+nav a,
+nav button {
+	cursor: pointer;
+	text-decoration: none;
+}
+/* all nav list items */
+nav li {
+	list-style: none;
+}
+
+/* #endregion */
+/* #region function groupings*/
+
+.fontToHeight,
+.navHor {
+	--heightMult: 2.7; /*button height = font height x VAL*/
+	height: calc(1em * var(--heightMult));
+}
+
+/* #endregion */
+/* #region horizontal nav*/
+
+.navHor {
+	/* height: 100%; */ /*.navHor standart part of .fontToHeight*/
+	width: inherit;
+
+	background-color: var(--colNavBG);
+	font-size: 1rem;
+}
+/*next big element, usually a list*/
+.navHor ul,
+#filter-button {
+	height: inherit;
+	/* flex */
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
-	width: 100%;
-	background-color: var(--colNavBG);
+	align-items: stretch;
 }
-#navigation ul {
-	justify-content: start;
-	max-width: var(--mainwidth);
+/* individual buttons */
+.navHor ul li,
+#filter-button {
+	height: inherit;
+	/* border: 1px solid rgb(28, 27, 27); */
+	padding: 0;
+	/* flex */
 	flex-grow: 1;
 }
-#navigation ul li {
-	/* max-width: 400px; */
+/* text in button */
+.navHor ul li a,
+#filter-button {
 }
-/* #endregion -navigation*/
+/* all */
+.navHor * {
+	font-size: 1em;
+	color: inherit;
+	/* color: var(--colText); */
+}
+/* #endregion horizontal nav*/
 
-/* #endregion header page*/
+/* #region page-navigation */
+#page-navigation {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+	justify-content: center;
+	/* col */
+	background-color: var(--colPageNavBG);
+	color: var(--colPageNavText);
+}
+#page-navigation ul {
+	width: var(--mainWidth);
+}
+#page-navigation li {
+	background-color: var(--colPageNav);
+}
+#page-navigation li:hover {
+	background-color: var(--colPageNavHover);
+}
+
+/* #endregion */
+/* #region filter button and list*/
+
+#filter-button,
+#filter-nav {
+	width: var(--filterWidth);
+}
+
+/* #endregion */
+/* #region filter button */
+#filter-button {
+	float: left;
+	/* col */
+	background-color: var(--colFilterButton);
+	color: var(--colFilterButtonText);
+}
+#filter-button:hover {
+	/* col */
+	background-color: var(--colFilterButtonHover);
+}
+/* #endregion */
+/* #region filter list*/
+#filter-nav {
+	font-size: 0.8rem;
+	background-color: var(--colFilterBG);
+	height: inherit;
+	color: var(--colFilterText);
+}
+#filter-nav ul {
+	width: inherit;
+	height: inherit;
+	/* display toggle stuff */
+	--rememberDisplay: block; /*holds display for toggle*/
+	display: none;
+}
+#filter-nav ul li {
+	padding: 0.6em 0.8em;
+	height: fit-content;
+	width: inherit;
+	text-align: start;
+	background-color: var(--colFilter);
+}
+#filter-list li:hover {
+	background-color: var(--colFilterHover);
+}
+/* #endregion */
+
+/* #endregion nav*/
 /* #region main page*/
 
 #page-main {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: var(--mainwidth);
+	max-width: var(--mainWidth);
 }
 
 /* #region -about*/
@@ -248,6 +331,7 @@ li a {
 
 /* #region -projects*/
 
+/* #region --general*/
 #project-div {
 }
 #project-div header {
@@ -255,60 +339,8 @@ li a {
 #project-title {
 	background-color: #d4d2e1;
 }
+/* #endregion --general*/
 
-/* #region --topic nav*/
-
-#topic-nav {
-}
-#topic-nav ul {
-}
-#topic-nav ul li {
-	background-color: var(--colTopic1);
-}
-#topic-nav ul li:hover {
-	background-color: var(--colTopicHover);
-}
-#topic-nav ul li a {
-}
-
-/* #endregion --topic nav*/
-/* #region --filter nav*/
-
-/*for all filters and the topic filter button*/
-.sidebutton {
-	/* width: 100%; */
-	width: 125px;
-	/* max-width: 125px;
-	min-width: 50px; */
-	padding: 5px 10px;
-}
-
-#filter-nav {
-	background-color: var(--colNavBG);
-}
-
-#filter-button {
-	text-align: center;
-	float: left;
-}
-#filter-button:hover {
-	background-color: var(--colFilterTHover);
-}
-#filter-list {
-	--rememberDisplay: block;
-	display: none;
-	/* flex: 1 1 auto; */
-}
-#filter-list li {
-	height: fit-content;
-	text-align: left;
-	background-color: var(--colFilter);
-}
-#filter-list li:hover {
-	background-color: var(--colFilterHover);
-}
-
-/* #endregion --filter nav*/
 /* #region --content*/
 
 #content-div {
