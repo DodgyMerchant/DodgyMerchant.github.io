@@ -9,17 +9,19 @@
 	--colPalette5: #5e2550;
 	--colPalette6: #9811b0;
 	/* baackground */
-	--colBG: #2f14a8;
-	/* title */
+	--colBG: #cfbbcc;
+	/* title, h1*/
 	--colTitle1: #31feee;
 	--colTitle2: #55aad8;
 	--colTitle3: #7660c5;
 	--colTitle4: #9811b0;
-
 	/* title background */
 	--colTitleBG1: var(--colPalette1);
 	--colTitleBG2: var(--colPalette3);
-
+	/* Section Headlines, h2 */
+	--colHeadline: rgb(233, 41, 159);
+	/* Subheadlines */
+	--colSubline: #360733;
 	/* text */
 	--colText: black;
 
@@ -28,11 +30,10 @@
 	--colPageNav: #edf2f4;
 	--colPageNavHover: #d7ced6;
 	--colPageNavBG: #e6ecefe0;
-	--colPageNavText: black;
+	--colPageNavText: rgb(50, 196, 201);
 	/*Topic Bar*/
 	--colTopic1: #edf2f4;
 	--colTopicHover: #d7ced6;
-	--colTopicBG: #e6ecefe0;
 	--colTopicText: black;
 	/* Filter Button */
 	--colFilterButton: #edf2f4; /*the filter button on the topic bar*/
@@ -44,10 +45,24 @@
 	--colFilterBG: #e6ecefe0;
 	--colFilterText: black;
 
+	/* content */
+	--colContentBorder: rgb(3, 18, 56);
+	--colContentBG: rgb(198, 211, 235);
+	/*  */
+	--colFooterBG: white;
 	/* #endregion COLORS*/
+	/* #region FONTS*/
+	--fontTitle: "Koulen", Impact;
+	--fontHeadline: "Audiowide", sans-serif;
+	--fontSubline: "Josefin Sans", sans-serif;
+	--fontText: "Josefin Sans", sans-serif;
+	--fontFooter: "Courier Prime", monospace;
+	--fontNavPage: var(--fontHeadline);
+	--fontNav: var(--fontText);
+	--fontNavFilter: var(--fontText);
+	/* #endregion */
 	/* #region SIZES*/
-	--mainWidth: 500px;
-
+	--mainWidth: 1000px;
 	/* filter */
 	--filterWidth: calc(1rem * 5.6);
 	/* #endregion SIZES*/
@@ -56,11 +71,13 @@
 /* #region -groundwork */
 html {
 	font-size: 100%;
-	/* line-height: 1.5rem; */
 	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: var(--fontText);
 	height: 100%;
 	scroll-behavior: smooth;
+}
+html p {
+	line-height: 1.5rem;
 }
 
 @media (prefers-reduced-motion) {
@@ -111,8 +128,7 @@ img {
 /* #endregion -utility classes*/
 
 /* #endregion root*/
-/* #region header page*/
-/* #region -title*/
+/* #region title*/
 #title-base {
 	/* font-size: calc(1rem * 4); */
 	font-size: calc(16px * 4);
@@ -155,8 +171,9 @@ img {
 	margin: 0;
 	width: 100%;
 	height: 100%;
-	font-family: "Koulen";
+	font-family: var(--fontTitle);
 	font-style: normal;
+	text-transform: uppercase;
 	font-weight: 400;
 	line-height: 100%;
 	font-size: 100%;
@@ -175,17 +192,8 @@ img {
 		var(--ttsc3) var(--ttsc3) 0 var(--colTitle4);
 }
 
-/* #endregion -title*/
-
-/* #endregion header page*/
+/* #endregion title*/
 /* #region nav */
-/* 
-
-.navspan li:hover {
-	background-color: var(--colTopicHover);
-}
-
-*/
 
 /* #region general nav*/
 /* all nav links and buttons */
@@ -198,29 +206,33 @@ nav button {
 nav li {
 	list-style: none;
 }
+/* all */
+nav * {
+	font-family: inherit;
+	font-size: 1em;
+	color: inherit;
+}
 
 /* #endregion */
 /* #region function groupings*/
 
 .fontToHeight,
 .navHor {
-	--heightMult: 2.7; /*button height = font height x VAL*/
-	height: calc(1em * var(--heightMult));
+	--fontToHeight: 2; /*individual var possible*/
+	height: calc(1em * var(--fontToHeight));
 }
 
 /* #endregion */
 /* #region horizontal nav*/
 
 .navHor {
-	/* height: 100%; */ /*.navHor standart part of .fontToHeight*/
+	/* height: 100%; */ /*.navHor standard part of .fontToHeight*/
 	width: inherit;
-
 	background-color: var(--colNavBG);
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 /*next big element, usually a list*/
-.navHor ul,
-#filter-button {
+.navHor ul {
 	height: inherit;
 	/* flex */
 	display: flex;
@@ -237,27 +249,32 @@ nav li {
 	/* flex */
 	flex-grow: 1;
 }
-/* text in button */
-.navHor ul li a,
-#filter-button {
-}
-/* all */
-.navHor * {
-	font-size: 1em;
-	color: inherit;
-	/* color: var(--colText); */
-}
 /* #endregion horizontal nav*/
 
+/* #region page and topic*/
+
+#page-navigation ul li,
+#topic-nav ul li {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* #endregion */
 /* #region page-navigation */
 #page-navigation {
+	/* heigth multiplier */
+	--fontToHeight: 2;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
 	justify-content: center;
 	/* col */
-	background-color: var(--colPageNavBG);
+	background: var(--colPageNavBG);
 	color: var(--colPageNavText);
+	/* font */
+	font-family: var(--fontNavPage);
+	font-size: 2rem;
 }
 #page-navigation ul {
 	width: var(--mainWidth);
@@ -267,6 +284,21 @@ nav li {
 }
 #page-navigation li:hover {
 	background-color: var(--colPageNavHover);
+}
+
+/* #endregion */
+/* #region topic bar*/
+
+#topic-nav {
+	/* col */
+	color: var(--colTopicText);
+}
+
+#topic-nav li {
+	background-color: var(--colTopic1);
+}
+#topic-nav li:hover {
+	background-color: var(--colTopicHover);
 }
 
 /* #endregion */
@@ -293,16 +325,17 @@ nav li {
 /* #region filter list*/
 #filter-nav {
 	font-size: 0.8rem;
-	background-color: var(--colFilterBG);
+	background: var(--colFilterBG);
 	height: inherit;
 	color: var(--colFilterText);
+
+	/* display toggle stuff */
+	--rememberDisplay: block; /*holds display for toggle*/
+	display: none;
 }
 #filter-nav ul {
 	width: inherit;
 	height: inherit;
-	/* display toggle stuff */
-	--rememberDisplay: block; /*holds display for toggle*/
-	display: none;
 }
 #filter-nav ul li {
 	padding: 0.6em 0.8em;
@@ -325,22 +358,34 @@ nav li {
 	max-width: var(--mainWidth);
 }
 
+header h2 {
+	font-size: 3rem;
+	color: var(--colHeadline);
+	font-family: var(--fontHeadline);
+}
+/* subheadline */
+header h2 + p {
+	font-size: 1.5rem;
+	color: var(--colSubline);
+	font-family: var(--fontSubline);
+}
+/* article*/
+article > p {
+	font-size: 1rem;
+	color: var(--colText);
+	font-family: var(--fontText);
+}
+
 /* #region -about*/
 
 /* #endregion -about*/
-
 /* #region -projects*/
 
 /* #region --general*/
 #project-div {
 }
-#project-div header {
-}
-#project-title {
-	background-color: #d4d2e1;
-}
-/* #endregion --general*/
 
+/* #endregion --general*/
 /* #region --content*/
 
 #content-div {
@@ -356,17 +401,12 @@ nav li {
 #content-destination {
 	/* size */
 	width: auto;
-
-	/* content */
-	/* background-color: #a691a8; */
-	/* me as flex item */
 	flex-grow: 1;
 
 	/* flex */
 	display: flex;
 	justify-content: space-evenly;
 	flex-flow: row wrap;
-	/* background-color: #9811b0; */
 }
 #content-article {
 	font-size: 1rem;
@@ -377,9 +417,9 @@ nav li {
 	max-width: 300px;
 
 	min-height: 200px;
-	border: 3px solid black;
+	border: 3px solid var(--colContentBorder, black);
 	border-radius: 10px;
-	background-color: aqua;
+	background: var(--colContentBG);
 }
 #content-article h2 {
 	margin: 0;
@@ -400,10 +440,17 @@ nav li {
 /* #region footer*/
 
 footer {
-	background: var(--colFilter);
+	background: var(--colFooterBG);
 	color: var(--colText);
-	padding: 1rem 4rem;
+	font-family: var(--fontFooter);
+	padding: 0 2rem;
+	padding-bottom: 0.5rem;
 	height: calc(1rem * 4);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-end;
+	justify-content: space-between;
 }
 
 /* #endregion footer*/

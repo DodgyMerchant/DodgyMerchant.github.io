@@ -56,3 +56,4 @@ function getIdStyle(_id) {
 	var _el = document.getElementById(_id);
 	return getComputedStyle(_el);
 }
+

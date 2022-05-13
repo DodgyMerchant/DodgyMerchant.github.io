@@ -20,10 +20,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="img/Logo.png" sizes="100x100" />
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- prettier-ignore -->
 		<link
+			href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee+Hairline&family=Courier+Prime&family=Josefin+Sans&family=Koulen&display=swap"
 			rel="stylesheet"
-			href="https://fonts.googleapis.com/css?family=Koulen"
 		/>
+
 		<link rel="stylesheet" href="css/style.css" />
 		<title>Dodgy_Merchant Portfolio</title>
 		<script src="js/code.js"></script>
@@ -54,14 +59,14 @@
 			<div id="about-div">
 				<article>
 					<header>
-						<h2>Dodgy_Merchant / Malte Bönig</h2>
-						<p>Some subtitle</p>
+						<h2>About</h2>
+						<p>Dodgy_Merchant / Malte Bönig</p>
 					</header>
 					<p>
-						TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-						TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-						TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-						TEXT.
+						Text Text Text Text Text Text Text Text Text Text Text Text Text
+						Text Text Text Text Text Text Text Text Text Text Text Text Text
+						Text Text Text Text Text Text Text Text Text Text Text Text Text
+						Text.
 					</p>
 				</article>
 				<aside></aside>
@@ -69,23 +74,19 @@
 			<!-- Project section -->
 			<div id="project-div">
 				<header>
-					<h2 id="project-title">Projects</h2>
+					<h2>Projects</h2>
 				</header>
 				<!-- topic nav  -->
 				<nav id="topic-nav" class="navHor selectNone">
 					<!-- filter button -->
-					<button
-						id="filter-button"
-						class="navbutton sidebutton"
-						onclick="displayToggle('filter-list')"
-					>
+					<button id="filter-button" onclick="displayToggle('filter-nav')">
 						Filters
 					</button>
 					<!-- topic list -->
 					<ul>
-						<li class=""><a>Design</a></li>
-						<li class=""><a>Coding</a></li>
-						<li class=""><a>Games</a></li>
+						<li>Design</li>
+						<li>Coding</li>
+						<li>Games</li>
 					</ul>
 				</nav>
 				<!-- content -->
@@ -94,19 +95,19 @@
 					<nav id="filter-nav">
 						<!-- filter nav menu -->
 						<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
-						<ul id="filter-list" class="selectNone">
-							<li class="">Design</li>
-							<li class="">Code</li>
-							<li class="">Game</li>
-							<li class="">HTML</li>
-							<li class="">Java</li>
-							<li class="">JavaScript</li>
-							<li class="">C++</li>
-							<li class="">C#</li>
-							<li class="">GML</li>
-							<li class="">GameMaker</li>
-							<li class="">Unity</li>
-							<li class="">UE</li>
+						<ul class="selectNone">
+							<li>Design</li>
+							<li>Code</li>
+							<li>Game</li>
+							<li>HTML</li>
+							<li>Java</li>
+							<li>JavaScript</li>
+							<li>C++</li>
+							<li>C#</li>
+							<li>GML</li>
+							<li>GameMaker</li>
+							<li>Unity</li>
+							<li>UE</li>
 						</ul>
 					</nav>
 					<!-- only the template -->
@@ -114,23 +115,23 @@
 						<article id="content-article">
 							<header>
 								<h2 id="content-headline">Project Name</h2>
-								<h3 id="content-subline">
-									Sub Headline Text. One or Two lines of text to describe the
+								<p id="content-subline">
+									Sub headline text. One or Two lines of text to describe the
 									project.
-								</h3>
+								</p>
 							</header>
 							<img id="content-img" src="" alt="placeholder image" />
-							<p id="content-text">
-								Project TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-								TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-								TEXT TEXT
+							<p id="content-Text">
+								Project Text Text Text Text Text Text Text Text Text Text Text
+								Text Text Text Text Text Text Text Text Text Text Text Text Text
+								Text Text
 							</p>
 						</article>
 					</template>
 					<!-- destination for generated content -->
 					<di id="content-destination"></di>
 					<!-- first time setup for content-->
-					<script src="js/template.js"></script>
+					<script src="js/content.js"></script>
 					<!-- create content with JS-->
 					<script>
 						ContentCreate();
