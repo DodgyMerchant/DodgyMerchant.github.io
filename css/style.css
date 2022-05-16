@@ -2,22 +2,29 @@
 
 :root {
 	/* #region COLORS */
-	--colPalette1: #1f1264;
-	--colPalette2: #ff88ac;
-	--colPalette3: #7c0f61;
-	--colPalette4: #31feee;
-	--colPalette5: #5e2550;
-	--colPalette6: #9811b0;
-	/* baackground */
-	--colBG: #cfbbcc;
+	--colBlack: #0b0015;
+	--colballer: #8c00ff;
+	/* background */
+	/* prettier-ignore */
+	--colBG: no-repeat
+  /* fixed */
+  linear-gradient(180deg,
+  #44195e,
+  var(--colBlack) 70%,
+  #00d0ff );
+	/* main */
+	/* prettier-ignore */
+	--colmainBG:
+  fixed
+  linear-gradient(180deg, #aa7ebb93, #aa7ebb93);
 	/* title, h1*/
 	--colTitle1: #31feee;
 	--colTitle2: #55aad8;
 	--colTitle3: #7660c5;
 	--colTitle4: #9811b0;
 	/* title background */
-	--colTitleBG1: var(--colPalette1);
-	--colTitleBG2: var(--colPalette3);
+	--colTitleBG1: #1f1264;
+	--colTitleBG2: #7c0f61;
 	/* Section Headlines, h2 */
 	--colHeadline: rgb(233, 41, 159);
 	/* Subheadlines */
@@ -48,11 +55,14 @@
 	/* content */
 	--colContentBorder: rgb(3, 18, 56);
 	--colContentBG: rgb(198, 211, 235);
-	/*  */
-	--colFooterBG: white;
+	/* prettier-ignore */
+	--colFooterBG: linear-gradient(
+    #9bb0af00,
+    #9bb0af 20%);
 	/* #endregion COLORS*/
 	/* #region FONTS*/
-	--fontTitle: "Koulen", Impact;
+	/* --fontTitle: "Koulen", Impact; */
+	--fontTitle: "Audiowide", Impact;
 	--fontHeadline: "Audiowide", sans-serif;
 	--fontSubline: "Josefin Sans", sans-serif;
 	--fontText: "Josefin Sans", sans-serif;
@@ -73,7 +83,7 @@ html {
 	font-size: 100%;
 	box-sizing: border-box;
 	font-family: var(--fontText);
-	height: 100%;
+	min-height: 100%;
 	scroll-behavior: smooth;
 }
 html p {
@@ -97,8 +107,10 @@ html p {
 body {
 	margin: 0 auto;
 	padding: 0;
-	min-height: 100vh;
-	background-color: var(--colBG);
+	height: 100%;
+	background: var(--colBG);
+	/* background-repeat: no-repeat;
+  background-attachment: fixed; */
 }
 
 img {
@@ -131,38 +143,51 @@ img {
 /* #region title*/
 #title-base {
 	/* font-size: calc(1rem * 4); */
-	font-size: calc(16px * 4);
-}
-#title {
-	font-size: 2em;
-	/* x&y offset of title*/
-	--titlexoff: calc(1em * 0.5);
-	--titleyoff: calc(1em * 0.5);
-	/*uses current font size*/
-	height: calc((1em * 2) * 1.1 + var(--titleyoff));
-	width: 100%;
-	padding-left: calc(1em * 0.09 + var(--titlexoff));
-	padding-top: var(--titleyoff);
-
+	font-size: calc(16px * 2.5);
 	background: linear-gradient(
 		to bottom right,
 		var(--colTitleBG1) 0%,
 		var(--colTitleBG2) 100%
 	);
 }
+#title {
+	font-size: 1em; /*control value*/
+	/* x&y offset of title*/
+	--TtopOff: calc(1em * 0.5);
+	--TleftOff: calc(1em * 0);
+	--TbottomOff: calc(1em * 0.2);
+	/* title title shadow offset vars*/
+	--TshadowOff1: calc(1 * 1em * 0.08);
+	--TshadowOff2: calc(2 * 1em * 0.08);
+	--TshadowOff3: calc(3 * 1em * 0.08);
+
+	/* comp values try to compensate for not easily detectable offsets in some way */
+	/*comp on the left of text for undetectable top offset in font*/
+	--titleLeftComp: calc(1em * 0.09);
+	/*comp for the bottom for multi shadow offsets*/
+	--titleBottomComp: calc(var(--TshadowOff3) + (1em * 0.14) * -1);
+	/*uses current font size*/
+
+	height: auto;
+	width: 100%;
+	padding-left: calc(var(--titleLeftComp) + var(--TleftOff));
+	padding-top: var(--TtopOff);
+	padding-bottom: calc(var(--titleBottomComp) + var(--TbottomOff));
+	/* position middle to main */
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--mainWidth);
+}
 
 /* #region media title size*/
 
 /* prettier-ignore */
-@media screen and (max-width: 375px)							{#title{font-size: 0.5em;	}}
-/* prettier-ignore */
-@media screen and (min-width: 376px) and	(max-width: 500px)	{#title{font-size: 0.65em;	}}
-/* prettier-ignore */
-@media screen and (min-width: 501px) and	(max-width: 600px)	{#title{font-size: 0.9em;	}}
-/* prettier-ignore */
-@media screen and (min-width: 601px) and	(max-width: 800px)	{#title{font-size: 1em;		}}
-/* prettier-ignore */
-@media screen and (min-width: 801px) and	(max-width: 1200px)	{#title{font-size: 1.5em;	}}
+@media screen and (max-width: 375px)							            {#title{font-size: 0.5em;	}} /* prettier-ignore */
+@media screen and (min-width: 376px) and	(max-width: 500px)	{#title{font-size: 0.65em;}} /* prettier-ignore */
+@media screen and (min-width: 501px) and	(max-width: 600px)	{#title{font-size: 0.9em;	}} /* prettier-ignore */
+@media screen and (min-width: 601px) and	(max-width: 800px)	{#title{font-size: 1em;		}} /* prettier-ignore */
+@media screen and (min-width: 801px) and	(max-width: 1200px)	{#title{font-size: 1.5em;	}} /* prettier-ignore */
+@media screen and (min-width: 1201px)                         {#title{font-size: 2em;   }}
 
 /* @media screen and (min-width: 1201px) and (max-width: 2000px) {#title{font-size: 2em;}} */
 /* #endregion */
@@ -178,18 +203,12 @@ img {
 	line-height: 100%;
 	font-size: 100%;
 
-	/* multi text shadow */
-
-	--ttsc1: calc(1 * 1em * 0.08);
-	--ttsc2: calc(2 * 1em * 0.08);
-	--ttsc3: calc(3 * 1em * 0.08);
-
 	color: var(--colTitle1);
 	/* prettier-ignore */
 	text-shadow:
-    var(--ttsc1) var(--ttsc1) 0 var(--colTitle2),
-		var(--ttsc2) var(--ttsc2) 0 var(--colTitle3),
-		var(--ttsc3) var(--ttsc3) 0 var(--colTitle4);
+    var(--TshadowOff1) var(--TshadowOff1) 0 var(--colTitle2),
+		var(--TshadowOff2) var(--TshadowOff2) 0 var(--colTitle3),
+		var(--TshadowOff3) var(--TshadowOff3) 0 var(--colTitle4);
 }
 
 /* #endregion title*/
@@ -206,6 +225,12 @@ nav button {
 nav li {
 	list-style: none;
 }
+/* all nav list items */
+nav li,
+#filter-button {
+	border: 1px solid rgba(0, 0, 0, 0.156);
+}
+
 /* all */
 nav * {
 	font-family: inherit;
@@ -244,7 +269,6 @@ nav * {
 .navHor ul li,
 #filter-button {
 	height: inherit;
-	/* border: 1px solid rgb(28, 27, 27); */
 	padding: 0;
 	/* flex */
 	flex-grow: 1;
@@ -344,7 +368,7 @@ nav * {
 	text-align: start;
 	background-color: var(--colFilter);
 }
-#filter-list li:hover {
+#filter-nav li:hover {
 	background-color: var(--colFilterHover);
 }
 /* #endregion */
@@ -356,26 +380,32 @@ nav * {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: var(--mainWidth);
+	background: var(--colmainBG);
 }
 
 header h2 {
-	font-size: 3rem;
 	color: var(--colHeadline);
 	font-family: var(--fontHeadline);
 }
 /* subheadline */
-header h2 + p {
-	font-size: 1.5rem;
+header h2 ~ p {
+	/* font-size: 1.5rem; */
 	color: var(--colSubline);
 	font-family: var(--fontSubline);
 }
 /* article*/
 article > p {
-	font-size: 1rem;
 	color: var(--colText);
 	font-family: var(--fontText);
 }
-
+#about-div header h2,
+#project-div header h2 {
+	font-size: 3rem;
+}
+#about-div header h2 ~ p,
+#project-div header h2 ~ p {
+	font-size: 1.5rem;
+}
 /* #region -about*/
 
 /* #endregion -about*/
@@ -396,8 +426,7 @@ article > p {
 	align-items: stretch;
 }
 
-/* #region ---generated content*/
-
+/* generated */
 #content-destination {
 	/* size */
 	width: auto;
@@ -430,7 +459,6 @@ article > p {
 	height: auto;
 	background-color: blanchedalmond;
 }
-/* #endregion ---generated content*/
 
 /* #endregion --content*/
 
