@@ -2,16 +2,23 @@
 
 :root {
 	/* #region COLORS */
+	/*
+  Purple Baller: #8c00ff;
+  Deep Dark Purple: #44195e
+  Deeper Darker Purple: #170721
+  */
 	--colBlack: #0b0015;
-	--colballer: #8c00ff;
+
 	/* background */
 	/* prettier-ignore */
-	--colBG: no-repeat
+	--colBG:
+  no-repeat
   /* fixed */
   linear-gradient(180deg,
   #44195e,
   var(--colBlack) 70%,
-  #00d0ff );
+  #005f74 );
+	/* prettier-ignore */
 	/* main */
 	/* prettier-ignore */
 	--colmainBG:
@@ -23,14 +30,18 @@
 	--colTitle3: #7660c5;
 	--colTitle4: #9811b0;
 	/* title background */
-	--colTitleBG1: #1f1264;
-	--colTitleBG2: #7c0f61;
+	/* prettier-ignore */
+	--colTitleBG: linear-gradient(
+		to bottom right,
+		#1f1264 0%,
+		#7c0f61 100%
+	);
 	/* Section Headlines, h2 */
 	--colHeadline: rgb(233, 41, 159);
 	/* Subheadlines */
 	--colSubline: #360733;
 	/* text */
-	--colText: black;
+	--colText: rgb(0, 0, 0);
 
 	/* ////// NAV ////// */
 	/* Page Nav */
@@ -56,9 +67,7 @@
 	--colContentBorder: rgb(3, 18, 56);
 	--colContentBG: rgb(198, 211, 235);
 	/* prettier-ignore */
-	--colFooterBG: linear-gradient(
-    #9bb0af00,
-    #9bb0af 20%);
+	--colFooterBG: white;
 	/* #endregion COLORS*/
 	/* #region FONTS*/
 	/* --fontTitle: "Koulen", Impact; */
@@ -144,11 +153,7 @@ img {
 #title-base {
 	/* font-size: calc(1rem * 4); */
 	font-size: calc(16px * 2.5);
-	background: linear-gradient(
-		to bottom right,
-		var(--colTitleBG1) 0%,
-		var(--colTitleBG2) 100%
-	);
+	background: var(--colTitleBG);
 }
 #title {
 	font-size: 1em; /*control value*/
