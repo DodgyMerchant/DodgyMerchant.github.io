@@ -57,3 +57,79 @@ function getIdStyle(_id) {
 	return getComputedStyle(_el);
 }
 
+//#region filter
+function filterSelection(tag) {
+	let elements, effectiveTag, i;
+	elements = document.getElementsByClassName("filtered");
+	if (tag == "all") {
+		effectiveTag = "";
+	} else {
+		effectiveTag = tag;
+	}
+	// Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+	for (i = 0; i < elements.length; i++) {
+		if (elements[i].className.indexOf(effectiveTag) > -1) {
+			w3AddClass(elements[i], "show");
+		} else {
+			w3RemoveClass(elements[i], "show");
+		}
+	}
+
+	let filter, ii;
+	let filterContainer = document.getElementsByClassName("filterContainer");
+	for (i = 0; i < filterContainer.length; i++) {
+		filter = filterContainer[i].getElementsByClassName("filter");
+		for (ii = 0; ii < filter.length; ii++) {
+			if (filter[ii].className.split(" ").includes(tag)) {
+				w3AddClass(filter[ii], "active");
+			} else {
+				w3RemoveClass(filter[ii], "active");
+			}
+		}
+	}
+}
+
+// Show filtered elements
+function w3AddClass(element, name) {
+	let i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		if (arr1.indexOf(arr2[i]) == -1) {
+			element.className += " " + arr2[i];
+		}
+	}
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+	let i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		while (arr1.indexOf(arr2[i]) > -1) {
+			arr1.splice(arr1.indexOf(arr2[i]), 1);
+		}
+	}
+	element.className = arr1.join(" ");
+}
+
+// Add active class to the current control button (highlight it)
+function filterSetup() {
+	let filter, i, ii;
+
+	let func = function () {
+		let arr = this.className.split(" ");
+		filterSelection(arr[arr.indexOf("filter") + 1]);
+	};
+
+	let filterContainer = document.getElementsByClassName("filterContainer");
+	for (i = 0; i < filterContainer.length; i++) {
+		filter = filterContainer[i].getElementsByClassName("filter");
+		for (ii = 0; ii < filter.length; ii++) {
+			filter[ii].addEventListener("click", func);
+		}
+	}
+}
+
+//#endregion

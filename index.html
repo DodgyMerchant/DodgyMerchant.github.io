@@ -2,10 +2,7 @@
 <html lang="en">
 	<head>
 		<!-- #region Global site tag (gtag.js) - Google Analytics -->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-P2RX44N8JS"
-		></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2RX44N8JS"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
@@ -44,7 +41,7 @@
 			</div>
 		</header>
 		<!-- Whole Page Navigation -->
-		<nav id="page-navigation" class="navHor selectNone">
+		<nav id="page-navigation" class="clickable-container navHor selectNone">
 			<ul>
 				<a href="#about-div"><li>About</li></a>
 				<a href="#project-div"><li>Projects</li></a>
@@ -58,12 +55,7 @@
 						<h2>About</h2>
 						<p>Dodgy_Merchant / Malte Bönig</p>
 					</header>
-					<p>
-						Text Text Text Text Text Text Text Text Text Text Text Text Text
-						Text Text Text Text Text Text Text Text Text Text Text Text Text
-						Text Text Text Text Text Text Text Text Text Text Text Text Text
-						Text.
-					</p>
+					<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text.</p>
 				</article>
 				<aside></aside>
 			</div>
@@ -76,14 +68,13 @@
 				<!-- topic nav  -->
 				<nav id="topic-nav" class="navHor selectNone">
 					<!-- filter button -->
-					<button id="filter-button" onclick="displayToggle('filter-nav')">
-						Filters
-					</button>
+					<button id="filter-button" class="clickable" onclick="displayToggle('filter-nav')">Filters</button>
 					<!-- topic list -->
-					<ul>
-						<li>Design</li>
-						<li>Coding</li>
-						<li>Games</li>
+					<ul class="filterContainer clickable-container">
+						<li class="filter all">All</li>
+						<li class="filter game">Games</li>
+						<li class="filter code">Coding</li>
+						<li class="filter game-des">Game Design</li>
 					</ul>
 				</nav>
 				<!-- content -->
@@ -92,46 +83,60 @@
 					<nav id="filter-nav">
 						<!-- filter nav menu -->
 						<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
-						<ul class="selectNone">
-							<li>Design</li>
-							<li>Code</li>
-							<li>Game</li>
-							<li>HTML</li>
-							<li>Java</li>
-							<li>JavaScript</li>
-							<li>C++</li>
-							<li>C#</li>
-							<li>GML</li>
-							<li>GameMaker</li>
-							<li>Unity</li>
-							<li>UE</li>
+						<ul class="filterContainer clickable-container selectNone">
+							<!-- general -->
+							<!-- <li class="filter game" >Games</li> -->
+							<li class="filter game">Games</li>
+							<li class="filter code">Code</li>
+
+							<!-- fields -->
+							<li class="filter game-des">Game Design</li>
+							<li class="filter system-des">System Design</li>
+							<li class="filter level-des">Level Design</li>
+							<li class="filter game-prog">Game Programm.</li>
+							<li class="filter ai-prog">AI Programm.</li>
+							<li class="filter gamepl-eng">Gameplay Engineer</li>
+							<li class="filter tech-art">Technical Artist</li>
+							<li class="filter vis-des">Visual Design</li>
+							<li class="filter asset-art">Asset Artist</li>
+
+							<!-- languages -->
+							<li class="filter HTML">HTML</li>
+							<li class="filter Java">Java</li>
+							<li class="filter JS">JavaScript</li>
+							<li class="filter C++">C++</li>
+							<li class="filter C#">C#</li>
+							<li class="filter GML">GML</li>
+							<!-- engines -->
+							<li class="filter GM">GameMaker</li>
+							<li class="filter Unity">Unity</li>
+							<li class="filter UE">Unreal</li>
+							<li class="filter Phaser">Unreal</li>
 						</ul>
 					</nav>
 					<!-- only the template -->
 					<template id="content-template">
-						<article id="content-article">
+						<article id="content-article" class="filtered">
 							<header>
 								<h2 id="content-headline">Project Name</h2>
-								<p id="content-subline">
-									Sub headline text. One or Two lines of text to describe the
-									project.
-								</p>
+								<p id="content-subline">Sub headline text. One or Two lines of text to describe the project.</p>
 							</header>
 							<img id="content-img" src="" alt="placeholder image" />
-							<p id="content-Text">
-								Project Text Text Text Text Text Text Text Text Text Text Text
-								Text Text Text Text Text Text Text Text Text Text Text Text Text
-								Text Text
-							</p>
+							<p id="content-Text">Project Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text</p>
 						</article>
 					</template>
 					<!-- destination for generated content -->
 					<div id="content-destination"></div>
-					<!-- first time setup for content-->
+
 					<script src="js/content.js"></script>
-					<!-- create content with JS-->
 					<script>
-						ContentCreate();
+						fetch("././content/content.json")
+							.then((results) => results.json())
+							.then(ContentCreate)
+							.then(() => {
+								filterSelection("all");
+							});
+						filterSetup();
 					</script>
 				</div>
 			</div>
@@ -140,9 +145,7 @@
 		<footer>
 			<p class="selectNone">
 				Contact me:
-				<a class="selectAll" href="mailto:admin@dodgymerchant.dev"
-					>admin@dodgymerchant.dev
-				</a>
+				<a class="selectAll" href="mailto:admin@dodgymerchant.dev">admin@dodgymerchant.dev </a>
 			</p>
 		</footer>
 	</body>

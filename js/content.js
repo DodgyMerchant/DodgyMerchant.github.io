@@ -1,68 +1,53 @@
 //#region  base setup
-//check for template support
-const supportsTemplate = document.createElement("template").content;
+//check for Template support
+const supportsTemplate = document.createElement("Template").content;
 
 //continue or exit
 if (supportsTemplate) {
-	console.log("Your browser supports template!");
+	console.log("Your browser supports Template!");
 } else {
-	console.log("Your browser does NOT support template!!!");
-	alert(
-		"Your browser does not fully support this website!\n My portfolio projects won't be displayed currently."
-	);
+	console.log("Your browser does NOT support Template!!!");
+	alert("Your browser does not fully support this website!\n My portfolio projects won't be displayed currently.");
 	// throw new Error();
 	stop(); //this is not optimal
 }
 
-//setup container for content
-const container = document.getElementById("content-destination");
-const template = document.getElementById("content-template").content;
+//setup Container for content
+const Container = document.getElementById("content-destination");
+const Template = document.getElementById("content-template").content;
 
 //#endregion
 
-function ContentCreate() {
+function ContentCreate(data) {
 	if (!supportsTemplate) return;
+	let entry, i, _newClone, img;
 
-	var _elements = document.querySelectorAll(".project-data");
-	var _leng = _elements.length;
-	for (var i = 0; i < _leng; i++) {
-		_elements[i].id = "abc-" + i;
+	for (i = 0; i < data.length; i++) {
+		entry = data[i];
+
+		_newClone = document.importNode(Template, true);
+
+		_newClone.getElementById("content-article").classList.add(entry.topics);
+		_newClone.getElementById("content-headline").innerText = entry.headline;
+		_newClone.getElementById("content-subline").innerText = entry.sub;
+		_newClone.getElementById("content-Text").innerText = entry.text;
+		img = _newClone.getElementById("content-img");
+		img.src = "./content/" + entry.imageURL;
+		img.alt = entry.imageAlt;
+
+		Container.appendChild(_newClone);
 	}
-
-	var _elements = document.querySelectorAll(".project-data");
-	var _leng = _elements.length;
-	for (var i = 0; i < _leng; i++) {
-		_elements[i].id = "abc-" + i;
-	}
-
-	var _new_node = ContentCreateArticle(template); //creates a new article with no info
-	var _new_node = ContentCreateArticle(template); //creates a new article with no info
-	var _new_node = ContentCreateArticle(template); //creates a new article with no info
-	var _new_node = ContentCreateArticle(template); //creates a new article with no info
-	var _new_node = ContentCreateArticle(template); //creates a new article with no info
-
-	// var _text = _new_node.("content-text");
-	// _text.style.color = "blue";
-
-	// _node.nodeType
 }
 
 function ContentClear() {
-	var _child = container.firstElementChild;
+	var _child = Container.firstElementChild;
 	while (_child) {
-		container.removeChild(_child);
-		var _child = container.firstElementChild;
+		Container.removeChild(_child);
+		var _child = Container.firstElementChild;
 	}
 }
 
-function ContentCreateArticle(_node) {
-	// var _newClone = _node.firstElementChild.cloneNode(true);
-	var _newClone = document.importNode(_node, true);
-	container.appendChild(_newClone);
-	return _newClone;
-}
-
 /*
-var _template = document.getElementById("content-template").content;
+var _template = document.getElementById("content-Template").content;
 
 */
