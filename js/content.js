@@ -30,6 +30,7 @@ function ContentCreate(data) {
 		_newClone.getElementById("content-article").classList.add(entry.topics);
 		_newClone.getElementById("content-headline").innerText = entry.headline;
 		_newClone.getElementById("content-subline").innerText = entry.sub;
+		_newClone.getElementById("content-date").innerText = entry.date;
 		_newClone.getElementById("content-Text").innerText = entry.text;
 		img = _newClone.getElementById("content-img");
 		img.src = "./content/" + entry.imageURL;

@@ -62,7 +62,7 @@
 
 	/* content */
 	--colContentBorder: rgb(3, 18, 56);
-	--colContentBG: rgb(198, 211, 235);
+	--colContentBG: linear-gradient(180deg, #ffffff, #c6d3eb 7%);
 	/* prettier-ignore */
 	--colFooterBG: white;
 	/* #endregion COLORS*/
@@ -82,7 +82,16 @@
 	/* filter */
 	/* --filterWidth: calc(1rem * 5.6); */
 	--filterWidth: calc(1rem * 8);
+
 	/* #endregion SIZES*/
+
+	--articleBack: linear-gradient(180deg, #ffffff4d, #ffffff23 25%);
+
+	--subColor: #ffffff1a;
+	--subSpacing: 0.5rem;
+
+	--articleInnerSpacing: 0.2em;
+	--articleHeaaderSpacing: 0.5em;
 }
 
 /* #region -groundwork */
@@ -382,36 +391,46 @@ nav * {
 	background: var(--colmainBG);
 }
 
-header h2 {
+article {
+	margin: var(--subSpacing);
+	padding: var(--subSpacing);
+	background: var(--articleBack);
+	border-radius: 5px;
+}
+article * {
+	margin-bottom: var(--articleInnerSpacing);
+}
+article header {
+	margin-bottom: var(--articleHeaaderSpacing);
+}
+
+/* all headlines */
+header > h2 {
 	color: var(--colHeadline);
 	font-family: var(--fontHeadline);
+	font-size: 3em;
 }
-/* subheadline */
-header h2 ~ p {
-	/* font-size: 1.5rem; */
+/* all  subheadline */
+header > h2 + p {
 	color: var(--colSubline);
 	font-family: var(--fontSubline);
+	font-size: 1.5em;
 }
+
 /* article*/
-article > p {
+article > p,
+article > pre {
 	color: var(--colText);
 	font-family: var(--fontText);
 }
-#about-div header h2,
-#project-div header h2 {
-	font-size: 3rem;
-}
-#about-div header h2 ~ p,
-#project-div header h2 ~ p {
-	font-size: 1.5rem;
-}
 
-/* #region -projects*/
+/* about */
 
-#project-div {
+#about-div {
+	/* i dunno man */
+	margin: 1px;
+	padding: 1px;
 }
-
-/* #endregion -projects*/
 
 /* #endregion main page*/
 /* #region content*/
@@ -429,6 +448,7 @@ article > p {
 	/* size */
 	width: auto;
 	flex-grow: 1;
+	/* padding: var(--subSpacing); */
 
 	/* flex */
 	display: flex;
@@ -448,16 +468,20 @@ article > p {
 	border-radius: 10px;
 	background: var(--colContentBG);
 }
-#content-article h2 {
-	margin: 0;
+
+#content-date {
+	font-size: 1em;
+	font-weight: lighter;
 }
 
 #content-article img {
-	width: 100%;
 	min-height: 100px;
-	height: auto;
-	background-color: blanchedalmond;
+	background-color: #37186891;
+	padding: 0.3em;
 }
+
+/* #content-article > p { */
+/* } */
 
 /* #endregion content*/
 /* #region footer*/
@@ -516,14 +540,4 @@ footer {
 }
 .filtered.show {
 	display: block;
-}
-
-#content-iframe {
-	position: relative;
-	padding-bottom: calc(65.55% + 44px);
-}
-#content-iframe iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
 }
