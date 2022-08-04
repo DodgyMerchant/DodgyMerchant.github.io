@@ -7,7 +7,9 @@ if (supportsTemplate) {
 	console.log("Your browser supports Template!");
 } else {
 	console.log("Your browser does NOT support Template!!!");
-	alert("Your browser does not fully support this website!\n My portfolio projects won't be displayed currently.");
+	alert(
+		"Your browser does not fully support this website!\n My portfolio projects won't be displayed currently."
+	);
 	// throw new Error();
 	stop(); //this is not optimal
 }
