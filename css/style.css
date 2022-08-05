@@ -367,7 +367,7 @@ nav * {
 	height: inherit;
 	/* display toggle stuff */
 	--rememberDisplay: block; /*holds display for toggle*/
-	display: block;
+	display: none;
 }
 #filter-nav ul {
 	width: inherit;
@@ -422,6 +422,7 @@ article > p,
 article > pre {
 	color: var(--colText);
 	font-family: var(--fontText);
+  word-wrap: break-word;
 }
 
 /* about */
