@@ -19,11 +19,16 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href="img/Logo.png" sizes="100x100" />
-		<!-- google fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<!-- prettier-ignore -->
+
+		<!-- #region icon -->
+
+		<link rel="icon" href="./img/iconDM-32.png" sizes="32x32" />
+		<link rel="icon" href="./img/iconDM-128.png" sizes="128x128" />
+		<link rel="icon" href="./img/iconDM-180.png" sizes="180x180" />
+		<link rel="icon" href="./img/iconDM-192.png" sizes="192x192" />
+
+		<!-- #endregion icon -->
+		<!-- #region google fonts -->
 		<link
 			href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee+Hairline&family=Courier+Prime&family=Josefin+Sans&family=Koulen&display=swap"
 			rel="stylesheet"
@@ -31,7 +36,7 @@
 
 		<link rel="stylesheet" href="css/style.css" />
 		<title>Dodgy_Merchant Portfolio</title>
-		<script src="js/code.js"></script>
+		<script type="module" src="js/content.js"></script>
 	</head>
 	<body>
 		<!-- header of the page, title + nav -->
@@ -72,45 +77,44 @@
 					<h2>Projects</h2>
 					<p>Work I created by myself or with others.</p>
 				</header>
-				<!-- topic nav  -->
-				<nav id="topic-nav" class="navHor selectNone">
+				<!-- tags nav  -->
+				<nav id="tags-nav" class="navHor selectNone">
 					<!-- filter button -->
-					<button
-						id="filter-button"
-						class="clickable"
-						onclick="displayToggle('filter-nav')"
-					>
-						Filters
-					</button>
-					<!-- topic list -->
-					<ul class="filterContainer clickable-container">
+					<button id="filter-button" class="clickable">Filters</button>
+					<!-- tags list -->
+					<ul class="clickable-container">
 						<li class="filter all">All</li>
+						<li class="filter website">Sites</li>
 						<li class="filter game">Games</li>
 						<li class="filter code">Coding</li>
-						<li class="filter game-des">Game Design</li>
+						<li class="filter game-design">Design</li>
 					</ul>
 				</nav>
+				<template>
+					<li class="filter"></li>
+				</template>
 				<!-- content -->
 				<div id="content-div">
 					<!-- filter nav -->
 					<nav id="filter-nav">
 						<!-- filter nav menu -->
 						<!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
-						<ul class="filterContainer clickable-container selectNone">
+						<ul class="clickable-container selectNone">
 							<!-- general -->
 							<!-- <li class="filter game" >Games</li> -->
+							<li class="filter website">Sites</li>
 							<li class="filter game">Games</li>
 							<li class="filter code">Code</li>
 
 							<!-- fields -->
-							<li class="filter game-des">Game Design</li>
-							<li class="filter system-des">System Design</li>
-							<li class="filter level-des">Level Design</li>
-							<li class="filter game-prog">Game Programm.</li>
-							<li class="filter ai-prog">AI Programm.</li>
-							<li class="filter gamepl-eng">Gameplay Engineer</li>
-							<li class="filter tech-art">Technical Artist</li>
-							<li class="filter vis-des">Visual Design</li>
+							<li class="filter game-design">Game Design</li>
+							<li class="filter system-design">System Design</li>
+							<li class="filter level-design">Level Design</li>
+							<li class="filter game-programming">Game Programm.</li>
+							<li class="filter ai-programming">AI Programm.</li>
+							<li class="filter gameplay-engineer">Gameplay Engineer</li>
+							<li class="filter technical-art">Technical Artist</li>
+							<li class="filter visual-design">Visual Design</li>
 							<li class="filter asset-art">Asset Artist</li>
 
 							<!-- languages -->
@@ -120,11 +124,12 @@
 							<li class="filter C++">C++</li>
 							<li class="filter C#">C#</li>
 							<li class="filter GML">GML</li>
+
 							<!-- engines -->
 							<li class="filter GM">GameMaker</li>
 							<li class="filter Unity">Unity</li>
 							<li class="filter UE">Unreal</li>
-							<li class="filter Phaser">Unreal</li>
+							<li class="filter Phaser">Phaser</li>
 						</ul>
 					</nav>
 					<!-- only the template -->
@@ -148,17 +153,6 @@
 					</template>
 					<!-- destination for generated content -->
 					<div id="content-destination"></div>
-
-					<script src="js/content.js"></script>
-					<script>
-						fetch("././content/content.json")
-							.then((results) => results.json())
-							.then(ContentCreate)
-							.then(() => {
-								filterSelection("all");
-							});
-						filterSetup();
-					</script>
 				</div>
 			</div>
 		</main>

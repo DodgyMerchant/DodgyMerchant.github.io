@@ -1,60 +1,61 @@
 [
 	{
-		"topics": ["code", "HTML", "CSS", "JS", "vis-des"],
+		"tags": ["website", "code", "HTML", "CSS", "JS", "visual-design"],
 		"headline": "This Website",
 		"sub": "My Portfolio Website.",
 		"date": "2022",
-		"imageURL": "Website.png",
+		"imageURL": "content/Website.png",
 		"imageAlt": "A picture of this exact Website. Might be an old version.",
 		"text": "Making a portfolio, something that represented me, was a daunting task.\n\nThis was A task done for my university class “Medien Informatik 2” in my second semester of University.\n\nThere were a lot of things I wanted and could have incorporated, but there is only so much time.\n\nI'm partially happy that the Cards for my projects get created dynamically, and the data comes from a JSON File, which makes inserting projects easier.\nBut through that, text editing is more difficult and the card layout is restricted to be the same across all cards.\n\nI'm not happy with the site yet.\nI'm content in a sense that someone with knowledge of design and web dev won't misjudge my site as uninspired. But there are many design decisions that haven't been made and a lot of polishing still needs to happen.\n\nMostly the colour theme, with I like, but I still need to find that balance.\nAt the moment, It looks less neon city, more yoghurt.\n\nMy perfectionism is as much as blessing as it is a curse, and I knew that for something that should represent me in front of strangers it would be worse.\n\nI know that realistically I will never be completely happy with this site, but I had to complete it somehow as University deadlines closed in."
 	},
 	{
-		"topics": [
+		"tags": [
 			"game",
 			"code",
 			"GM",
 			"GML",
-			"game-des",
-			"system-des",
-			"game-prog",
-			"ai-prog",
-			"gamepl-eng",
-			"tech-art",
+			"game-design",
+			"system-design",
+			"game-programming",
+			"ai-programming",
+			"gameplay-engineer",
+			"technical-art",
 			"asset-art",
-			"vis-des"
+			"visual-design"
 		],
 		"headline": "HANDS",
 		"sub": "Lovecraftian Extreme Rock Paper Scissors.",
 		"date": "2021",
-		"imageURL": "HANDS.gif",
+		"imageURL": "./content/HANDS.gif",
 		"imageAlt": "gif of my game, HANDS. Rock Paper Scissors but weird.",
 		"text": "This Game Project was made in Game Maker 2, as a personal project in my free time, started in 2021.\n\nFor Hands, I started out with 2 Ideas.\nI have a deep respect for games simple rule sets, so I wanted to explore that.\nAdditionally, I dislike making my own assets, but I'm never content with 3rd party assets.\nSo I wanted to test how far I could make it with just 1ish sprite.\n\nGod is dead, and all that's left is his corpse, angels and some fading souls.\nYou have the chance to ascend to godhood to take the empty throne, but thy must take the trial of hands.\n\nBorrowing from Judaist beliefs, the space of existence is inside god, who is dead.\nSo I wanted to make every bit of the game feel as weird as possible.\nIn many design decisions, I oriented my design around the feeling you would get when viewing a living organism from the inside.\nWhich everything being in motion constantly and reacting to your actions with more writhing, and pulsing.\n\nGameplay wise, early on I thought about basic rock paper scissors with some minor modification. This proved, far more difficult, than imagined. Altering one thing would throw out the balance of another.\n\nAt the moment, the gameplay is still in early stages.\nAll rules are configurable, so one can create their own game within limitations.\nAfter some more work, I would publish this version.\nWith the intent to hopefully find the best version of the rules with the feedback.\n\nEarly on, I tried to find ways to build the game without using text, which wasn't feasible.\nI may revisit this idea. I would love to make the game so otherworldly that every second with it feels alienating. And forgoing a normalcy such as text would certainly work towards this alienation.\n\nAfter telling some of my colleagues about the game, one noted how much it sounded like a simple fighting game.\nI was surprised by that comparison, but they were completely right.\nOwing to me having absolutely no experience with fighting games, I didn't see the obvious comparison."
 	},
 
 	{
-		"topics": [
+		"tags": [
 			"game",
 			"code",
 			"Phaser",
 			"JS",
-			"game-des",
-			"system-des",
-			"game-prog",
-			"tech-art"
+			"game-design",
+			"system-design",
+			"game-programming",
+			"gameplay-engineer",
+			"level-design"
 		],
 		"headline": "Phaser Game",
-		"sub": "Open World Boss Rush",
+		"sub": "Open World Exploration Boss Rush",
 		"date": "2022",
-		"imageURL": "PhaserGame.gif",
+		"imageURL": "./content/PhaserGame.gif",
 		"imageAlt": "Phaser Game GIF",
 		"text": "This project was started as for my university class “Medien Informatik 2” in my second semester of University.\n\nWe were assigned to make a small game, in a group, using the Phaser HTML5 game engine for JavaScript, while preparing documentation and applying learned information from the university lectures.\n\nGameplay wise, the player would control a drone which could only grapple along walls and jump off them.\nThe play has to navigate through a large map and beat 3-5 bosses, in any order, to beat the game.\nInspired by the Game Titan Souls, these bosses would function like an action puzzle box, and both the player and the boss would die in one hit.\nDeath would only be a minor setback of being thrown out of the boos arena and the boss resetting.\nThe player had to learn the behaviour of a boss, while trying to survive and position themselves in a way they could beat the boss, while managing their own survival.\n\nThe game was a combination of many excellent design choices from inspiring works across mediums.\n\nThe two aspects I was excited to explore most was firstly, to give the game a sci-fi, industrial + jungle theme but to completely avoid showing the jungle part.\n\nThe Japanese animation film Akira from 1991 has a similar theme for the city the film takes place in, but the jungle aspect is only suggested by the music and the portrayed city having many aspects in common that we associate with a jungle ecosystem.\nThe metropolis being crowded, loud and dense, not a plant in sight, and jet together with the tribal music the subconscious association with a thick jungle is immediately apparent.\n\nSecond, we wanted to try to recreate the timeless intrigue, a vast and purposefully designed world like the map of Shadow of the Colossus.\nWhere space and exploration are removed from the usual player reward process and have meaning in themselves.\n\nThey were some management mistakes on the universities side this semester, so the time we had for all the projects was not appropriate.\nResulting in a lot of crunch on our side and changes in deadlines and evaluation criteria on theirs.\n\nIn the end we had a basic level editor, some base mechanics and some good visual assets.\nI felt we hadn't done the vision of the project justice, so I would like to continue the development.\nBut other courses and some earned holiday has priority, if my schedule allows it I would like to complete attest the tutorial section of the game."
 	},
 	{
-		"topics": ["code", "Java"],
+		"tags": ["code", "Java"],
 		"headline": "Eshop",
 		"sub": "A Eshop Made In java",
 		"date": "2022",
-		"imageURL": "EshopGUI.png",
+		"imageURL": "./content/EshopGUI.png",
 		"imageAlt": "Eshop login interface.",
 		"text": "This project was started as for my university class “Programmieren 2” in my second semester of University.\n\nIn a group, we were to design and create a small dummy Eshop in Java.\n\nThis served as an introduction to Java."
 	}
