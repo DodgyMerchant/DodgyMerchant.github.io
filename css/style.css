@@ -77,6 +77,7 @@
 	--subSpacing: 0.5rem;
 
 	--articleInnerSpacing: 0.2em;
+	--articleImgSpacing: 1em;
 	--articleHeaaderSpacing: 0.5em;
 }
 
@@ -309,6 +310,12 @@ nav * {
 	/* font */
 	font-family: var(--fontNavPage);
 	font-size: 2rem;
+
+	/* sticky */
+	position: -webkit-sticky;
+	position: sticky;
+	width: 100%;
+	top: 0;
 }
 #page-navigation ul {
 	width: var(--mainWidth);
@@ -379,15 +386,24 @@ nav * {
 
 article {
 	margin: var(--subSpacing);
-	padding: var(--subSpacing);
-	background: var(--articleBack);
+	/* padding: var(--subSpacing); */
+	/* background: var(--articleBack); */
 	border-radius: 5px;
 }
 article * {
-	margin-bottom: var(--articleInnerSpacing);
+	/* margin-bottom: var(--articleInnerSpacing); */
 }
 article header {
-	margin-bottom: var(--articleHeaaderSpacing);
+	/* margin-bottom: var(--articleHeaaderSpacing); */
+}
+article img {
+	/* margin-bottom: var(--articleImgSpacing); */
+}
+article img + p {
+	margin-bottom: var(--articleImgSpacing);
+	text-align: center;
+	font-size: 0.9em;
+	color: var(--colSubline);
 }
 
 /* all headlines */
@@ -396,7 +412,7 @@ header > h2 {
 	font-family: var(--fontHeadline);
 	font-size: 3em;
 }
-/* all  subheadline */
+/* all subheadline */
 header > h2 + p {
 	color: var(--colSubline);
 	font-family: var(--fontSubline);
@@ -414,9 +430,11 @@ article > pre {
 /* about */
 
 #about-div {
-	/* i dunno man */
-	margin: 1px;
-	padding: 1px;
+	overflow: auto; /*This prevents the margins to collapse. Without it some weird space is above the about section.*/
+}
+
+#project-div > header {
+	margin: var(--subSpacing);
 }
 
 /* #endregion main page*/
