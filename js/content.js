@@ -45,7 +45,8 @@ var contentHandler;
  * @typedef {Object} ContentData content data object containing all data for a content block.
  * @property {string} headline text
  * @property {string} sub text
- * @property {string} date text
+ * @property {string} dateStart text
+ * @property {string} dateEnd text
  * @property {string} imageAlt desc
  * @property {string} imageURL desc
  * @property {string} text desc
@@ -144,9 +145,12 @@ class ContentHandler {
 			_newClone,  entry.tags,
 			MyHTML.getChildByID(_newClone,"content-headline"),  entry.headline,
 			MyHTML.getChildByID(_newClone,"content-subline"),   entry.sub,
-			MyHTML.getChildByID(_newClone,"content-date"),      entry.date,
+			MyHTML.getChildByID(_newClone,"content-date"),      entry.dateStart,
+			                                                    entry.dateEnd,
 			MyHTML.getChildByID(_newClone,"content-Text"),      entry.text,
-			MyHTML.getChildByID(_newClone,"content-img"),       entry.imageURL,
+			MyHTML.getChildByID(_newClone,"content-img"),
+      MyHTML.getChildByID(_newClone,"content-img-description"),
+                                                          entry.imageURL,
 			                                                    entry.imageAlt
 			);
 		}
@@ -249,17 +253,19 @@ class ContentHandler {
 
 	/**
 	 *
-	 * @param {*} tagsTar
+	 * @param {HTMLElement} tagsTar
 	 * @param {*} tags
-	 * @param {*} headTrg
+	 * @param {HTMLElement} headTrg
 	 * @param {*} headTxt
-	 * @param {*} subTrg
+	 * @param {HTMLElement} subTrg
 	 * @param {*} subTxt
-	 * @param {*} datTrg
-	 * @param {*} dat
-	 * @param {*} txtTarg
+	 * @param {HTMLElement} datTrg
+	 * @param {string} datS
+	 * @param {string} datE
+	 * @param {HTMLElement} txtTarg
 	 * @param {string} txt article text
-	 * @param {*} imgTrg
+	 * @param {HTMLElement} imgTrg
+	 * @param {HTMLElement} imgAltTrg
 	 * @param {*} imgSrc
 	 * @param {*} imgAlt
 	 */
@@ -271,20 +277,39 @@ class ContentHandler {
 		subTrg,
 		subTxt,
 		datTrg,
-		dat,
+		datS,
+		datE,
 		txtTarg,
 		txt,
 		imgTrg,
+		imgAltTrg,
 		imgSrc,
 		imgAlt
 	) {
 		tagTar.classList.add(tags);
 		headTrg.innerText = headTxt;
 		subTrg.innerText = subTxt;
-		datTrg.innerText = dat;
+
+		//#region date
+		let dateText;
+		if (datS != "") {
+			if (datE != "") {
+				dateText = `From ${datS} to ${datE}`;
+			} else {
+				dateText = `Started ${datS}`;
+			}
+		} else {
+			dateText = `Finished: ${datE}`;
+		}
+
+		datTrg.innerText = dateText;
+
+		//#endregion date
+
 		txtTarg.innerText = txt;
 		imgTrg.src = imgSrc;
 		imgTrg.alt = imgAlt;
+		imgAltTrg.innerText = imgAlt;
 	}
 
 	/**
