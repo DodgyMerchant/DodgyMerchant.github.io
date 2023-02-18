@@ -36,19 +36,53 @@ if (!MyTemplate.supports())
 	);
 //#endregion template support
 
+/**
+ * tracks and manages its content
+ */
 class Content {
+	/**
+	 * handler
+	 * @type {ContentHandler}
+	 */
+	handler;
+	/**
+	 * content elmeent this object manages.
+	 * @type {HTMLElement}
+	 */
+	target;
 	/**
 	 * @type {string[]}
 	 */
 	tags;
 
 	/**
+	 * @type {boolean} active
+	 */
+	_active = false;
+	get active() {
+		return this._active;
+	}
+	set active(bool) {
+		this._active = bool;
+
+		if (bool) {
+			MyHTML.addClass(this.target, this.handler.filteredClassActive);
+		} else {
+			MyHTML.removeClass(this.target, this.handler.filteredClassActive);
+		}
+	}
+
+	/**
 	 *
-	 * @param {HTMLTemplateElement} template
+	 * @param {ContentHandler} handler
 	 * @param {HTMLElement} target
 	 * @param {string[]} tags
 	 */
-	constructor(template, target, tags) {}
+	constructor(handler, target, tags) {
+		this.handler = handler;
+		this.target = target;
+		this.tags = tags;
+	}
 }
 
 /**
@@ -132,6 +166,13 @@ class ContentHandler {
 	activeFilters = [];
 
 	//#endregion filtered
+	//#region
+	/**
+	 * @type {Content}
+	 */
+	contentList = [];
+
+	//#endregion
 
 	/**
 	 *
@@ -160,7 +201,7 @@ class ContentHandler {
 		console.log(data);
 
 		//#region content create
-		let entry, img;
+		let entry;
 		/**
 		 * @type {HTMLDivElement}
 		 */
@@ -171,14 +212,16 @@ class ContentHandler {
 
 			_newClone = MyTemplate.addTemplate(template, destination)[0];
 
+			this.contentList.push(new Content(this, _newClone, entry.tags));
+
 			// prettier-ignore
 			this.setContent(
-			_newClone,  entry.tags,
+			_newClone,  entry.tags.join(","),
 			MyHTML.getChildByID(_newClone,"content-headline"),  entry.headline,
 			MyHTML.getChildByID(_newClone,"content-subline"),   entry.sub,
 			MyHTML.getChildByID(_newClone,"content-date"),      entry.dateStart,
 			                                                    entry.dateEnd,
-			MyHTML.getChildByID(_newClone,"content-Text"),      entry.text,
+      _newClone,                                          entry.text,
 			MyHTML.getChildByID(_newClone,"content-img"),
       MyHTML.getChildByID(_newClone,"content-img-description"),
                                                           entry.imageURL,
@@ -228,19 +271,20 @@ class ContentHandler {
 
 		this.activeFilters = tags;
 
-		/**
-		 * filter targets
-		 */
-		let fltrTrg = document.getElementsByClassName(this.filteredClassName);
 		//filtered
-		for (let i = 0; i < fltrTrg.length; i++) {
+		/**
+		 * @type {Content}
+		 */
+		let cont;
+		for (let i = 0; i < this.contentList.length; i++) {
+			cont = this.contentList[i];
 			if (
-				this.TagCheck(fltrTrg[i], this.activeFilters, this.filteredBehavior) ||
+				this.TagCheck(cont, this.activeFilters, this.filteredBehavior) ||
 				this.activeFilters.includes("all")
 			) {
-				MyHTML.addClass(fltrTrg[i], this.filteredClassActive);
+				cont.active = true;
 			} else {
-				MyHTML.removeClass(fltrTrg[i], this.filteredClassActive);
+				cont.active = false;
 			}
 		}
 
@@ -264,20 +308,27 @@ class ContentHandler {
 	/**
 	 * checks if the given target tag list corresponds to the source tag list with the given gebavior.
 	 * If target object tag list is empty will only be drawn if the filtered tags are also empty.
-	 * @param {HTMLElement} element element to check tags against.
+	 * @param {HTMLElement | Content} element element to check tags against.
 	 * @param {string[]=} filterTags List of Tags to filter by. If no tags are given it will always return true.
 	 * @param {import("../myJS/MyTags.js").TagBehavior=} behavior "one" or more. "all" or more. "exact"ly the items, no more or less.
 	 * @returns {boolean}
 	 */
 	TagCheck(element, filterTags, behavior) {
-		if (!behavior)
-			if (element.className.split(" ").indexOf(this.filterClassName) != -1) {
-				behavior = this.filterBehavior;
-			} else {
-				behavior = this.filteredBehavior;
-			}
-
-		return MyTags.Compare(this.getTags(element), filterTags, behavior);
+		if (element instanceof Content) {
+			return MyTags.Compare(
+				element.tags,
+				filterTags,
+				behavior ? behavior : this.filteredBehavior
+			);
+		} else if (
+			element.className.split(" ").indexOf(this.filterClassName) != -1
+		) {
+			return MyTags.Compare(
+				this.getTags(element),
+				filterTags,
+				behavior ? behavior : this.filterBehavior
+			);
+		}
 	}
 
 	/**
@@ -288,19 +339,53 @@ class ContentHandler {
 		let classList = elem.className.split(" ");
 
 		let num = classList.indexOf(this.filterClassName);
-		if (num == -1) num = classList.indexOf(this.filteredClassName);
 
 		return classList[num + 1].split(",");
 	}
 
 	/**
 	 *
+	 * @param {HTMLElement} filterEl
+	 */
+	filterSetup(filterEl) {
+		if (!MyHTML.hasClass(filterEl, "all")) {
+			//all not "all" buttons
+			filterEl.addEventListener("click", (event) => {
+				let _t = event.target;
+
+				console.log("FilterApply from: ", this.activeFilters);
+
+				if (this.TagCheck(_t, this.activeFilters, this.filterBehavior)) {
+					// if (MyHTML.hasClass(_t, this.filterClassActive)) {
+					MyArr.removeList(this.activeFilters, this.getTags(_t));
+				} else {
+					MyArr.pushUniqueList(this.activeFilters, this.getTags(_t));
+				}
+
+				console.log("FilterApply to: ", this.activeFilters);
+
+				contentHandler.FilterApply();
+			});
+		} else {
+			//"all" button
+			filterEl.addEventListener("click", (event) => {
+				console.log("FilterApply from: ", this.activeFilters);
+				contentHandler.FilterApply(["all"]);
+				console.log("FilterApply to: ", this.activeFilters);
+			});
+		}
+	}
+
+	//#region filtered
+
+	/**
+	 *
 	 * @param {HTMLElement} tagsTar
-	 * @param {*} tags
+	 * @param {string} tags
 	 * @param {HTMLElement} headTrg
-	 * @param {*} headTxt
+	 * @param {string} headTxt
 	 * @param {HTMLElement} subTrg
-	 * @param {*} subTxt
+	 * @param {string} subTxt
 	 * @param {HTMLElement} datTrg
 	 * @param {string} datS
 	 * @param {string} datE
@@ -347,45 +432,25 @@ class ContentHandler {
 		datTrg.innerText = dateText;
 
 		//#endregion date
+		//#region text
 
-		txtTarg.innerText = txt;
+		//split multi line breaks into seperate paragraphs
+		txt.split("\n\n").forEach((txt) => {
+			//generate paragraph elements for each text section
+			let elem = document.createElement("p");
+
+			elem.appendChild(document.createTextNode(txt));
+			txtTarg.append(elem);
+		});
+
+		//#endregion text
+
 		imgTrg.src = imgSrc;
 		imgTrg.alt = imgAlt;
 		imgAltTrg.innerText = imgAlt;
 	}
 
-	/**
-	 *
-	 * @param {HTMLElement} filterEl
-	 */
-	filterSetup(filterEl) {
-		if (!MyHTML.hasClass(filterEl, "all")) {
-			//all not "all" buttons
-			filterEl.addEventListener("click", (event) => {
-				let _t = event.target;
-
-				console.log("FilterApply from: ", this.activeFilters);
-
-				if (this.TagCheck(_t, this.activeFilters, this.filterBehavior)) {
-					// if (MyHTML.hasClass(_t, this.filterClassActive)) {
-					MyArr.removeList(this.activeFilters, this.getTags(_t));
-				} else {
-					MyArr.pushUniqueList(this.activeFilters, this.getTags(_t));
-				}
-
-				console.log("FilterApply to: ", this.activeFilters);
-
-				contentHandler.FilterApply();
-			});
-		} else {
-			//"all" button
-			filterEl.addEventListener("click", (event) => {
-				console.log("FilterApply from: ", this.activeFilters);
-				contentHandler.FilterApply(["all"]);
-				console.log("FilterApply to: ", this.activeFilters);
-			});
-		}
-	}
+	//#endregion filtered
 }
 
 fetch("content/content.json")
@@ -395,7 +460,7 @@ fetch("content/content.json")
 			ContentTemplate,
 			ContentDestination,
 			"filter",
-			undefined,
+			"active",
 			"filtered",
 			"active",
 			-1,
