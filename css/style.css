@@ -1,143 +1,143 @@
 /* #region general */
 
 :root {
-	/* #region COLORS */
-	/*
+  /* #region COLORS */
+  /*
   Purple Baller: #8c00ff;
   Deep Dark Purple: #44195e
   Deeper Darker Purple: #170721
   */
-	--colBlack: #0b0015;
+  --colBlack: #0b0015;
 
-	/* background */
+  /* background */
 
-	--colBG: no-repeat /* fixed */
-		linear-gradient(180deg, #44195e, var(--colBlack) 70%, #005f74);
-	/* main */
-	--colmainBG: fixed linear-gradient(180deg, #aa7ebb93, #aa7ebb93);
-	/* title, h1*/
-	--colTitle1: #31feee;
-	--colTitle2: #55aad8;
-	--colTitle3: #7660c5;
-	--colTitle4: #9811b0;
-	/* title background */
-	--colTitleBG: linear-gradient(to bottom right, #1f1264 0%, #7c0f61 100%);
-	/* Section Headlines, h2 */
-	--colHeadline: rgb(233, 41, 159);
-	/* Subheadlines */
-	--colSubline: #360733;
-	/* text */
-	--colText: rgb(0, 0, 0);
+  --colBG: no-repeat /* fixed */
+    linear-gradient(180deg, #44195e, var(--colBlack) 70%, #005f74);
+  /* main */
+  --colmainBG: fixed linear-gradient(180deg, #aa7ebb93, #aa7ebb93);
+  /* title, h1*/
+  --colTitle1: #31feee;
+  --colTitle2: #55aad8;
+  --colTitle3: #7660c5;
+  --colTitle4: #9811b0;
+  /* title background */
+  --colTitleBG: linear-gradient(to bottom right, #1f1264 0%, #7c0f61 100%);
+  /* Section Headlines, h2 */
+  --colHeadline: rgb(233, 41, 159);
+  /* Subheadlines */
+  --colSubline: #360733;
+  /* text */
+  --colText: rgb(0, 0, 0);
 
-	/* ////// NAV ////// */
-	/* Page Nav */
-	--colPageNav: #edf2f4;
-	--colPageNavHover: #59dfe9;
-	--colPageNavBG: #e6ecefe0;
-	--colPageNavText: rgb(50, 196, 201);
-	/* filter */
-	--colFilterActive: #793188;
-	--colFilterTextActive: #00f0e4;
-	--colFilterHoverActive: #00e1ff;
-	--colFilterBorderActive: #ec8cffce;
+  /* ////// NAV ////// */
+  /* Page Nav */
+  --colPageNav: #edf2f4;
+  --colPageNavHover: #59dfe9;
+  --colPageNavBG: #e6ecefe0;
+  --colPageNavText: rgb(50, 196, 201);
+  /* filter */
+  --colFilterActive: #793188;
+  --colFilterTextActive: #00f0e4;
+  --colFilterHoverActive: #00e1ff;
+  --colFilterBorderActive: #ec8cffce;
 
-	--colFilterInactive: #ffffff;
-	--colFilterTextInactive: #000000;
-	--colFilterHoverInactive: #00e1ff;
-	--colFilterBorderInactive: #21002515;
+  --colFilterInactive: #ffffff;
+  --colFilterTextInactive: #000000;
+  --colFilterHoverInactive: #00e1ff;
+  --colFilterBorderInactive: #21002515;
 
-	/* content */
-	--colContentBorder: rgb(3, 18, 56);
-	--colContentBG: linear-gradient(180deg, #ffffff, #c6d3eb 7%);
-	/* prettier-ignore */
-	--colFooterBG: white;
-	/* #endregion COLORS*/
-	/* #region FONTS*/
-	/* --fontTitle: "Koulen", Impact; */
-	--fontTitle: "Audiowide", Impact;
-	--fontHeadline: "Audiowide", sans-serif;
-	--fontSubline: "Josefin Sans", sans-serif;
-	--fontText: "Josefin Sans", sans-serif;
-	--fontFooter: "Courier Prime", monospace;
-	--fontNavPage: var(--fontHeadline);
-	--fontNav: var(--fontText);
-	--fontNavFilter: var(--fontText);
-	/* #endregion */
-	/* #region SIZES*/
-	--mainWidth: 1800px;
-	/* filter */
-	/* --filterWidth: calc(1rem * 5.6); */
-	--filterWidth: calc(1rem * 8);
+  /* content */
+  --colContentBorder: rgb(3, 18, 56);
+  --colContentBG: linear-gradient(180deg, #ffffff, #c6d3eb 7%);
+  /* prettier-ignore */
+  --colFooterBG: white;
+  /* #endregion COLORS*/
+  /* #region FONTS*/
+  /* --fontTitle: "Koulen", Impact; */
+  --fontTitle: "Audiowide", Impact;
+  --fontHeadline: "Audiowide", sans-serif;
+  --fontSubline: "Josefin Sans", sans-serif;
+  --fontText: "Josefin Sans", sans-serif;
+  --fontFooter: "Courier Prime", monospace;
+  --fontNavPage: var(--fontHeadline);
+  --fontNav: var(--fontText);
+  --fontNavFilter: var(--fontText);
+  /* #endregion */
+  /* #region SIZES*/
+  --mainWidth: 1800px;
+  /* filter */
+  /* --filterWidth: calc(1rem * 5.6); */
+  --filterWidth: calc(1rem * 8);
 
-	/* #endregion SIZES*/
+  /* #endregion SIZES*/
 
-	--articleBack: linear-gradient(180deg, #ffffff4d, #ffffff23 25%);
+  --articleBack: linear-gradient(180deg, #ffffff4d, #ffffff23 25%);
 
-	--subColor: #ffffff1a;
-	--subSpacing: 0.5rem;
+  --subColor: #ffffff1a;
+  --subSpacing: 0.5rem;
 
-	--articleInnerSpacing: 0.2em;
-	--articleImgSpacing: 1em;
-	--articleHeaaderSpacing: 0.5em;
+  --articleInnerSpacing: 0.2em;
+  --articleImgSpacing: 1em;
+  --articleHeaaderSpacing: 0.5em;
 }
 
 /* #region -groundwork */
 html {
-	font-size: 100%;
-	box-sizing: border-box;
-	font-family: var(--fontText);
-	min-height: 100%;
-	scroll-behavior: smooth;
+  font-size: 100%;
+  box-sizing: border-box;
+  font-family: var(--fontText);
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
 html p {
-	line-height: 1.5rem;
+  line-height: 1.5rem;
 }
 
 @media (prefers-reduced-motion) {
-	html {
-		scroll-behavior: initial;
-	}
+  html {
+    scroll-behavior: initial;
+  }
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: inherit;
-	margin-block: 0;
-	padding-inline: 0;
+  box-sizing: inherit;
+  margin-block: 0;
+  padding-inline: 0;
 }
 
 body {
-	margin: 0 auto;
-	padding: 0;
-	height: 100%;
-	background: var(--colBG);
-	/* background-repeat: no-repeat;
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
+  background: var(--colBG);
+  /* background-repeat: no-repeat;
   background-attachment: fixed; */
 }
 
 img {
-	width: 100%;
-	height: auto;
-	display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 /* #endregion -groundwork*/
 /* #region -utility classes*/
 .selectNone {
-	/*cant be selected*/
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Old versions of Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently supported by Chrome,
+  /*cant be selected*/
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome,
   dge, Opera and Firefox */
 }
 .selectAll {
-	-webkit-user-select: all;
-	-moz-user-select: all;
-	-ms-user-select: all;
-	user-select: all;
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
 }
 
 /* #endregion -utility classes*/
@@ -145,11 +145,11 @@ img {
 
 .clickable,
 .clickable-container * {
-	cursor: pointer;
+  cursor: pointer;
 }
 .clickable:hover,
 .clickable-container *:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* #endregion */
@@ -157,37 +157,37 @@ img {
 /* #endregion root*/
 /* #region title*/
 #title-base {
-	/* font-size: calc(1rem * 4); */
-	font-size: calc(16px * 2.5);
-	background: var(--colTitleBG);
+  /* font-size: calc(1rem * 4); */
+  font-size: calc(16px * 2.5);
+  background: var(--colTitleBG);
 }
 #title {
-	font-size: 1em; /*control value*/
-	/* x&y offset of title*/
-	--TtopOff: calc(1em * 0.5);
-	--TleftOff: calc(1em * 0);
-	--TbottomOff: calc(1em * 0.2);
-	/* title title shadow offset vars*/
-	--TshadowOff1: calc(1 * 1em * 0.08);
-	--TshadowOff2: calc(2 * 1em * 0.08);
-	--TshadowOff3: calc(3 * 1em * 0.08);
+  font-size: 1em; /*control value*/
+  /* x&y offset of title*/
+  --TtopOff: calc(1em * 0.5);
+  --TleftOff: calc(1em * 0);
+  --TbottomOff: calc(1em * 0.2);
+  /* title title shadow offset vars*/
+  --TshadowOff1: calc(1 * 1em * 0.08);
+  --TshadowOff2: calc(2 * 1em * 0.08);
+  --TshadowOff3: calc(3 * 1em * 0.08);
 
-	/* comp values try to compensate for not easily detectable offsets in some way */
-	/*comp on the left of text for undetectable top offset in font*/
-	--titleLeftComp: calc(1em * 0.09);
-	/*comp for the bottom for multi shadow offsets*/
-	--titleBottomComp: calc(var(--TshadowOff3) + (1em * 0.14) * -1);
-	/*uses current font size*/
+  /* comp values try to compensate for not easily detectable offsets in some way */
+  /*comp on the left of text for undetectable top offset in font*/
+  --titleLeftComp: calc(1em * 0.09);
+  /*comp for the bottom for multi shadow offsets*/
+  --titleBottomComp: calc(var(--TshadowOff3) + (1em * 0.14) * -1);
+  /*uses current font size*/
 
-	height: auto;
-	width: 100%;
-	padding-left: calc(var(--titleLeftComp) + var(--TleftOff));
-	padding-top: var(--TtopOff);
-	padding-bottom: calc(var(--titleBottomComp) + var(--TbottomOff));
-	/* position middle to main */
-	margin-left: auto;
-	margin-right: auto;
-	max-width: var(--mainWidth);
+  height: auto;
+  width: 100%;
+  padding-left: calc(var(--titleLeftComp) + var(--TleftOff));
+  padding-top: var(--TtopOff);
+  padding-bottom: calc(var(--titleBottomComp) + var(--TbottomOff));
+  /* position middle to main */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--mainWidth);
 }
 
 /* #region media title size*/
@@ -204,19 +204,19 @@ img {
 /* #endregion */
 
 #title-title {
-	margin: 0;
-	width: 100%;
-	height: 100%;
-	font-family: var(--fontTitle);
-	font-style: normal;
-	text-transform: uppercase;
-	font-weight: 400;
-	line-height: 100%;
-	font-size: 100%;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--fontTitle);
+  font-style: normal;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 100%;
+  font-size: 100%;
 
-	color: var(--colTitle1);
-	/* prettier-ignore */
-	text-shadow:
+  color: var(--colTitle1);
+  /* prettier-ignore */
+  text-shadow:
     var(--TshadowOff1) var(--TshadowOff1) 0 var(--colTitle2),
 		var(--TshadowOff2) var(--TshadowOff2) 0 var(--colTitle3),
 		var(--TshadowOff3) var(--TshadowOff3) 0 var(--colTitle4);
@@ -229,20 +229,20 @@ img {
 
 /* all nav list items */
 nav li {
-	list-style: none;
+  list-style: none;
 }
 
 /* all nav list items */
 nav li,
 #filter-button {
-	border: 1px solid rgba(0, 0, 0, 0.156);
+  border: 1px solid rgba(0, 0, 0, 0.156);
 }
 
 /* all */
 nav * {
-	font-family: inherit;
-	font-size: 1em;
-	color: inherit;
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
 }
 
 /* #endregion */
@@ -250,80 +250,80 @@ nav * {
 
 .fontToHeight,
 .navHor {
-	--fontToHeight: 2; /*individual var possible*/
-	height: calc(1em * var(--fontToHeight));
+  --fontToHeight: 2; /*individual var possible*/
+  height: calc(1em * var(--fontToHeight));
 }
 
 /* #endregion */
 /* #region horizontal nav*/
 
 .navHor {
-	/* height: 100%; */ /*.navHor standard part of .fontToHeight*/
-	width: inherit;
-	background-color: var(--colNavBG);
-	font-size: 1.5rem;
+  /* height: 100%; */ /*.navHor standard part of .fontToHeight*/
+  width: inherit;
+  background-color: var(--colNavBG);
+  font-size: 1.5rem;
 }
 /*next big element, usually a list*/
 .navHor ul {
-	height: inherit;
-	/* flex */
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: stretch;
+  height: inherit;
+  /* flex */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
 }
 /* individual buttons */
 .navHor ul > *,
 #filter-button {
-	height: inherit;
-	padding: 0;
-	/* flex */
-	flex-grow: 1;
+  height: inherit;
+  padding: 0;
+  /* flex */
+  flex-grow: 1;
 }
 
 .navHor ul > * *,
 #filter-button {
-	height: inherit;
-	width: 100%;
+  height: inherit;
+  width: 100%;
 }
 
 /* #endregion horizontal nav*/
 /* #region page and tags*/
 #page-navigation ul li,
 #tags-nav ul li {
-	display: inline-block;
-	text-align: center;
+  display: inline-block;
+  text-align: center;
 }
 
 /* #endregion */
 /* #region page-navigation */
 #page-navigation {
-	/* heigth multiplier */
-	--fontToHeight: 2;
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: stretch;
-	justify-content: center;
-	/* col */
-	background: var(--colPageNavBG);
-	color: var(--colPageNavText);
-	/* font */
-	font-family: var(--fontNavPage);
-	font-size: 2rem;
+  /* heigth multiplier */
+  --fontToHeight: 2;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: center;
+  /* col */
+  background: var(--colPageNavBG);
+  color: var(--colPageNavText);
+  /* font */
+  font-family: var(--fontNavPage);
+  font-size: 2rem;
 
-	/* sticky */
-	position: -webkit-sticky;
-	position: sticky;
-	width: 100%;
-	top: 0;
+  /* sticky */
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  top: 0;
 }
 #page-navigation ul {
-	width: var(--mainWidth);
+  width: var(--mainWidth);
 }
 #page-navigation li {
-	background-color: var(--colPageNav);
-	padding-top: 0.3em;
-	text-decoration-color: var(--colPageNavHover);
+  background-color: var(--colPageNav);
+  padding-top: 0.3em;
+  text-decoration-color: var(--colPageNavHover);
 }
 /* #page-navigation li:hover {
 	background-color: var(--colPageNavHover);
@@ -333,7 +333,7 @@ nav * {
 /* #region tags bar*/
 
 #tags-nav li {
-	padding-top: 0.5em;
+  padding-top: 0.5em;
 }
 
 /* #endregion */
@@ -341,13 +341,13 @@ nav * {
 
 #filter-button,
 #filter-nav {
-	width: var(--filterWidth);
+  width: var(--filterWidth);
 }
 
 /* #endregion */
 /* #region filter button */
 #filter-button {
-	float: left;
+  float: left;
 }
 /* #filter-button:hover {
 	background-color: var(--colFilterHoverInactive);
@@ -355,22 +355,22 @@ nav * {
 /* #endregion */
 /* #region filter list*/
 #filter-nav {
-	font-size: 0.8rem;
-	background: var(--colFilterInactive);
-	height: inherit;
-	/* display toggle stuff */
-	--rememberDisplay: block; /*holds display for toggle*/
-	display: none;
+  font-size: 0.8rem;
+  background: var(--colFilterInactive);
+  height: inherit;
+  /* display toggle stuff */
+  --rememberDisplay: block; /*holds display for toggle*/
+  display: none;
 }
 #filter-nav ul {
-	width: inherit;
-	height: inherit;
+  width: inherit;
+  height: inherit;
 }
 #filter-nav ul li {
-	padding: 0.6em 0.8em;
-	height: fit-content;
-	width: inherit;
-	text-align: start;
+  padding: 0.6em 0.8em;
+  height: fit-content;
+  width: inherit;
+  text-align: start;
 }
 
 /* #endregion filter list*/
@@ -378,111 +378,111 @@ nav * {
 /* #region main page*/
 
 #page-main {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: var(--mainWidth);
-	background: var(--colmainBG);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--mainWidth);
+  background: var(--colmainBG);
 }
 
 article {
-	margin: var(--subSpacing);
-	/* padding: var(--subSpacing); */
-	/* background: var(--articleBack); */
-	border-radius: 5px;
+  margin: var(--subSpacing);
+  /* padding: var(--subSpacing); */
+  /* background: var(--articleBack); */
+  border-radius: 5px;
 }
 article * {
-	/* margin-bottom: var(--articleInnerSpacing); */
+  /* margin-bottom: var(--articleInnerSpacing); */
 }
 article header {
-	/* margin-bottom: var(--articleHeaaderSpacing); */
+  /* margin-bottom: var(--articleHeaaderSpacing); */
 }
 article img {
-	/* margin-bottom: var(--articleImgSpacing); */
+  /* margin-bottom: var(--articleImgSpacing); */
 }
 article img + p {
-	margin-bottom: var(--articleImgSpacing);
-	text-align: center;
-	font-size: 0.9em;
-	color: var(--colSubline);
+  margin-bottom: var(--articleImgSpacing);
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--colSubline);
 }
 
 /* all headlines */
 header > h2 {
-	color: var(--colHeadline);
-	font-family: var(--fontHeadline);
-	font-size: 3em;
+  color: var(--colHeadline);
+  font-family: var(--fontHeadline);
+  font-size: 3em;
 }
 /* all subheadline */
 header > h2 + p {
-	color: var(--colSubline);
-	font-family: var(--fontSubline);
-	font-size: 1.5em;
+  color: var(--colSubline);
+  font-family: var(--fontSubline);
+  font-size: 1.5em;
 }
 
 /* article*/
 article > p,
 article > pre {
-	color: var(--colText);
-	font-family: var(--fontText);
-	word-wrap: break-word;
+  color: var(--colText);
+  font-family: var(--fontText);
+  word-wrap: break-word;
 }
 
 /* about */
 
 #about-div {
-	overflow: auto; /*This prevents the margins to collapse. Without it some weird space is above the about section.*/
+  overflow: auto; /*This prevents the margins to collapse. Without it some weird space is above the about section.*/
 }
 
 #project-div > header {
-	margin: var(--subSpacing);
+  margin: var(--subSpacing);
 }
 
 /* #endregion main page*/
 /* #region content*/
 
 #content-div {
-	height: inherit;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: stretch;
+  height: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
 /* generated */
 #content-destination {
-	/* size */
-	width: auto;
-	flex-grow: 1;
-	/* padding: var(--subSpacing); */
+  /* size */
+  width: auto;
+  flex-grow: 1;
+  /* padding: var(--subSpacing); */
 
-	/* flex */
-	display: flex;
-	justify-content: space-evenly;
-	flex-flow: row wrap;
+  /* flex */
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
 }
 #content-article {
-	font-size: 1rem;
-	font-weight: normal;
-	padding: 5px;
+  font-size: 1rem;
+  font-weight: normal;
+  padding: 5px;
 
-	min-width: 200px;
-	max-width: 700px;
+  min-width: 200px;
+  max-width: 700px;
 
-	min-height: 200px;
-	border: 3px solid var(--colContentBorder, black);
-	border-radius: 10px;
-	background: var(--colContentBG);
+  min-height: 200px;
+  border: 3px solid var(--colContentBorder, black);
+  border-radius: 10px;
+  background: var(--colContentBG);
 }
 
 #content-date {
-	font-size: 1em;
-	font-weight: lighter;
+  font-size: 1em;
+  font-weight: lighter;
 }
 
 #content-article img {
-	min-height: 100px;
-	background-color: #37186891;
-	padding: 0.3em;
+  min-height: 100px;
+  background-color: #37186891;
+  padding: 0.3em;
 }
 
 #content-article > p {
@@ -492,57 +492,57 @@ article > pre {
 /* #region footer*/
 
 footer {
-	background: var(--colFooterBG);
-	color: var(--colText);
-	font-family: var(--fontFooter);
-	padding: 0 2rem;
-	padding-bottom: 0.5rem;
-	height: calc(1rem * 4);
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: flex-end;
-	justify-content: space-between;
+  background: var(--colFooterBG);
+  color: var(--colText);
+  font-family: var(--fontFooter);
+  padding: 0 2rem;
+  padding-bottom: 0.5rem;
+  height: calc(1rem * 4);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 /* #endregion footer*/
 /* #region media*/
 
 @media screen and (max-width: 300px) {
-	html {
-		font-size: 0.5rem;
-	}
+  html {
+    font-size: 0.5rem;
+  }
 }
 @media screen and (min-width: 301px) and (max-width: 425px) {
-	html {
-		font-size: 0.7rem;
-	}
+  html {
+    font-size: 0.7rem;
+  }
 }
 @media screen and (min-width: 426px) {
-	html {
-		font-size: 1rem;
-	}
+  html {
+    font-size: 1rem;
+  }
 }
 
 /* #endregion */
 
 .filter,
 #filter-button {
-	background-color: var(--colFilterInactive);
-	text-decoration-color: var(--colFilterHoverInactive);
-	color: var(--colFilterTextInactive);
-	border: 1px solid var(--colFilterBorderInactive);
+  background-color: var(--colFilterInactive);
+  text-decoration-color: var(--colFilterHoverInactive);
+  color: var(--colFilterTextInactive);
+  border: 1px solid var(--colFilterBorderInactive);
 }
 .filter.active {
-	background-color: var(--colFilterActive);
-	text-decoration-color: var(--colFilterHoverActive);
-	color: var(--colFilterTextActive);
-	border: 1px solid var(--colFilterBorderActive);
+  background-color: var(--colFilterActive);
+  text-decoration-color: var(--colFilterHoverActive);
+  color: var(--colFilterTextActive);
+  border: 1px solid var(--colFilterBorderActive);
 }
 
 .filtered {
-	display: none;
+  display: none;
 }
 .filtered.active {
-	display: block;
+  display: block;
 }
