@@ -116,7 +116,7 @@ export class MyHTML {
    * @param {HTMLElement} parentEl
    * @param {string} childName
    */
-  static getChildByID(parentEl, childName) {
+  static getChildById(parentEl, childName) {
     let leng = parentEl.children.length;
     /**
      * @type {HTMLElement}
@@ -127,7 +127,7 @@ export class MyHTML {
 
       if (chld.id == childName) return chld;
 
-      chld = this.getChildByID(chld, childName);
+      chld = this.getChildById(chld, childName);
       if (chld) return chld;
     }
 

@@ -36,7 +36,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
     <title>Dodgy_Merchant Portfolio</title>
-    <script type="module" src="js/content.js"></script>
+    <script type="module" src="js/main.js"></script>
   </head>
   <body>
     <!-- header of the page, title + nav -->
@@ -49,59 +49,27 @@
       </div>
     </header>
     <!-- Whole Page Navigation -->
-    <nav id="page-navigation" class="clickable-container navHor selectNone">
+    <nav id="page-navigation" class="clickable-container selectNone">
       <ul>
         <a href="#about-div"><li>About</li></a>
         <a href="#project-div"><li>Projects</li></a>
       </ul>
     </nav>
     <main id="page-main">
-      <!-- About me -->
-      <div id="about-div">
-        <article>
-          <header>
-            <h2>About</h2>
-            <p>Dodgy_Merchant / Malte Bönig / ID: 5199921</p>
-          </header>
-          <p>
-            Welcome, welcome! Step into my parlor.<br />
-            I'm a University Student from Germany, currently studying Media
-            Design at the HSB in Bremen, Germany.
-          </p>
-        </article>
-        <aside></aside>
-      </div>
-      <!-- Project section -->
+      <article id="about"></article>
       <div id="project-div">
         <header>
           <h2>Projects</h2>
           <p>Work I created by myself or with others.</p>
         </header>
-        <!-- tags nav  -->
-        <nav id="tags-nav" class="navHor selectNone">
-          <!-- filter button -->
-          <button id="filter-button" class="clickable">Filters</button>
-          <!-- tags list -->
-          <ul class="clickable-container">
-            <li class="filter all">All</li>
-            <li class="filter website">Sites</li>
-            <li class="filter game">Games</li>
-            <li class="filter code">Coding</li>
-            <li class="filter game-design">Design</li>
-          </ul>
-        </nav>
-        <template>
-          <li class="filter"></li>
-        </template>
         <!-- content -->
-        <div id="content-div">
+        <div id="content">
           <!-- filter nav -->
           <nav id="filter-nav">
             <!-- filter nav menu -->
-            <!-- <ul id="filter-list" class="selectNone" style="display: none"> -->
             <ul class="clickable-container selectNone">
               <!-- general -->
-              <!-- <li class="filter game" >Games</li> -->
+              <li class="filter all">All</li>
               <li class="filter website">Sites</li>
               <li class="filter game">Games</li>
               <li class="filter code">Code</li>

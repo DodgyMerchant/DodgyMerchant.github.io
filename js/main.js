@@ -1,34 +1,7 @@
-import MyDisplay from "../myJS/MyDisplay.js";
 import { MyArr, MyHTML } from "../myJS/MyJS.js";
 import MyTags from "../myJS/MyTags.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-//#region get element
-
-const FilterNav = document.getElementById("filter-nav");
-/**
- *@type {HTMLButtonElement}
- */
-const FilterButton = document.getElementById("filter-button");
-
-/**
- * @type {HTMLDivElement}
- */
-const ContentDestination = document.getElementById("content-destination");
-/**
- * @type {HTMLTemplateElement}
- */
-const ContentTemplate = document.getElementById("content-template");
-
-//#endregion get element
-//#region genearal events
-
-//filter button
-FilterButton.addEventListener("click", () => {
-  MyDisplay.toggle(FilterNav);
-});
-
-//#endregion genearal events
 //#region template support
 if (!MyTemplate.supports())
   alert(
@@ -217,17 +190,17 @@ class ContentHandler {
       this.setContent(
         _newClone,
         entry.tags.join(","),
-        MyHTML.getChildByID(_newClone, "content-headline"),
+        MyHTML.getChildById(_newClone, "content-headline"),
         entry.headline,
-        MyHTML.getChildByID(_newClone, "content-subline"),
+        MyHTML.getChildById(_newClone, "content-subline"),
         entry.sub,
-        MyHTML.getChildByID(_newClone, "content-date"),
+        MyHTML.getChildById(_newClone, "content-date"),
         entry.dateStart,
         entry.dateEnd,
         _newClone,
         entry.text,
-        MyHTML.getChildByID(_newClone, "content-img"),
-        MyHTML.getChildByID(_newClone, "content-img-description"),
+        MyHTML.getChildById(_newClone, "content-img"),
+        MyHTML.getChildById(_newClone, "content-img-description"),
         entry.imageURL,
         entry.imageAlt
       );
@@ -461,8 +434,8 @@ fetch("content/content.json")
   .then((results) => results.json())
   .then((data) => {
     contentHandler = new ContentHandler(
-      ContentTemplate,
-      ContentDestination,
+      document.getElementById("content-template"),
+      document.getElementById("content-destination"),
       "filter",
       "active",
       "filtered",
@@ -471,8 +444,3 @@ fetch("content/content.json")
       data
     );
   });
-
-/*
-var _template = document.getElementById("content-Template").content;
-
-*/
