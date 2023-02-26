@@ -7,9 +7,14 @@
   --fontNavPage: var(--fontHeadline);
   --fontNav: var(--fontBaseText);
   --fontNavFilter: var(--fontBaseText);
+
+  /* col */
+  /* --colBG: rgb(32, 0, 0); */
+  --colBG: rgb(189, 154, 154);
 }
 
 /* #region -groundwork */
+
 html {
   font-size: 100%;
   box-sizing: border-box;
@@ -58,6 +63,11 @@ label {
 button {
   cursor: pointer;
 }
+
+li {
+  list-style: none;
+}
+
 /* #endregion -groundwork*/
 /* #region -utility classes */
 
@@ -100,7 +110,8 @@ button {
   --rememberDisplay: flex;
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
+  flex-wrap: wrap;
   align-content: stretch;
   /* justify-content: space-between; */ /*original*/
   justify-content: flex-start;
@@ -161,92 +172,6 @@ button {
 /* #endregion text unify*/
 
 /* #endregion -utility classes */
-
-/* #region title*/
-#title-base {
-  /* font-size: calc(1rem * 4); */
-  font-size: calc(16px * 2.5);
-  background: var(--colTitleBG);
-}
-#title {
-  font-size: 1em; /*control value*/
-  /* x&y offset of title*/
-  --TtopOff: calc(1em * 0.5);
-  --TleftOff: calc(1em * 0);
-  --TbottomOff: calc(1em * 0.2);
-  /* title title shadow offset vars*/
-  --TshadowOff1: calc(1 * 1em * 0.08);
-  --TshadowOff2: calc(2 * 1em * 0.08);
-  --TshadowOff3: calc(3 * 1em * 0.08);
-
-  /* comp values try to compensate for not easily detectable offsets in some way */
-  /*comp on the left of text for undetectable top offset in font*/
-  --titleLeftComp: calc(1em * 0.09);
-  /*comp for the bottom for multi shadow offsets*/
-  --titleBottomComp: calc(var(--TshadowOff3) + (1em * 0.14) * -1);
-  /*uses current font size*/
-
-  height: auto;
-  width: 100%;
-  padding-left: calc(var(--titleLeftComp) + var(--TleftOff));
-  padding-top: var(--TtopOff);
-  padding-bottom: calc(var(--titleBottomComp) + var(--TbottomOff));
-  /* position middle to main */
-  margin-left: auto;
-  margin-right: auto;
-  max-width: var(--mainWidth);
-}
-
-/* #region media title size*/
-
-/* prettier-ignore */
-@media screen and (max-width: 375px)							            {#title{font-size: 0.5em;	}} /* prettier-ignore */
-@media screen and (min-width: 376px) and	(max-width: 500px)	{#title{font-size: 0.65em;}} /* prettier-ignore */
-@media screen and (min-width: 501px) and	(max-width: 600px)	{#title{font-size: 0.9em;	}} /* prettier-ignore */
-@media screen and (min-width: 601px) and	(max-width: 800px)	{#title{font-size: 1em;		}} /* prettier-ignore */
-@media screen and (min-width: 801px) and	(max-width: 1200px)	{#title{font-size: 1.5em;	}} /* prettier-ignore */
-@media screen and (min-width: 1201px)                         {#title{font-size: 2em;   }}
-
-/* @media screen and (min-width: 1201px) and (max-width: 2000px) {#title{font-size: 2em;}} */
-/* #endregion */
-
-#title-title {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  font-family: var(--fontTitle);
-  font-style: normal;
-  text-transform: uppercase;
-  font-weight: 400;
-  line-height: 100%;
-  font-size: 100%;
-
-  color: var(--colTitle1);
-  /* prettier-ignore */
-  text-shadow:
-    var(--TshadowOff1) var(--TshadowOff1) 0 var(--colTitle2),
-		var(--TshadowOff2) var(--TshadowOff2) 0 var(--colTitle3),
-		var(--TshadowOff3) var(--TshadowOff3) 0 var(--colTitle4);
-}
-
-/* #endregion title*/
-/* #region footer*/
-
-footer {
-  /* background: var(--colFooterBG); */
-  /* color: var(--colText); */
-  /* font-family: var(--fontFooter); */
-  padding: 0 2rem;
-  padding-bottom: 0.5rem;
-  height: calc(1rem * 4);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-/* #endregion footer*/
 /* #region media*/
 
 @media screen and (max-width: 300px) {
@@ -267,20 +192,56 @@ footer {
 
 /* #endregion */
 
-/* #region filter*/
-.filter,
-#filter-button {
-  color: black;
+.section {
+  --rememberDisplay: flex;
+  display: flex;
+
+  flex-direction: row;
+  justify-content: flex-start;
 }
-.filter.active {
+.section > *:first-child {
+  margin-right: 1em;
+  border-right: 10px solid red;
+}
+.section > *:first-child + * {
+}
+
+/* #region filter*/
+
+.lvl-fltr,
+.cont-fltr {
+  color: blue;
+}
+.lvl-fltr.active,
+.cont-fltr.active {
   color: red;
+}
+.lvl-fltr:hover,
+.cont-fltr:hover {
+  color: lightblue;
+}
+.lvl-fltr.active:hover,
+.cont-fltr.active:hover {
+  color: darkred;
 }
 /* #endregion filter*/
 /* #region filtered*/
-.filtered {
+.lvl-fltrd:not(.active),
+.cont-fltrd:not(.active) {
   display: none;
 }
-.filtered.active {
-  display: block;
-}
 /* #endregion filtered*/
+
+body {
+  height: 100vh;
+}
+
+#firstlevel {
+  width: 30vw;
+}
+
+footer {
+  height: 1em;
+  width: 100%;
+  background: rgb(0, 0, 0);
+}

@@ -38,71 +38,76 @@
     <title>Dodgy_Merchant Portfolio</title>
     <script type="module" src="js/main.js"></script>
   </head>
-  <body>
-    <!-- header of the page, title + nav -->
-    <header>
-      <!-- title -->
-      <div id="title-base">
-        <div id="title">
-          <h1 id="title-title">Dodgy_Merchant<br />Portfolio</h1>
-        </div>
-      </div>
+  <body class="flexContainer flexSBS">
+    <header id="firstlevel">
+      <h1 id="title-title">Dodgy_Merchant<br />Portfolio</h1>
+      <nav id="page-navigation" class="selectNone">
+        <ul>
+          <li class="lvl-fltr about">About</li>
+          <li class="lvl-fltr projects">Projects</li>
+        </ul>
+      </nav>
     </header>
-    <!-- Whole Page Navigation -->
-    <nav id="page-navigation" class="clickable-container selectNone">
-      <ul>
-        <a href="#about-div"><li>About</li></a>
-        <a href="#project-div"><li>Projects</li></a>
-      </ul>
-    </nav>
-    <main id="page-main">
-      <article id="about"></article>
-      <div id="project-div">
+    <main class="flexMeDyn">
+      <article id="about" class="flexContainer flexSBS lvl-fltrd">
         <header>
-          <h2>Projects</h2>
-          <p>Work I created by myself or with others.</p>
+          <h2>About</h2>
+          <p>Dodgy_Merchant / Malte Bönig / ID: 5199921</p>
         </header>
-        <!-- content -->
-        <div id="content">
-          <!-- filter nav -->
-          <nav id="filter-nav">
+        <div>
+          <p>Welcome, welcome!</p>
+          <p>Step into my parlor.</p>
+          <p>
+            I'm a University Student from Germany, currently studying Media
+            Design at the HSB in Bremen, Germany.
+          </p>
+        </div>
+      </article>
+      <div id="projects" class="flexContainer flexSBS lvl-fltrd">
+        <div>
+          <header>
+            <h2>Projects</h2>
+            <p>Work I created by myself or with others.</p>
+          </header>
+          <nav id="content-nav">
             <!-- filter nav menu -->
             <ul class="clickable-container selectNone">
               <!-- general -->
-              <li class="filter all">All</li>
-              <li class="filter website">Sites</li>
-              <li class="filter game">Games</li>
-              <li class="filter code">Code</li>
+              <li class="cont-fltr all">All</li>
+              <li class="cont-fltr website">Sites</li>
+              <li class="cont-fltr game">Games</li>
+              <li class="cont-fltr code">Code</li>
 
               <!-- fields -->
-              <li class="filter game-design">Game Design</li>
-              <li class="filter system-design">System Design</li>
-              <li class="filter level-design">Level Design</li>
-              <li class="filter game-programming">Game Programm.</li>
-              <li class="filter ai-programming">AI Programm.</li>
-              <li class="filter gameplay-engineer">Gameplay Engineer</li>
-              <li class="filter technical-art">Technical Artist</li>
-              <li class="filter visual-design">Visual Design</li>
-              <li class="filter asset-art">Asset Artist</li>
+              <li class="cont-fltr game-design">Game Design</li>
+              <li class="cont-fltr system-design">System Design</li>
+              <li class="cont-fltr level-design">Level Design</li>
+              <li class="cont-fltr game-programming">Game Programm.</li>
+              <li class="cont-fltr ai-programming">AI Programm.</li>
+              <li class="cont-fltr gameplay-engineer">Gameplay Engineer</li>
+              <li class="cont-fltr technical-art">Technical Artist</li>
+              <li class="cont-fltr visual-design">Visual Design</li>
+              <li class="cont-fltr asset-art">Asset Artist</li>
 
               <!-- languages -->
-              <li class="filter HTML">HTML</li>
-              <li class="filter Java">Java</li>
-              <li class="filter JS">JavaScript</li>
-              <li class="filter C++">C++</li>
-              <li class="filter C#">C#</li>
-              <li class="filter GML">GML</li>
+              <li class="cont-fltr HTML">HTML</li>
+              <li class="cont-fltr Java">Java</li>
+              <li class="cont-fltr JS">JavaScript</li>
+              <li class="cont-fltr C++">C++</li>
+              <li class="cont-fltr C#">C#</li>
+              <li class="cont-fltr GML">GML</li>
 
               <!-- engines -->
-              <li class="filter GM">GameMaker</li>
-              <li class="filter Unity">Unity</li>
-              <li class="filter UE">Unreal</li>
-              <li class="filter Phaser">Phaser</li>
+              <li class="cont-fltr GM">GameMaker</li>
+              <li class="cont-fltr Unity">Unity</li>
+              <li class="cont-fltr UE">Unreal</li>
+              <li class="cont-fltr Phaser">Phaser</li>
             </ul>
           </nav>
-          <!-- only the template -->
+        </div>
+        <div id="content-destination">
           <template id="content-template">
-            <article id="content-article" class="filtered">
+            <article id="content-article" class="cont-fltrd">
               <header>
                 <h2 id="content-headline">Project Name</h2>
                 <p id="content-subline">
@@ -115,19 +120,14 @@
               <p id="content-img-description">EEEEE</p>
             </article>
           </template>
-          <!-- destination for generated content -->
-          <div id="content-destination"></div>
         </div>
       </div>
     </main>
-    <!-- footer -->
-    <footer>
-      <p class="selectNone">
-        Contact me:
-        <a class="selectAll" href="mailto:admin@dodgymerchant.dev"
-          >admin@dodgymerchant.dev
-        </a>
-      </p>
+    <footer class="selectNone">
+      Contact me:
+      <a class="selectAll" href="mailto:admin@dodgymerchant.dev"
+        >admin@dodgymerchant.dev
+      </a>
     </footer>
   </body>
 </html>

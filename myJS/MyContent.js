@@ -1,7 +1,7 @@
 /**
  * @file Collection of code that manages content.
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 import MyTags from "../myJS/MyTags.js";
@@ -69,7 +69,7 @@ class Content {
  * @property {string[]} tags desc
  */
 /**
- *
+ * ContentManager Object.
  */
 export default class ContentManager {
   //#region configurable
@@ -92,6 +92,28 @@ export default class ContentManager {
    * @type {number}
    */
   filterNumMax;
+
+  /**
+   * If the system allows the unselection of the last filters resulting in an empty list.
+   * Defaults to true.
+   * @type {boolean}
+   */
+  zeroSelect;
+  /**
+   * If the system should use fallback.
+   * Fallback sets the filter list to the filter fallback list if the filter list is empty.
+   * Preventing the filter list from being empty.
+   * Defaults to true.
+   * @type {boolean}
+   */
+  filterFallback;
+  /**
+   * Filter Used On Ititialization.
+   * Defaults to "all".
+   * Used as default fallback filter.
+   * @type {string[]}
+   */
+  filterflbList;
 
   /**
    * how many tags in the filter ellement have to match for the object to be active.
@@ -143,14 +165,21 @@ export default class ContentManager {
 
   /**
    * create a ContentManager instance that manages given content via filters.
+   * Filter Elements must have their filter-tags in their class string following the Filter Class Designator.
+   * If one filter has multiple tags they must only be seperated by "," f.e: "tag1,tag2,tag3".
+   * The "all" filter is reserved to display all filtered items and will be auto removed from the list if any other tag is present..
+   * If no filters are selected fallback will be used and the fallback list will be applied.
+   * If fallback is not used and filters are empty the system will treat it as if the "all" filter is used.
    * @param {{element: HTMLElement, tags: string[]}[]} elements list of HTMLElements to manage.
-   * @param {string} filterClassName HTML class name of filter seignated elements. will be given interaction events.
+   * @param {string} filterClassName HTML class name of filter designated elements. will be given interaction events.
    * @param {string | undefined} filterClassActive Name of the class set to a filter if its tags are in use. Used to Highlight active filters.
    * @param {string} filteredClassName HTML class name of a cotnent/filtered HTML element.
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
    * @param {string} filterNumMax Maximum number of filters. -1 for infinite.
-   * @param {[ContentData]} data
-   * @returns
+   * @param {string[]=} filterInit Ffilters to apply on init. defaults to "all".
+   * @param {boolean=} zeroSelect If the system allows the unselection of the last filters resulting in an empty list. Defaults to true.
+   * @param {boolean=} filterFallback If the system should apply the Fallback-Filter if no filters are selected. Defauts to true.
+   * @param {string[]=} filterflbList Filter List to use as fallback. Defaults to init filter.
    */
   constructor(
     elements,
@@ -158,7 +187,11 @@ export default class ContentManager {
     filterClassActive,
     filteredClassName,
     filteredClassActive,
-    filterNumMax
+    filterNumMax,
+    filterInit = ["all"],
+    zeroSelect = true,
+    filterFallback = true,
+    filterflbList = filterInit
   ) {
     //#region filter
 
@@ -185,7 +218,10 @@ export default class ContentManager {
 
     //#endregion filter
 
-    this.FilterApply(["all"]);
+    this.zeroSelect = zeroSelect;
+    this.filterFallback = filterFallback;
+    this.filterflbList = filterflbList;
+    this.FilterApply(filterInit.slice());
   }
 
   /**
@@ -199,14 +235,16 @@ export default class ContentManager {
     if (tags.length > 1 && tags.includes("all"))
       MyArr.remove(tags, tags.indexOf("all"));
 
-    //if list empty add all filter
-    if (tags.length == 0) tags.push("all");
+    //fallback on list empty
+    if (tags.length == 0 && this.filterFallback) {
+      tags.push(...this.filterflbList);
+    }
 
     //#endregion preprocess filters
 
     this.activeFilters = tags;
 
-    console.log("FilterApply: ", this.activeFilters);
+    console.log("Filters: ", this.activeFilters);
 
     //filtered
     /**
@@ -330,6 +368,12 @@ export default class ContentManager {
    * @param {string[]} tags
    */
   removeFilter(tags) {
-    MyArr.removeList(this.activeFilters, tags);
+    if (!this.zeroSelect) {
+      //id the list cant be empty
+      let copy = this.activeFilters.slice();
+
+      MyArr.removeList(copy, tags);
+      if (copy.length != 0) this.activeFilters = copy;
+    } else MyArr.removeList(this.activeFilters, tags);
   }
 }

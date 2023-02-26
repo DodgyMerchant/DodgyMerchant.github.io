@@ -2,6 +2,20 @@ import ContentManager from "../myJS/MyContent.js";
 import { MyHTML } from "../myJS/MyJS.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
+new ContentManager(
+  [
+    { element: document.getElementById("about"), tags: ["about"] },
+    { element: document.getElementById("projects"), tags: ["projects"] },
+  ],
+  "lvl-fltr",
+  "active",
+  "lvl-fltrd",
+  "active",
+  1,
+  ["about"],
+  false
+);
+
 //get data => create content => create contentmanager
 fetch("content/content.json")
   .then((results) => results.json())
@@ -87,11 +101,10 @@ fetch("content/content.json")
 
     new ContentManager(
       elements,
-      "filter",
+      "cont-fltr",
       "active",
-      "filtered",
+      "cont-fltrd",
       "active",
-      1,
-      data
+      -1
     );
   });
