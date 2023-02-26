@@ -270,8 +270,10 @@ footer {
 /* #region filter*/
 .filter,
 #filter-button {
+  color: black;
 }
 .filter.active {
+  color: red;
 }
 /* #endregion filter*/
 /* #region filtered*/
