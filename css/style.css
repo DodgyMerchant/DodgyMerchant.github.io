@@ -11,7 +11,7 @@
 
   /* color: ; */
   --colBG: rgb(48, 6, 48);
-  --colText: blue;
+  --colText: rgb(57, 179, 219);
   --colHighlight: aqua; /*lightblue*/
   --colSpecial1: fuchsia;
   --colSpecual2: purple;
@@ -22,7 +22,7 @@
   --colFilterAH: var(--colSpecual2);
 
   font: normal normal 1em "Courier Prime", monospace;
-  color: blue;
+  color: var(--colText);
 }
 
 /* #region -groundwork */
@@ -36,7 +36,7 @@ html {
 }
 html p {
   line-height: normal;
-  /* line-height: 1.5rem; */
+  line-height: 1.5rem;
 }
 
 @media (prefers-reduced-motion) {
@@ -218,10 +218,6 @@ li {
 
 /* #region about */
 
-#about-head > p {
-  display: inline;
-}
-
 #about > p {
   width: 100%;
   text-align: justify;
@@ -233,7 +229,8 @@ li {
 #Base {
   height: 100vh;
   display: grid;
-  gap: 0.5em;
+  --gridGap: 0.5em;
+  gap: var(--gridGap);
 
   grid-template-areas: "head" "side" "main" "foot";
   grid-template-columns: 100%;
@@ -241,7 +238,7 @@ li {
 }
 
 /* filter on the sides */
-@media (min-width: 400px) and (max-width: 800px) {
+@media (min-width: 420px) and (max-width: 800px) {
   #Base {
     grid-template-areas:
       ". head"
@@ -250,8 +247,14 @@ li {
     grid-template-columns: max-content 1fr;
     grid-template-rows: max-content auto max-content;
   }
-  #about-head > p {
-    display: block;
+
+  @media (max-width: 480px) {
+    #Base {
+      grid-template-areas:
+        "head head"
+        "side main"
+        "foot foot";
+    }
   }
 }
 
@@ -263,18 +266,21 @@ li {
       "side main"
       "foot foot";
     grid-template-columns: max-content 1fr;
-    grid-template-rows: 8em auto max-content;
-  }
-  #about-head > p {
-    display: block;
+
+    --gridRow1: 8em;
+    grid-template-rows: var(--gridRow1) auto max-content;
   }
   #Base > header {
     text-align: end;
   }
+  #about {
+    /* move about section down by grid row 1 heigth and row gap */
+    margin-top: calc(var(--gridGap) + var(--gridRow1));
+  }
 }
 
 /* sticky filter if screen is big enough */
-@media (min-width: 400px) and (min-height: 460px) {
+@media (min-width: 400px) and (min-height: 490px) {
   #projects-nav {
     position: sticky;
     top: 0px;
@@ -286,6 +292,13 @@ li {
       top: 0px;
     }
   } */
+}
+
+/* full view */
+@media (max-width: 275px) {
+  html, html *{
+    overflow-x: hidden;
+  }
 }
 
 #Base > header {
@@ -326,11 +339,15 @@ h6 {
   color: var(--colHighlight);
 }
 
-#content-headline {
+/* #content-headline {
   position: sticky;
   top: 0;
-}
+} */
 
 #projects {
   max-width: 600px;
+}
+
+ul li {
+  font-size: 1.2em;
 }
