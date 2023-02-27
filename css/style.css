@@ -1,6 +1,4 @@
 :root {
-  font: normal normal 1em "Courier Prime", monospace;
-
   /*
   "Audiowide", Impact
   "Josefin Sans", sans-serif
@@ -10,7 +8,21 @@
 
   /* col */
   /* --colBG: rgb(32, 0, 0); */
-  --colBG: rgb(189, 154, 154);
+
+  /* color: ; */
+  --colBG: rgb(48, 6, 48);
+  --colText: blue;
+  --colHighlight: aqua; /*lightblue*/
+  --colSpecial1: fuchsia;
+  --colSpecual2: purple;
+
+  --colFilter: var(--colText);
+  --colFilterH: var(--colHighlight);
+  --colFilterA: var(--colSpecial1);
+  --colFilterAH: var(--colSpecual2);
+
+  font: normal normal 1em "Courier Prime", monospace;
+  color: blue;
 }
 
 /* #region -groundwork */
@@ -181,19 +193,20 @@ li {
 
 .lvl-fltr,
 .cont-fltr {
-  color: blue;
+  color: var(--colFilter);
 }
 .lvl-fltr.active,
 .cont-fltr.active {
-  color: red;
+  color: var(--colFilterA);
+  text-decoration: underline;
 }
 .lvl-fltr:hover,
 .cont-fltr:hover {
-  color: lightblue;
+  color: var(--colFilterH);
 }
 .lvl-fltr.active:hover,
 .cont-fltr.active:hover {
-  color: darkred;
+  color: var(--colFilterAH);
 }
 /* #endregion filter*/
 /* #region filtered*/
@@ -220,22 +233,20 @@ li {
 #Base {
   height: 100vh;
   display: grid;
-  gap: 0.1em;
+  gap: 0.5em;
 
   grid-template-areas: "head" "side" "main" "foot";
   grid-template-columns: 100%;
   grid-template-rows: max-content max-content auto max-content;
 }
-#Base > * {
-}
 
 /* filter on the sides */
 @media (min-width: 400px) and (max-width: 800px) {
-  html {
-    /* border: red 5px solid; */
-  }
   #Base {
-    grid-template-areas: "head head" "side main" "foot foot";
+    grid-template-areas:
+      ". head"
+      "side main"
+      "foot foot";
     grid-template-columns: max-content 1fr;
     grid-template-rows: max-content auto max-content;
   }
@@ -246,9 +257,6 @@ li {
 
 /* full view */
 @media (min-width: 801px) {
-  html {
-    /* border: red 5px solid; */
-  }
   #Base {
     grid-template-areas:
       "head main"
@@ -260,26 +268,28 @@ li {
   #about-head > p {
     display: block;
   }
+  #Base > header {
+    text-align: end;
+  }
 }
 
 /* sticky filter if screen is big enough */
 @media (min-width: 400px) and (min-height: 460px) {
-  #Base > div > * {
+  #projects-nav {
     position: sticky;
-    top: 0;
+    top: 0px;
   }
 
   /* @media (min-height: 600px) {
     #Base > header {
       position: sticky;
-      top: 0;
+      top: 0px;
     }
   } */
 }
 
 #Base > header {
   grid-area: head;
-  text-align: end;
 }
 
 #Base > div {
@@ -306,3 +316,21 @@ li {
 }
 
 /* #endregion layout */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--colHighlight);
+}
+
+#content-headline {
+  position: sticky;
+  top: 0;
+}
+
+#projects {
+  max-width: 600px;
+}
