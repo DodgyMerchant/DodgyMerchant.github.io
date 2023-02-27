@@ -5,7 +5,9 @@ import MyTemplate from "../myJS/MyTemplate.js";
 new ContentManager(
   [
     { element: document.getElementById("about"), tags: ["about"] },
+    { element: document.getElementById("about-head"), tags: ["about"] },
     { element: document.getElementById("projects"), tags: ["projects"] },
+    { element: document.getElementById("projects-nav"), tags: ["projects"] },
   ],
   "lvl-fltr",
   "active",

@@ -1,12 +1,12 @@
 :root {
-  --fontTitle: "Audiowide", Impact;
-  --fontHeadline: "Audiowide", sans-serif;
-  --fontSubline: "Josefin Sans", sans-serif;
-  --fontBaseText: "Josefin Sans", sans-serif;
-  --fontFooter: "Courier Prime", monospace;
-  --fontNavPage: var(--fontHeadline);
-  --fontNav: var(--fontBaseText);
-  --fontNavFilter: var(--fontBaseText);
+  font: normal normal 1em "Courier Prime", monospace;
+
+  /*
+  "Audiowide", Impact
+  "Josefin Sans", sans-serif
+  */
+
+  --fontFooter: normal 0.8em "Courier Prime", monospace;
 
   /* col */
   /* --colBG: rgb(32, 0, 0); */
@@ -23,7 +23,8 @@ html {
   scroll-behavior: smooth;
 }
 html p {
-  line-height: 1.5rem;
+  line-height: normal;
+  /* line-height: 1.5rem; */
 }
 
 @media (prefers-reduced-motion) {
@@ -172,39 +173,9 @@ li {
 /* #endregion text unify*/
 
 /* #endregion -utility classes */
-/* #region media*/
 
-@media screen and (max-width: 300px) {
-  html {
-    font-size: 0.5rem;
-  }
-}
-@media screen and (min-width: 301px) and (max-width: 425px) {
-  html {
-    font-size: 0.7rem;
-  }
-}
-@media screen and (min-width: 426px) {
-  html {
-    font-size: 1rem;
-  }
-}
-
-/* #endregion */
-
-.section {
-  --rememberDisplay: flex;
-  display: flex;
-
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.section > *:first-child {
-  margin-right: 1em;
-  border-right: 10px solid red;
-}
-.section > *:first-child + * {
-}
+/* .section > *:first-child + * {
+} */
 
 /* #region filter*/
 
@@ -232,16 +203,106 @@ li {
 }
 /* #endregion filtered*/
 
-body {
-  height: 100vh;
+/* #region about */
+
+#about-head > p {
+  display: inline;
 }
 
-#firstlevel {
-  width: 30vw;
-}
-
-footer {
-  height: 1em;
+#about > p {
   width: 100%;
-  background: rgb(0, 0, 0);
+  text-align: justify;
 }
+
+/* #endregion about */
+/* #region layout*/
+
+#Base {
+  height: 100vh;
+  display: grid;
+  gap: 0.1em;
+
+  grid-template-areas: "head" "side" "main" "foot";
+  grid-template-columns: 100%;
+  grid-template-rows: max-content max-content auto max-content;
+}
+#Base > * {
+}
+
+/* filter on the sides */
+@media (min-width: 400px) and (max-width: 800px) {
+  html {
+    /* border: red 5px solid; */
+  }
+  #Base {
+    grid-template-areas: "head head" "side main" "foot foot";
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content auto max-content;
+  }
+  #about-head > p {
+    display: block;
+  }
+}
+
+/* full view */
+@media (min-width: 801px) {
+  html {
+    /* border: red 5px solid; */
+  }
+  #Base {
+    grid-template-areas:
+      "head main"
+      "side main"
+      "foot foot";
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 8em auto max-content;
+  }
+  #about-head > p {
+    display: block;
+  }
+}
+
+/* sticky filter if screen is big enough */
+@media (min-width: 400px) and (min-height: 460px) {
+  #Base > div > * {
+    position: sticky;
+    top: 0;
+  }
+
+  /* @media (min-height: 600px) {
+    #Base > header {
+      position: sticky;
+      top: 0;
+    }
+  } */
+}
+
+#Base > header {
+  grid-area: head;
+  text-align: end;
+}
+
+#Base > div {
+  grid-area: side;
+  text-align: end;
+}
+
+#Base > main {
+  grid-area: main;
+}
+
+#Base > footer {
+  grid-area: foot;
+  font: var(--fontFooter);
+  height: 100%;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  background: var(--colBG);
+  /* border-top: 5em var(--colBG) solid; */
+}
+#Base > footer > * {
+  float: left;
+}
+
+/* #endregion layout */

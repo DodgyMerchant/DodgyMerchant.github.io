@@ -38,9 +38,9 @@
     <title>Dodgy_Merchant Portfolio</title>
     <script type="module" src="js/main.js"></script>
   </head>
-  <body class="flexContainer flexSBS">
-    <header id="firstlevel">
-      <h1 id="title-title">Dodgy_Merchant<br />Portfolio</h1>
+  <body id="Base">
+    <header>
+      <h1 id="title">Dodgy_Merchant<br />Portfolio</h1>
       <nav id="page-navigation" class="selectNone">
         <ul>
           <li class="lvl-fltr about">About</li>
@@ -48,62 +48,65 @@
         </ul>
       </nav>
     </header>
-    <main class="flexMeDyn">
-      <article id="about" class="flexContainer flexSBS lvl-fltrd">
-        <header>
-          <h2>About</h2>
-          <p>Dodgy_Merchant / Malte Bönig / ID: 5199921</p>
-        </header>
-        <div>
-          <p>Welcome, welcome!</p>
-          <p>Step into my parlor.</p>
-          <p>
-            I'm a University Student from Germany, currently studying Media
-            Design at the HSB in Bremen, Germany.
-          </p>
-        </div>
+    <div>
+      <header id="about-head" class="lvl-fltrd">
+        <h2>About</h2>
+        <p>Dodgy_Merchant /</p>
+        <p>Malte Bönig /</p>
+        <p>ID: 5199921</p>
+      </header>
+      <nav id="projects-nav" class="lvl-fltrd">
+        <h2>Filter</h2>
+        <!-- filter nav menu -->
+        <ul class="clickable-container selectNone">
+          <!-- general -->
+          <li class="cont-fltr all">All</li>
+          <li class="cont-fltr website">Sites</li>
+          <li class="cont-fltr game">Games</li>
+          <li class="cont-fltr code">Code</li>
+
+          <!-- fields -->
+          <li class="cont-fltr game-design">Game Design</li>
+          <li class="cont-fltr system-design">System Design</li>
+          <li class="cont-fltr level-design">Level Design</li>
+          <li class="cont-fltr game-programming">Game Programm.</li>
+          <li class="cont-fltr ai-programming">AI Programm.</li>
+          <li class="cont-fltr gameplay-engineer">Gameplay Engineer</li>
+          <li class="cont-fltr technical-art">Technical Artist</li>
+          <li class="cont-fltr visual-design">Visual Design</li>
+          <li class="cont-fltr asset-art">Asset Artist</li>
+
+          <!-- languages -->
+          <li class="cont-fltr HTML">HTML</li>
+          <li class="cont-fltr Java">Java</li>
+          <li class="cont-fltr JS">JavaScript</li>
+          <li class="cont-fltr C++">C++</li>
+          <li class="cont-fltr C#">C#</li>
+          <li class="cont-fltr GML">GML</li>
+
+          <!-- engines -->
+          <li class="cont-fltr GM">GameMaker</li>
+          <li class="cont-fltr Unity">Unity</li>
+          <li class="cont-fltr UE">Unreal</li>
+          <li class="cont-fltr Phaser">Phaser</li>
+        </ul>
+      </nav>
+    </div>
+    <main>
+      <article id="about" class="lvl-fltrd">
+        <p>Welcome, welcome!<br />Step into my parlor.</p>
+        <p>
+          I'm a University
+          Student from Germany, currently studying Media Design at the HSB in
+          Bremen, Germany.
+        </p>
       </article>
-      <div id="projects" class="flexContainer flexSBS lvl-fltrd">
+      <div id="projects" class="lvl-fltrd">
         <div>
           <header>
             <h2>Projects</h2>
             <p>Work I created by myself or with others.</p>
           </header>
-          <nav id="content-nav">
-            <!-- filter nav menu -->
-            <ul class="clickable-container selectNone">
-              <!-- general -->
-              <li class="cont-fltr all">All</li>
-              <li class="cont-fltr website">Sites</li>
-              <li class="cont-fltr game">Games</li>
-              <li class="cont-fltr code">Code</li>
-
-              <!-- fields -->
-              <li class="cont-fltr game-design">Game Design</li>
-              <li class="cont-fltr system-design">System Design</li>
-              <li class="cont-fltr level-design">Level Design</li>
-              <li class="cont-fltr game-programming">Game Programm.</li>
-              <li class="cont-fltr ai-programming">AI Programm.</li>
-              <li class="cont-fltr gameplay-engineer">Gameplay Engineer</li>
-              <li class="cont-fltr technical-art">Technical Artist</li>
-              <li class="cont-fltr visual-design">Visual Design</li>
-              <li class="cont-fltr asset-art">Asset Artist</li>
-
-              <!-- languages -->
-              <li class="cont-fltr HTML">HTML</li>
-              <li class="cont-fltr Java">Java</li>
-              <li class="cont-fltr JS">JavaScript</li>
-              <li class="cont-fltr C++">C++</li>
-              <li class="cont-fltr C#">C#</li>
-              <li class="cont-fltr GML">GML</li>
-
-              <!-- engines -->
-              <li class="cont-fltr GM">GameMaker</li>
-              <li class="cont-fltr Unity">Unity</li>
-              <li class="cont-fltr UE">Unreal</li>
-              <li class="cont-fltr Phaser">Phaser</li>
-            </ul>
-          </nav>
         </div>
         <div id="content-destination">
           <template id="content-template">
@@ -124,10 +127,12 @@
       </div>
     </main>
     <footer class="selectNone">
-      Contact me:
-      <a class="selectAll" href="mailto:admin@dodgymerchant.dev"
-        >admin@dodgymerchant.dev
-      </a>
+      <p>
+        Contact me:
+        <a class="selectAll" href="mailto:admin@dodgymerchant.dev"
+          >admin@dodgymerchant.dev
+        </a>
+      </p>
     </footer>
   </body>
 </html>
