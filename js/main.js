@@ -42,9 +42,13 @@ fetch("content/content.json")
 
     let entry;
     /**
+     * @type {Object{URL: string, alt: string}}
+     */
+    let imgData;
+    /**
      * @type {HTMLDivElement}
      */
-    let _newClone;
+    let _newClone, _newImg, _newImgDesc;
 
     for (let i = 0; i < data.length; i++) {
       entry = data[i];
@@ -78,6 +82,26 @@ fetch("content/content.json")
       MyHTML.getChildById(_newClone, "content-date").innerText = dateText;
 
       //#endregion date
+      //#region img
+
+      for (let ii = 0; ii < entry.image.length; ii++) {
+        imgData = entry.image[ii];
+
+        // <img id="content-img" src="" alt="placeholder image" />
+        //       <p id="content-img-description">EEEEE</p>
+
+        _newImg = document.createElement("img");
+        _newImgDesc = document.createElement("p");
+
+        _newImg.src = imgData.URL;
+        _newImg.alt = imgData.alt;
+        _newImgDesc.innerText = imgData.alt;
+
+        _newClone.append(_newImg);
+        _newClone.append(_newImgDesc);
+      }
+
+      //#endregion img
       //#region text
 
       //split multi line breaks into seperate paragraphs
@@ -90,13 +114,6 @@ fetch("content/content.json")
       });
 
       //#endregion text
-      //#region img
-      let imgTrg = MyHTML.getChildById(_newClone, "content-img");
-      imgTrg.src = entry.imageURL;
-      imgTrg.alt = entry.imageAlt;
-      MyHTML.getChildById(_newClone, "content-img-description").innerText =
-        entry.imageAlt;
-      //#endregion img
     }
 
     //#endregion generate content
