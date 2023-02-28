@@ -6,20 +6,27 @@
 
   --fontFooter: normal 0.8em "Courier Prime", monospace;
 
-  /* col */
   /* --colBG: rgb(32, 0, 0); */
-
   /* color: ; */
+
+  --backClickable: blue;
+
   --colBG: rgb(48, 6, 48);
   --colText: rgb(57, 179, 219);
   --colHighlight: aqua; /*lightblue*/
   --colSpecial1: fuchsia;
   --colSpecual2: purple;
+  --colSpecual3: pink;
 
+  /* filter */
   --colFilter: var(--colText);
   --colFilterH: var(--colHighlight);
   --colFilterA: var(--colSpecial1);
-  --colFilterAH: var(--colSpecual2);
+  --colFilterAH: var(--colSpecual3);
+
+  /* content */
+  --borderCont: 3px var(--colText) dashed;
+  --borderImg: 3px rgba(255, 0, 255, 0.192) solid;
 
   font: normal normal 1em "Courier Prime", monospace;
   color: var(--colText);
@@ -172,6 +179,7 @@ li {
 .clickable:hover,
 .clickable-container *:hover {
   text-decoration: underline;
+  background: var(--backClickable);
 }
 
 /* #endregion -clickable */
@@ -215,7 +223,6 @@ li {
   display: none;
 }
 /* #endregion filtered*/
-
 /* #region about */
 
 #about > p {
@@ -230,29 +237,55 @@ li {
   height: 100vh;
   display: grid;
   --gridGap: 0.5em;
+  --grid2row: 6em;
   gap: var(--gridGap);
 
-  grid-template-areas: "head" "side" "main" "foot";
+  grid-template-areas:
+    "title"
+    "topic"
+    "aside"
+    "main"
+    "foot";
   grid-template-columns: 100%;
-  grid-template-rows: max-content max-content auto max-content;
+  grid-template-rows:
+    max-content
+    max-content
+    max-content
+    max-content
+    auto
+    max-content;
+}
+/* increadibly small view */
+@media (max-width: 275px) {
+  html,
+  html * {
+    overflow-x: hidden;
+  }
 }
 
 /* filter on the sides */
 @media (min-width: 420px) and (max-width: 800px) {
   #Base {
     grid-template-areas:
-      ". head"
-      "side main"
+      ". title"
+      "topic main"
+      "aside main"
       "foot foot";
-    grid-template-columns: max-content 1fr;
-    grid-template-rows: max-content auto max-content;
+    grid-template-columns: 12em 1fr;
+    grid-template-rows:
+      max-content
+      var(--grid2row)
+      auto
+      max-content;
   }
 
+  /* expand title to middle */
   @media (max-width: 480px) {
     #Base {
       grid-template-areas:
-        "head head"
-        "side main"
+        "title title"
+        "topic main"
+        "aside main"
         "foot foot";
     }
   }
@@ -262,20 +295,19 @@ li {
 @media (min-width: 801px) {
   #Base {
     grid-template-areas:
-      "head main"
-      "side main"
+      "title ."
+      "topic main"
+      "aside main"
       "foot foot";
     grid-template-columns: max-content 1fr;
-
-    --gridRow1: 8em;
-    grid-template-rows: var(--gridRow1) auto max-content;
+    grid-template-rows:
+      max-content
+      var(--grid2row)
+      auto
+      max-content;
   }
   #Base > header {
     text-align: end;
-  }
-  #about {
-    /* move about section down by grid row 1 heigth and row gap */
-    margin-top: calc(var(--gridGap) + var(--gridRow1));
   }
 }
 
@@ -288,44 +320,48 @@ li {
 
   /* @media (min-height: 600px) {
     #Base > header {
+      border: 2px solid red;
       position: sticky;
       top: 0px;
     }
   } */
 }
 
-/* full view */
-@media (max-width: 275px) {
-  html, html *{
-    overflow-x: hidden;
-  }
-}
-
 #Base > header {
-  grid-area: head;
+  grid-area: title;
 }
-
-#Base > div {
-  grid-area: side;
+#Base > nav {
+  grid-area: topic;
   text-align: end;
 }
-
+#Base > aside {
+  grid-area: aside;
+  text-align: end;
+}
 #Base > main {
   grid-area: main;
 }
-
 #Base > footer {
   grid-area: foot;
-  font: var(--fontFooter);
-  height: 100%;
-  width: 100%;
-  position: sticky;
-  bottom: 0;
-  background: var(--colBG);
-  /* border-top: 5em var(--colBG) solid; */
 }
-#Base > footer > * {
-  float: left;
+
+#Main {
+  display: grid;
+  gap: var(--gridGap);
+
+  grid-template-areas:
+    "head"
+    "main";
+  grid-template-columns: 100%;
+  grid-template-rows:
+    var(--grid2row)
+    auto;
+}
+#Main > header {
+  grid-area: head;
+}
+#Main > :not(header) {
+  grid-area: main;
 }
 
 /* #endregion layout */
@@ -339,15 +375,79 @@ h6 {
   color: var(--colHighlight);
 }
 
-/* #content-headline {
-  position: sticky;
-  top: 0;
-} */
+/* #region aside*/
 
-#projects {
+aside p,
+nav ul li {
+  font-size: 1.2em;
+}
+
+#page-navigation ~ * {
+  padding-top: 1em;
+}
+
+/* #endregion filter and topics */
+/* #region main section */
+
+#Base > main {
   max-width: 600px;
 }
 
-ul li {
-  font-size: 1.2em;
+/* #region projects*/
+
+#projects {
 }
+
+#projects > article {
+  --dist: min(2vmin, 1em);
+  padding-left: var(--dist);
+  border-left: var(--borderCont);
+  border-bottom: var(--borderCont);
+  padding-bottom: var(--dist);
+}
+#projects > article:not(:first-of-type) {
+  margin-top: var(--dist);
+}
+
+#projects main {
+  margin-top: 1em;
+}
+#projects header ~ * {
+  display: none;
+}
+
+/* all text paragraphs that arent img descriptions and no the last paragraph */
+#projects main p:not(:last-child):not(img + p) {
+  margin-bottom: 0.5em;
+}
+
+/* img */
+#projects img {
+  border: var(--borderImg);
+}
+#projects img + p {
+  font-size: 0.8em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+/* #endregion projects */
+
+/* #endregion main section */
+/* #region footer */
+
+#Base > footer {
+  font: var(--fontFooter);
+  height: 100%;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  background: var(--colBG);
+  /* border-top: 5em var(--colBG) solid; */
+}
+#Base > footer > * {
+  float: left;
+}
+
+/* #endregion footer */

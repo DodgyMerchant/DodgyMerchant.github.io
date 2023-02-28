@@ -1,4 +1,5 @@
 import ContentManager from "../myJS/MyContent.js";
+import MyDisplay from "../myJS/MyDisplay.js";
 import { MyHTML } from "../myJS/MyJS.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
@@ -6,7 +7,9 @@ new ContentManager(
   [
     { element: document.getElementById("about"), tags: ["about"] },
     { element: document.getElementById("about-head"), tags: ["about"] },
+    { element: document.getElementById("about-aside"), tags: ["about"] },
     { element: document.getElementById("projects"), tags: ["projects"] },
+    { element: document.getElementById("projects-head"), tags: ["projects"] },
     { element: document.getElementById("projects-nav"), tags: ["projects"] },
   ],
   "lvl-fltr",
@@ -31,7 +34,7 @@ fetch("content/content.json")
     //#region generate content
 
     let contTemp = document.getElementById("content-template");
-    let contDest = document.getElementById("content-destination");
+    let contDest = document.getElementById("projects");
 
     if (!MyTemplate.supports()) {
       alert(
@@ -42,18 +45,40 @@ fetch("content/content.json")
 
     let entry;
     /**
-     * @type {Object{URL: string, alt: string}}
+     * @type {string}
      */
-    let imgData;
+    let datS,
+      /**
+       * @type {string}
+       */
+      datE,
+      /**
+       * @type {Object{URL: string, alt: string}}
+       */
+      imgData,
+      /**
+       * @type {HTMLDivElement}
+       */
+      _newClone,
+      _newImg,
+      _newImgDesc,
+      _contMain;
+
     /**
-     * @type {HTMLDivElement}
+     *
+     * @param {InputEvent} ev
      */
-    let _newClone, _newImg, _newImgDesc;
+    let toggleDisp = function (ev) {
+      let _t = ev.currentTarget.parentElement;
+      MyDisplay.toggle(MyHTML.getChildById(_t, "content-main"));
+      MyDisplay.toggle(MyHTML.getChildById(_t, "content-foot"));
+    };
 
     for (let i = 0; i < data.length; i++) {
       entry = data[i];
 
       _newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
+      _contMain = MyHTML.getChildById(_newClone, "content-main");
 
       //save to list for content manager
       elements.push({ element: _newClone, tags: entry.tags });
@@ -66,12 +91,17 @@ fetch("content/content.json")
 
       //#region date
 
-      let datS = entry.dateStart;
-      let datE = entry.dateEnd;
+      datS = entry.dateStart;
+      datE = entry.dateEnd;
       let dateText;
       if (datS != "") {
         if (datE != "") {
-          dateText = `From ${datS} to ${datE}`;
+          if (datE.match(/\d+/g)) {
+            dateText = `From ${datS} to ${datE}`;
+          } else {
+            //datE is a word
+            dateText = `From ${datS}, ${datE}.`;
+          }
         } else {
           dateText = `Started ${datS}`;
         }
@@ -97,23 +127,25 @@ fetch("content/content.json")
         _newImg.alt = imgData.alt;
         _newImgDesc.innerText = imgData.alt;
 
-        _newClone.append(_newImg);
-        _newClone.append(_newImgDesc);
+        _contMain.append(_newImg);
+        _contMain.append(_newImgDesc);
       }
 
       //#endregion img
       //#region text
-
+      let elem;
       //split multi line breaks into seperate paragraphs
       entry.text.split("\n\n").forEach((txt) => {
         //generate paragraph elements for each text section
-        let elem = document.createElement("p");
+        elem = document.createElement("p");
 
         elem.appendChild(document.createTextNode(txt));
-        _newClone.append(elem);
+        _contMain.append(elem);
       });
 
       //#endregion text
+
+      _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
     }
 
     //#endregion generate content

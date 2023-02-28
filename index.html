@@ -42,22 +42,20 @@
     <header>
       <h1 id="title">Dodgy_Merchant<br />Portfolio</h1>
     </header>
-    <div>
-      <nav id="page-navigation" class="selectNone">
-        <header>
-          <h2>_Topics</h2>
-        </header>
-        <ul>
-          <li class="lvl-fltr about">About</li>
-          <li class="lvl-fltr projects">Projects</li>
-        </ul>
-      </nav>
-      <header id="about-head" class="lvl-fltrd">
-        <h2>_About</h2>
+    <nav id="topics" class="selectNone">
+      <h2>_Topics</h2>
+      <ul class="clickable-container">
+        <li class="lvl-fltr about">About</li>
+        <li class="lvl-fltr projects">Projects</li>
+      </ul>
+    </nav>
+    <aside>
+      <div id="about-aside" class="lvl-fltrd">
+        <h2>_Data</h2>
         <p>Dodgy_Merchant /</p>
         <p>Malte Bönig /</p>
         <p>Student /</p>
-      </header>
+      </div>
       <nav id="projects-nav" class="lvl-fltrd">
         <h2>_Filters</h2>
         <!-- filter nav menu -->
@@ -74,7 +72,7 @@
           <li class="cont-fltr level-design">Level Design</li>
           <li class="cont-fltr game-programming">Game Programm.</li>
           <li class="cont-fltr ai-programming">AI Programm.</li>
-          <li class="cont-fltr gameplay-engineer">Gameplay Engineer</li>
+          <li class="cont-fltr gameplay-engineer">Gameplay Eng.</li>
           <li class="cont-fltr technical-art">Technical Artist</li>
           <li class="cont-fltr visual-design">Visual Design</li>
           <li class="cont-fltr asset-art">Asset Artist</li>
@@ -94,8 +92,12 @@
           <li class="cont-fltr Phaser">Phaser</li>
         </ul>
       </nav>
-    </div>
-    <main>
+    </aside>
+    <main id="Main">
+      <header id="about-head" class="lvl-fltrd">
+        <h2>About_</h2>
+        <p>about me.</p>
+      </header>
       <article id="about" class="lvl-fltrd">
         <p>Welcome, welcome!<br />Step into my parlor.</p>
         <p>
@@ -103,30 +105,25 @@
           at the HSB in Bremen, Germany.
         </p>
       </article>
+      <header id="projects-head" class="lvl-fltrd">
+        <h2>Projects_</h2>
+        <p>Work I created by myself or with others.</p>
+      </header>
       <div id="projects" class="lvl-fltrd">
-        <div>
-          <header>
-            <h2>Projects_</h2>
-            <p>Work I created by myself or with others.</p>
-          </header>
-        </div>
-        <div id="content-destination">
-          <template id="content-template">
-            <article id="content-article" class="cont-fltrd">
-              <header>
-                <h2 id="content-headline">Project Name</h2>
-                <p id="content-subline">
-                  Sub headline text. One or Two lines of text to describe the
-                  project.
-                </p>
-                <p id="content-date">DATE</p>
-              </header>
-              <!-- GENERATED -->
-              <!-- <img id="content-img" src="" alt="placeholder image" />
-              <p id="content-img-description">EEEEE</p> -->
-            </article>
-          </template>
-        </div>
+        <template id="content-template">
+          <article class="cont-fltrd">
+            <header class="clickable">
+              <h3 id="content-headline">Project Name</h3>
+              <p id="content-subline">
+                Sub headline text. One or Two lines of text to describe the
+                project.
+              </p>
+              <p id="content-date">DATE</p>
+            </header>
+            <main id="content-main"></main>
+            <footer id="content-foot"></footer>
+          </article>
+        </template>
       </div>
     </main>
     <footer class="selectNone">
