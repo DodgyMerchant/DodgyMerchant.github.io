@@ -436,9 +436,9 @@ aside a {
   border-left: var(--borderCont);
   border-bottom: var(--borderCont);
   padding-bottom: var(--dist);
+  margin-bottom: var(--dist);
 }
-#projects > article:not(:first-of-type) {
-  margin-top: var(--dist);
+#projects > article {
 }
 
 #projects main {
