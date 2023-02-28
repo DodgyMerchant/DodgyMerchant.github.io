@@ -321,7 +321,7 @@ a.delink {
 
 /* sticky filter if screen is big enough */
 @media (min-width: 400px) and (min-height: 490px) {
-  #projects-nav {
+  #Base > aside > * {
     position: sticky;
     top: 0px;
   }
@@ -417,6 +417,8 @@ aside a {
   position: sticky;
   top: 0px;
   background: var(--colBG);
+  height: max-content;
+  padding-bottom: var(--gridGap);
 }
 
 /* #region projects*/
@@ -442,7 +444,8 @@ aside a {
 #projects main {
   margin-top: 1em;
 }
-#projects header ~ * {
+/* disaling all content except for headers */
+#projects article > header ~ * {
   display: none;
 }
 
