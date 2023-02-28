@@ -374,7 +374,7 @@ export default class ContentManager {
         this.FilterApply(["all"]);
       });
       //right mouse button
-      filterEl.addEventListener("contextmenu", () => {
+      filterEl.addEventListener("contextmenu", (ev) => {
         ev.preventDefault();
         this.FilterApply(["all"]);
       });
