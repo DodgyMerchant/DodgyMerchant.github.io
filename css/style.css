@@ -242,8 +242,8 @@ a.delink {
   height: 100vh;
   display: grid;
   --gridGap: 0.5em;
-  --grid2row: 6em;
-  gap: var(--gridGap);
+  --grid2row: 7em;
+  gap: 0px var(--gridGap);
 
   grid-template-areas:
     "title"
@@ -269,7 +269,7 @@ a.delink {
 }
 
 /* filter on the sides */
-@media (min-width: 420px) and (max-width: 800px) {
+@media (min-width: 430px) and (max-width: 800px) {
   #Base {
     grid-template-areas:
       ". title"
@@ -380,6 +380,13 @@ h6 {
   color: var(--colHighlight);
 }
 
+/* #region title*/
+
+#Base > header {
+  margin-bottom: var(--gridGap);
+}
+
+/* #endregion */
 /* #region aside*/
 
 aside p,
@@ -464,7 +471,7 @@ aside a {
   position: sticky;
   bottom: 0;
   background: var(--colBG);
-  /* border-top: 5em var(--colBG) solid; */
+  border-top: var(--gridGap) var(--colBG) solid;
 }
 #Base > footer > * {
   float: left;
