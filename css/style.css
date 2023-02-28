@@ -352,7 +352,7 @@ a.delink {
 
 #Main {
   display: grid;
-  gap: var(--gridGap);
+  gap: 0px var(--gridGap);
 
   grid-template-areas:
     "head"
