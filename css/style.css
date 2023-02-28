@@ -13,6 +13,7 @@
 
   --colBG: rgb(48, 6, 48);
   --colText: rgb(57, 179, 219);
+  --colTextA5: rgba(57, 179, 219, 0.5);
   --colHighlight: aqua; /*lightblue*/
   --colSpecial1: fuchsia;
   --colSpecial2: purple;
@@ -27,6 +28,8 @@
   /* content */
   --borderCont: 3px var(--colText) dashed;
   --borderImg: 3px rgba(255, 0, 255, 0.192) solid;
+  --fontContFoot: lighter 0.8em "Courier Prime", monospace;
+  --colContFoot: var(--colTextA5);
 
   font: normal normal 1em "Courier Prime", monospace;
   color: var(--colText);
@@ -444,7 +447,7 @@ aside a {
 }
 
 /* all text paragraphs that arent img descriptions and no the last paragraph */
-#projects main p:not(:last-child):not(img + p) {
+#projects main > p:not(img + p) {
   margin-bottom: 0.5em;
 }
 
@@ -457,6 +460,12 @@ aside a {
   margin-left: 1em;
   margin-right: 1em;
   margin-bottom: 1em;
+}
+
+/* footer */
+#projects footer {
+  font: var(--fontContFoot);
+  color: var(--colContFoot);
 }
 
 /* #endregion projects */

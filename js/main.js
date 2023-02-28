@@ -75,8 +75,8 @@ fetch("content/content.json")
       MyDisplay.toggle(MyHTML.getChildById(_t, "content-foot"));
     };
 
-    for (let i = 0; i < data.length; i++) {
-      entry = data[i];
+    for (let i = 0; i < data.content.length; i++) {
+      entry = data.content[i];
 
       _newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
       _contMain = MyHTML.getChildById(_newClone, "content-main");
@@ -145,6 +145,9 @@ fetch("content/content.json")
       });
 
       //#endregion text
+
+      MyHTML.getChildById(_newClone, "content-tags").innerText =
+        entry.tags.join(", ");
 
       _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
     }
