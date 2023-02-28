@@ -16,6 +16,7 @@ new ContentManager(
   "active",
   "lvl-fltrd",
   "active",
+  undefined,
   1,
   ["about"],
   false
@@ -156,6 +157,8 @@ fetch("content/content.json")
       "active",
       "cont-fltrd",
       "active",
-      -1
+      (num) => {
+        document.getElementById("projects-number").innerText = num.toString();
+      }
     );
   });

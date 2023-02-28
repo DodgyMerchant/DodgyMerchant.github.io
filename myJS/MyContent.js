@@ -140,6 +140,19 @@ export default class ContentManager {
    */
   filteredBehavior = "match";
 
+  /**
+   * list of diplayed Content.
+   * @type {Content[]}
+   */
+  filteredDispList = [];
+
+  /**
+   * Function called on Filter apply.
+   * @type {function(number) | undefined}
+   * @param {number} num number of results after filter application.
+   */
+  filteredNumerCallback;
+
   //#endregion filtered
   //#region tags and filters
 
@@ -175,7 +188,8 @@ export default class ContentManager {
    * @param {string | undefined} filterClassActive Name of the class set to a filter if its tags are in use. Used to Highlight active filters.
    * @param {string} filteredClassName HTML class name of a cotnent/filtered HTML element.
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
-   * @param {string} filterNumMax Maximum number of filters. -1 for infinite.
+   * @param {function(number)=} filteredNumerCallback callback function that is called on every filter application. Argument 0 will be the number Of results found with the filter. Usefull to set the number of found objects into an element.
+   * @param {string} filterNumMax Maximum number of filters. -1 for infinite. Defaults to -1.
    * @param {string[]=} filterInit Ffilters to apply on init. defaults to "all".
    * @param {boolean=} zeroSelect If the system allows the unselection of the last filters resulting in an empty list. Defaults to true.
    * @param {boolean=} filterFallback If the system should apply the Fallback-Filter if no filters are selected. Defauts to true.
@@ -187,7 +201,8 @@ export default class ContentManager {
     filterClassActive,
     filteredClassName,
     filteredClassActive,
-    filterNumMax,
+    filteredNumerCallback,
+    filterNumMax = -1,
     filterInit = ["all"],
     zeroSelect = true,
     filterFallback = true,
@@ -218,6 +233,8 @@ export default class ContentManager {
 
     //#endregion filter
 
+    this.filteredNumerCallback = filteredNumerCallback;
+
     this.zeroSelect = zeroSelect;
     this.filterFallback = filterFallback;
     this.filterflbList = filterflbList;
@@ -247,6 +264,7 @@ export default class ContentManager {
     console.log("Filters: ", this.activeFilters);
 
     //filtered
+    this.filteredDispList = [];
     /**
      * @type {Content}
      */
@@ -257,6 +275,8 @@ export default class ContentManager {
         this.TagCheck(cont, this.activeFilters, this.filteredBehavior) ||
         this.activeFilters.includes("all")
       ) {
+        //count up filtered elements displayed
+        this.filteredDispList.push(cont);
         cont.active = true;
       } else {
         cont.active = false;
@@ -278,6 +298,10 @@ export default class ContentManager {
         }
       }
     }
+
+    //callback
+    if (this.filteredNumerCallback)
+      this.filteredNumerCallback(this.filteredDispList.length);
   }
 
   /**
@@ -328,6 +352,7 @@ export default class ContentManager {
       filterEl.addEventListener("click", (event) => {
         let _t = event.target;
 
+        //check if tags are present in filter
         if (this.TagCheck(_t, this.activeFilters, this.filterBehavior)) {
           // if (MyHTML.hasClass(_t, this.filterClassActive)) {
           this.removeFilter(this.getTags(_t));
@@ -337,9 +362,20 @@ export default class ContentManager {
 
         this.FilterApply();
       });
+      //right mouse button
+      filterEl.addEventListener("contextmenu", (ev) => {
+        ev.preventDefault();
+
+        this.FilterApply(this.getTags(ev.target));
+      });
     } else {
       //"all" button
       filterEl.addEventListener("click", () => {
+        this.FilterApply(["all"]);
+      });
+      //right mouse button
+      filterEl.addEventListener("contextmenu", () => {
+        ev.preventDefault();
         this.FilterApply(["all"]);
       });
     }

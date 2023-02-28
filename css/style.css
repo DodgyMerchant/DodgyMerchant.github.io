@@ -15,14 +15,14 @@
   --colText: rgb(57, 179, 219);
   --colHighlight: aqua; /*lightblue*/
   --colSpecial1: fuchsia;
-  --colSpecual2: purple;
-  --colSpecual3: pink;
+  --colSpecial2: purple;
+  --colSpecial3: pink;
 
   /* filter */
   --colFilter: var(--colText);
   --colFilterH: var(--colHighlight);
   --colFilterA: var(--colSpecial1);
-  --colFilterAH: var(--colSpecual3);
+  --colFilterAH: var(--colSpecial3);
 
   /* content */
   --borderCont: 3px var(--colText) dashed;
@@ -383,8 +383,13 @@ h6 {
 /* #region aside*/
 
 aside p,
-nav ul li {
+nav ul li,
+aside a {
   font-size: 1.2em;
+}
+
+#about-aside * {
+  display: block;
 }
 
 #page-navigation ~ * {
@@ -394,13 +399,23 @@ nav ul li {
 /* #endregion filter and topics */
 /* #region main section */
 
-#Base > main {
+#Main {
   max-width: 600px;
+}
+
+#Main > header {
+  position: sticky;
+  top: 0px;
+  background: var(--colBG);
 }
 
 /* #region projects*/
 
 #projects {
+}
+
+#projects-number {
+  color: var(--colSpecial1);
 }
 
 #projects > article {
