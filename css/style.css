@@ -191,11 +191,16 @@ li {
 }
 
 /* #endregion text unify*/
+/* #region delink */
+/* makes <a> elements more better*/
+
+a.delink {
+  color: inherit;
+}
+
+/* #endregion text unify*/
 
 /* #endregion -utility classes */
-
-/* .section > *:first-child + * {
-} */
 
 /* #region filter*/
 
