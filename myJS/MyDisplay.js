@@ -65,8 +65,8 @@ export default class MyDisplay {
 
   //other
   /**
-   *
-   * @param {HTMLElement} _el
+   * toggles the dispaly property between none <=> (block | rememberd value)
+   * @param {HTMLElement} _el element to toggle the display property of.
    */
   static toggle(_el) {
     /**
@@ -87,8 +87,11 @@ export default class MyDisplay {
     return _el.style.display;
   }
   /**
-   * @param {HTMLElement} _el
-   * @param {String | undefined} string
+   * Enables displaying for a given HTMLElement.
+   * IF no string value is provided will used remembered value setup in the Element.
+   * If nothign is setup will default to block and setup remmbering that value.
+   * @param {HTMLElement} _el element to enable the display property of.
+   * @param {string=} _str property to set the display value to. Defaults to block.
    */
   static enable(_el, _str) {
     this.setup(_el);
@@ -97,8 +100,9 @@ export default class MyDisplay {
     if (_el.style.display == "none") this.set(_el, _str);
   }
   /**
-   * sets the display property of the given element to "none"
-   * @param {HTMLElement} _el
+   * Disables displaying for a given HTMLElement by setting its display to "none".
+   * Before that Will setup remembering for the original value.
+   * @param {HTMLElement} _el element to disable the display property of.
    */
   static disable(_el) {
     this.setupRemember(_el);

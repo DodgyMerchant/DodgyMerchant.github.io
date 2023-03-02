@@ -60,18 +60,37 @@ export class MyHTML {
   static getPropertyFlt(el, str) {
     return Number.parseFloat(this.getPropertyStr(el, str));
   }
-  //#region html class
+
   /**
+   * Checks if target element has all classes supplied in the name string.
+   * For a single class check use hasAnyClass, its slightly faster.
    * @param {HTMLElement} element
-   * @param {string} name class string split by space
+   * @param {string} name one or multiple classes. split by space.
    */
-  static hasClass(element, name) {
+  static hasAllClass(element, name) {
     let i, arr1, arr2;
     arr1 = element.className.split(" ");
     arr2 = name.split(" ");
 
     for (i = 0; i < arr2.length; i++) {
-      if (arr1.indexOf(arr2[i]) != -1) {
+      if (!arr1.includes(arr2[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  /**
+   * Checks if target element has any one class supplied in the name string
+   * @param {HTMLElement} element
+   * @param {string} name one or multiple classes. split by space.
+   */
+  static hasAnyClass(element, name) {
+    let i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.includes(arr2[i])) {
         return true;
       }
     }
@@ -81,7 +100,7 @@ export class MyHTML {
   /**
    * @author w3
    * @param {HTMLElement} element
-   * @param {string} name
+   * @param {string} name one or multiple classes. split by space.
    */
   static addClass(element, name) {
     let i, arr1, arr2;
@@ -97,7 +116,7 @@ export class MyHTML {
    *
    * @author w3
    * @param {HTMLElement} element
-   * @param {string} name
+   * @param {string} name one or multiple classes. split by space.
    */
   static removeClass(element, name) {
     let i, arr1, arr2;
@@ -110,7 +129,69 @@ export class MyHTML {
     }
     element.className = arr1.join(" ");
   }
-  //#endregion html class
+  /**
+   * Finds the classes in "find" and replaces all found classes with the class from "replace" in the same position.
+   * Both Strings must have the same amont of classes.
+   * given: "f1 f2","r1 r2".
+   * if "f1" is found then it will be replaced by "r2", because they share the same position in their lists, 0.
+   * @param {HTMLElement} element
+   * @param {string} find one or multiple classes. split by space. must be the same number as name2.
+   * @param {string} replace one or multiple classes. split by space. must be the same number as name1.
+   */
+  static replaceClass(element, find, replace) {
+    let tList, arr1, arr2;
+
+    arr1 = find.split(" ");
+    arr2 = replace.split(" ");
+    if (arr1.length != arr2.length) {
+      console.error(
+        "class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name."
+      );
+      return;
+    }
+    tList = element.className.split(" ");
+
+    let i, ind;
+    for (i = 0; i < arr1.length; i++) {
+      ind = tList.indexOf(arr1[i]);
+      if (ind != -1) tList.splice(ind, 1, arr2[i]);
+    }
+
+    element.className = tList.join(",");
+  }
+  /**
+   * Finds the classes in from the given class strings in the elements class and replaces them by their respective counterparts from the other list..
+   * given: element.className = "x1 x2 x3", "x1 B 44","A x3 99" => "A x2 B"
+   * @param {HTMLElement} element
+   * @param {string} classes1 one or multiple classes. split by space. must be the same number as name2.
+   * @param {string} classes2 one or multiple classes. split by space. must be the same number as name1.
+   */
+  static switchClass(element, classes1, classes2) {
+    let tList, arr1, arr2;
+
+    arr1 = classes1.split(" ");
+    arr2 = classes2.split(" ");
+    if (arr1.length != arr2.length) {
+      console.error(
+        "class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name."
+      );
+      return;
+    }
+    tList = element.className.split(" ");
+
+    let i, ind;
+    for (i = 0; i < arr1.length; i++) {
+      ind = tList.indexOf(arr1[i]);
+      if (ind != -1) tList.splice(ind, 1, arr2[i]);
+      else {
+        ind = tList.indexOf(arr2[i]);
+        if (ind != -1) tList.splice(ind, 1, arr1[i]);
+      }
+    }
+
+    element.className = tList.join(",");
+  }
+
   /**
    *
    * @param {HTMLElement} parentEl

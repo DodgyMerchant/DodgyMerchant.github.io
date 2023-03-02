@@ -224,13 +224,13 @@ a.delink {
 .cont-fltr.active:hover {
   color: var(--colFilterAH);
 }
+
 /* #endregion filter*/
-/* #region filtered*/
-.lvl-fltrd:not(.active),
-.cont-fltrd:not(.active) {
+
+.lvl-fltrd:not(.active) {
   display: none;
 }
-/* #endregion filtered*/
+
 /* #region about */
 
 #about > p {
@@ -382,6 +382,22 @@ h5,
 h6 {
   color: var(--colHighlight);
 }
+section {
+  margin-top: 1em;
+}
+
+/* all article normal text paragraphs */
+article p:not(img + p):not(header p) {
+  margin-bottom: 0.25em;
+}
+/* first element after header gets margin top */
+article header + * {
+  margin-top: 1em;
+}
+
+a {
+  color: var(--colSpecial1);
+}
 
 /* #region title*/
 
@@ -421,13 +437,22 @@ aside a {
   padding-bottom: var(--gridGap);
 }
 
+.cont-fltrd:not(.active) {
+  display: none;
+}
+
 /* #region projects*/
 
-#projects {
-}
+/* #projects {
+} */
 
 #projects-number {
   color: var(--colSpecial1);
+}
+
+#projects-empty {
+  --rememberDisplay: block;
+  display: none;
 }
 
 #projects > article {
@@ -438,21 +463,26 @@ aside a {
   padding-bottom: var(--dist);
   margin-bottom: var(--dist);
 }
-#projects > article {
-}
 
 #projects main {
   margin-top: 1em;
 }
+
+/* #region closing content block */
 /* disaling all content except for headers */
-#projects article > header ~ * {
+
+#projects article.cont-fltrd {
+  transition: height 2s;
+  /* overflow: hidden; */
+}
+#projects article.cont-fltrd > header ~ * {
   display: none;
 }
-
-/* all text paragraphs that arent img descriptions and no the last paragraph */
-#projects main > p:not(img + p) {
-  margin-bottom: 0.5em;
+#projects article.cont-fltrd.ContOpen > header ~ * {
+  display: block;
 }
+
+/* #endregion closing content block */
 
 /* img */
 #projects img {
@@ -472,6 +502,9 @@ aside a {
 }
 
 /* #endregion projects */
+/* #region about */
+
+/* #endregion about */
 
 /* #endregion main section */
 /* #region footer */
@@ -480,13 +513,21 @@ aside a {
   font: var(--fontFooter);
   height: 100%;
   width: 100%;
-  position: sticky;
-  bottom: 0;
+  /* position: sticky;
+  bottom: 0; */
   background: var(--colBG);
   border-top: var(--gridGap) var(--colBG) solid;
 }
+#Base > footer > *:first-child {
+  margin-left: var(--gridGap);
+}
 #Base > footer > * {
   float: left;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+#Base > footer:hover > * {
+  opacity: 1;
 }
 
 /* #endregion footer */

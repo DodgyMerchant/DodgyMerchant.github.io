@@ -4,8 +4,7 @@
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 /**
- * @typedef {"one" | "all" | "match" | "complete" | "exact"} TagBehavior refer to behavior map for explainaition of individual behaviors.
- *
+ * @typedef {"one" | "all" | "match" | "complete" | "exact"} TagBehavior refer to behavior map or MyTags Class for explainaition of individual behaviors.
  */
 /**
  * tag or filter logic handling class.
@@ -14,29 +13,6 @@
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 export default class MyTags {
-  /**
-   * a map of all behaviors and user description text for them.
-   * @type {Map<TagBehavior,String>}
-   */
-  // prettier-ignore
-  static TagBehaviorMap = new Map([
-        ["one", "Displays all objects with atleast one matching tags."],
-        ["all", "Displays all objects with all their tags matching."],
-        ["exact","Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
-    ]);
-  /**
-   * expanded map of all behaviors and user description text for them.
-   * @type {Map<TagBehavior,String>}
-   */
-  // prettier-ignore
-  static TagBehaviorMapExt = new Map([
-        ["one",       "Displays all objects with atleast one matching tag."],
-        ["all",       "Displays all objects that have all their tags in the filter."],
-        ["match",     "Displays all objects that have matching and no mismatching tags in the filter."],
-        ["complete",  "Displays all objects that have no mismatching tags unless all tags are contained in the filter"],
-        ["exact",     "Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
-    ]);
-
   /* Filter Logic explainaition
     //
     //  complete  = all tags in the target are matched to tags in the filter.
@@ -91,6 +67,29 @@ export default class MyTags {
     console.log("exact: ", MyTags.Compare(["a", "b", "c"], ["a", "b", "x"], "exact"), "false");
     }
     */
+
+  /**
+   * a map of all behaviors and user description text for them.
+   * @type {Map<TagBehavior,String>}
+   */
+  // prettier-ignore
+  static TagBehaviorMap = new Map([
+        ["one", "Displays all objects with atleast one matching tags."],
+        ["all", "Displays all objects with all their tags matching."],
+        ["exact","Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
+    ]);
+  /**
+   * expanded map of all behaviors and user description text for them.
+   * @type {Map<TagBehavior,String>}
+   */
+  // prettier-ignore
+  static TagBehaviorMapExt = new Map([
+        ["one",       "Displays all objects with atleast one matching tag."],
+        ["all",       "Displays all objects that have all their tags in the filter."],
+        ["match",     "Displays all objects that have matching and no mismatching tags in the filter."],
+        ["complete",  "Displays all objects that have no mismatching tags unless all tags are contained in the filter"],
+        ["exact",     "Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
+    ]);
 
   /**
    * checks if target tags correspont to the filter tags using given behavior.

@@ -62,22 +62,26 @@
         <br />
         <a
           href="https://github.com/DodgyMerchant"
-          target="”_blank”"
+          target="_blank"
           class="clickable delink"
           >GitHub</a
-        >
-        <a
+        ><a
           href="https://twitter.com/Dodgy_Merchant"
-          target="”_blank”"
+          target="_blank"
           class="clickable delink"
           >Twitter</a
-        >
-        <a
+        ><a
           href="https://gfycat.com/@hiro_hunter"
-          target="”_blank”"
+          target="_blank"
           class="clickable delink"
-          title="Fun gifs of some of my projects. Mostly games."
-          >gyfcat</a
+          title="My uploaded GIFs."
+          >GyfCat</a
+        ><a
+          href="https://gfycat.com/@hiro_hunter/collections/O2QD8ZGp/gamedev-representative"
+          target="_blank"
+          class="clickable delink"
+          title="Fun gifs of some of my projects."
+          >GameDev_GIFs</a
         >
       </div>
       <nav id="projects-nav" class="lvl-fltrd">
@@ -120,40 +124,60 @@
     <main id="Main">
       <header id="about-head" class="lvl-fltrd">
         <h2>About_</h2>
-        <p>about me.</p>
+        <p>this website, me and my passions.</p>
       </header>
       <article id="about" class="lvl-fltrd">
         <p>Welcome, welcome!</p>
-        <p>
-          I'm a University Student studying Media Design at the HSB in Bremen,
-          Germany.
-        </p>
-        <br />
-        <p>I am German, but from no particular place.</p>
-        <p>
-          Born in Germany, lived in China for a while, back to Germany, back to
-          China, finals in Korea, back to Germany.
-        </p>
-        <p>Leaving out all in country moving.</p>
-        <p>So I am German, but from no particular place.</p>
-        <br />
-        <p>
-          As a kid, I played
-          <a
-            href="https://store.steampowered.com/app/204060/Superbrothers_Sword__Sworcery_EP/"
-            target="”_blank”"
-            class="clickable delink"
-            title="Link to the game on steam."
-            >Superbrothers: Sword & Sworcery EP</a
-          >
-          on my iPod and had the realization, “Someone made this. I can be that
-          someone.”.
-        </p>
-        <p>That game and soundtrack still mean a lot to me.</p>
-        <p>I would like to be a Video Game Developer.</p>
-        <p>We'll see if I end up there.</p>
-
-        <p></p>
+        <section>
+          <h3>This Website</h3>
+          <p>
+            is my portfolio, a positive representation of my past and current
+            projects and ideas.
+          </p>
+          <p>
+            This includes but is not limited to Websites, Video Games,
+            University assignments and other projects public and private.
+          </p>
+          <br />
+          <p>
+            As an aspiring Video Game Developer, I must admit that many of my
+            personal game projects are unfinished.
+          </p>
+          <p>
+            Of which some nonetheless hold an essence which I wish to share.
+          </p>
+        </section>
+        <section>
+          <h3>Me</h3>
+          <p>
+            I'm a University Student studying Media Design at the HSB in Bremen,
+            Germany.
+          </p>
+          <br />
+          <p>I am German, but from no particular place.</p>
+          <p>
+            Born in Germany, lived in China for a while, back to Germany, back
+            to China, finals in Korea, back to Germany.
+          </p>
+          <p>Leaving out all in country moving.</p>
+          <p>So I am German, but from no particular place.</p>
+          <br />
+          <p>
+            As a kid, I played
+            <a
+              href="https://store.steampowered.com/app/204060/Superbrothers_Sword__Sworcery_EP/"
+              target="_blank"
+              class="clickable delink"
+              title="Link to the game on steam."
+              >Superbrothers: Sword & Sworcery EP</a
+            >
+            on my iPod and had the realization, “Someone made this. I can be
+            that someone.”.
+          </p>
+          <p>That game and soundtrack still mean a lot to me.</p>
+          <p>I would like to be a Video Game Developer.</p>
+          <p>We'll see if I end up there.</p>
+        </section>
       </article>
       <header id="projects-head" class="lvl-fltrd">
         <h2>Projects_</h2>
@@ -161,6 +185,26 @@
         <p>[<span id="projects-number">X</span>] projects found.</p>
       </header>
       <div id="projects" class="lvl-fltrd">
+        <article id="projects-empty">
+          <header>
+            <h3>Nothing Found...</h3>
+            <p>None of my projects match the selected filters.</p>
+          </header>
+          <p>
+            But while you are here, check out my
+            <a
+              href="https://gfycat.com/@hiro_hunter/collections/O2QD8ZGp/gamedev-representative"
+              target="_blank"
+              class="clickable delink"
+              title="Fun gifs of some of my projects. Mostly games."
+              >GameDev GIF collection on GyfCat</a
+            >.
+          </p>
+          <p>
+            There are some pretty cool GIFs there from some of my projects.<br />
+            Really fun to look at.
+          </p>
+        </article>
         <template id="content-template">
           <article class="cont-fltrd">
             <header class="clickable">
@@ -171,7 +215,7 @@
               </p>
               <p id="content-date">DATE</p>
             </header>
-            <main id="content-main"></main>
+            <div id="content-main"></div>
             <footer id="content-foot">
               Tags: <span id="content-tags"></span>
             </footer>

@@ -58,17 +58,6 @@ class Content {
 }
 
 /**
- * @typedef {Object} ContentData content data object containing all data for a content block.
- * @property {string} headline text
- * @property {string} sub text
- * @property {string} dateStart text
- * @property {string} dateEnd text
- * @property {string} imageAlt desc
- * @property {string} imageURL desc
- * @property {string} text desc
- * @property {string[]} tags desc
- */
-/**
  * ContentManager Object.
  */
 export default class ContentManager {
@@ -135,7 +124,9 @@ export default class ContentManager {
   filteredClassActive;
 
   /**
-   * how many tags in the filtered element have to match for the object be displayed.
+   * Tag Filtering behavior that determines if a Filtered Object/Element should be displayed.
+   * Behavior can be Read in MyTags Class.
+   * Follow the import link.
    * @type {import("../myJS/MyTags.js").TagBehavior}
    */
   filteredBehavior = "match";
@@ -147,11 +138,19 @@ export default class ContentManager {
   filteredDispList = [];
 
   /**
-   * Function called on Filter apply.
-   * @type {function(number) | undefined}
-   * @param {number} num number of results after filter application.
+   *
+   * @callback FilteredCallback Function called by ContentManager on Filter apply.
+   * @param {number} number number of results after filter application.
+   * @param {Content[]} displayedList List of Content Objects that should be displayed with current active filter..
+   * @param {import("../myJS/MyTags.js").TagBehavior} behavior Tag Filtering behavior that determines if a Filtered Object/Element should be displayed.
+   * @param {string} className Class name that the ContentManager looks for to determine filtered targets.
+   * @param {string} classActive Class name a FIltered HTMLElement receives if active (dispalyed).
    */
-  filteredNumerCallback;
+  /**
+   * Function called on Filter apply.
+   * @type {FilteredCallback | undefined}
+   */
+  filteredCallback;
 
   //#endregion filtered
   //#region tags and filters
@@ -188,12 +187,14 @@ export default class ContentManager {
    * @param {string | undefined} filterClassActive Name of the class set to a filter if its tags are in use. Used to Highlight active filters.
    * @param {string} filteredClassName HTML class name of a cotnent/filtered HTML element.
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
-   * @param {function(number)=} filteredNumerCallback callback function that is called on every filter application. Argument 0 will be the number Of results found with the filter. Usefull to set the number of found objects into an element.
-   * @param {string} filterNumMax Maximum number of filters. -1 for infinite. Defaults to -1.
+   * @param {FilteredCallback=} filteredCallback callback function that is called on every filter application. Usefull to set the number of found objects into an element.
+   * @param {string=} filterNumMax Maximum number of filters. -1 for infinite. Defaults to -1.
    * @param {string[]=} filterInit Ffilters to apply on init. defaults to "all".
    * @param {boolean=} zeroSelect If the system allows the unselection of the last filters resulting in an empty list. Defaults to true.
    * @param {boolean=} filterFallback If the system should apply the Fallback-Filter if no filters are selected. Defauts to true.
    * @param {string[]=} filterflbList Filter List to use as fallback. Defaults to init filter.
+   * @param {import("../myJS/MyTags.js").TagBehavior=} filterBehav Behavior determining if Filters receive active class. Defaults to "all".
+   * @param {import("../myJS/MyTags.js").TagBehavior=} filteredBehav Behavior determining if Filtered receive active class. Defaults to "match".
    */
   constructor(
     elements,
@@ -201,13 +202,18 @@ export default class ContentManager {
     filterClassActive,
     filteredClassName,
     filteredClassActive,
-    filteredNumerCallback,
+    filteredCallback = undefined,
     filterNumMax = -1,
     filterInit = ["all"],
     zeroSelect = true,
     filterFallback = true,
-    filterflbList = filterInit
+    filterflbList = filterInit,
+    filterBehav = "all",
+    filteredBehav = "match"
   ) {
+    this.filterBehavior = filterBehav;
+    this.filteredBehavior = filteredBehav;
+
     //#region filter
 
     this.filterClassName = filterClassName;
@@ -233,7 +239,7 @@ export default class ContentManager {
 
     //#endregion filter
 
-    this.filteredNumerCallback = filteredNumerCallback;
+    this.filteredCallback = filteredCallback;
 
     this.zeroSelect = zeroSelect;
     this.filterFallback = filterFallback;
@@ -300,8 +306,12 @@ export default class ContentManager {
     }
 
     //callback
-    if (this.filteredNumerCallback)
-      this.filteredNumerCallback(this.filteredDispList.length);
+    if (this.filteredCallback)
+      this.filteredCallback(
+        this.filteredDispList.length,
+        this.filteredDispList,
+        this.filteredBehavior
+      );
   }
 
   /**
@@ -333,13 +343,15 @@ export default class ContentManager {
   /**
    * get tags of a given HTMLElement
    * @param {HTMLElement} elem
+   * @returns {string[] | undefined} undefined if failure.
    */
   getTags(elem) {
     let classList = elem.className.split(" ");
 
     let num = classList.indexOf(this.filterClassName);
 
-    return classList[num + 1].split(",");
+    if (num != -1) return classList[num + 1].split(",");
+    else return undefined;
   }
 
   /**
@@ -347,14 +359,13 @@ export default class ContentManager {
    * @param {HTMLElement} filterEl
    */
   filterSetup(filterEl) {
-    if (!MyHTML.hasClass(filterEl, "all")) {
+    if (!MyHTML.hasAnyClass(filterEl, "all")) {
       //all not "all" buttons
       filterEl.addEventListener("click", (event) => {
         let _t = event.target;
 
         //check if tags are present in filter
         if (this.TagCheck(_t, this.activeFilters, this.filterBehavior)) {
-          // if (MyHTML.hasClass(_t, this.filterClassActive)) {
           this.removeFilter(this.getTags(_t));
         } else {
           this.addFilter(this.getTags(_t));
@@ -411,5 +422,14 @@ export default class ContentManager {
       MyArr.removeList(copy, tags);
       if (copy.length != 0) this.activeFilters = copy;
     } else MyArr.removeList(this.activeFilters, tags);
+  }
+
+  /**
+   * returns the list of displayed Content Objects.
+   * DO NOT modify list!
+   * @returns {Content[]}
+   */
+  getDisplayed() {
+    return this.filteredDispList;
   }
 }
