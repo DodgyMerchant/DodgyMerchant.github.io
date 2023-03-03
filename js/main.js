@@ -3,6 +3,10 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import { MyHTML } from "../myJS/MyJS.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
+let str = "aaaXXXaaaaXaaaaXXaaaaXaaaa";
+
+console.log(str.split("X"));
+
 new ContentManager(
   [
     { element: document.getElementById("about"), tags: ["about"] },
@@ -31,6 +35,7 @@ const ContOpenClass = "ContOpen";
  * @property {string[]} tags list of strigns that are tags relating to this content block. Used for filtering.
  * @property {string} dateStart Project start text. Can be a date or a word.
  * @property {string} dateEnd Project end text. Can be a date or a word.
+ * @property {string} status status it the project.
  * @property {ContentImage} image List of image objects.
  * @property {string} text text relating to the content.
  */
@@ -46,7 +51,7 @@ fetch("content/content.json")
   .then(
     /**
      *
-     * @param {ContentData[]} data
+     * @param {{content: ContentData[]}} data
      * @returns
      */
     (data) => {
@@ -67,7 +72,9 @@ fetch("content/content.json")
         );
         return;
       }
-
+      /**
+       * @type {ContentData}
+       */
       let entry;
       /**
        * @type {string}
@@ -106,6 +113,8 @@ fetch("content/content.json")
           MyHTML.addClass(_t, ContOpenClass);
         }
       };
+
+      let regN = new RegExp("[\r\n]");
 
       for (let i = 0; i < data.content.length; i++) {
         entry = data.content[i];
@@ -167,13 +176,18 @@ fetch("content/content.json")
         //#endregion img
         //#region text
         let elem;
-        //split multi line breaks into seperate paragraphs
-        entry.text.split("\n\n").forEach((txt) => {
-          //generate paragraph elements for each text section
-          elem = document.createElement("p");
 
-          elem.appendChild(document.createTextNode(txt));
-          _contMain.append(elem);
+        entry.text.split(regN).forEach((txt) => {
+          if (txt.length == 0) {
+            //split multi line breaks into seperate paragraphs
+            _contMain.append(document.createElement("br"));
+          } else {
+            //generate paragraph elements for each text section
+            elem = document.createElement("p");
+
+            elem.appendChild(document.createTextNode(txt));
+            _contMain.append(elem);
+          }
         });
 
         //#endregion text
