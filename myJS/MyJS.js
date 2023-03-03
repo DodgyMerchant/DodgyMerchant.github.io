@@ -61,6 +61,8 @@ export class MyHTML {
     return Number.parseFloat(this.getPropertyStr(el, str));
   }
 
+  //#region classes
+
   /**
    * Checks if target element has all classes supplied in the name string.
    * For a single class check use hasAnyClass, its slightly faster.
@@ -191,6 +193,25 @@ export class MyHTML {
 
     element.className = tList.join(",");
   }
+  /**
+   *
+   * @param {HTMLElement} element
+   * @param {string} name a single class
+   */
+  static toggleClass(element, name) {
+    // let tList, arr1, arr2;
+    // tList = element.className.split(" ");
+
+    if (MyHTML.hasAnyClass(element, name)) {
+      MyHTML.removeClass(element, name);
+    } else {
+      MyHTML.addClass(element, name);
+    }
+
+    // element.className = tList.join(",");
+  }
+
+  //#endregion classes
 
   /**
    *

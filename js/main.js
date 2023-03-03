@@ -3,9 +3,10 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import { MyHTML } from "../myJS/MyJS.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-let str = "aaaXXXaaaaXaaaaXXaaaaXaaaa";
-
-console.log(str.split("X"));
+const ContOpenClass = "ContOpen";
+const FltrOpenClass = "FltrOpen";
+const FltrClosedDec = "-";
+const FltrOpenDec = "x";
 
 new ContentManager(
   [
@@ -26,7 +27,40 @@ new ContentManager(
   false
 );
 
-const ContOpenClass = "ContOpen";
+//#region filter
+
+let collection = document
+  .getElementById("projects-nav")
+  .getElementsByClassName("clickable");
+
+let filtFunc = (ev) => {
+  /**
+   * @type {HTMLParagraphElement}
+   */
+  let _t = ev.currentTarget;
+  let _after = _t.nextElementSibling;
+
+  if (MyHTML.hasAnyClass(_after, FltrOpenClass)) {
+    MyHTML.removeClass(_after, FltrOpenClass);
+    h3Update(_t, false);
+  } else {
+    MyHTML.addClass(_after, FltrOpenClass);
+    h3Update(_t, true);
+  }
+};
+let h3Update = (h3, open) => {
+  if (open) h3.firstElementChild.innerText = FltrOpenDec;
+  else h3.firstElementChild.innerText = FltrClosedDec;
+};
+let h3;
+for (let i = 0; i < collection.length; i++) {
+  h3 = collection.item(i);
+  h3.addEventListener("pointerdown", filtFunc);
+
+  h3Update(h3, MyHTML.hasAnyClass(h3.nextElementSibling, FltrOpenClass));
+}
+
+//#endregion filter
 
 /**
  * @typedef {Object} ContentData content data loaded in to produce content for my website.
@@ -105,13 +139,7 @@ fetch("content/content.json")
         // MyDisplay.toggle(MyHTML.getChildById(_t, "content-main"));
         // MyDisplay.toggle(MyHTML.getChildById(_t, "content-foot"));
 
-        let _t = ev.currentTarget.parentElement;
-
-        if (MyHTML.hasAnyClass(_t, ContOpenClass)) {
-          MyHTML.removeClass(_t, ContOpenClass);
-        } else {
-          MyHTML.addClass(_t, ContOpenClass);
-        }
+        MyHTML.toggleClass(ev.currentTarget.parentElement, ContOpenClass);
       };
 
       let regN = new RegExp("[\r\n]");

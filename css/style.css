@@ -206,28 +206,6 @@ a.delink {
 
 /* #endregion -utility classes */
 
-/* #region filter*/
-
-.lvl-fltr,
-.cont-fltr {
-  color: var(--colFilter);
-}
-.lvl-fltr.active,
-.cont-fltr.active {
-  color: var(--colFilterA);
-  text-decoration: underline;
-}
-.lvl-fltr:hover,
-.cont-fltr:hover {
-  color: var(--colFilterH);
-}
-.lvl-fltr.active:hover,
-.cont-fltr.active:hover {
-  color: var(--colFilterAH);
-}
-
-/* #endregion filter*/
-
 .lvl-fltrd:not(.active) {
   display: none;
 }
@@ -321,7 +299,7 @@ a.delink {
 }
 
 /* sticky filter if screen is big enough */
-@media (min-width: 400px) and (min-height: 490px) {
+@media (min-width: 430px) and (min-height: 400px) {
   #Base > aside > * {
     position: sticky;
     top: 0px;
@@ -403,6 +381,23 @@ a {
   color: var(--colSpecial1);
 }
 
+/* #region lvl filter*/
+
+.lvl-fltr {
+  color: var(--colFilter);
+}
+.lvl-fltr.active {
+  color: var(--colFilterA);
+  text-decoration: underline;
+}
+.lvl-fltr:hover {
+  color: var(--colFilterH);
+}
+.lvl-fltr.active:hover {
+  color: var(--colFilterAH);
+}
+
+/* #endregion lvl filter*/
 /* #region title*/
 
 #Base > header {
@@ -422,8 +417,26 @@ aside a {
   display: block;
 }
 
-#page-navigation ~ * {
-  padding-top: 1em;
+#projects-nav > h3 + ul {
+  display: none;
+}
+#projects-nav > h3 + ul.FltrOpen {
+  display: block;
+}
+
+.cont-fltr {
+  color: var(--colFilter);
+}
+#projects-nav > h3.active,
+.cont-fltr.active {
+  color: var(--colFilterA);
+  text-decoration: underline;
+}
+.cont-fltr:hover {
+  color: var(--colFilterH);
+}
+.cont-fltr.active:hover {
+  color: var(--colFilterAH);
 }
 
 /* #endregion filter and topics */
