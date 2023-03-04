@@ -26,7 +26,7 @@
   --colFilterAH: var(--colSpecial3);
 
   /* content */
-  --borderCont: 3px var(--colText) dashed;
+  --borderCont: 3px currentcolor dashed;
   --borderImg: 3px rgba(255, 0, 255, 0.192) solid;
   --fontContFoot: lighter 0.8em "Courier Prime", monospace;
   --colContFoot: var(--colTextA5);
@@ -118,6 +118,36 @@ li {
 .displayOver > * {
   grid-column: 1;
   grid-row: 1;
+}
+
+/* makes text extremely breakup happy */
+.dont-break-out {
+  /* CSS3 */
+  /* white-space: pre-wrap; */
+  /* Mozilla, since 1999 */
+  /* white-space: -moz-pre-wrap; */
+  /* Opera 4-6 */
+  /* white-space: -pre-wrap; */
+  /* Opera 7 */
+  /* white-space: -o-pre-wrap; */
+  /* Internet Explorer 5.5+ */
+  /* word-wrap: break-word; */
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 /* #region screen ready only element. will not be displayed. */
@@ -355,10 +385,10 @@ a.delink {
 
 h1,
 h2,
-h3,
-h4,
+h3
+/* ,h4,
 h5,
-h6 {
+h6  */ {
   color: var(--colHighlight);
 }
 section {
@@ -366,7 +396,7 @@ section {
 }
 
 /* all article normal text paragraphs */
-article p:not(img + p):not(header p) {
+article p:not(img + p):not(header p):not(footer p) {
   margin-bottom: 0.25em;
   margin-right: 0.5em;
   /* text-align: justify; */
@@ -520,6 +550,10 @@ aside a {
 #projects footer {
   font: var(--fontContFoot);
   color: var(--colContFoot);
+
+  padding-left: var(--dist);
+  border-left: var(--borderCont);
+  width: fit-content;
 }
 
 /* #endregion projects */

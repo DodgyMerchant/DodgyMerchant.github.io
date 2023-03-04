@@ -46,7 +46,7 @@ export default class MyTemplate {
    * adds all template children to target element and returns a list of all added elelemnts.
    * @param {HTMLTemplateElement} template
    * @param {HTMLElement} target
-   * @returns {Node[]}
+   * @returns {Element[]}
    */
   static addTemplate(template, target) {
     let list = [];

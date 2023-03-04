@@ -225,7 +225,30 @@ fetch("content/content.json")
         //#endregion text
         //#region footer
 
-        MyHTML.getChildById(_newClone, "content-headline");
+        //repo
+        let repoA = MyHTML.getChildById(_newClone, "content-repo");
+        if (entry.footer.repo != "") {
+          repoA.innerText = entry.footer.repo;
+          repoA.href = entry.footer.repo;
+        } else {
+          MyDisplay.disable(repoA.parentElement);
+        }
+
+        //links
+        if (entry.footer.links.length > 0) {
+          let linkObj, link;
+          for (let i = 0; i < entry.footer.links.length; i++) {
+            linkObj = entry.footer.links[i];
+            link = MyTemplate.addTemplate(
+              document.getElementById("template-ContLink"),
+              MyHTML.getChildById(_newClone, "content-links")
+            )[0];
+            link.firstChild.textContent = linkObj.text;
+            link.firstElementChild.innerText = linkObj.URL;
+            link.firstElementChild.href = linkObj.URL;
+          }
+        } else {
+        }
 
         //#endregion footer
 
