@@ -110,6 +110,19 @@ export default class ContentManager {
    */
   filterBehavior = "all";
 
+  /**
+   *
+   * @callback FilterCallback called on filter interaction.
+   * @param {HTMLElement} ev desc.
+   * @param {HTMLElement} element desc.
+   * @param {boolean} newState desc.
+   * @param {string[]} tags desc.
+   */
+  /**
+   * @type {FilterCallback | undefined}
+   */
+  filterCallback;
+
   //#endregion filter
   //#region filtered elements
   /**
@@ -188,13 +201,14 @@ export default class ContentManager {
    * @param {string} filteredClassName HTML class name of a cotnent/filtered HTML element.
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
    * @param {FilteredCallback=} filteredCallback callback function that is called on every filter application. Usefull to set the number of found objects into an element.
+   * @param {FilterCallback} filterCallback Function called on filter interaction..
    * @param {string=} filterNumMax Maximum number of filters. -1 for infinite. Defaults to -1.
    * @param {string[]=} filterInit Ffilters to apply on init. defaults to "all".
    * @param {boolean=} zeroSelect If the system allows the unselection of the last filters resulting in an empty list. Defaults to true.
    * @param {boolean=} filterFallback If the system should apply the Fallback-Filter if no filters are selected. Defauts to true.
    * @param {string[]=} filterflbList Filter List to use as fallback. Defaults to init filter.
-   * @param {import("../myJS/MyTags.js").TagBehavior=} filterBehav Behavior determining if Filters receive active class. Defaults to "all".
    * @param {import("../myJS/MyTags.js").TagBehavior=} filteredBehav Behavior determining if Filtered receive active class. Defaults to "match".
+   * @param {import("../myJS/MyTags.js").TagBehavior=} filterBehav Behavior determining if Filters receive active class. Defaults to "all".
    */
   constructor(
     elements,
@@ -203,16 +217,17 @@ export default class ContentManager {
     filteredClassName,
     filteredClassActive,
     filteredCallback = undefined,
+    filterCallback = undefined,
     filterNumMax = -1,
     filterInit = ["all"],
     zeroSelect = true,
     filterFallback = true,
     filterflbList = filterInit,
-    filterBehav = "all",
-    filteredBehav = "match"
+    filteredBehav = "match",
+    filterBehav = "all"
   ) {
-    this.filterBehavior = filterBehav;
     this.filteredBehavior = filteredBehav;
+    this.filterBehavior = filterBehav;
 
     //#region filter
 
@@ -240,10 +255,12 @@ export default class ContentManager {
     //#endregion filter
 
     this.filteredCallback = filteredCallback;
+    this.filterCallback = filterCallback;
 
     this.zeroSelect = zeroSelect;
     this.filterFallback = filterFallback;
     this.filterflbList = filterflbList;
+    console.log(filterInit);
     this.FilterApply(filterInit.slice());
   }
 
@@ -267,7 +284,7 @@ export default class ContentManager {
 
     this.activeFilters = tags;
 
-    console.log("Filters: ", this.activeFilters);
+    // console.log("Filters: ", this.activeFilters);
 
     //filtered
     this.filteredDispList = [];
@@ -361,34 +378,47 @@ export default class ContentManager {
   filterSetup(filterEl) {
     if (!MyHTML.hasAnyClass(filterEl, "all")) {
       //all not "all" buttons
-      filterEl.addEventListener("click", (event) => {
-        let _t = event.target;
-
+      filterEl.addEventListener("click", (ev) => {
+        let _t = ev.target;
+        let tags = this.getTags(_t);
+        let check = this.TagCheck(_t, this.activeFilters, this.filterBehavior);
         //check if tags are present in filter
-        if (this.TagCheck(_t, this.activeFilters, this.filterBehavior)) {
-          this.removeFilter(this.getTags(_t));
+        if (check) {
+          this.removeFilter(tags);
         } else {
-          this.addFilter(this.getTags(_t));
+          this.addFilter(tags);
         }
 
         this.FilterApply();
+        if (this.filterCallback) this.filterCallback(ev, _t, !check, tags);
       });
       //right mouse button
       filterEl.addEventListener("contextmenu", (ev) => {
         ev.preventDefault();
 
         this.FilterApply(this.getTags(ev.target));
+        if (this.filterCallback) this.filterCallback(ev, _t, true, tags);
       });
     } else {
       //"all" button
-      filterEl.addEventListener("click", () => {
+
+      let func = (ev) => {
+        if (ev.type == "contextmenu") ev.preventDefault();
+
         this.FilterApply(["all"]);
-      });
+        if (this.filterCallback)
+          this.filterCallback(
+            ev,
+            ev.currentTarget,
+            true,
+            this.getTags(ev.currentTarget)
+          );
+      };
+
+      //left mouse button
+      filterEl.addEventListener("click", func);
       //right mouse button
-      filterEl.addEventListener("contextmenu", (ev) => {
-        ev.preventDefault();
-        this.FilterApply(["all"]);
-      });
+      filterEl.addEventListener("contextmenu", func);
     }
   }
 

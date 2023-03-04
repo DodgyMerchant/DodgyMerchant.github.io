@@ -5,8 +5,8 @@ import MyTemplate from "../myJS/MyTemplate.js";
 
 const ContOpenClass = "ContOpen";
 const FltrOpenClass = "FltrOpen";
-const FltrClosedDec = "-";
-const FltrOpenDec = "x";
+const FltrClosedDec = "+";
+const FltrOpenDec = "-";
 
 new ContentManager(
   [
@@ -21,6 +21,7 @@ new ContentManager(
   "active",
   "lvl-fltrd",
   "active",
+  undefined,
   undefined,
   1,
   ["about"],
@@ -237,13 +238,33 @@ fetch("content/content.json")
         (num) => {
           //enable and disable no projects found message.
 
-          console.log("proj found: ", num);
           if (num == 0) {
             MyDisplay.enable(document.getElementById("projects-empty"));
           } else {
             MyDisplay.disable(document.getElementById("projects-empty"));
           }
           document.getElementById("projects-number").innerText = num.toString();
+        },
+        (ev, element, newState, tags) => {
+          console.log();
+          let parent = element.parentElement;
+          if (parent.classList.contains("subFilter")) {
+            let heading = parent.previousElementSibling;
+
+            //if any children are active set heading to active
+            for (let i = 0; i < parent.children.length; i++) {
+              if (parent.children[i].classList.contains("active")) {
+                if (!heading.classList.contains("active"))
+                  heading.classList.add("active");
+                return;
+              }
+            }
+
+            //remove active class if no children are active
+            if (heading.classList.contains("active")) {
+              heading.classList.remove("active");
+            }
+          }
         }
       );
     }
