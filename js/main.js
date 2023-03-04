@@ -71,13 +71,19 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} dateStart Project start text. Can be a date or a word.
  * @property {string} dateEnd Project end text. Can be a date or a word.
  * @property {string} status status it the project.
- * @property {ContentImage} image List of image objects.
+ * @property {ContentImage[]} imageList List of image objects.
  * @property {string} text text relating to the content.
+ * @property {{repo: string, links: ContentLink[]}} footer footer data list.
  */
 /**
  * @typedef {Object} ContentImage image data loaded in to produce content for my website.
  * @property {string} URL url to image.
  * @property {string} alt text description of image.
+ */
+/**
+ * @typedef {Object} ContentLink link data.
+ * @property {string} URL url of the link.
+ * @property {string} text text of the link.
  */
 
 //get data => create content => create contentmanager
@@ -119,9 +125,6 @@ fetch("content/content.json")
          * @type {string}
          */
         datE,
-        /**
-         * @type {Object{URL: string, alt: string}}
-         */
         imgData,
         /**
          * @type {HTMLDivElement}
@@ -185,8 +188,8 @@ fetch("content/content.json")
         //#endregion date
         //#region img
 
-        for (let ii = 0; ii < entry.image.length; ii++) {
-          imgData = entry.image[ii];
+        for (let ii = 0; ii < entry.imageList.length; ii++) {
+          imgData = entry.imageList[ii];
 
           // <img id="content-img" src="" alt="placeholder image" />
           //       <p id="content-img-description">EEEEE</p>
@@ -220,6 +223,11 @@ fetch("content/content.json")
         });
 
         //#endregion text
+        //#region footer
+
+        MyHTML.getChildById(_newClone, "content-headline");
+
+        //#endregion footer
 
         MyHTML.getChildById(_newClone, "content-tags").innerText =
           entry.tags.join(", ");
@@ -236,35 +244,44 @@ fetch("content/content.json")
         "cont-fltrd",
         "active",
         (num) => {
+          //#region no projects found message
           //enable and disable no projects found message.
-
           if (num == 0) {
             MyDisplay.enable(document.getElementById("projects-empty"));
           } else {
             MyDisplay.disable(document.getElementById("projects-empty"));
           }
           document.getElementById("projects-number").innerText = num.toString();
-        },
-        (ev, element, newState, tags) => {
-          console.log();
-          let parent = element.parentElement;
-          if (parent.classList.contains("subFilter")) {
-            let heading = parent.previousElementSibling;
 
-            //if any children are active set heading to active
-            for (let i = 0; i < parent.children.length; i++) {
-              if (parent.children[i].classList.contains("active")) {
-                if (!heading.classList.contains("active"))
-                  heading.classList.add("active");
-                return;
+          //#endregion no projects found message
+
+          //#region active/highlited subsections
+          //search all sub section for active filters and turn headins active
+          let subSections = document.getElementsByClassName("subFilter");
+          let subSection, heading;
+          for (let i = 0; i < subSections.length; i++) {
+            subSection = subSections.item(i);
+            heading = subSection.previousElementSibling;
+            //check if section has a header its a header
+            if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
+              //end early if not
+              continue;
+            //find any child filter that is active
+            let ii;
+            for (ii = 0; ii < subSection.children.length; ii++) {
+              //if filter is active
+              if (subSection.children[ii].classList.contains("active")) {
+                //Give heading active if not present, and end this loop
+                heading.classList.add("active");
+                break;
               }
             }
 
             //remove active class if no children are active
-            if (heading.classList.contains("active")) {
+            if (ii >= subSection.children.length)
               heading.classList.remove("active");
-            }
           }
+          //#endregion active/highlited subsections
         }
       );
     }

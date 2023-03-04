@@ -74,6 +74,8 @@ export class MyHTML {
     arr1 = element.className.split(" ");
     arr2 = name.split(" ");
 
+    element.classList;
+
     for (i = 0; i < arr2.length; i++) {
       if (!arr1.includes(arr2[i])) {
         return false;
@@ -202,11 +204,13 @@ export class MyHTML {
     // let tList, arr1, arr2;
     // tList = element.className.split(" ");
 
-    if (MyHTML.hasAnyClass(element, name)) {
-      MyHTML.removeClass(element, name);
-    } else {
-      MyHTML.addClass(element, name);
-    }
+    // if (MyHTML.hasAnyClass(element, name)) {
+    //   MyHTML.removeClass(element, name);
+    // } else {
+    //   MyHTML.addClass(element, name);
+    // }
+
+    element.classList.toggle(name);
 
     // element.className = tList.join(",");
   }

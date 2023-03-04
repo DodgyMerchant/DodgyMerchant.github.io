@@ -51,7 +51,7 @@
       "dateStart": "2021",
       "dateEnd": "unfinished",
       "status": "paused",
-      "image": [
+      "imageList": [
         {
           "URL": "./content/HANDS.gif",
           "alt": "A GIF of my game, HANDS. Rock Paper Scissors but weird."
@@ -75,7 +75,7 @@
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "completed",
-      "image": [
+      "imageList": [
         {
           "URL": "content/Website1.png",
           "alt": "A picture of this exact Website. The first, retired version."
@@ -98,7 +98,7 @@
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "paused",
-      "image": [
+      "imageList": [
         {
           "URL": "./content/HistoryWebsite1.png",
           "alt": "A better History Website."
@@ -127,7 +127,7 @@
       "dateStart": "2022",
       "dateEnd": "unfinished",
       "status": "paused indefinitely",
-      "image": [
+      "imageList": [
         {
           "URL": "./content/PhaserGame.gif",
           "alt": "A GIF of a Phaser Game Projekts Level Editor."
@@ -146,7 +146,7 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
-      "image": [
+      "imageList": [
         {
           "URL": "./content/EshopGUI.png",
           "alt": "Java Eshop login interface."
@@ -173,7 +173,7 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
-      "image": [
+      "imageList": [
         {
           "URL": "./content/SportOrt1.png",
           "alt": "The Sport Ort Website's Main Landing Page.\nThe Map shows the German city Bremen and all the Sporting locations entered into the system."

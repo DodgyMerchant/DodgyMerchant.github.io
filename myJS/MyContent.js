@@ -396,8 +396,9 @@ export default class ContentManager {
       filterEl.addEventListener("contextmenu", (ev) => {
         ev.preventDefault();
 
-        this.FilterApply(this.getTags(ev.target));
-        if (this.filterCallback) this.filterCallback(ev, _t, true, tags);
+        let tags = this.getTags(ev.target);
+        this.FilterApply(tags);
+        if (this.filterCallback) this.filterCallback(ev, ev.target, true, tags);
       });
     } else {
       //"all" button
