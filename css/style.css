@@ -248,140 +248,6 @@ a.delink {
 }
 
 /* #endregion about */
-/* #region layout*/
-
-#Base {
-  height: 100vh;
-  display: grid;
-  --gridGap: 0.5em;
-  --grid2row: 7em;
-  gap: 0px var(--gridGap);
-
-  grid-template-areas:
-    "title"
-    "topic"
-    "aside"
-    "main"
-    "foot";
-  grid-template-columns: 100%;
-  grid-template-rows:
-    max-content
-    max-content
-    max-content
-    max-content
-    auto
-    max-content;
-}
-/* increadibly small view */
-@media (max-width: 275px) {
-  html,
-  html * {
-    overflow-x: hidden;
-  }
-}
-
-/* filter on the sides */
-@media (min-width: 430px) and (max-width: 800px) {
-  #Base {
-    grid-template-areas:
-      ". title"
-      "topic main"
-      "aside main"
-      "foot foot";
-    grid-template-columns: 12em 1fr;
-    grid-template-rows:
-      max-content
-      var(--grid2row)
-      auto
-      max-content;
-  }
-
-  /* expand title to middle */
-  @media (max-width: 480px) {
-    #Base {
-      grid-template-areas:
-        "title title"
-        "topic main"
-        "aside main"
-        "foot foot";
-    }
-  }
-}
-
-/* full view */
-@media (min-width: 801px) {
-  #Base {
-    grid-template-areas:
-      "title ."
-      "topic main"
-      "aside main"
-      "foot foot";
-    grid-template-columns: max-content 1fr;
-    grid-template-rows:
-      max-content
-      var(--grid2row)
-      auto
-      max-content;
-  }
-  #Base > header {
-    text-align: end;
-  }
-}
-
-/* sticky filter if screen is big enough */
-@media (min-width: 430px) and (min-height: 400px) {
-  #Base > aside > * {
-    position: sticky;
-    top: 0px;
-  }
-
-  /* @media (min-height: 600px) {
-    #Base > header {
-      border: 2px solid red;
-      position: sticky;
-      top: 0px;
-    }
-  } */
-}
-
-#Base > header {
-  grid-area: title;
-}
-#Base > nav {
-  grid-area: topic;
-  text-align: end;
-}
-#Base > aside {
-  grid-area: aside;
-  text-align: end;
-}
-#Base > main {
-  grid-area: main;
-}
-#Base > footer {
-  grid-area: foot;
-}
-
-#Main {
-  display: grid;
-  gap: 0px var(--gridGap);
-
-  grid-template-areas:
-    "head"
-    "main";
-  grid-template-columns: 100%;
-  grid-template-rows:
-    var(--grid2row)
-    auto;
-}
-#Main > header {
-  grid-area: head;
-}
-#Main > :not(header) {
-  grid-area: main;
-}
-
-/* #endregion layout */
 
 h1,
 h2,
@@ -490,9 +356,7 @@ aside a {
 
 /* #region projects*/
 
-/* #projects {
-} */
-
+/* general projects section */
 #projects-number {
   color: var(--colSpecial1);
 }
@@ -502,6 +366,7 @@ aside a {
   display: none;
 }
 
+/* all content including no found message */
 #projects > article {
   --dist: min(2vmin, 1em);
   padding-left: var(--dist);
@@ -511,8 +376,17 @@ aside a {
   margin-bottom: var(--dist);
 }
 
-#projects main {
-  margin-top: 1em;
+/* making status work */
+#projects > article > header > div {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#project-status {
+  text-align: end;
+  /* flex: 0 1; */
 }
 
 /* #projects > article > div > p:not(img + p) {
@@ -522,14 +396,14 @@ aside a {
 /* #region closing content block */
 /* disaling all content except for headers */
 
-#projects article.cont-fltrd {
+/* #projects article.cont-fltrd {
   transition: height 2s;
-  /* overflow: hidden; */
-}
-#projects article.cont-fltrd > header ~ * {
+  overflow: hidden;
+} */
+#projects .ContCmprssd {
   display: none;
 }
-#projects article.cont-fltrd.ContOpen > header ~ * {
+#projects .ContOpen .ContCmprssd {
   display: block;
 }
 
@@ -594,3 +468,162 @@ aside a {
 }
 
 /* #endregion footer */
+/* #region layout*/
+
+#Base {
+  height: 100vh;
+  display: grid;
+  --gridGap: 0.5em;
+  --grid2row: 7em;
+  gap: 0px var(--gridGap);
+
+  grid-template-areas:
+    "title"
+    "topic"
+    "aside"
+    "main"
+    "foot";
+  grid-template-columns: 100%;
+  grid-template-rows:
+    max-content
+    max-content
+    max-content
+    max-content
+    auto
+    max-content;
+}
+
+/* project status in header or main section */
+.ContStatusH {
+  display: block;
+}
+.ContStatusM {
+  display: none;
+}
+
+/* increadibly small view */
+@media (max-width: 275px) {
+  html,
+  html * {
+    overflow-x: hidden;
+  }
+}
+
+/* filter on the sides */
+@media (min-width: 430px) and (max-width: 800px) {
+  #Base {
+    grid-template-areas:
+      ". title"
+      "topic main"
+      "aside main"
+      "foot foot";
+    grid-template-columns: 12em 1fr;
+    grid-template-rows:
+      max-content
+      var(--grid2row)
+      auto
+      max-content;
+  }
+
+  /* expand title to middle */
+  @media (max-width: 480px) {
+    #Base {
+      grid-template-areas:
+        "title title"
+        "topic main"
+        "aside main"
+        "foot foot";
+    }
+  }
+}
+
+/* full view */
+@media (min-width: 801px) {
+  #Base {
+    grid-template-areas:
+      "title ."
+      "topic main"
+      "aside main"
+      "foot foot";
+    grid-template-columns: max-content 1fr;
+    grid-template-rows:
+      max-content
+      var(--grid2row)
+      auto
+      max-content;
+  }
+  #Base > header {
+    text-align: end;
+  }
+}
+
+/* sticky filter if screen is big enough */
+@media (min-width: 430px) and (min-height: 400px) {
+  #Base > aside > * {
+    position: sticky;
+    top: 0px;
+  }
+
+  /* @media (min-height: 600px) {
+    #Base > header {
+      border: 2px solid red;
+      position: sticky;
+      top: 0px;
+    }
+  } */
+}
+
+/* project satus not in header */
+@media (max-width: 600px) {
+  /* making status work */
+  #projects > article > header > div {
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+  }
+  #project-status {
+    text-align: start;
+  }
+  #project-status * {
+    display: inline;
+  }
+}
+
+#Base > header {
+  grid-area: title;
+}
+#Base > nav {
+  grid-area: topic;
+  text-align: end;
+}
+#Base > aside {
+  grid-area: aside;
+  text-align: end;
+}
+#Base > main {
+  grid-area: main;
+}
+#Base > footer {
+  grid-area: foot;
+}
+
+#Main {
+  display: grid;
+  gap: 0px var(--gridGap);
+
+  grid-template-areas:
+    "head"
+    "main";
+  grid-template-columns: 100%;
+  grid-template-rows:
+    var(--grid2row)
+    auto;
+}
+#Main > header {
+  grid-area: head;
+}
+#Main > :not(header) {
+  grid-area: main;
+}
+
+/* #endregion layout */

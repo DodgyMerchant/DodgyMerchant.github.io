@@ -4,6 +4,7 @@ import { MyHTML } from "../myJS/MyJS.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
 const ContOpenClass = "ContOpen";
+const ContCompressedClass = "ContCmprssd";
 const FltrOpenClass = "FltrOpen";
 const FltrClosedDec = "+";
 const FltrOpenDec = "-";
@@ -186,6 +187,12 @@ fetch("content/content.json")
         MyHTML.getChildById(_newClone, "content-date").innerText = dateText;
 
         //#endregion date
+        //#region status
+
+        MyHTML.getChildById(_newClone, "project-status").lastElementChild.innerText =
+          entry.status;
+
+        //#endregion status
         //#region img
 
         for (let ii = 0; ii < entry.imageList.length; ii++) {
