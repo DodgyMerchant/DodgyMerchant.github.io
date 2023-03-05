@@ -226,8 +226,10 @@ fetch("content/content.json")
         //#region footer
 
         //repo
+
+        let repExist = entry.footer.repo != "";
         let repoA = MyHTML.getChildById(_newClone, "content-repo");
-        if (entry.footer.repo != "") {
+        if (repExist) {
           repoA.innerText = entry.footer.repo;
           repoA.href = entry.footer.repo;
         } else {
@@ -247,7 +249,8 @@ fetch("content/content.json")
             link.firstElementChild.innerText = linkObj.URL;
             link.firstElementChild.href = linkObj.URL;
           }
-        } else {
+        } else if (!repExist) {
+          MyDisplay.disable(MyHTML.getChildById(_newClone, "content-links"));
         }
 
         //#endregion footer

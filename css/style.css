@@ -28,7 +28,7 @@
   /* content */
   --borderCont: 3px currentcolor dashed;
   --borderImg: 3px rgba(255, 0, 255, 0.192) solid;
-  --fontContFoot: lighter 0.8em "Courier Prime", monospace;
+  --fontContFoot: normal lighter 0.8em "Courier Prime", monospace;
   --colContFoot: var(--colTextA5);
 
   font: normal normal 1em "Courier Prime", monospace;
@@ -553,7 +553,15 @@ aside a {
 
   padding-left: var(--dist);
   border-left: var(--borderCont);
+  margin-top: 1.5em;
   width: fit-content;
+}
+
+#projects footer > #content-links {
+  margin-bottom: 1em;
+}
+#projects footer > #content-links + * {
+  line-height: 1em;
 }
 
 /* #endregion projects */
