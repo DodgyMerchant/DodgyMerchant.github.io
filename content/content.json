@@ -93,7 +93,7 @@
     },
     {
       "headline": "History Website",
-      "sub": "The better version of that history map.",
+      "sub": "The interactive version of that history map.",
       "tags": ["website", "code", "HTML", "CSS", "JS", "system-design"],
       "dateStart": "2022",
       "dateEnd": "2023",
@@ -101,7 +101,7 @@
       "imageList": [
         {
           "URL": "./content/HistoryWebsite1.png",
-          "alt": "A better History Website."
+          "alt": "A picture of the History Websites main interface.\nIt consits of the interactive map that displays population movements, 2 UI-panels and the controls below the map."
         }
       ],
       "text": "A better History Website.",

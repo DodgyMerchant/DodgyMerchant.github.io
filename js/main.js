@@ -189,8 +189,10 @@ fetch("content/content.json")
         //#endregion date
         //#region status
 
-        MyHTML.getChildById(_newClone, "project-status").lastElementChild.innerText =
-          entry.status;
+        MyHTML.getChildById(
+          _newClone,
+          "project-status"
+        ).lastElementChild.innerText = entry.status;
 
         //#endregion status
         //#region img
