@@ -51,13 +51,17 @@
       "dateStart": "2021",
       "dateEnd": "unfinished",
       "status": "paused",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "./content/HANDS.gif",
           "alt": "A GIF of my game, HANDS. Rock Paper Scissors but weird."
+        },
+        {
+          "type": "text",
+          "text": "This Game Project was made in Game Maker 2, as a personal project in my free time, started in 2021.\n\nFor Hands, I started out with 2 Ideas.\nI have a deep respect for games simple rule sets, so I wanted to explore that.\nAdditionally, I dislike making my own assets, but I'm never content with 3rd party assets.\nSo I wanted to test how far I could make it with just 1ish sprite.\n\nGod is dead, and all that's left is his corpse, angels and some fading souls.\nYou have the chance to ascend to godhood to take the empty throne, but thy must take the trial of hands.\n\nBorrowing from Judaist beliefs, the space of existence is inside god, who is dead.\nSo I wanted to make every bit of the game feel as weird as possible.\nIn many design decisions, I oriented my design around the feeling you would get when viewing a living organism from the inside.\nWhich everything being in motion constantly and reacting to your actions with more writhing, and pulsing.\n\nGameplay wise, early on I thought about basic rock paper scissors with some minor modification. This proved, far more difficult, than imagined. Altering one thing would throw out the balance of another.\n\nAt the moment, the gameplay is still in early stages.\nAll rules are configurable, so one can create their own game within limitations.\nAfter some more work, I would publish this version.\nWith the intent to hopefully find the best version of the rules with the feedback.\n\nEarly on, I tried to find ways to build the game without using text, which wasn't feasible.\nI may revisit this idea. I would love to make the game so otherworldly that every second with it feels alienating. And forgoing a normalcy such as text would certainly work towards this alienation.\n\nAfter telling some of my colleagues about the game, one noted how much it sounded like a simple fighting game.\nI was surprised by that comparison, but they were completely right.\nOwing to me having absolutely no experience with fighting games, I didn't see the obvious comparison."
         }
       ],
-      "text": "This Game Project was made in Game Maker 2, as a personal project in my free time, started in 2021.\n\nFor Hands, I started out with 2 Ideas.\nI have a deep respect for games simple rule sets, so I wanted to explore that.\nAdditionally, I dislike making my own assets, but I'm never content with 3rd party assets.\nSo I wanted to test how far I could make it with just 1ish sprite.\n\nGod is dead, and all that's left is his corpse, angels and some fading souls.\nYou have the chance to ascend to godhood to take the empty throne, but thy must take the trial of hands.\n\nBorrowing from Judaist beliefs, the space of existence is inside god, who is dead.\nSo I wanted to make every bit of the game feel as weird as possible.\nIn many design decisions, I oriented my design around the feeling you would get when viewing a living organism from the inside.\nWhich everything being in motion constantly and reacting to your actions with more writhing, and pulsing.\n\nGameplay wise, early on I thought about basic rock paper scissors with some minor modification. This proved, far more difficult, than imagined. Altering one thing would throw out the balance of another.\n\nAt the moment, the gameplay is still in early stages.\nAll rules are configurable, so one can create their own game within limitations.\nAfter some more work, I would publish this version.\nWith the intent to hopefully find the best version of the rules with the feedback.\n\nEarly on, I tried to find ways to build the game without using text, which wasn't feasible.\nI may revisit this idea. I would love to make the game so otherworldly that every second with it feels alienating. And forgoing a normalcy such as text would certainly work towards this alienation.\n\nAfter telling some of my colleagues about the game, one noted how much it sounded like a simple fighting game.\nI was surprised by that comparison, but they were completely right.\nOwing to me having absolutely no experience with fighting games, I didn't see the obvious comparison.",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/HANDS",
         "links": [
@@ -75,17 +79,22 @@
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "completed",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "content/Website1.png",
           "alt": "A picture of this exact Website. The first, retired version."
         },
         {
+          "type": "image",
           "URL": "content/Website2.png",
           "alt": "A picture of this exact Website. The second, current version."
+        },
+        {
+          "type": "text",
+          "text": "This project was started as an assignment for my university class “Medien Informatik 2” in my second semester of University.\n\nThe first version I identified with the least, but was functionally well done.\n\nI accept that I will never be completely happy with the portfolio I use."
         }
       ],
-      "text": "This project was started as an assignment for my university class “Medien Informatik 2” in my second semester of University.\n\nThe first version I identified with the least, but was functionally well done.\n\nI accept that I will never be completely happy with the portfolio I use.",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/DodgyMerchant.github.io",
         "links": []
@@ -98,16 +107,71 @@
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "paused",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "./content/HistoryWebsite1.png",
           "alt": "A picture of the History Websites main interface.\nIt consits of the interactive map that displays population movements, 2 UI-panels and the controls below the map."
+        },
+        {
+          "type": "text",
+          "text": "An interactive Map that displayed population movements.\nBorn from the will to make horrendous history maps better.\nA lot of things can be configured, making it instantly superior to commonly used map graphics.\nDisplayed timespan can be changed, objects can be filtered by topic and interacted with.\n\nAll data is pulled from a Google sheet and converted."
         }
       ],
-      "text": "A better History Website.",
       "footer": {
-        "repo": "https://github.com/DodgyMerchant/HistoryWebsite",
+        "repo": "",
         "links": []
+      }
+    },
+    {
+      "headline": "SPITE",
+      "sub": "A gruellingly slow game about fear and survival and the fight against a dying body.",
+      "tags": [
+        "game",
+        "code",
+        "game-design",
+        "system-design",
+        "level-design",
+        "game-programming",
+        "ai-programming",
+        "gameplay-engineer",
+        "visual-design",
+        "asset-art",
+        "GML",
+        "GM"
+      ],
+      "dateStart": "2021",
+      "dateEnd": "unfinished",
+      "status": "paused",
+      "content": [
+        {
+          "type": "image",
+          "URL": "https://thumbs.gfycat.com/HelplessPeacefulArkshell-max-1mb.gif",
+          "alt": "A GIF showing the main character's slow change side, sword attack charge up, swing and charge cancel animations."
+        },
+        {
+          "type": "image",
+          "URL": "https://thumbs.gfycat.com/DisguisedEmotionalAlleycat-max-1mb.gif",
+          "alt": "The GIF shows the player's brace and brace hit animations."
+        },
+        {
+          "type": "text",
+          "text": "SPITE will never be a fun game, that is not in its nature.\nBut still technically a game, I'm referring to it more as an experience.\nThe game is about the weakness of a dying person.\nHow energy leaves the body, but the will to survive doesn't.\n\nA soldier on deaths' door is hunted by creatures fleeing from the battlefield.\n\nIf one dies, it isn't from a lack of health points, but from the loss of energy.\nSo, hope you can stand up before you can't.\n\nMade in Game Maker 2.\nI had to write some real funky code to make a custom sprite system that translates player movement to pixel perfect animation speeds.\nBut that make the animation real crisp."
+        },
+        {
+          "type": "image",
+          "URL": "https://thumbs.gfycat.com/MildAggressiveGonolek-max-1mb.gif",
+          "alt": "GIF displays the player character's inconsistent movement animations played relating to movement speed, making them pixel perfect and crisp. Ground Textures Only For Testing Purposes."
+        }
+      ],
+      "footer": {
+        "repo": "https://github.com/DodgyMerchant/SPITE",
+        "links": [
+          {
+            "text": "Project GIFs: ",
+            "URL": "https://gfycat.com/@hiro_hunter/collections/KfdjLhJt/spite"
+          }
+        ]
       }
     },
     {
@@ -127,13 +191,17 @@
       "dateStart": "2022",
       "dateEnd": "unfinished",
       "status": "paused indefinitely",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "./content/PhaserGame.gif",
           "alt": "A GIF of a Phaser Game Projekts Level Editor."
+        },
+        {
+          "type": "text",
+          "text": "This project was started as for my university class “Medien Informatik 2” in my second semester of University.\n\nWe were assigned to make a small game, in a group, using the Phaser HTML5 game engine for JavaScript, while preparing documentation and applying learned information from the university lectures.\n\nGameplay wise, the player would control a drone which could only grapple along walls and jump off them.\nThe play has to navigate through a large map and beat 3-5 bosses, in any order, to beat the game.\nInspired by the Game Titan Souls, these bosses would function like an action puzzle box, and both the player and the boss would die in one hit.\nDeath would only be a minor setback of being thrown out of the boos arena and the boss resetting.\nThe player had to learn the behaviour of a boss, while trying to survive and position themselves in a way they could beat the boss, while managing their own survival.\n\nThe game was a combination of many excellent design choices from inspiring works across mediums.\n\nThe two aspects I was excited to explore most was firstly, to give the game a sci-fi, industrial + jungle theme but to completely avoid showing the jungle part.\n\nThe Japanese animation film Akira from 1991 has a similar theme for the city the film takes place in, but the jungle aspect is only suggested by the music and the portrayed city having many aspects in common that we associate with a jungle ecosystem.\nThe metropolis being crowded, loud and dense, not a plant in sight, and jet together with the tribal music the subconscious association with a thick jungle is immediately apparent.\n\nSecond, we wanted to try to recreate the timeless intrigue, a vast and purposefully designed world like the map of Shadow of the Colossus.\nWhere space and exploration are removed from the usual player reward process and have meaning in themselves.\n\nThey were some management mistakes on the universities side this semester, so the time we had for all the projects was not appropriate.\nResulting in a lot of crunch on our side and changes in deadlines and evaluation criteria on theirs.\n\nIn the end we had a basic level editor, some base mechanics and some good visual assets.\nI felt we hadn't done the vision of the project justice, so I would like to continue the development.\nBut other courses and some earned holiday has priority, if my schedule allows it I would like to complete attest the tutorial section of the game."
         }
       ],
-      "text": "This project was started as for my university class “Medien Informatik 2” in my second semester of University.\n\nWe were assigned to make a small game, in a group, using the Phaser HTML5 game engine for JavaScript, while preparing documentation and applying learned information from the university lectures.\n\nGameplay wise, the player would control a drone which could only grapple along walls and jump off them.\nThe play has to navigate through a large map and beat 3-5 bosses, in any order, to beat the game.\nInspired by the Game Titan Souls, these bosses would function like an action puzzle box, and both the player and the boss would die in one hit.\nDeath would only be a minor setback of being thrown out of the boos arena and the boss resetting.\nThe player had to learn the behaviour of a boss, while trying to survive and position themselves in a way they could beat the boss, while managing their own survival.\n\nThe game was a combination of many excellent design choices from inspiring works across mediums.\n\nThe two aspects I was excited to explore most was firstly, to give the game a sci-fi, industrial + jungle theme but to completely avoid showing the jungle part.\n\nThe Japanese animation film Akira from 1991 has a similar theme for the city the film takes place in, but the jungle aspect is only suggested by the music and the portrayed city having many aspects in common that we associate with a jungle ecosystem.\nThe metropolis being crowded, loud and dense, not a plant in sight, and jet together with the tribal music the subconscious association with a thick jungle is immediately apparent.\n\nSecond, we wanted to try to recreate the timeless intrigue, a vast and purposefully designed world like the map of Shadow of the Colossus.\nWhere space and exploration are removed from the usual player reward process and have meaning in themselves.\n\nThey were some management mistakes on the universities side this semester, so the time we had for all the projects was not appropriate.\nResulting in a lot of crunch on our side and changes in deadlines and evaluation criteria on theirs.\n\nIn the end we had a basic level editor, some base mechanics and some good visual assets.\nI felt we hadn't done the vision of the project justice, so I would like to continue the development.\nBut other courses and some earned holiday has priority, if my schedule allows it I would like to complete attest the tutorial section of the game.",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/PhaserGame",
         "links": []
@@ -146,13 +214,17 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "./content/EshopGUI.png",
           "alt": "Java Eshop login interface."
+        },
+        {
+          "type": "text",
+          "text": "This project was started as for my university class “Programmieren 2” in my second semester of University.\n\nIn a group, we were to design and create a small dummy Eshop in Java.\n\nThis served as an introduction to Java."
         }
       ],
-      "text": "This project was started as for my university class “Programmieren 2” in my second semester of University.\n\nIn a group, we were to design and create a small dummy Eshop in Java.\n\nThis served as an introduction to Java.",
       "footer": {
         "repo": "https://github.com/JonahAW/S2_Prog2_E-Shop",
         "links": []
@@ -173,13 +245,17 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
-      "imageList": [
+      "content": [
         {
+          "type": "image",
           "URL": "./content/SportOrt1.png",
           "alt": "The Sport Ort Website's Main Landing Page.\nThe Map shows the German city Bremen and all the Sporting locations entered into the system."
+        },
+        {
+          "type": "text",
+          "text": "Translates from German into English as “Sport Place”.\n\nThe website was created for a university assignment in which we should create any sort of website that would prove useful for Refugees living in Bremen, Germany.\n\nMy Group decided to build a Website that would assist someone in finding a sporting location, with a focus on free and open offers.\nData management was done with Google Sheets, in which all locations were registered.\nEntries would show a location's availability, sport, location and more.\n\nWe used the Google Maps API together with some custom HTML, CSS and JS."
         }
       ],
-      "text": "Translates from German into English as “Sport Place”.\n\nThe website was created for a university assignment in which we should create any sort of website that would prove useful for Refugees living in Bremen, Germany.\n\nMy Group decided to build a Website that would assist someone in finding a sporting location, with a focus on free and open offers.\nData management was done with Google Sheets, in which all locations were registered.\nEntries would show a location's availability, sport, location and more.\n\nWe used the Google Maps API together with some custom HTML, CSS and JS.",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/SportWebsiteBremen",
         "links": []

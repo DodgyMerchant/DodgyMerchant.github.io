@@ -64,6 +64,23 @@ for (let i = 0; i < collection.length; i++) {
 
 //#endregion filter
 
+/*
+
+"content": [
+        {
+          "type": "image",
+          "URL": "https://thumbs.gfycat.com/HelplessPeacefulArkshell-max-1mb.gif",
+          "alt": "A GIF of my game, HANDS. Rock Paper Scissors but weird."
+        },
+        {
+          "type": "text",
+          "text": "SPITE will never be a fun game, that is not in its nature.\nBut still technically a game, I'm referring to it more as an experience.\nThe game is about the weakness of a dying person.\nHow energy leaves the body, but the will to survive doesn't.\n\nA soldier on deaths' door is hunted by creatures fleeing from the battlefield.\n\nIf one dies, it isn't from a lack of health points, but from the loss of energy.\nSo, hope you can stand up before you can't."
+        }
+      ],
+
+
+
+*/
 /**
  * @typedef {Object} ContentData content data loaded in to produce content for my website.
  * @property {string} headline Headline for this content block.
@@ -72,14 +89,19 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} dateStart Project start text. Can be a date or a word.
  * @property {string} dateEnd Project end text. Can be a date or a word.
  * @property {string} status status it the project.
- * @property {ContentImage[]} imageList List of image objects.
- * @property {string} text text relating to the content.
+ * @property {ContentImage[] | ContentText[]} content content object list.
  * @property {{repo: string, links: ContentLink[]}} footer footer data list.
  */
 /**
  * @typedef {Object} ContentImage image data loaded in to produce content for my website.
+ * @property {"image"} type type of object.
  * @property {string} URL url to image.
  * @property {string} alt text description of image.
+ */
+/**
+ * @typedef {Object} ContentText image data loaded in to produce content for my website.
+ * @property {"text"} type type of object.
+ * @property {string} text text relating to the content.
  */
 /**
  * @typedef {Object} ContentLink link data.
@@ -148,6 +170,7 @@ fetch("content/content.json")
       };
 
       let regN = new RegExp("[\r\n]");
+      let content;
 
       for (let i = 0; i < data.content.length; i++) {
         entry = data.content[i];
@@ -195,43 +218,56 @@ fetch("content/content.json")
         ).lastElementChild.innerText = entry.status;
 
         //#endregion status
-        //#region img
 
-        for (let ii = 0; ii < entry.imageList.length; ii++) {
-          imgData = entry.imageList[ii];
+        //#region content
 
-          // <img id="content-img" src="" alt="placeholder image" />
-          //       <p id="content-img-description">EEEEE</p>
+        for (let ii = 0; ii < entry.content.length; ii++) {
+          content = entry.content[ii];
 
-          _newImg = document.createElement("img");
-          _newImgDesc = document.createElement("p");
+          switch (content.type) {
+            case "image":
+              // <img id="content-img" src="" alt="placeholder image" />
+              //       <p id="content-img-description">EEEEE</p>
 
-          _newImg.src = imgData.URL;
-          _newImg.alt = imgData.alt;
-          _newImgDesc.innerText = imgData.alt;
+              _newImg = document.createElement("img");
+              _newImgDesc = document.createElement("p");
 
-          _contMain.append(_newImg);
-          _contMain.append(_newImgDesc);
+              _newImg.src = content.URL;
+              _newImg.alt = content.alt;
+              _newImgDesc.innerText = content.alt;
+
+              _contMain.append(_newImg);
+              _contMain.append(_newImgDesc);
+
+              break;
+            case "text":
+              let elem;
+
+              content.text.split(regN).forEach((txt) => {
+                if (txt.length == 0) {
+                  //split multi line breaks into seperate paragraphs
+                  _contMain.append(document.createElement("br"));
+                } else {
+                  //generate paragraph elements for each text section
+                  elem = document.createElement("p");
+
+                  elem.appendChild(document.createTextNode(txt));
+                  _contMain.append(elem);
+                }
+              });
+
+              break;
+            default:
+              console.error(
+                "Content type not implemented!",
+                entry.headline,
+                content
+              );
+              break;
+          }
         }
 
-        //#endregion img
-        //#region text
-        let elem;
-
-        entry.text.split(regN).forEach((txt) => {
-          if (txt.length == 0) {
-            //split multi line breaks into seperate paragraphs
-            _contMain.append(document.createElement("br"));
-          } else {
-            //generate paragraph elements for each text section
-            elem = document.createElement("p");
-
-            elem.appendChild(document.createTextNode(txt));
-            _contMain.append(elem);
-          }
-        });
-
-        //#endregion text
+        //#endregion content
         //#region footer
 
         //repo
