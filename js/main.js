@@ -57,7 +57,8 @@ let h3Update = (h3, open) => {
 let h3;
 for (let i = 0; i < collection.length; i++) {
   h3 = collection.item(i);
-  h3.addEventListener("pointerdown", filtFunc);
+  // h3.addEventListener("pointerdown", filtFunc);
+  h3.addEventListener("pointerup", filtFunc);
 
   h3Update(h3, MyHTML.hasAnyClass(h3.nextElementSibling, FltrOpenClass));
 }
@@ -303,7 +304,9 @@ fetch("content/content.json")
         MyHTML.getChildById(_newClone, "content-tags").innerText =
           entry.tags.join(", ");
 
-        _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
+        // _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
+        _newClone.firstElementChild.addEventListener("pointerup", toggleDisp);
+        // _newClone.addEventListener("pointerup")
       }
 
       //#endregion generate content
