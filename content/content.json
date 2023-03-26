@@ -14,11 +14,12 @@
     "asset-art",
     "HTML",
     "Java",
-    "JS",
+    "JavaScript",
+    "TypeScript",
     "C++",
     "C#",
-    "GML",
-    "GM",
+    "GameMakerLang.",
+    "GameMaker",
     "Unity",
     "UE",
     "Phaser"
@@ -37,8 +38,8 @@
       "tags": [
         "game",
         "code",
-        "GM",
-        "GML",
+        "GameMaker",
+        "GameMakerLang.",
         "game-design",
         "system-design",
         "game-programming",
@@ -75,7 +76,7 @@
     {
       "headline": "This Website",
       "sub": "My Portfolio Website.",
-      "tags": ["website", "code", "HTML", "CSS", "JS", "visual-design"],
+      "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "completed",
@@ -103,7 +104,7 @@
     {
       "headline": "History Website",
       "sub": "The interactive version of that history map.",
-      "tags": ["website", "code", "HTML", "CSS", "JS", "system-design"],
+      "tags": ["website", "code", "HTML", "CSS", "JavaScript", "system-design"],
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "paused",
@@ -137,8 +138,8 @@
         "gameplay-engineer",
         "visual-design",
         "asset-art",
-        "GML",
-        "GM"
+        "GameMakerLang.",
+        "GameMaker"
       ],
       "dateStart": "2021",
       "dateEnd": "unfinished",
@@ -181,7 +182,7 @@
         "game",
         "code",
         "Phaser",
-        "JS",
+        "JavaScript",
         "game-design",
         "system-design",
         "game-programming",
@@ -238,7 +239,7 @@
         "code",
         "HTML",
         "CSS",
-        "JS",
+        "JavaScript",
         "visual-design",
         "system-design"
       ],
@@ -253,7 +254,7 @@
         },
         {
           "type": "text",
-          "text": "Translates from German into English as “Sport Place”.\n\nThe website was created for a university assignment in which we should create any sort of website that would prove useful for Refugees living in Bremen, Germany.\n\nMy Group decided to build a Website that would assist someone in finding a sporting location, with a focus on free and open offers.\nData management was done with Google Sheets, in which all locations were registered.\nEntries would show a location's availability, sport, location and more.\n\nWe used the Google Maps API together with some custom HTML, CSS and JS."
+          "text": "Translates from German into English as “Sport Place”.\n\nThe website was created for a university assignment in which we should create any sort of website that would prove useful for Refugees living in Bremen, Germany.\n\nMy Group decided to build a Website that would assist someone in finding a sporting location, with a focus on free and open offers.\nData management was done with Google Sheets, in which all locations were registered.\nEntries would show a location's availability, sport, location and more.\n\nWe used the Google Maps API together with some custom HTML, CSS and JavaScript."
         }
       ],
       "footer": {
