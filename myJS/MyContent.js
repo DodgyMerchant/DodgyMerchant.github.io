@@ -260,7 +260,7 @@ export default class ContentManager {
     this.zeroSelect = zeroSelect;
     this.filterFallback = filterFallback;
     this.filterflbList = filterflbList;
-    console.log(filterInit);
+    // console.log(filterInit);
     this.FilterApply(filterInit.slice());
   }
 
@@ -272,8 +272,7 @@ export default class ContentManager {
     //#region preprocess filters
 
     //remove "all" filter
-    if (tags.length > 1 && tags.includes("all"))
-      MyArr.remove(tags, tags.indexOf("all"));
+    if (tags.length > 1 && tags.includes("all")) MyArr.remove(tags, tags.indexOf("all"));
 
     //fallback on list empty
     if (tags.length == 0 && this.filterFallback) {
@@ -294,10 +293,7 @@ export default class ContentManager {
     let cont;
     for (let i = 0; i < this.contentList.length; i++) {
       cont = this.contentList[i];
-      if (
-        this.TagCheck(cont, this.activeFilters, this.filteredBehavior) ||
-        this.activeFilters.includes("all")
-      ) {
+      if (this.TagCheck(cont, this.activeFilters, this.filteredBehavior) || this.activeFilters.includes("all")) {
         //count up filtered elements displayed
         this.filteredDispList.push(cont);
         cont.active = true;
@@ -323,12 +319,7 @@ export default class ContentManager {
     }
 
     //callback
-    if (this.filteredCallback)
-      this.filteredCallback(
-        this.filteredDispList.length,
-        this.filteredDispList,
-        this.filteredBehavior
-      );
+    if (this.filteredCallback) this.filteredCallback(this.filteredDispList.length, this.filteredDispList, this.filteredBehavior);
   }
 
   /**
@@ -341,19 +332,9 @@ export default class ContentManager {
    */
   TagCheck(element, filterTags, behavior) {
     if (element instanceof Content) {
-      return MyTags.Compare(
-        element.tags,
-        filterTags,
-        behavior ? behavior : this.filteredBehavior
-      );
-    } else if (
-      element.className.split(" ").indexOf(this.filterClassName) != -1
-    ) {
-      return MyTags.Compare(
-        this.getTags(element),
-        filterTags,
-        behavior ? behavior : this.filterBehavior
-      );
+      return MyTags.Compare(element.tags, filterTags, behavior ? behavior : this.filteredBehavior);
+    } else if (element.className.split(" ").indexOf(this.filterClassName) != -1) {
+      return MyTags.Compare(this.getTags(element), filterTags, behavior ? behavior : this.filterBehavior);
     }
   }
 
@@ -407,13 +388,7 @@ export default class ContentManager {
         if (ev.type == "contextmenu") ev.preventDefault();
 
         this.FilterApply(["all"]);
-        if (this.filterCallback)
-          this.filterCallback(
-            ev,
-            ev.currentTarget,
-            true,
-            this.getTags(ev.currentTarget)
-          );
+        if (this.filterCallback) this.filterCallback(ev, ev.currentTarget, true, this.getTags(ev.currentTarget));
       };
 
       //left mouse button
@@ -431,14 +406,8 @@ export default class ContentManager {
     MyArr.pushUniqueList(this.activeFilters, tags);
 
     //reduce to maximum length
-    if (
-      this.filterNumMax != -1 &&
-      this.activeFilters.length > this.filterNumMax
-    )
-      this.activeFilters.splice(
-        0,
-        this.activeFilters.length - this.filterNumMax
-      );
+    if (this.filterNumMax != -1 && this.activeFilters.length > this.filterNumMax)
+      this.activeFilters.splice(0, this.activeFilters.length - this.filterNumMax);
   }
 
   /**
