@@ -261,6 +261,10 @@ section {
   margin-top: 1em;
 }
 
+em {
+  color: var(--colHighlight);
+}
+
 /* all article normal text paragraphs */
 article p:not(img + p):not(header p):not(footer p) {
   margin-bottom: 0.25em;
