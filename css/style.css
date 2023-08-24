@@ -206,14 +206,29 @@ li {
 /* #endregion */
 /* #region clickable */
 
-.clickable,
-.clickable-container * {
-  cursor: pointer;
+@media (hover: hover) {
+  /* mouse device */
+  .clickable,
+  .clickable-container * {
+    cursor: pointer;
+  }
+  .clickable:hover,
+  .clickable-container *:hover {
+    text-decoration: underline;
+    background: var(--backClickable);
+  }
 }
-.clickable:hover,
-.clickable-container *:hover {
-  text-decoration: underline;
-  background: var(--backClickable);
+@media (hover: none) {
+  /* no mouse device (touch enabled) */
+  .clickable,
+  .clickable-container * {
+    cursor: pointer;
+  }
+  .clickable:hover,
+  .clickable-container *:hover {
+    /* text-decoration: underline; */
+    background: var(--backClickable);
+  }
 }
 
 /* #endregion -clickable */
@@ -261,6 +276,7 @@ section {
   margin-top: 1em;
 }
 
+/* emphasis element */
 em {
   color: var(--colHighlight);
 }
