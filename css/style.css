@@ -7,29 +7,46 @@
   --fontFooter: normal 0.8em "Courier Prime", monospace;
 
   /* --colBG: rgb(32, 0, 0); */
-  /* color: ; */
+  /* #region colors */
+
+  --cpDeepPurlpe: rgb(48, 6, 48);
+  --cpViolentViolet: #290c5e;
+  --cpLightBlue: aqua;
+  /* --cpLightBlue2: rgb(27, 127, 167); */
+  --cpBlue: rgb(57, 179, 219);
+  --cpMuteBlue: rgba(57, 179, 219, 0.5);
+  /* #endregion colors */
+  /* #region use case */
 
   --backClickable: blue;
+  --colImportant: fuchsia;
+  --colImportantHov: pink;
+  --colHighlight: var(--cpLightBlue);
 
-  --colBG: rgb(48, 6, 48);
-  --colText: rgb(57, 179, 219);
-  --colTextA5: rgba(57, 179, 219, 0.5);
-  --colHighlight: aqua; /*lightblue*/
-  --colSpecial1: fuchsia;
-  --colSpecial2: purple;
-  --colSpecial3: pink;
+  /* #endregion use case */
 
-  /* filter */
-  --colFilter: var(--colText);
+  --colBG: var(--cpViolentViolet);
+  --colHeading: var(--colHighlight);
+  --colText: var(--cpBlue);
+
+  /* filter A=active H=hovered*/
+  /* --colFilter: var(--colText); */
+  --colLvlFilter: var(--colHighlight);
+  --colContFilter: var(--cpMuteBlue);
   --colFilterH: var(--colHighlight);
-  --colFilterA: var(--colSpecial1);
-  --colFilterAH: var(--colSpecial3);
+  --colFilterA: var(--colImportant);
+  --colFilterAH: var(--colImportantHov);
+
+  --colProjNum: var(--colImportant);
+
+  /* --colLink: var(--colImportant); */
+  --colLink: var(--colHighlight);
 
   /* content */
   --borderCont: 3px currentcolor dashed;
-  --borderImg: 3px rgba(255, 0, 255, 0.192) solid;
+  --borderImg: 3px var(--cpDeepPurlpe) solid;
   --fontContFoot: normal lighter 0.8em "Courier Prime", monospace;
-  --colContFoot: var(--colTextA5);
+  --colContFoot: var(--cpMuteBlue);
 
   font: normal normal 1em "Courier Prime", monospace;
   color: var(--colText);
@@ -270,7 +287,7 @@ h3
 /* ,h4,
 h5,
 h6  */ {
-  color: var(--colHighlight);
+  color: var(--colHeading);
 }
 section {
   margin-top: 1em;
@@ -294,13 +311,13 @@ article header + * {
 }
 
 a {
-  color: var(--colSpecial1);
+  color: var(--colLink);
 }
 
 /* #region lvl filter*/
 
 .lvl-fltr {
-  color: var(--colFilter);
+  color: var(--colLvlFilter);
 }
 .lvl-fltr.active {
   color: var(--colFilterA);
@@ -321,7 +338,7 @@ a {
 }
 
 /* #endregion */
-/* #region aside*/
+/* #region aside =left Data panel */
 
 aside p,
 nav ul li,
@@ -341,7 +358,7 @@ aside a {
 }
 
 .cont-fltr {
-  color: var(--colFilter);
+  color: var(--colContFilter);
 }
 #projects-nav > h3.active,
 .cont-fltr.active {
@@ -378,7 +395,7 @@ aside a {
 
 /* general projects section */
 #projects-number {
-  color: var(--colSpecial1);
+  color: var(--colProjNum);
 }
 
 #projects-empty {
