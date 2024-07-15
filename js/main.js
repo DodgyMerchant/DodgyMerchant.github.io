@@ -1,6 +1,6 @@
 import ContentManager from "../myJS/MyContent.js";
 import MyDisplay from "../myJS/MyDisplay.js";
-import { MyHTML } from "../myJS/MyJS.js";
+import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
 const ContOpenClass = "ContOpen";
@@ -31,9 +31,7 @@ new ContentManager(
 
 //#region filter
 
-let collection = document
-  .getElementById("projects-nav")
-  .getElementsByClassName("clickable");
+let collection = document.getElementById("projects-nav").getElementsByClassName("clickable");
 
 let filtFunc = (ev) => {
   /**
@@ -132,9 +130,7 @@ fetch("content/content.json")
       let contDest = document.getElementById("projects");
 
       if (!MyTemplate.supports()) {
-        alert(
-          "Your browser does not fully support this website!\n My portfolio projects won't be displayed currently."
-        );
+        alert("Your browser does not fully support this website!\n My portfolio projects won't be displayed currently.");
         return;
       }
       /**
@@ -183,8 +179,7 @@ fetch("content/content.json")
         elements.push({ element: _newClone, tags: entry.tags });
 
         //headline
-        MyHTML.getChildById(_newClone, "content-headline").innerText =
-          entry.headline;
+        MyHTML.getChildById(_newClone, "content-headline").innerText = entry.headline;
         //sub headline
         MyHTML.getChildById(_newClone, "content-subline").innerText = entry.sub;
 
@@ -213,10 +208,7 @@ fetch("content/content.json")
         //#endregion date
         //#region status
 
-        MyHTML.getChildById(
-          _newClone,
-          "project-status"
-        ).lastElementChild.innerText = entry.status;
+        MyHTML.getChildById(_newClone, "project-status").lastElementChild.innerText = entry.status;
 
         //#endregion status
 
@@ -259,11 +251,7 @@ fetch("content/content.json")
 
               break;
             default:
-              console.error(
-                "Content type not implemented!",
-                entry.headline,
-                content
-              );
+              console.error("Content type not implemented!", entry.headline, content);
               break;
           }
         }
@@ -301,8 +289,7 @@ fetch("content/content.json")
 
         //#endregion footer
 
-        MyHTML.getChildById(_newClone, "content-tags").innerText =
-          entry.tags.join(", ");
+        MyHTML.getChildById(_newClone, "content-tags").innerText = entry.tags.join(", ");
 
         // _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
         _newClone.firstElementChild.addEventListener("pointerup", toggleDisp);
@@ -311,52 +298,44 @@ fetch("content/content.json")
 
       //#endregion generate content
 
-      new ContentManager(
-        elements,
-        "cont-fltr",
-        "active",
-        "cont-fltrd",
-        "active",
-        (num) => {
-          //#region no projects found message
-          //enable and disable no projects found message.
-          if (num == 0) {
-            MyDisplay.enable(document.getElementById("projects-empty"));
-          } else {
-            MyDisplay.disable(document.getElementById("projects-empty"));
-          }
-          document.getElementById("projects-number").innerText = num.toString();
-
-          //#endregion no projects found message
-
-          //#region active/highlited subsections
-          //search all sub section for active filters and turn headins active
-          let subSections = document.getElementsByClassName("subFilter");
-          let subSection, heading;
-          for (let i = 0; i < subSections.length; i++) {
-            subSection = subSections.item(i);
-            heading = subSection.previousElementSibling;
-            //check if section has a header its a header
-            if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
-              //end early if not
-              continue;
-            //find any child filter that is active
-            let ii;
-            for (ii = 0; ii < subSection.children.length; ii++) {
-              //if filter is active
-              if (subSection.children[ii].classList.contains("active")) {
-                //Give heading active if not present, and end this loop
-                heading.classList.add("active");
-                break;
-              }
-            }
-
-            //remove active class if no children are active
-            if (ii >= subSection.children.length)
-              heading.classList.remove("active");
-          }
-          //#endregion active/highlited subsections
+      new ContentManager(elements, "cont-fltr", "active", "cont-fltrd", "active", (num) => {
+        //#region no projects found message
+        //enable and disable no projects found message.
+        if (num == 0) {
+          MyDisplay.enable(document.getElementById("projects-empty"));
+        } else {
+          MyDisplay.disable(document.getElementById("projects-empty"));
         }
-      );
+        document.getElementById("projects-number").innerText = num.toString();
+
+        //#endregion no projects found message
+
+        //#region active/highlited subsections
+        //search all sub section for active filters and turn headins active
+        let subSections = document.getElementsByClassName("subFilter");
+        let subSection, heading;
+        for (let i = 0; i < subSections.length; i++) {
+          subSection = subSections.item(i);
+          heading = subSection.previousElementSibling;
+          //check if section has a header its a header
+          if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
+            //end early if not
+            continue;
+          //find any child filter that is active
+          let ii;
+          for (ii = 0; ii < subSection.children.length; ii++) {
+            //if filter is active
+            if (subSection.children[ii].classList.contains("active")) {
+              //Give heading active if not present, and end this loop
+              heading.classList.add("active");
+              break;
+            }
+          }
+
+          //remove active class if no children are active
+          if (ii >= subSection.children.length) heading.classList.remove("active");
+        }
+        //#endregion active/highlited subsections
+      });
     }
   );

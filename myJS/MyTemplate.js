@@ -1,7 +1,5 @@
 //check for Template support
-const supportsTemplate = new Boolean(
-  document.createElement("Template").content
-);
+const supportsTemplate = new Boolean(document.createElement("Template").content);
 //continue or exit
 if (supportsTemplate) {
   console.log("Your browser supports Template!");

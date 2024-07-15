@@ -5,7 +5,8 @@
  */
 
 import MyTags from "../myJS/MyTags.js";
-import { MyArr, MyHTML } from "./MyJS.js";
+import MyHTML from "./MyHTML.js";
+import MyArr from "./MyArr.js";
 
 /**
  * tracks and manages its content.
