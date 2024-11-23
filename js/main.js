@@ -31,7 +31,9 @@ new ContentManager(
 
 //#region filter
 
-let collection = document.getElementById("projects-nav").getElementsByClassName("clickable");
+let collection = document
+  .getElementById("projects-nav")
+  .getElementsByClassName("clickable");
 
 let filtFunc = (ev) => {
   /**
@@ -130,7 +132,9 @@ fetch("content/content.json")
       let contDest = document.getElementById("projects");
 
       if (!MyTemplate.supports()) {
-        alert("Your browser does not fully support this website!\n My portfolio projects won't be displayed currently.");
+        alert(
+          "Your browser does not fully support this website!\n My portfolio projects won't be displayed currently."
+        );
         return;
       }
       /**
@@ -140,11 +144,11 @@ fetch("content/content.json")
       /**
        * @type {string}
        */
-      let datS,
+      let dateStart,
         /**
          * @type {string}
          */
-        datE,
+        dateEnd,
         imgData,
         /**
          * @type {HTMLDivElement}
@@ -179,36 +183,44 @@ fetch("content/content.json")
         elements.push({ element: _newClone, tags: entry.tags });
 
         //headline
-        MyHTML.getChildById(_newClone, "content-headline").innerText = entry.headline;
+        MyHTML.getChildById(_newClone, "content-headline").innerText =
+          entry.headline;
         //sub headline
         MyHTML.getChildById(_newClone, "content-subline").innerText = entry.sub;
 
         //#region date
 
-        datS = entry.dateStart;
-        datE = entry.dateEnd;
+        dateStart = entry.dateStart;
+        dateEnd = entry.dateEnd;
         let dateText;
-        if (datS != "") {
-          if (datE != "") {
-            if (datE.match(/\d+/g)) {
-              dateText = `From ${datS} to ${datE}`;
+        if (dateStart && dateStart != "") {
+          if (dateEnd && dateEnd != "") {
+            if (dateEnd.match(/\d+/g)) {
+              //dateEnd is a number
+              dateText = `From ${dateStart} to ${dateEnd}`;
             } else {
-              //datE is a word
-              dateText = `From ${datS}, ${datE}.`;
+              //dateEnd is a word
+              dateText = `From ${dateStart}, ${dateEnd}.`;
             }
           } else {
-            dateText = `Started ${datS}`;
+            dateText = `Started ${dateStart}`;
           }
         } else {
-          dateText = `Finished: ${datE}`;
+          if (dateEnd && dateEnd != "") dateText = `Finished ${dateEnd}`;
         }
 
-        MyHTML.getChildById(_newClone, "content-date").innerText = dateText;
-
+        if (dateText)
+          MyHTML.getChildById(_newClone, "content-date").innerText = dateText;
+        else MyHTML.getChildById(_newClone, "content-date").remove();
         //#endregion date
         //#region status
 
-        MyHTML.getChildById(_newClone, "project-status").lastElementChild.innerText = entry.status;
+        if (entry.status && entry.status != "")
+          MyHTML.getChildById(
+            _newClone,
+            "project-status"
+          ).lastElementChild.innerText = entry.status;
+        else MyHTML.getChildById(_newClone, "project-status").remove();
 
         //#endregion status
 
@@ -251,7 +263,11 @@ fetch("content/content.json")
 
               break;
             default:
-              console.error("Content type not implemented!", entry.headline, content);
+              console.error(
+                "Content type not implemented!",
+                entry.headline,
+                content
+              );
               break;
           }
         }
@@ -289,7 +305,8 @@ fetch("content/content.json")
 
         //#endregion footer
 
-        MyHTML.getChildById(_newClone, "content-tags").innerText = entry.tags.join(", ");
+        MyHTML.getChildById(_newClone, "content-tags").innerText =
+          entry.tags.join(", ");
 
         // _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
         _newClone.firstElementChild.addEventListener("pointerup", toggleDisp);
@@ -298,44 +315,52 @@ fetch("content/content.json")
 
       //#endregion generate content
 
-      new ContentManager(elements, "cont-fltr", "active", "cont-fltrd", "active", (num) => {
-        //#region no projects found message
-        //enable and disable no projects found message.
-        if (num == 0) {
-          MyDisplay.enable(document.getElementById("projects-empty"));
-        } else {
-          MyDisplay.disable(document.getElementById("projects-empty"));
-        }
-        document.getElementById("projects-number").innerText = num.toString();
-
-        //#endregion no projects found message
-
-        //#region active/highlited subsections
-        //search all sub section for active filters and turn headins active
-        let subSections = document.getElementsByClassName("subFilter");
-        let subSection, heading;
-        for (let i = 0; i < subSections.length; i++) {
-          subSection = subSections.item(i);
-          heading = subSection.previousElementSibling;
-          //check if section has a header its a header
-          if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
-            //end early if not
-            continue;
-          //find any child filter that is active
-          let ii;
-          for (ii = 0; ii < subSection.children.length; ii++) {
-            //if filter is active
-            if (subSection.children[ii].classList.contains("active")) {
-              //Give heading active if not present, and end this loop
-              heading.classList.add("active");
-              break;
-            }
+      new ContentManager(
+        elements,
+        "cont-fltr",
+        "active",
+        "cont-fltrd",
+        "active",
+        (num) => {
+          //#region no projects found message
+          //enable and disable no projects found message.
+          if (num == 0) {
+            MyDisplay.enable(document.getElementById("projects-empty"));
+          } else {
+            MyDisplay.disable(document.getElementById("projects-empty"));
           }
+          document.getElementById("projects-number").innerText = num.toString();
 
-          //remove active class if no children are active
-          if (ii >= subSection.children.length) heading.classList.remove("active");
+          //#endregion no projects found message
+
+          //#region active/highlited subsections
+          //search all sub section for active filters and turn headins active
+          let subSections = document.getElementsByClassName("subFilter");
+          let subSection, heading;
+          for (let i = 0; i < subSections.length; i++) {
+            subSection = subSections.item(i);
+            heading = subSection.previousElementSibling;
+            //check if section has a header its a header
+            if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
+              //end early if not
+              continue;
+            //find any child filter that is active
+            let ii;
+            for (ii = 0; ii < subSection.children.length; ii++) {
+              //if filter is active
+              if (subSection.children[ii].classList.contains("active")) {
+                //Give heading active if not present, and end this loop
+                heading.classList.add("active");
+                break;
+              }
+            }
+
+            //remove active class if no children are active
+            if (ii >= subSection.children.length)
+              heading.classList.remove("active");
+          }
+          //#endregion active/highlited subsections
         }
-        //#endregion active/highlited subsections
-      });
+      );
     }
   );

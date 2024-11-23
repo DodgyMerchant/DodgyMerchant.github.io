@@ -57,15 +57,17 @@
         <p>Malte Bönig /</p>
         <p>Student /</p>
         <br />
-        <a href="https://github.com/DodgyMerchant" target="_blank" class="clickable delink">GitHub</a
-        ><a href="https://twitter.com/Dodgy_Merchant" target="_blank" class="clickable delink">Twitter</a
-        ><a href="https://gfycat.com/@hiro_hunter" target="_blank" class="clickable delink" title="My uploaded GIFs.">GyfCat</a
-        ><a
-          href="https://gfycat.com/@hiro_hunter/collections/O2QD8ZGp/gamedev-representative"
+        <a
+          href="https://github.com/DodgyMerchant"
           target="_blank"
           class="clickable delink"
-          title="Fun gifs of some of my projects."
-          >GameDev_GIFs</a
+          >GitHub</a
+        >
+        <a
+          href="https://dodgy-merchant.itch.io/"
+          target="_blank"
+          class="clickable delink"
+          >Itch.io</a
         >
       </div>
       <nav id="projects-nav" class="selectNone lvl-fltrd">
@@ -78,6 +80,7 @@
           <li class="cont-fltr website">Sites</li>
           <li class="cont-fltr game">Games</li>
           <li class="cont-fltr code">Code</li>
+          <li class="cont-fltr other">Other</li>
         </ul>
         <!-- fields -->
         <h3 class="clickable"><span>X</span>Fields</h3>
@@ -102,11 +105,13 @@
           <li class="cont-fltr C++">C++</li>
           <li class="cont-fltr C#">C#</li>
           <li class="cont-fltr GameMakerLang.">GameMakerLang.</li>
+          <li class="cont-fltr GDScript">GDScript.</li>
         </ul>
         <!-- engines -->
         <h3 class="clickable"><span>X</span>Engines</h3>
         <ul class="clickable-container subFilter">
           <li class="cont-fltr GameMaker">GameMaker</li>
+          <li class="cont-fltr Godot">Godot</li>
           <li class="cont-fltr Unity">Unity</li>
           <li class="cont-fltr UE">Unreal</li>
           <li class="cont-fltr Phaser">Phaser</li>
@@ -122,17 +127,22 @@
         <p>Welcome, welcome!</p>
         <section>
           <h3>Me</h3>
-          <p>I'm a university student pursuing a degree in Media Design at the HSB in Bremen, Germany.</p>
-          <br />
           <p>
-            Although I currently reside in Germany, I have lived in various places throughout my life. Born in Germany, I spent a
-            significant amount of time in China before returning to Germany. I later went back to China and then had my finals in
-            Korea before coming back to Germany again.
+            I'm a university student pursuing a degree in Media Design at the
+            HSB in Bremen, Germany.
           </p>
           <br />
           <p>
-            As a kid and teenager, I played some video games that still inspire me today. However, none of them had the same
-            profound impact as
+            Although I currently reside in Germany, I have lived in various
+            places throughout my life. Born in Germany, I spent a significant
+            amount of time in China before returning to Germany. I later went
+            back to China and then had my finals in Korea before coming back to
+            Germany again.
+          </p>
+          <br />
+          <p>
+            As a kid and teenager, I played some video games that still inspire
+            me today. However, none of them had the same profound impact as
             <a
               href="https://store.steampowered.com/app/204060/Superbrothers_Sword__Sworcery_EP/"
               target="_blank"
@@ -142,25 +152,41 @@
             >.
           </p>
           <p>
-            At 15 years old in a car's backseat, headphones on, iPod in hand, I realized and understood.
+            At 15 years old in a car's backseat, headphones on, iPod in hand, I
+            realized and understood.
             <em>“Someone made this.”</em>
           </p>
-          <p>To this day, that game and its soundtrack hold a special place in my heart.</p>
-          <p>My dream is to become a video game developer, but who knows if I end up there?</p>
+          <p>
+            To this day, that game and its soundtrack hold a special place in my
+            heart.
+          </p>
+          <p>
+            My dream is to become a video game developer, but who knows if I end
+            up there?
+          </p>
         </section>
         <section>
           <h3>This Website</h3>
-          <p>is my portfolio, a positive representation of my past and current projects and ideas.</p>
           <p>
-            This includes but is not limited to Websites, Video Games, University assignments and other projects public and
-            private.
+            is my portfolio, a positive representation of my past and current
+            projects and ideas.
+          </p>
+          <p>
+            This includes but is not limited to Websites, Video Games,
+            University assignments and other projects public and private.
           </p>
           <br />
-          <p>As an aspiring Video Game Developer, I must admit that many of my personal game projects are unfinished.</p>
-          <p>Of which some nonetheless hold an essence which I wish to share.</p>
           <p>
-            As a student I have little spare time/energy outside of holidays. So I cant dedicate myself to new or old projects
-            like I would want to. HANDS is definetly on the top of my to-do list.
+            As an aspiring Video Game Developer, I must admit that many of my
+            personal game projects are unfinished.
+          </p>
+          <p>
+            Of which some nonetheless hold an essence which I wish to share.
+          </p>
+          <p>
+            As a student I have little spare time/energy outside of holidays. So
+            I cant dedicate myself to new or old projects like I would want to.
+            HANDS is definetly on the top of my to-do list.
           </p>
         </section>
       </article>
@@ -176,18 +202,8 @@
             <p>None of my projects match the selected filters.</p>
           </header>
           <p>
-            But while you are here, check out my
-            <a
-              href="https://gfycat.com/@hiro_hunter/collections/O2QD8ZGp/gamedev-representative"
-              target="_blank"
-              class="clickable delink"
-              title="Fun gifs of some of my projects. Mostly games."
-              >GameDev GIF collection on GyfCat</a
-            >.
-          </p>
-          <p>
-            There are some pretty cool GIFs there from some of my projects.<br />
-            Really fun to look at.
+            You can fold out the cathegories marked with a + or -.<br />
+            Right click also only select that filter.
           </p>
         </article>
         <template id="content-template">
@@ -196,7 +212,10 @@
               <h3 id="content-headline">Project Name</h3>
               <div class="flexContainer">
                 <div>
-                  <p id="content-subline">Sub headline text. One or Two lines of text to describe the project.</p>
+                  <p id="content-subline">
+                    Sub headline text. One or Two lines of text to describe the
+                    project.
+                  </p>
                   <p id="content-date">DATE</p>
                 </div>
                 <div id="project-status">
@@ -229,7 +248,9 @@
     <footer class="selectNone">
       <p>
         Contact me:
-        <a class="selectAll" href="mailto:admin@dodgymerchant.dev">admin@dodgymerchant.dev </a>
+        <a class="selectAll" href="mailto:admin@dodgymerchant.dev"
+          >admin@dodgymerchant.dev
+        </a>
       </p>
     </footer>
   </body>

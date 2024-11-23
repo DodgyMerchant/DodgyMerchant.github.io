@@ -194,7 +194,6 @@ li {
 /* all not dynamic in a flex container */
 .flexContainer > :not(.flexMeDyn),
 .flexContainer > .flexMeStatic {
-  flex-grow: 0 0;
 }
 
 /* #region debug*/
@@ -418,7 +417,8 @@ aside a {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: flex-end;
+  /* align-items: flex-end; */
+  align-items: flex-start;
 }
 
 #project-status {
