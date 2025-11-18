@@ -189,7 +189,7 @@ export default class MyHTML {
   /**
    *
    * @param {HTMLElement} element
-   * @param {string} name a single class
+   * @param {string} name a single class name
    */
   static toggleClass(element, name) {
     // let tList, arr1, arr2;

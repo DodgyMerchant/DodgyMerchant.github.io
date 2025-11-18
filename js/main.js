@@ -9,6 +9,8 @@ const FltrOpenClass = "FltrOpen";
 const FltrClosedDec = "+";
 const FltrOpenDec = "-";
 
+// TODO [ ]: Check if i can use radio or check(?) elements for the filters.
+
 new ContentManager(
   [
     { element: document.getElementById("about"), tags: ["about"] },
