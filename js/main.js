@@ -113,7 +113,7 @@ for (let i = 0; i < collection.length; i++) {
  */
 
 //get data => create content => create contentmanager
-fetch("content/content.json")
+fetch("./content/content.json")
   .then((results) => results.json())
   .then(
     /**
@@ -123,7 +123,7 @@ fetch("content/content.json")
      */
     (data) => {
       /**
-       * hodls data for ContentManager
+       * holds data for ContentManager
        * @type {{element: HTMLElement, tags: string[]}}
        */
       let elements = [];
@@ -323,7 +323,7 @@ fetch("content/content.json")
         "active",
         "cont-fltrd",
         "active",
-        (num) => {
+         (num) => {
           //#region no projects found message
           //enable and disable no projects found message.
           if (num == 0) {

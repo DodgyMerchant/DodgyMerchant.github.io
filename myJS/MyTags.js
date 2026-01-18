@@ -14,33 +14,32 @@
  */
 export default class MyTags {
   /* Filter Logic explainaition
-    //
-    //  complete  = all tags in the target are matched to tags in the filter.
-    //
-    //  match     = all tags in the filter are matched to tags in the target.
-    //
-    //
-	//        target  filter
-	// "one":       one or more mathcing tags
-	// true   ["a", "x"] ["a", "y"]                       true =  incomplete  mismatch
-	// false  ["a", "x"] ["c", "y"]                       false = incomplete  mismatch
-	// "all":       all target tags are in the filter
-	// true   ["a", "b", "c"] ["a", "b", "c", "d", "e"]   true =  complete    mismatch
-	// true   ["a", "b", "c"] ["a", "b", "c"]             true =  complete    match
-	// false  ["a", "b", "c"] ["a", "b"]                  false = incomplete  match
-	// "match":     no mismatching tags
-	// true   ["a", "b"] ["a"]                            true =  incomplete  match
-	// true   ["a", "b"] ["a", "b"]                       true =  complete    match
-	// false  ["a", "b"] ["a", "c"]                       false = incomplete  mismatch
-	// false  ["a", "b"] ["a", "b", "c"]                  false = complete    mismatch
-	// "complete":  target has no mismatching tags unless all tags are contained in the filter.
-	// true   ["a", "b"] ["a"]                            true =  incomplete  match
-	// true   ["a", "b"] ["a", "b", "c"]                  true =  complete    mismatch
-	// true   ["a", "b"] ["a", "b"]                       true =  complete    match
-	// false  ["a", "b"] ["a", "c"]                       false = incomplete  mismatch
-	// "exact":     Displays all objects that have the exact same tags as used in the filter. All, not more or less.
-	// ["a", "b", "c"] ["a", "b", "c"]                    true =  complete    match
-    */
+  
+  complete  = all tags in the target are matched to tags in the filter.
+
+  match     = all tags in the filter are matched to tags in the target.
+
+	target  filter
+	"one":       one or more mathcing tags
+	true   ["a", "x"] ["a", "y"]                       true =  incomplete  mismatch
+	false  ["a", "x"] ["c", "y"]                       false = incomplete  mismatch
+	"all":       all target tags are in the filter
+	true   ["a", "b", "c"] ["a", "b", "c", "d", "e"]   true =  complete    mismatch
+	true   ["a", "b", "c"] ["a", "b", "c"]             true =  complete    match
+	false  ["a", "b", "c"] ["a", "b"]                  false = incomplete  match
+	"match":     no mismatching tags
+	true   ["a", "b"] ["a"]                            true =  incomplete  match
+	true   ["a", "b"] ["a", "b"]                       true =  complete    match
+	false  ["a", "b"] ["a", "c"]                       false = incomplete  mismatch
+	false  ["a", "b"] ["a", "b", "c"]                  false = complete    mismatch
+	"complete":  target has no mismatching tags unless all tags are contained in the filter.
+	true   ["a", "b"] ["a"]                            true =  incomplete  match
+	true   ["a", "b"] ["a", "b", "c"]                  true =  complete    mismatch
+	true   ["a", "b"] ["a", "b"]                       true =  complete    match
+	false  ["a", "b"] ["a", "c"]                       false = incomplete  mismatch
+	"exact":     Displays all objects that have the exact same tags as used in the filter. All, not more or less.
+	["a", "b", "c"] ["a", "b", "c"]                    true =  complete    match
+  */
 
   /* test code
     // prettier-ignore
