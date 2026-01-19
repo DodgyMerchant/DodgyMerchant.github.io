@@ -54,7 +54,7 @@
           "type": "image",
           "URL": "./projects/MI1Website/content/Title.svg",
           "alt": "Logo."
-        },
+        }
       ],
       "footer": {
         "repo": "https://github.com/DodgyMerchant/MI1Website",
