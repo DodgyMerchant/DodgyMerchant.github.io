@@ -1,20 +1,14 @@
 :root {
-  /*
-  "Audiowide", Impact
-  "Josefin Sans", sans-serif
-  */
-
   --fontFooter: normal 0.8em "Courier Prime", monospace;
 
-  /* --colBG: rgb(32, 0, 0); */
   /* #region colors */
-
+  
   --cpDeepPurlpe: rgb(48, 6, 48);
   --cpViolentViolet: #290c5e;
   --cpLightBlue: aqua;
   /* --cpLightBlue2: rgb(27, 127, 167); */
   --cpBlue: rgb(57, 179, 219);
-  --cpMuteBlue: rgba(57, 179, 219, 0.5);
+  --cpMuteBlue: rgba(57, 179, 219, 0.688); /* rgba(57, 179, 219, 0.5); */
   /* #endregion colors */
   /* #region use case */
 
@@ -48,7 +42,9 @@
   --fontContFoot: normal lighter 0.8em "Courier Prime", monospace;
   --colContFoot: var(--cpMuteBlue);
 
-  font: normal normal 1em "Courier Prime", monospace;
+  font:
+    normal normal 1em "Courier Prime",
+    monospace;
   color: var(--colText);
 }
 

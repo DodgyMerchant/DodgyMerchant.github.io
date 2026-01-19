@@ -38,6 +38,35 @@
   ],
   "content": [
     {
+      "headline": "MI1 Projekt Website",
+      "sub": "Designing a fictional universities campaign.",
+      "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
+      "dateStart": "2025",
+      "status": "completed",
+      "dateEnd": "2026",
+      "content": [
+        {
+          "type": "image",
+          "URL": "./projects/MI1Website/content/A4 Original Scaled.svg",
+          "alt": "Poster."
+        },
+        {
+          "type": "image",
+          "URL": "./projects/MI1Website/content/Title.svg",
+          "alt": "Logo."
+        },
+      ],
+      "footer": {
+        "repo": "https://github.com/DodgyMerchant/MI1Website",
+        "links": [
+          {
+            "text": "Project Website: ",
+            "URL": "./projects/MI1Website/index.html"
+          }
+        ]
+      }
+    },
+    {
       "headline": "Zero-Sievert GNR V2",
       "sub": "A better modding tool for Zero Sievert.",
       "tags": ["other", "system-design", "GDScript", "Godot"],
