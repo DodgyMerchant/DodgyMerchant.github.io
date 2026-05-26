@@ -188,9 +188,9 @@ li {
   flex: 1 1;
 }
 /* all not dynamic in a flex container */
-.flexContainer > :not(.flexMeDyn),
+/* .flexContainer > :not(.flexMeDyn),
 .flexContainer > .flexMeStatic {
-}
+} */
 
 /* #region debug*/
 /* .flexContainer > * {
@@ -333,7 +333,7 @@ a {
 }
 
 /* #endregion */
-/* #region aside =left Data panel */
+/* #region aside left Data panel */
 
 aside p,
 nav ul li,

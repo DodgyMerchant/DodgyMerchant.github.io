@@ -9,8 +9,10 @@ const FltrOpenClass = "FltrOpen";
 const FltrClosedDec = "+";
 const FltrOpenDec = "-";
 
-// TODO [ ]: Check if i can use radio or check(?) elements for the filters.
+// TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
 
+//#region Top level ContentManager
+// Create ContentManager to manage top level displayed sections: about / projects
 new ContentManager(
   [
     { element: document.getElementById("about"), tags: ["about"] },
@@ -28,9 +30,10 @@ new ContentManager(
   undefined,
   1,
   ["about"],
-  false
+  false,
 );
 
+//#endregion
 //#region filter
 
 let collection = document
@@ -52,9 +55,13 @@ let filtFunc = (ev) => {
     h3Update(_t, true);
   }
 };
+
 let h3Update = (h3, open) => {
   if (open) h3.firstElementChild.innerText = FltrOpenDec;
   else h3.firstElementChild.innerText = FltrClosedDec;
+
+  // TODO: compress above like below
+  // h3.firstElementChild.innerText = (open ? eerr : errrr)
 };
 let h3;
 for (let i = 0; i < collection.length; i++) {
@@ -66,24 +73,6 @@ for (let i = 0; i < collection.length; i++) {
 }
 
 //#endregion filter
-
-/*
-
-"content": [
-        {
-          "type": "image",
-          "URL": "https://thumbs.gfycat.com/HelplessPeacefulArkshell-max-1mb.gif",
-          "alt": "A GIF of my game, HANDS. Rock Paper Scissors but weird."
-        },
-        {
-          "type": "text",
-          "text": "SPITE will never be a fun game, that is not in its nature.\nBut still technically a game, I'm referring to it more as an experience.\nThe game is about the weakness of a dying person.\nHow energy leaves the body, but the will to survive doesn't.\n\nA soldier on deaths' door is hunted by creatures fleeing from the battlefield.\n\nIf one dies, it isn't from a lack of health points, but from the loss of energy.\nSo, hope you can stand up before you can't."
-        }
-      ],
-
-
-
-*/
 /**
  * @typedef {Object} ContentData content data loaded in to produce content for my website.
  * @property {string} headline Headline for this content block.
@@ -111,8 +100,9 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} URL url of the link.
  * @property {string} text text of the link.
  */
+//#region Content ContentManager
+//get project data => create project content => create contentmanager for project data/content
 
-//get data => create content => create contentmanager
 fetch("./content/content.json")
   .then((results) => results.json())
   .then(
@@ -135,7 +125,7 @@ fetch("./content/content.json")
 
       if (!MyTemplate.supports()) {
         alert(
-          "Your browser does not fully support this website!\n My portfolio projects won't be displayed currently."
+          "Your browser does not fully support this website!\n My portfolio projects won't be displayed currently.",
         );
         return;
       }
@@ -220,7 +210,7 @@ fetch("./content/content.json")
         if (entry.status && entry.status != "")
           MyHTML.getChildById(
             _newClone,
-            "project-status"
+            "project-status",
           ).lastElementChild.innerText = entry.status;
         else MyHTML.getChildById(_newClone, "project-status").remove();
 
@@ -268,7 +258,7 @@ fetch("./content/content.json")
               console.error(
                 "Content type not implemented!",
                 entry.headline,
-                content
+                content,
               );
               break;
           }
@@ -295,7 +285,7 @@ fetch("./content/content.json")
             linkObj = entry.footer.links[i];
             link = MyTemplate.addTemplate(
               document.getElementById("template-ContLink"),
-              MyHTML.getChildById(_newClone, "content-links")
+              MyHTML.getChildById(_newClone, "content-links"),
             )[0];
             link.firstChild.textContent = linkObj.text;
             link.firstElementChild.innerText = linkObj.URL;
@@ -316,6 +306,7 @@ fetch("./content/content.json")
       }
 
       //#endregion generate content
+      //#region make ContentManager
 
       new ContentManager(
         elements,
@@ -323,7 +314,7 @@ fetch("./content/content.json")
         "active",
         "cont-fltrd",
         "active",
-         (num) => {
+        (num) => {
           //#region no projects found message
           //enable and disable no projects found message.
           if (num == 0) {
@@ -336,15 +327,16 @@ fetch("./content/content.json")
           //#endregion no projects found message
 
           //#region active/highlited subsections
-          //search all sub section for active filters and turn headins active
+          //search all sub section for active filters and turn headings active
           let subSections = document.getElementsByClassName("subFilter");
           let subSection, heading;
+          let headingList = ["H2", "H3", "H4", "H5", "H6"];
           for (let i = 0; i < subSections.length; i++) {
             subSection = subSections.item(i);
             heading = subSection.previousElementSibling;
             //check if section has a header its a header
-            if (!["H2", "H3", "H4", "H5", "H6"].includes(heading.nodeName))
-              //end early if not
+            if (!headingList.includes(heading.nodeName))
+              //end early if no previous heading present
               continue;
             //find any child filter that is active
             let ii;
@@ -362,7 +354,11 @@ fetch("./content/content.json")
               heading.classList.remove("active");
           }
           //#endregion active/highlited subsections
-        }
+        },
       );
-    }
+
+      //#endregion
+    },
   );
+
+//#endregion

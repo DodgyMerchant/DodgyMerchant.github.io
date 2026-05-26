@@ -111,14 +111,16 @@ export default class ContentManager {
    */
   filterBehavior = "all";
 
+  // TODO: formulate arguments descriptions for documentation.
   /**
-   *
    * @callback FilterCallback called on filter interaction.
    * @param {HTMLElement} ev desc.
    * @param {HTMLElement} element desc.
    * @param {boolean} newState desc.
    * @param {string[]} tags desc.
    */
+  
+  // TODO: expand documentation for property
   /**
    * @type {FilterCallback | undefined}
    */
@@ -127,7 +129,7 @@ export default class ContentManager {
   //#endregion filter
   //#region filtered elements
   /**
-   * name of the class that designamtes an HTML element as a filtered Element.
+   * name of the class that designates an HTML element as a filtered Element.
    * @type {string}
    */
   filteredClassName;
@@ -225,7 +227,7 @@ export default class ContentManager {
     filterFallback = true,
     filterflbList = filterInit,
     filteredBehav = "match",
-    filterBehav = "all"
+    filterBehav = "all",
   ) {
     this.filteredBehavior = filteredBehav;
     this.filterBehavior = filterBehav;
@@ -325,10 +327,11 @@ export default class ContentManager {
 
     //callback
     if (this.filteredCallback)
+      // TODO: include all function arguments
       this.filteredCallback(
         this.filteredDispList.length,
         this.filteredDispList,
-        this.filteredBehavior
+        this.filteredBehavior,
       );
   }
 
@@ -345,7 +348,7 @@ export default class ContentManager {
       return MyTags.Compare(
         element.tags,
         filterTags,
-        behavior ? behavior : this.filteredBehavior
+        behavior ? behavior : this.filteredBehavior,
       );
     } else if (
       element.className.split(" ").indexOf(this.filterClassName) != -1
@@ -353,7 +356,7 @@ export default class ContentManager {
       return MyTags.Compare(
         this.getTags(element),
         filterTags,
-        behavior ? behavior : this.filterBehavior
+        behavior ? behavior : this.filterBehavior,
       );
     }
   }
@@ -413,7 +416,7 @@ export default class ContentManager {
             ev,
             ev.currentTarget,
             true,
-            this.getTags(ev.currentTarget)
+            this.getTags(ev.currentTarget),
           );
       };
 
@@ -438,7 +441,7 @@ export default class ContentManager {
     )
       this.activeFilters.splice(
         0,
-        this.activeFilters.length - this.filterNumMax
+        this.activeFilters.length - this.filterNumMax,
       );
   }
 

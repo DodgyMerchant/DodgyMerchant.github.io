@@ -82,8 +82,11 @@ export default class MyHTML {
    * Checks if target element has any one class supplied in the name string
    * @param {HTMLElement} element
    * @param {string} name one or multiple classes. split by space.
+   * @returns {boolean}
    */
   static hasAnyClass(element, name) {
+    if (element?.className?.length == 0) return false;
+
     let i, arr1, arr2;
     arr1 = element.className.split(" ");
     arr2 = name.split(" ");
@@ -143,7 +146,9 @@ export default class MyHTML {
     arr1 = find.split(" ");
     arr2 = replace.split(" ");
     if (arr1.length != arr2.length) {
-      console.error("class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name.");
+      console.error(
+        "class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name.",
+      );
       return;
     }
     tList = element.className.split(" ");
@@ -169,7 +174,9 @@ export default class MyHTML {
     arr1 = classes1.split(" ");
     arr2 = classes2.split(" ");
     if (arr1.length != arr2.length) {
-      console.error("class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name.");
+      console.error(
+        "class name(s) inclused multiple classes.\nFunction supports a ONLY SINGLE class per name.",
+      );
       return;
     }
     tList = element.className.split(" ");
@@ -230,4 +237,13 @@ export default class MyHTML {
 
     return undefined;
   }
+}
+
+/**
+ * description for the function
+ * @param {any} arg argument description
+ * @returns return value description
+ */
+function myFunc(arg) {
+  return arg;
 }
