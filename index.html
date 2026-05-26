@@ -39,18 +39,18 @@
     <title>Dodgy_Merchant Portfolio</title>
     <script type="module" src="js/main.js"></script>
   </head>
-  <body id="Base">
+  <body id="base">
     <header>
       <h1 id="title">Dodgy_Merchant<br />Portfolio</h1>
     </header>
     <nav id="topics" class="selectNone">
       <h2>_Topics</h2>
       <ul class="clickable-container">
-        <li class="lvl-fltr about">About</li>
+        <li class="lvl-fltr about">about</li>
         <li class="lvl-fltr projects">Projects</li>
       </ul>
     </nav>
-    <aside>
+    <aside id="dataPanel">
       <div id="about-aside" class="lvl-fltrd">
         <h2>_Data</h2>
         <p>Dodgy_Merchant /</p>
@@ -87,7 +87,7 @@
           <li class="cont-fltr other">Other</li>
         </ul>
         <!-- fields -->
-        <h3 class="clickable"><span>X</span>Fields</h3>
+        <h3 class="clickable fltrFold"><span>X</span>Fields</h3>
         <!-- prettier-ignore -->
         <ul class="clickable-container subFilter">
           <li class="cont-fltr game-design">Game Design</li>
@@ -101,7 +101,7 @@
           <li class="cont-fltr asset-art">Asset Artist</li>
         </ul>
         <!-- languages -->
-        <h3 class="clickable"><span>X</span>Languages</h3>
+        <h3 class="clickable fltrFold"><span>X</span>Languages</h3>
         <!-- prettier-ignore -->
         <ul class="clickable-container subFilter">
           <li class="cont-fltr HTML">HTML</li>
@@ -114,7 +114,7 @@
           <li class="cont-fltr GDScript">GDScript.</li>
         </ul>
         <!-- engines -->
-        <h3 class="clickable"><span>X</span>Engines</h3>
+        <h3 class="clickable fltrFold"><span>X</span>Engines</h3>
         <!-- prettier-ignore -->
         <ul class="clickable-container subFilter">
           <li class="cont-fltr GameMaker">GameMaker</li>

@@ -1,3 +1,5 @@
+// TODO: replace non changing let with const
+
 /**
  * general html handling object
  * @version 1.0.1
@@ -199,18 +201,7 @@ export default class MyHTML {
    * @param {string} name a single class name
    */
   static toggleClass(element, name) {
-    // let tList, arr1, arr2;
-    // tList = element.className.split(" ");
-
-    // if (MyHTML.hasAnyClass(element, name)) {
-    //   MyHTML.removeClass(element, name);
-    // } else {
-    //   MyHTML.addClass(element, name);
-    // }
-
     element.classList.toggle(name);
-
-    // element.className = tList.join(",");
   }
 
   //#endregion classes
@@ -237,13 +228,4 @@ export default class MyHTML {
 
     return undefined;
   }
-}
-
-/**
- * description for the function
- * @param {any} arg argument description
- * @returns return value description
- */
-function myFunc(arg) {
-  return arg;
 }

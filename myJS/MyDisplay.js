@@ -1,3 +1,5 @@
+// TODO: replace non changing let with const
+
 /**
  * html element property name of saved display value.
  * Change freely.

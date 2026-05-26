@@ -1,3 +1,5 @@
+// TODO: replace non changing let with const
+
 /**
  * @file Collection of code that manages content.
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
@@ -7,6 +9,8 @@
 import MyTags from "../myJS/MyTags.js";
 import MyHTML from "./MyHTML.js";
 import MyArr from "./MyArr.js";
+
+// TODO: replace non changing let with const
 
 /**
  * tracks and manages its content.
@@ -119,7 +123,7 @@ export default class ContentManager {
    * @param {boolean} newState desc.
    * @param {string[]} tags desc.
    */
-  
+
   // TODO: expand documentation for property
   /**
    * @type {FilterCallback | undefined}

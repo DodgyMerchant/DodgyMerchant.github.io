@@ -5,11 +5,20 @@ import MyTemplate from "../myJS/MyTemplate.js";
 
 const ContOpenClass = "ContOpen";
 const ContCompressedClass = "ContCmprssd";
+const FltrFoldClass = "fltrFold";
 const FltrOpenClass = "FltrOpen";
 const FltrClosedDec = "+";
 const FltrOpenDec = "-";
+const MouseEventToOpen = "pointerup";
 
 // TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
+
+console.log("log: window.location: ", window.location);
+
+// window.location.replace()
+// window.location.assign()
+
+console.log(window.location.search);
 
 //#region Top level ContentManager
 // Create ContentManager to manage top level displayed sections: about / projects
@@ -36,40 +45,46 @@ new ContentManager(
 //#endregion
 //#region filter
 
-let collection = document
-  .getElementById("projects-nav")
-  .getElementsByClassName("clickable");
+// get all filter sub group headings
+const collection = document.getElementsByClassName(FltrFoldClass);
 
-let filtFunc = (ev) => {
-  /**
-   * @type {HTMLParagraphElement}
-   */
-  let _t = ev.currentTarget;
-  let _after = _t.nextElementSibling;
+/**
+ * callback function for the datapanels filter group headings.
+ * @param {PointerEvent} ev
+ */
+const filterGroupCallback = (ev) => {
+  let heading = ev.currentTarget;
+  let filterGroup = heading.nextElementSibling;
 
-  if (MyHTML.hasAnyClass(_after, FltrOpenClass)) {
-    MyHTML.removeClass(_after, FltrOpenClass);
-    h3Update(_t, false);
-  } else {
-    MyHTML.addClass(_after, FltrOpenClass);
-    h3Update(_t, true);
-  }
+  // toggles the display status of the filter group
+  MyHTML.toggleClass(filterGroup, FltrOpenClass);
+
+  // updates Subfilter Heading display depending on the display status of its filter group
+  filterHeadingUpdate(heading, MyHTML.hasAnyClass(filterGroup, FltrOpenClass));
 };
 
-let h3Update = (h3, open) => {
-  if (open) h3.firstElementChild.innerText = FltrOpenDec;
-  else h3.firstElementChild.innerText = FltrClosedDec;
-
-  // TODO: compress above like below
-  // h3.firstElementChild.innerText = (open ? eerr : errrr)
+/**
+ * Updates the provided {@link HTMLElement}s visuals to match its provided open/closed state.
+ * @param {HTMLElement} el
+ * @param {boolean} open
+ */
+const filterHeadingUpdate = (el, open) => {
+  el.firstElementChild.innerText = open ? FltrOpenDec : FltrClosedDec;
 };
+
+/**
+ * @type {Element}
+ */
 let h3;
+// go through all items
 for (let i = 0; i < collection.length; i++) {
   h3 = collection.item(i);
-  // h3.addEventListener("pointerdown", filtFunc);
-  h3.addEventListener("pointerup", filtFunc);
+  h3.addEventListener(MouseEventToOpen, filterGroupCallback);
 
-  h3Update(h3, MyHTML.hasAnyClass(h3.nextElementSibling, FltrOpenClass));
+  filterHeadingUpdate(
+    h3,
+    MyHTML.hasAnyClass(h3.nextElementSibling, FltrOpenClass),
+  );
 }
 
 //#endregion filter
@@ -101,7 +116,7 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} text text of the link.
  */
 //#region Content ContentManager
-//get project data => create project content => create contentmanager for project data/content
+// get project data => create project content => create contentmanager for project data/content
 
 fetch("./content/content.json")
   .then((results) => results.json())
@@ -116,12 +131,12 @@ fetch("./content/content.json")
        * holds data for ContentManager
        * @type {{element: HTMLElement, tags: string[]}}
        */
-      let elements = [];
+      const elements = [];
 
       //#region generate content
 
-      let contTemp = document.getElementById("content-template");
-      let contDest = document.getElementById("projects");
+      const contTemp = document.getElementById("content-template");
+      const contDest = document.getElementById("projects");
 
       if (!MyTemplate.supports()) {
         alert(
@@ -145,46 +160,43 @@ fetch("./content/content.json")
         /**
          * @type {HTMLDivElement}
          */
-        _newClone,
+        newClone,
         _newImg,
         _newImgDesc,
-        _contMain;
+        contMain,
+        dateText;
 
       /**
-       *
+       * Toggles the display of the project entry {@link HTMLElement} that is the {@link InputEvent}.
        * @param {InputEvent} ev
        */
-      let toggleDisp = function (ev) {
-        // let _t = ev.currentTarget.parentElement;
-        // MyDisplay.toggle(MyHTML.getChildById(_t, "content-main"));
-        // MyDisplay.toggle(MyHTML.getChildById(_t, "content-foot"));
-
+      const toggleDisp = function (ev) {
         MyHTML.toggleClass(ev.currentTarget.parentElement, ContOpenClass);
       };
 
-      let regN = new RegExp("[\r\n]");
+      const regN = new RegExp("[\r\n]");
       let content;
 
+      //add all projects
       for (let i = 0; i < data.content.length; i++) {
         entry = data.content[i];
 
-        _newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
-        _contMain = MyHTML.getChildById(_newClone, "content-main");
+        newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
+        contMain = MyHTML.getChildById(newClone, "content-main");
 
         //save to list for content manager
-        elements.push({ element: _newClone, tags: entry.tags });
+        elements.push({ element: newClone, tags: entry.tags });
 
         //headline
-        MyHTML.getChildById(_newClone, "content-headline").innerText =
+        MyHTML.getChildById(newClone, "content-headline").innerText =
           entry.headline;
         //sub headline
-        MyHTML.getChildById(_newClone, "content-subline").innerText = entry.sub;
+        MyHTML.getChildById(newClone, "content-subline").innerText = entry.sub;
 
         //#region date
 
         dateStart = entry.dateStart;
         dateEnd = entry.dateEnd;
-        let dateText;
         if (dateStart && dateStart != "") {
           if (dateEnd && dateEnd != "") {
             if (dateEnd.match(/\d+/g)) {
@@ -202,20 +214,19 @@ fetch("./content/content.json")
         }
 
         if (dateText)
-          MyHTML.getChildById(_newClone, "content-date").innerText = dateText;
-        else MyHTML.getChildById(_newClone, "content-date").remove();
+          MyHTML.getChildById(newClone, "content-date").innerText = dateText;
+        else MyHTML.getChildById(newClone, "content-date").remove();
         //#endregion date
         //#region status
 
         if (entry.status && entry.status != "")
           MyHTML.getChildById(
-            _newClone,
+            newClone,
             "project-status",
           ).lastElementChild.innerText = entry.status;
-        else MyHTML.getChildById(_newClone, "project-status").remove();
+        else MyHTML.getChildById(newClone, "project-status").remove();
 
         //#endregion status
-
         //#region content
 
         for (let ii = 0; ii < entry.content.length; ii++) {
@@ -233,8 +244,8 @@ fetch("./content/content.json")
               _newImg.alt = content.alt;
               _newImgDesc.innerText = content.alt;
 
-              _contMain.append(_newImg);
-              _contMain.append(_newImgDesc);
+              contMain.append(_newImg);
+              contMain.append(_newImgDesc);
 
               break;
             case "text":
@@ -243,13 +254,13 @@ fetch("./content/content.json")
               content.text.split(regN).forEach((txt) => {
                 if (txt.length == 0) {
                   //split multi line breaks into seperate paragraphs
-                  _contMain.append(document.createElement("br"));
+                  contMain.append(document.createElement("br"));
                 } else {
                   //generate paragraph elements for each text section
                   elem = document.createElement("p");
 
                   elem.appendChild(document.createTextNode(txt));
-                  _contMain.append(elem);
+                  contMain.append(elem);
                 }
               });
 
@@ -267,47 +278,50 @@ fetch("./content/content.json")
         //#endregion content
         //#region footer
 
-        //repo
-
+        //#region repo
         let repExist = entry.footer.repo != "";
-        let repoA = MyHTML.getChildById(_newClone, "content-repo");
+        let repoA = MyHTML.getChildById(newClone, "content-repo");
         if (repExist) {
           repoA.innerText = entry.footer.repo;
           repoA.href = entry.footer.repo;
         } else {
           MyDisplay.disable(repoA.parentElement);
         }
-
-        //links
+        //#endregion repo
+        //#region links
         if (entry.footer.links.length > 0) {
           let linkObj, link;
           for (let i = 0; i < entry.footer.links.length; i++) {
             linkObj = entry.footer.links[i];
             link = MyTemplate.addTemplate(
               document.getElementById("template-ContLink"),
-              MyHTML.getChildById(_newClone, "content-links"),
+              MyHTML.getChildById(newClone, "content-links"),
             )[0];
             link.firstChild.textContent = linkObj.text;
             link.firstElementChild.innerText = linkObj.URL;
             link.firstElementChild.href = linkObj.URL;
           }
         } else if (!repExist) {
-          MyDisplay.disable(MyHTML.getChildById(_newClone, "content-links"));
+          MyDisplay.disable(MyHTML.getChildById(newClone, "content-links"));
         }
+        //#endregion links
 
         //#endregion footer
 
-        MyHTML.getChildById(_newClone, "content-tags").innerText =
+        //tags
+        MyHTML.getChildById(newClone, "content-tags").innerText =
           entry.tags.join(", ");
 
+        //open/close project
+        newClone.firstElementChild.addEventListener(
+          MouseEventToOpen,
+          toggleDisp,
+        );
         // _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
-        _newClone.firstElementChild.addEventListener("pointerup", toggleDisp);
-        // _newClone.addEventListener("pointerup")
       }
 
       //#endregion generate content
       //#region make ContentManager
-
       new ContentManager(
         elements,
         "cont-fltr",
@@ -316,6 +330,7 @@ fetch("./content/content.json")
         "active",
         (num) => {
           //#region no projects found message
+          // TODO: look if making Project not found message a feature makes sense.
           //enable and disable no projects found message.
           if (num == 0) {
             MyDisplay.enable(document.getElementById("projects-empty"));
@@ -325,12 +340,11 @@ fetch("./content/content.json")
           document.getElementById("projects-number").innerText = num.toString();
 
           //#endregion no projects found message
-
           //#region active/highlited subsections
           //search all sub section for active filters and turn headings active
-          let subSections = document.getElementsByClassName("subFilter");
+          const subSections = document.getElementsByClassName("subFilter");
+          const headingList = ["H2", "H3", "H4", "H5", "H6"];
           let subSection, heading;
-          let headingList = ["H2", "H3", "H4", "H5", "H6"];
           for (let i = 0; i < subSections.length; i++) {
             subSection = subSections.item(i);
             heading = subSection.previousElementSibling;
@@ -356,7 +370,6 @@ fetch("./content/content.json")
           //#endregion active/highlited subsections
         },
       );
-
       //#endregion
     },
   );

@@ -328,16 +328,16 @@ a {
 /* #endregion lvl filter*/
 /* #region title*/
 
-#Base > header {
+#base > header {
   margin-bottom: var(--gridGap);
 }
 
 /* #endregion */
 /* #region aside left Data panel */
 
-aside p,
+#dataPanel p,
 nav ul li,
-aside a {
+#dataPanel a {
   font-size: 1.2em;
 }
 
@@ -345,10 +345,12 @@ aside a {
   display: block;
 }
 
-#projects-nav > h3 + ul {
+/* Filter category closed */
+#projects-nav > h3 + ul.subFilter:not(.FltrOpen) {
   display: none;
 }
-#projects-nav > h3 + ul.FltrOpen {
+/* Filter category open */
+#projects-nav > h3 + ul.subFilter.FltrOpen {
   display: block;
 }
 
@@ -479,7 +481,7 @@ aside a {
 /* #endregion main section */
 /* #region footer */
 
-#Base > footer {
+#base > footer {
   font: var(--fontFooter);
   height: 100%;
   width: 100%;
@@ -488,22 +490,22 @@ aside a {
   background: var(--colBG);
   border-top: var(--gridGap) var(--colBG) solid;
 }
-#Base > footer > *:first-child {
+#base > footer > *:first-child {
   margin-left: var(--gridGap);
 }
-#Base > footer > * {
+#base > footer > * {
   float: left;
   opacity: 0.5;
   transition: opacity 0.3s;
 }
-#Base > footer:hover > * {
+#base > footer:hover > * {
   opacity: 1;
 }
 
 /* #endregion footer */
 /* #region layout*/
 
-#Base {
+#base {
   height: 100vh;
   display: grid;
   --gridGap: 0.5em;
@@ -512,8 +514,8 @@ aside a {
 
   grid-template-areas:
     "title"
-    "topic"
-    "aside"
+    "topics"
+    "dataPanel"
     "main"
     "foot";
   grid-template-columns: 100%;
@@ -544,11 +546,11 @@ aside a {
 
 /* filter on the sides */
 @media (min-width: 430px) and (max-width: 800px) {
-  #Base {
+  #base {
     grid-template-areas:
       ". title"
-      "topic main"
-      "aside main"
+      "topics main"
+      "dataPanel main"
       "foot foot";
     grid-template-columns: 12em 1fr;
     grid-template-rows:
@@ -560,11 +562,11 @@ aside a {
 
   /* expand title to middle */
   @media (max-width: 480px) {
-    #Base {
+    #base {
       grid-template-areas:
         "title title"
-        "topic main"
-        "aside main"
+        "topics main"
+        "dataPanel main"
         "foot foot";
     }
   }
@@ -572,11 +574,11 @@ aside a {
 
 /* full view */
 @media (min-width: 801px) {
-  #Base {
+  #base {
     grid-template-areas:
       "title ."
-      "topic main"
-      "aside main"
+      "topics main"
+      "dataPanel main"
       "foot foot";
     grid-template-columns: max-content 1fr;
     grid-template-rows:
@@ -585,20 +587,20 @@ aside a {
       auto
       max-content;
   }
-  #Base > header {
+  #base > header {
     text-align: end;
   }
 }
 
 /* sticky filter if screen is big enough */
 @media (min-width: 430px) and (min-height: 400px) {
-  #Base > aside > * {
+  #dataPanel > * {
     position: sticky;
     top: 0px;
   }
 
   /* @media (min-height: 600px) {
-    #Base > header {
+    #base > header {
       border: 2px solid red;
       position: sticky;
       top: 0px;
@@ -622,21 +624,21 @@ aside a {
   }
 }
 
-#Base > header {
+#base > header {
   grid-area: title;
 }
-#Base > nav {
-  grid-area: topic;
+#Topics {
+  grid-area: topics;
   text-align: end;
 }
-#Base > aside {
-  grid-area: aside;
+#dataPanel {
+  grid-area: dataPanel;
   text-align: end;
 }
-#Base > main {
+#base > main {
   grid-area: main;
 }
-#Base > footer {
+#base > footer {
   grid-area: foot;
 }
 

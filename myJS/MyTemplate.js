@@ -1,6 +1,10 @@
-//check for Template support
-const supportsTemplate = new Boolean(document.createElement("Template").content);
-//continue or exit
+// TODO: replace non changing let with const
+
+// check for Template support
+const supportsTemplate = new Boolean(
+  document.createElement("Template").content,
+);
+// continue or exit
 if (supportsTemplate) {
   console.log("Your browser supports Template!");
 } else {
@@ -15,7 +19,7 @@ if (supportsTemplate) {
  */
 export default class MyTemplate {
   /**
-   *  only creates element from template
+   * only creates element from template
    * @param {HTMLTemplateElement} template
    * @returns {HTMLElement} appended child of template
    */
