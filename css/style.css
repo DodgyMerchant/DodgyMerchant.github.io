@@ -372,11 +372,11 @@ nav ul li,
 /* #endregion filter and topics */
 /* #region main section */
 
-#Main {
+#main {
   max-width: 600px;
 }
 
-#Main > header {
+#main > header {
   position: sticky;
   top: 0px;
   background: var(--colBG);
@@ -627,7 +627,7 @@ nav ul li,
 #base > header {
   grid-area: title;
 }
-#Topics {
+#topics {
   grid-area: topics;
   text-align: end;
 }
@@ -642,7 +642,7 @@ nav ul li,
   grid-area: foot;
 }
 
-#Main {
+#main {
   display: grid;
   gap: 0px var(--gridGap);
 
@@ -654,10 +654,10 @@ nav ul li,
     var(--grid2row)
     auto;
 }
-#Main > header {
+#main > header {
   grid-area: head;
 }
-#Main > :not(header) {
+#main > :not(header) {
   grid-area: main;
 }
 

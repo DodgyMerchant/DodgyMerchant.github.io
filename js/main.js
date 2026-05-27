@@ -12,13 +12,22 @@ const FltrOpenDec = "-";
 const MouseEventToOpen = "pointerup";
 
 // TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
-
-console.log("log: window.location: ", window.location);
-
+// TODO: category macro: about, 
 // window.location.replace()
 // window.location.assign()
+// history.replaceState()
+// history.pushState()
 
-console.log(window.location.search);
+const param = new URLSearchParams(window.location.search);
+
+//category
+param.get("c");
+//filter
+param.get("f");
+
+// window.location.assign(`${window.location.pathname}?${param}`);
+
+// TODO: fold not displayed projects
 
 //#region Top level ContentManager
 // Create ContentManager to manage top level displayed sections: about / projects
