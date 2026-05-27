@@ -12,7 +12,6 @@ const FltrOpenDec = "-";
 const MouseEventToOpen = "pointerup";
 
 // TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
-// TODO: category macro: about, 
 // window.location.replace()
 // window.location.assign()
 // history.replaceState()
