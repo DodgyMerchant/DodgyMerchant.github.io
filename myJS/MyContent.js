@@ -1,5 +1,3 @@
-// TODO: replace non changing let with const
-
 /**
  * @file Collection of code that manages content.
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>

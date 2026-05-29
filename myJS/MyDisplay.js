@@ -1,5 +1,3 @@
-// TODO: replace non changing let with const
-
 /**
  * Html element property name of saved display value.
  * Change freely.
@@ -14,63 +12,62 @@ const MyDispPropName = "--rememberDisplay";
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 export default class MyDisplay {
+  //#region setup
   /**
    *
-   * @param {HTMLElement} _el
-   * @returns {String}
+   * @param {HTMLElement} el
+   * @returns {string}
    */
-  static setup(_el) {
-    let _disp = _el.style.display;
+  static setup(el) {
+    // style is set
+    if (el.style.display) return el.style.display;
 
-    //no direct style set for display
-    if (_disp == "") {
-      //setting the var
-      _disp = window.getComputedStyle(_el).display;
-      //saving display val to direct display
-      this.set(_el, _disp);
-    }
-    return _disp;
+    // no direct style set for display
+    //saving display val to direct display
+    const display = window.getComputedStyle(el).display;
+    this.set(el, display);
+    return display;
   }
   /**
-   *
-   * @param {HTMLElement} _el
-   * @returns
+   * Initializes display remembrance functionality in given {@link HTMLElement}.
+   * @param {HTMLElement} el Element to be initialized.
+   * @param {string} fallback Fallback value if used for the display property if no used value can be found.
+   * @returns {string} Used display string display property.
    */
-  static setupRemember(_el) {
-    let _remdisp = _el.style.getPropertyValue(MyDispPropName);
-    let _disp = this.get(_el);
+  static setupRemember(el, fallback = "block") {
+    // if remembrance is setup
+    const rememberDisplay = el.style.getPropertyValue(MyDispPropName);
+    if (rememberDisplay) return rememberDisplay;
 
-    //if no rememberence is setup
-    if (_remdisp == "") {
-      let _give; //this val will be set as remember value
-      if (_disp != "none") {
-        //if computed style is not none
-        _give = _disp; //sets current display value
-      } else {
-        /* prettier-ignore */
-        let _custom = window.getComputedStyle(_el).getPropertyValue(MyDispPropName);
-        if (_custom != "")
-          //looks for custom computed var
-          _give = _custom;
-        else {
-          //use fallback value
-          _give = "block";
-        }
+    // if no remembrance is setup, check different sources for style and set it.
+    const disp = this.get(el);
+    let newValue; // this val will be set as remember value
+    if (disp != "none") {
+      // if computed style is not none
+      newValue = disp; //sets current display value
+    } else {
+      // looks for custom computed var
+      const custom = window
+        .getComputedStyle(el)
+        .getPropertyValue(MyDispPropName);
+
+      if (custom != "") newValue = custom;
+      else {
+        // use fallback value
+        newValue = fallback;
       }
-      //set values
-      this.setRemember(_el, _give);
-      _remdisp = _give;
     }
-
-    return _remdisp;
+    //set values
+    this.setRemember(el, newValue);
+    return newValue;
   }
-
-  //other
+  //#endregion setup
+  //#region manipulation
   /**
-   * Toggles the dispaly property between none <=> (block | rememberd value).
-   * @param {HTMLElement} _el element to toggle the display property of.
+   * Toggles the display property between none <=> (block | remembered value).
+   * @param {HTMLElement} el element to toggle the display property of.
    */
-  static toggle(_el) {
+  static toggle(el) {
     /**
      * Toggles the display style of an element.
      * Uses and saves used computed styles if there is one.
@@ -81,70 +78,69 @@ export default class MyDisplay {
      * But starts off in as none.
      */
     //get direct style custom value
-    this.setup(_el);
-    let _remdisp = this.getRemember(_el);
+    this.setup(el);
+    const rememberDisplay = this.getRemember(el);
 
-    this.set(_el, _el.style.display == "none" ? _remdisp : "none");
+    this.set(el, el.style.display == "none" ? rememberDisplay : "none");
 
-    return _el.style.display;
+    return el.style.display;
   }
   /**
    * Enables displaying for a given HTMLElement.
    * IF no string value is provided will used remembered value setup in the Element.
-   * If nothign is setup will default to block and setup remmbering that value.
-   * @param {HTMLElement} _el element to enable the display property of.
-   * @param {string=} _str property to set the display value to. Defaults to block.
+   * If nothing is setup will default to block and setup remembering that value.
+   * @param {HTMLElement} el element to enable the display property of.
+   * @param {string=} str property to set the display value to. Defaults to block.
    */
-  static enable(_el, _str) {
-    this.setup(_el);
-    if (!_str) _str = this.getRemember(_el);
+  static enable(el, str) {
+    this.setup(el);
+    if (!str) str = this.getRemember(el);
 
-    if (_el.style.display == "none") this.set(_el, _str);
+    if (el.style.display == "none") this.set(el, str);
   }
   /**
    * Disables displaying for a given HTMLElement by setting its display to "none".
    * Before that Will setup remembering for the original value.
-   * @param {HTMLElement} _el element to disable the display property of.
+   * @param {HTMLElement} el element to disable the display property of.
    */
-  static disable(_el) {
-    this.setupRemember(_el);
+  static disable(el) {
+    this.setupRemember(el);
 
-    if (_el.style.display != "none") this.set(_el, "none");
+    if (el.style.display != "none") this.set(el, "none");
   }
+  //#endregion manipulation
 
   /**
    * Get style display property.
-   * @param {HTMLElement} _el
+   * @param {HTMLElement} el
    * @returns {String}
    */
-  static get(_el) {
-    let _disp = this.setup(_el);
-
-    return _disp;
+  static get(el) {
+    return this.setup(el);
   }
   /**
-   * Set style display property
-   * @param {HTMLElement} _el
+   * Set style display property of the {@link HTMLElement}
+   * @param {HTMLElement} el
    * @param {String} display
    */
-  static set(_el, display) {
-    _el.style.display = display;
+  static set(el, display) {
+    el.style.display = display;
   }
 
   /**
-   * 
-   * @param {HTMLElement} _el
+   *
+   * @param {HTMLElement} el
    * @returns {String}
    */
-  static getRemember(_el) {
-    return this.setupRemember(_el);
+  static getRemember(el) {
+    return this.setupRemember(el);
   }
   /**
    * Does not setup.
-   * @param {HTMLElement} _el
+   * @param {HTMLElement} el
    * @param {String} display
    */
-  static setRemember(_el, display) {
-    _el.style.setProperty(MyDispPropName, display);
+  static setRemember(el, display) {
+    el.style.setProperty(MyDispPropName, display);
   }
 }

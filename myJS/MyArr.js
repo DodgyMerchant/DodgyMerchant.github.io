@@ -1,5 +1,3 @@
-// TODO: replace non changing let with const
-
 /**
  * @version 1.1.0
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
@@ -33,7 +31,7 @@ export default class MyArr {
    * @returns {any} removed entry
    */
   static removeEntry(list, data) {
-    let index = list.indexOf(data);
+    const index = list.indexOf(data);
     if (index != -1) return list.splice(index, 1)[0];
   }
 
@@ -66,7 +64,7 @@ export default class MyArr {
   }
 
   /**
-   * Pushes data into target list if it isnt in the list already.
+   * Pushes data into target list if it isn't in the list already.
    * @param {any[]} targetList
    * @param {any} data
    * @returns {boolean} if the entry was added to target list.
@@ -81,7 +79,7 @@ export default class MyArr {
   }
 
   /**
-   * Pushes all entries into target list that arent in the list already.
+   * Pushes all entries into target list that aren't in the list already.
    * @param {any[]} targetList
    * @param {any[]} dataList
    */

@@ -3,7 +3,8 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-// TODO: fold not displayed projects
+// TODO: fold not displayed projects. remove 
+// TODO: replace more let with const
 
 const MouseEventToOpen = "pointerup";
 
@@ -313,9 +314,8 @@ fetch("./content/content.json")
         //#region footer
 
         //#region repo
-        let repExist = entry.footer.repo != "";
-        let repoA = MyHTML.getChildById(newClone, "content-repo");
-        if (repExist) {
+        const repoA = MyHTML.getChildById(newClone, "content-repo");
+        if (entry.footer.repo) {
           repoA.innerText = entry.footer.repo;
           repoA.href = entry.footer.repo;
         } else {
@@ -335,7 +335,7 @@ fetch("./content/content.json")
             link.firstElementChild.innerText = linkObj.URL;
             link.firstElementChild.href = linkObj.URL;
           }
-        } else if (!repExist) {
+        } else if (!entry.footer.repo) {
           MyDisplay.disable(MyHTML.getChildById(newClone, "content-links"));
         }
         //#endregion links
@@ -346,7 +346,7 @@ fetch("./content/content.json")
         MyHTML.getChildById(newClone, "content-tags").innerText =
           entry.tags.join(", ");
 
-        //open/close project
+        // open/close project
         newClone.firstElementChild.addEventListener(
           MouseEventToOpen,
           toggleDisp,
@@ -365,15 +365,18 @@ fetch("./content/content.json")
         (num, _displayedList, _behavior, _className) => {
           //#region no projects found message
           // TODO: look if making Project not found message a feature makes sense.
+
           //enable and disable no projects found message.
           if (num == 0) {
+            console.log("CM no content");
             MyDisplay.enable(document.getElementById("projects-empty"));
           } else {
             MyDisplay.disable(document.getElementById("projects-empty"));
           }
-          document.getElementById("projects-number").innerText = num.toString();
-
           //#endregion no projects found message
+          //#region projects found counter
+          document.getElementById("projects-number").innerText = num.toString();
+          //#endregion projects found counter
           //#region active/highlited subsections
 
           //search all sub section for active filters and turn headings active
