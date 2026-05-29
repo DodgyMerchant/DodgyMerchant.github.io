@@ -37,7 +37,7 @@ urlParam.get(urlKeys.filter)?.split("+");
 urlKeys.category.projects;
 
 //#endregion  URL parameters
-//#region categorie, Top level ContentManager
+//#region category, Top level ContentManager
 
 /**
  * The default category to apply on load, if no other is provided
@@ -55,9 +55,9 @@ new ContentManager(
     { element: document.getElementById("projects-head"), tags: [urlKeys.category.projects] },
     { element: document.getElementById("projects-nav"), tags: [urlKeys.category.projects] },
   ],
-  "lvl-fltr",
+  "lvl-filter",
   "active",
-  "lvl-fltrd",
+  "lvl-filtered",
   "active",
   undefined,
   undefined,
@@ -69,16 +69,16 @@ new ContentManager(
 //#endregion
 //#region filter
 
-const FltrFoldClass = "fltrFold";
-const FltrOpenClass = "FltrOpen";
-const FltrClosedDec = "+";
-const FltrOpenDec = "-";
+const filterFoldClass = "filterFold";
+const filterOpenClass = "filterOpen";
+const filterClosedDec = "+";
+const filterOpenDec = "-";
 
 // get all filter sub group headings
-const collection = document.getElementsByClassName(FltrFoldClass);
+const collection = document.getElementsByClassName(filterFoldClass);
 
 /**
- * Tallback function for the datapanels filter group headings.
+ * Callback function for the data panels filter group headings.
  * @param {PointerEvent} ev
  */
 const filterGroupCallback = (ev) => {
@@ -86,10 +86,13 @@ const filterGroupCallback = (ev) => {
   let filterGroup = heading.nextElementSibling;
 
   // toggles the display status of the filter group
-  MyHTML.toggleClass(filterGroup, FltrOpenClass);
+  MyHTML.toggleClass(filterGroup, filterOpenClass);
 
-  // updates Subfilter Heading display depending on the display status of its filter group
-  filterHeadingUpdate(heading, MyHTML.hasAnyClass(filterGroup, FltrOpenClass));
+  // updates sub filter Heading display depending on the display status of its filter group
+  filterHeadingUpdate(
+    heading,
+    MyHTML.hasAnyClass(filterGroup, filterOpenClass),
+  );
 };
 
 /**
@@ -98,7 +101,7 @@ const filterGroupCallback = (ev) => {
  * @param {boolean} open
  */
 const filterHeadingUpdate = (el, open) => {
-  el.firstElementChild.innerText = open ? FltrOpenDec : FltrClosedDec;
+  el.firstElementChild.innerText = open ? filterOpenDec : filterClosedDec;
 };
 
 /**
@@ -112,7 +115,7 @@ for (let i = 0; i < collection.length; i++) {
 
   filterHeadingUpdate(
     h3,
-    MyHTML.hasAnyClass(h3.nextElementSibling, FltrOpenClass),
+    MyHTML.hasAnyClass(h3.nextElementSibling, filterOpenClass),
   );
 }
 
@@ -121,7 +124,7 @@ for (let i = 0; i < collection.length; i++) {
  * @typedef {Object} ContentData content data loaded in to produce content for my website.
  * @property {string} headline Headline for this content block.
  * @property {string} sub Descriptive sub headline for this content block.
- * @property {string[]} tags list of strigns that are tags relating to this content block. Used for filtering.
+ * @property {string[]} tags list of strings that are tags relating to this content block. Used for filtering.
  * @property {string} dateStart Project start text. Can be a date or a word.
  * @property {string} dateEnd Project end text. Can be a date or a word.
  * @property {string} status status it the project.
@@ -145,10 +148,10 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} text text of the link.
  */
 //#region Content ContentManager
-// get project data => create project content => create contentmanager for project data/content
+// get project data => create project content => create {@link ContentManager} for project data/content
 
 const ContOpenClass = "ContOpen";
-const ContCompressedClass = "ContCmprssd";
+const ContCompressedClass = "ContentCompressed";
 
 fetch("./content/content.json")
   .then((results) => results.json())
@@ -222,7 +225,7 @@ fetch("./content/content.json")
         MyHTML.getChildById(newClone, "content-headline").innerText =
           entry.headline;
         //sub headline
-        MyHTML.getChildById(newClone, "content-subline").innerText = entry.sub;
+        MyHTML.getChildById(newClone, "content-subLine").innerText = entry.sub;
 
         //#region date
 
@@ -284,7 +287,7 @@ fetch("./content/content.json")
 
               content.text.split(regN).forEach((txt) => {
                 if (txt.length == 0) {
-                  //split multi line breaks into seperate paragraphs
+                  //split multi line breaks into separate paragraphs
                   contMain.append(document.createElement("br"));
                 } else {
                   //generate paragraph elements for each text section
@@ -355,9 +358,9 @@ fetch("./content/content.json")
       //#region make ContentManager
       new ContentManager(
         elements,
-        "cont-fltr",
+        "content-filter",
         "active",
-        "cont-fltrd",
+        "content-filtered",
         "active",
         (num, _displayedList, _behavior, _className) => {
           //#region no projects found message
@@ -401,9 +404,7 @@ fetch("./content/content.json")
           }
           //#endregion active/highlited subsections
         },
-        (ev, element, newState, tags) => {
-          console.log("filter: filterCallback", ev, element, newState, tags);
-        },
+        undefined,
         undefined,
         ["all"],
       );

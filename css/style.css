@@ -3,7 +3,7 @@
 
   /* #region colors */
 
-  --cpDeepPurlpe: rgb(48, 6, 48);
+  --cpDeepPurple: rgb(48, 6, 48);
   --cpViolentViolet: #290c5e;
   --cpLightBlue: aqua;
   /* --cpLightBlue2: rgb(27, 127, 167); */
@@ -38,7 +38,7 @@
 
   /* content */
   --borderCont: 3px currentcolor dashed;
-  --borderImg: 3px var(--cpDeepPurlpe) solid;
+  --borderImg: 3px var(--cpDeepPurple) solid;
   --fontContFoot: normal lighter 0.8em "Courier Prime", monospace;
   --colContFoot: var(--cpMuteBlue);
 
@@ -134,7 +134,7 @@ li {
 }
 
 /* makes text extremely breakup happy */
-.dont-break-out {
+.do-not-break-out {
   /* CSS3 */
   /* white-space: pre-wrap; */
   /* Mozilla, since 1999 */
@@ -263,7 +263,7 @@ a.delink {
 
 /* #endregion -utility classes */
 
-.lvl-fltrd:not(.active) {
+.lvl-filtered:not(.active) {
   display: none;
 }
 
@@ -311,17 +311,17 @@ a {
 
 /* #region lvl filter*/
 
-.lvl-fltr {
+.lvl-filter {
   color: var(--colLvlFilter);
 }
-.lvl-fltr.active {
+.lvl-filter.active {
   color: var(--colFilterA);
   text-decoration: underline;
 }
-.lvl-fltr:hover {
+.lvl-filter:hover {
   color: var(--colFilterH);
 }
-.lvl-fltr.active:hover {
+.lvl-filter.active:hover {
   color: var(--colFilterAH);
 }
 
@@ -346,26 +346,26 @@ nav ul li,
 }
 
 /* Filter category closed */
-#projects-nav > h3 + ul.subFilter:not(.FltrOpen) {
+#projects-nav > h3 + ul.subFilter:not(.filterOpen) {
   display: none;
 }
 /* Filter category open */
-#projects-nav > h3 + ul.subFilter.FltrOpen {
+#projects-nav > h3 + ul.subFilter.filterOpen {
   display: block;
 }
 
-.cont-fltr {
+.content-filter {
   color: var(--colContFilter);
 }
 #projects-nav > h3.active,
-.cont-fltr.active {
+.content-filter.active {
   color: var(--colFilterA);
   text-decoration: underline;
 }
-.cont-fltr:hover {
+.content-filter:hover {
   color: var(--colFilterH);
 }
-.cont-fltr.active:hover {
+.content-filter.active:hover {
   color: var(--colFilterAH);
 }
 
@@ -384,7 +384,7 @@ nav ul li,
   padding-bottom: var(--gridGap);
 }
 
-.cont-fltrd:not(.active) {
+.content-filtered:not(.active) {
   display: none;
 }
 
@@ -429,16 +429,16 @@ nav ul li,
 } */
 
 /* #region closing content block */
-/* disaling all content except for headers */
+/* disabling all content except for headers */
 
-/* #projects article.cont-fltrd {
+/* #projects article.content-filtered {
   transition: height 2s;
   overflow: hidden;
 } */
-#projects .ContCmprssd {
+#projects .ContentCompressed {
   display: none;
 }
-#projects .ContOpen .ContCmprssd {
+#projects .ContOpen .ContentCompressed {
   display: block;
 }
 
@@ -536,7 +536,7 @@ nav ul li,
   display: none;
 }
 
-/* increadibly small view */
+/* incredibly small view */
 @media (max-width: 275px) {
   html,
   html * {
@@ -608,7 +608,7 @@ nav ul li,
   } */
 }
 
-/* project satus not in header */
+/* project status not in header */
 @media (max-width: 600px) {
   /* making status work */
   #projects > article > header > div {
