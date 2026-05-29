@@ -3,41 +3,57 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-const ContOpenClass = "ContOpen";
-const ContCompressedClass = "ContCmprssd";
-const FltrFoldClass = "fltrFold";
-const FltrOpenClass = "FltrOpen";
-const FltrClosedDec = "+";
-const FltrOpenDec = "-";
+// TODO: fold not displayed projects
+
 const MouseEventToOpen = "pointerup";
 
+//#region URL parameters
+const urlKeys = {
+  category: {
+    key: "c",
+    about: "about",
+    projects: "projects",
+  },
+  filter: {
+    key: "f",
+  },
+};
+
 // TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
-// window.location.replace()
-// window.location.assign()
+// window.location.replace() // no reload
 // history.replaceState()
 // history.pushState()
 
-const param = new URLSearchParams(window.location.search);
+/**
+ * URL parameter interface
+ */
+const urlParam = new URLSearchParams(window.location.search);
 
 //category
-param.get("c");
+urlParam.get(urlKeys.category.key);
 //filter
-param.get("f");
+urlParam.get(urlKeys.filter)?.split("+");
 
-// window.location.assign(`${window.location.pathname}?${param}`);
+urlKeys.category.projects;
 
-// TODO: fold not displayed projects
+//#endregion  URL parameters
+//#region categorie, Top level ContentManager
 
-//#region Top level ContentManager
+/**
+ * The default category to apply on load, if no other is provided
+ */
+const categoryDefault = urlKeys.category.about;
+
 // Create ContentManager to manage top level displayed sections: about / projects
 new ContentManager(
+  // prettier-ignore
   [
-    { element: document.getElementById("about"), tags: ["about"] },
-    { element: document.getElementById("about-head"), tags: ["about"] },
-    { element: document.getElementById("about-aside"), tags: ["about"] },
-    { element: document.getElementById("projects"), tags: ["projects"] },
-    { element: document.getElementById("projects-head"), tags: ["projects"] },
-    { element: document.getElementById("projects-nav"), tags: ["projects"] },
+    { element: document.getElementById("about"), tags: [urlKeys.category.about] },
+    { element: document.getElementById("about-head"), tags: [urlKeys.category.about] },
+    { element: document.getElementById("about-aside"), tags: [urlKeys.category.about] },
+    { element: document.getElementById("projects"), tags: [urlKeys.category.projects] },
+    { element: document.getElementById("projects-head"), tags: [urlKeys.category.projects] },
+    { element: document.getElementById("projects-nav"), tags: [urlKeys.category.projects] },
   ],
   "lvl-fltr",
   "active",
@@ -46,18 +62,23 @@ new ContentManager(
   undefined,
   undefined,
   1,
-  ["about"],
+  [urlParam.get(urlKeys.category.key) ?? categoryDefault],
   false,
 );
 
 //#endregion
 //#region filter
 
+const FltrFoldClass = "fltrFold";
+const FltrOpenClass = "FltrOpen";
+const FltrClosedDec = "+";
+const FltrOpenDec = "-";
+
 // get all filter sub group headings
 const collection = document.getElementsByClassName(FltrFoldClass);
 
 /**
- * callback function for the datapanels filter group headings.
+ * Tallback function for the datapanels filter group headings.
  * @param {PointerEvent} ev
  */
 const filterGroupCallback = (ev) => {
@@ -126,17 +147,19 @@ for (let i = 0; i < collection.length; i++) {
 //#region Content ContentManager
 // get project data => create project content => create contentmanager for project data/content
 
+const ContOpenClass = "ContOpen";
+const ContCompressedClass = "ContCmprssd";
+
 fetch("./content/content.json")
   .then((results) => results.json())
   .then(
     /**
-     *
      * @param {{content: ContentData[]}} data
      * @returns
      */
     (data) => {
       /**
-       * holds data for ContentManager
+       * Holds data for ContentManager
        * @type {{element: HTMLElement, tags: string[]}}
        */
       const elements = [];
@@ -336,7 +359,7 @@ fetch("./content/content.json")
         "active",
         "cont-fltrd",
         "active",
-        (num) => {
+        (num, _displayedList, _behavior, _className) => {
           //#region no projects found message
           // TODO: look if making Project not found message a feature makes sense.
           //enable and disable no projects found message.
@@ -349,6 +372,7 @@ fetch("./content/content.json")
 
           //#endregion no projects found message
           //#region active/highlited subsections
+
           //search all sub section for active filters and turn headings active
           const subSections = document.getElementsByClassName("subFilter");
           const headingList = ["H2", "H3", "H4", "H5", "H6"];
@@ -377,6 +401,11 @@ fetch("./content/content.json")
           }
           //#endregion active/highlited subsections
         },
+        (ev, element, newState, tags) => {
+          console.log("filter: filterCallback", ev, element, newState, tags);
+        },
+        undefined,
+        ["all"],
       );
       //#endregion
     },

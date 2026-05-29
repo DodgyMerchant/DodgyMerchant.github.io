@@ -6,7 +6,7 @@
  */
 export default class MyArr {
   /**
-   * check for array overlap
+   * Check for array overlap
    * @param {any[]} arr1
    * @param {any[]} arr2
    */
@@ -51,7 +51,7 @@ export default class MyArr {
   //#endregion removing
 
   /**
-   * pushes all entries in nested lists into target list
+   * Pushes all entries in nested lists into target list
    * @param {any[]} targetList
    * @param {any | any[]} data
    */
@@ -66,7 +66,7 @@ export default class MyArr {
   }
 
   /**
-   * pushes data into target list if it isnt in the list already.
+   * Pushes data into target list if it isnt in the list already.
    * @param {any[]} targetList
    * @param {any} data
    * @returns {boolean} if the entry was added to target list.
@@ -81,7 +81,7 @@ export default class MyArr {
   }
 
   /**
-   * pushes all entries into target list that arent in the list already.
+   * Pushes all entries into target list that arent in the list already.
    * @param {any[]} targetList
    * @param {any[]} dataList
    */

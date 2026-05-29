@@ -2,15 +2,15 @@
 
 /**
  * @file tag or filter logic handling class.
- * tags are strings that have to be an exact match.
+ * Tags are strings that have to be an exact match.
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 /**
  * @typedef {"one" | "all" | "match" | "complete" | "exact"} TagBehavior refer to behavior map or MyTags Class for explainaition of individual behaviors.
  */
 /**
- * tag or filter logic handling class.
- * tags are strings that have to be an exact match.
+ * Tag or filter logic handling class.
+ * Tags are strings that have to be an exact match.
  * @version 1.1.0
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
@@ -70,7 +70,7 @@ export default class MyTags {
     */
 
   /**
-   * a map of all behaviors and user description text for them.
+   * A map of all behaviors and user description text for them.
    * @type {Map<TagBehavior,String>}
    */
   // prettier-ignore
@@ -80,7 +80,7 @@ export default class MyTags {
         ["exact","Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
     ]);
   /**
-   * expanded map of all behaviors and user description text for them.
+   * Expanded map of all behaviors and user description text for them.
    * @type {Map<TagBehavior,String>}
    */
   // prettier-ignore
@@ -93,7 +93,7 @@ export default class MyTags {
     ]);
 
   /**
-   * checks if target tags correspont to the filter tags using given behavior.
+   * Checks if target tags correspont to the filter tags using given behavior.
    * If target tag list is empty will only be drawn if the filter tags are also empty.
    * @param {string[]=} targetTags List of Tags belonging to the target.
    * @param {string[]=} filterTags List of Tags to filter by. If no tags are given it will always return true.

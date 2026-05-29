@@ -1,7 +1,7 @@
 // TODO: replace non changing let with const
 
 /**
- * html element property name of saved display value.
+ * Html element property name of saved display value.
  * Change freely.
  * @type {string}
  */
@@ -67,18 +67,18 @@ export default class MyDisplay {
 
   //other
   /**
-   * toggles the dispaly property between none <=> (block | rememberd value)
+   * Toggles the dispaly property between none <=> (block | rememberd value).
    * @param {HTMLElement} _el element to toggle the display property of.
    */
   static toggle(_el) {
     /**
-     * toggles the display style of an element
-     * uses and saves used computed styles if there is one
+     * Toggles the display style of an element.
+     * Uses and saves used computed styles if there is one.
      *
-     * saves the original display in a custom attribute "--rememberDisplay"
-     * this attribute can also be predefined
-     * THis should be dome if the element is not supposed to be a block display
-     * but starts off in as none
+     * Saves the original display in a custom attribute "--rememberDisplay".
+     * This attribute can also be predefined.
+     * This should be dome if the element is not supposed to be a block display.
+     * But starts off in as none.
      */
     //get direct style custom value
     this.setup(_el);
@@ -113,7 +113,7 @@ export default class MyDisplay {
   }
 
   /**
-   * get style display property
+   * Get style display property.
    * @param {HTMLElement} _el
    * @returns {String}
    */
@@ -123,7 +123,7 @@ export default class MyDisplay {
     return _disp;
   }
   /**
-   * set style display property
+   * Set style display property
    * @param {HTMLElement} _el
    * @param {String} display
    */
@@ -132,17 +132,15 @@ export default class MyDisplay {
   }
 
   /**
-   *
+   * 
    * @param {HTMLElement} _el
    * @returns {String}
    */
   static getRemember(_el) {
-    let _rem = this.setupRemember(_el);
-
-    return _rem;
+    return this.setupRemember(_el);
   }
   /**
-   * does not setup
+   * Does not setup.
    * @param {HTMLElement} _el
    * @param {String} display
    */

@@ -1,13 +1,13 @@
 // TODO: replace non changing let with const
 
 /**
- * general html handling object
+ * General html handling object.
  * @version 1.0.1
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 export default class MyHTML {
   /**
-   * translate mouse window mouse position to local position to given element
+   * Translate mouse window mouse position to local position to given element.
    * @param {HTMLElement} elem
    * @param {number} mx mouse x
    * @param {number} my mouse y
@@ -18,9 +18,9 @@ export default class MyHTML {
     return { x: mx - rect.left, y: my - rect.top };
   }
   /**
-   * returs property or style of element.
-   * first checks the elements direct style.
-   * then computed style declaration.
+   * Returs property or style of element.
+   * First checks the elements direct style.
+   * Then computed style declaration.
    * @param {HTMLElement} el
    * @param {string} str
    * @returns {string}
@@ -36,9 +36,9 @@ export default class MyHTML {
     return style;
   }
   /**
-   * returs property or style of element.
-   * first checks the elements direct style.
-   * then computed style declaration.
+   * Returs property or style of element.
+   * First checks the elements direct style.
+   * Then computed style declaration.
    * @param {HTMLElement} el
    * @param {string} str
    * @returns {number}
@@ -47,9 +47,9 @@ export default class MyHTML {
     return Number.parseInt(this.getPropertyStr(el, str));
   }
   /**
-   * returs property or style of element.
-   * first checks the elements direct style.
-   * then computed style declaration.
+   * Returs property or style of element.
+   * First checks the elements direct style.
+   * Then computed style declaration.
    * @param {HTMLElement} el
    * @param {string} str
    * @returns {number}
@@ -64,7 +64,7 @@ export default class MyHTML {
    * Checks if target element has all classes supplied in the name string.
    * For a single class check use hasAnyClass, its slightly faster.
    * @param {HTMLElement} element
-   * @param {string} name one or multiple classes. split by space.
+   * @param {string} name One or multiple classes. split by space.
    */
   static hasAllClass(element, name) {
     let i, arr1, arr2;
@@ -83,7 +83,7 @@ export default class MyHTML {
   /**
    * Checks if target element has any one class supplied in the name string
    * @param {HTMLElement} element
-   * @param {string} name one or multiple classes. split by space.
+   * @param {string} name One or multiple classes. split by space.
    * @returns {boolean}
    */
   static hasAnyClass(element, name) {
@@ -104,7 +104,7 @@ export default class MyHTML {
   /**
    * @author w3
    * @param {HTMLElement} element
-   * @param {string} name one or multiple classes. split by space.
+   * @param {string} name One or multiple classes. split by space.
    */
   static addClass(element, name) {
     let i, arr1, arr2;
@@ -120,7 +120,7 @@ export default class MyHTML {
    *
    * @author w3
    * @param {HTMLElement} element
-   * @param {string} name one or multiple classes. split by space.
+   * @param {string} name One or multiple classes. split by space.
    */
   static removeClass(element, name) {
     let i, arr1, arr2;
@@ -137,10 +137,10 @@ export default class MyHTML {
    * Finds the classes in "find" and replaces all found classes with the class from "replace" in the same position.
    * Both Strings must have the same amont of classes.
    * given: "f1 f2","r1 r2".
-   * if "f1" is found then it will be replaced by "r2", because they share the same position in their lists, 0.
+   * If "f1" is found then it will be replaced by "r2", because they share the same position in their lists, 0.
    * @param {HTMLElement} element
-   * @param {string} find one or multiple classes. split by space. must be the same number as name2.
-   * @param {string} replace one or multiple classes. split by space. must be the same number as name1.
+   * @param {string} find One or multiple classes. split by space. must be the same number as name2.
+   * @param {string} replace One or multiple classes. split by space. must be the same number as name1.
    */
   static replaceClass(element, find, replace) {
     let tList, arr1, arr2;
@@ -164,11 +164,11 @@ export default class MyHTML {
     element.className = tList.join(",");
   }
   /**
-   * Finds the classes in from the given class strings in the elements class and replaces them by their respective counterparts from the other list..
+   * Finds the classes in from the given class strings in the elements class and replaces them by their respective counterparts from the other list.
    * given: element.className = "x1 x2 x3", "x1 B 44","A x3 99" => "A x2 B"
    * @param {HTMLElement} element
-   * @param {string} classes1 one or multiple classes. split by space. must be the same number as name2.
-   * @param {string} classes2 one or multiple classes. split by space. must be the same number as name1.
+   * @param {string} classes1 One or multiple classes. split by space. must be the same number as name2.
+   * @param {string} classes2 One or multiple classes. split by space. must be the same number as name1.
    */
   static switchClass(element, classes1, classes2) {
     let tList, arr1, arr2;
@@ -198,7 +198,7 @@ export default class MyHTML {
   /**
    *
    * @param {HTMLElement} element
-   * @param {string} name a single class name
+   * @param {string} name A single class name
    */
   static toggleClass(element, name) {
     element.classList.toggle(name);

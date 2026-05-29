@@ -19,9 +19,9 @@ if (supportsTemplate) {
  */
 export default class MyTemplate {
   /**
-   * only creates element from template
+   * Only creates element from template.
    * @param {HTMLTemplateElement} template
-   * @returns {HTMLElement} appended child of template
+   * @returns {HTMLElement} appended child of template.
    */
   static create(template) {
     if (!supportsTemplate) return;
@@ -30,7 +30,7 @@ export default class MyTemplate {
   }
 
   /**
-   * clers of all child elements
+   * Clers of all child elements.
    * @param {HTMLElement} parEl
    */
   static clearAll(parEl) {
@@ -45,7 +45,7 @@ export default class MyTemplate {
     return target.appendChild(child);
   }
   /**
-   * adds all template children to target element and returns a list of all added elelemnts.
+   * Adds all template children to target element and returns a list of all added elelemnts.
    * @param {HTMLTemplateElement} template
    * @param {HTMLElement} target
    * @returns {Element[]}
@@ -61,7 +61,7 @@ export default class MyTemplate {
   }
 
   /**
-   * returns if the browser supports template.
+   * Returns if the browser supports template.
    * @returns {Boolean}
    */
   static supports() {
