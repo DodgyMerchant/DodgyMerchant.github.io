@@ -38,23 +38,14 @@
   ],
   "content": [
     {
-      "headline": "MI1 Project Website",
-      "sub": "Designing a fictional universities campaign.",
+      "headline": "Future Mind Campaign",
+      "sub": "DesignDesigning a fictional universities campaign.",
       "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
       "dateStart": "2025",
-      "status": "completed",
       "dateEnd": "2026",
-      "content": [
-        {
-          "type": "text",
-          "text": ""
-        },
-        {
-          "type": "image",
-          "URL": "./projects/MI1Website/content/A4 Original Scaled.svg",
-          "alt": "Poster."
-        }
-      ],
+      "language": "german",
+      "status": "completed",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/MI1Website",
         "links": [
@@ -70,28 +61,9 @@
       "sub": "A modding tool for Zero Sievert.",
       "tags": ["other", "system-design", "GDScript", "C#", "Godot"],
       "dateEnd": "2022",
+      "language": "english",
       "status": "completed",
-      "content": [
-        {
-          "type": "image",
-          "URL": "./content/ZS-GNR-InGame.png",
-          "alt": "In game weapon showing changed name."
-        },
-        {
-          "type": "text",
-          "text": "Standalone modding software for the video game ZERO Sievert by CABO Studio.\nIt replaces the Display names of the weapons in the game in a non-destructive way.\n\nFor a tutorial how to use it, read the Itch.io page."
-        },
-        {
-          "type": "image",
-          "URL": "./content/ZS-GNR-Window.png",
-          "alt": "Interface window."
-        },
-        {
-          "type": "image",
-          "URL": "./content/ZS-GNR-TextFile.png",
-          "alt": "Generated text file with gun names."
-        }
-      ],
+      "iFrameSrc": "/content/ZeroSievertGNR/ZeroSievertGNR.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/Zero-Sievert-GNR",
         "links": [
@@ -107,18 +79,9 @@
       "sub": "A better modding tool for Zero Sievert.",
       "tags": ["other", "system-design", "GDScript", "Godot"],
       "dateStart": "2024",
+      "language":"english",
       "status": "paused",
-      "content": [
-        {
-          "type": "image",
-          "URL": "./content/ZS-GNRv2-Dev-Window.png",
-          "alt": "Window displaying a lift of weapon names, loaded from game data."
-        },
-        {
-          "type": "text",
-          "text": "Standalone modding software for the video game ZERO Sievert by CABO Studio. It replaces the Display names of the weapons in the game in a non-destructive way.\n\nVersion 2 improves the user experience greatly and doesn't require the heavy upfront time investment of v1."
-        }
-      ],
+      "iFrameSrc": "/content/ZeroSievertGNRv2/ZeroSievertGNRv2.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/Zero-Sievert-GNR",
         "links": [
@@ -148,6 +111,7 @@
       ],
       "dateStart": "2021",
       "status": "stopped",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",
@@ -173,6 +137,7 @@
       "headline": "This Website",
       "sub": "My portfolio website.",
       "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",
@@ -201,6 +166,7 @@
       "dateStart": "2022",
       "dateEnd": "2023",
       "status": "completed",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",
@@ -240,6 +206,7 @@
       "dateStart": "2021",
       "dateEnd": "unfinished",
       "status": "stopped",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "text",
@@ -267,6 +234,7 @@
       ],
       "dateEnd": "2022",
       "status": "completed",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",
@@ -290,6 +258,7 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",
@@ -321,6 +290,7 @@
       "dateStart": "2022",
       "dateEnd": "2022",
       "status": "completed",
+      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
         {
           "type": "image",

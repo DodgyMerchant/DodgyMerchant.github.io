@@ -6,10 +6,21 @@ import MyTemplate from "../myJS/MyTemplate.js";
 // TODO: fold not displayed projects. remove
 // TODO: replace more let with const
 
-// TODO: can I use HTML files for the main text, which I can link in the content.json?
+// BUG: resizing the window wont scale the iframes with it.
 
 const MouseEventToOpen = "pointerup";
 
+//#region iframes
+
+/**
+ * resizes {@link HTMLIFrameElement} to its content size.
+ * @param {HTMLIFrameElement} el
+ */
+function iFrameResize(el) {
+  el.style.height = el.contentDocument.documentElement.scrollHeight + "px";
+}
+
+//#endregion iframes
 //#region URL parameters
 const urlKeys = {
   category: {
@@ -123,6 +134,7 @@ for (let i = 0; i < collection.length; i++) {
 }
 
 //#endregion filter
+//#region definitions
 /**
  * @typedef {Object} ContentData content data loaded in to produce content for my website.
  * @property {string} headline Headline for this content block.
@@ -131,27 +143,34 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} dateStart Project start text. Can be a date or a word.
  * @property {string} dateEnd Project end text. Can be a date or a word.
  * @property {string} status status it the project.
- * @property {ContentImage[] | ContentText[]} content content object list.
+ * @property {string} iFrameSrc Filepath to the html file to be displayed in the iFrame.
+ * TODO: implement language.
+ * @property {string} language language of the project.
  * @property {{repo: string, links: ContentLink[]}} footer footer data list.
- */
-/**
- * @typedef {Object} ContentImage image data loaded in to produce content for my website.
- * @property {"image"} type type of object.
- * @property {string} URL url to image.
- * @property {string} alt text description of image.
- */
-/**
- * @typedef {Object} ContentText image data loaded in to produce content for my website.
- * @property {"text"} type type of object.
- * @property {string} text text relating to the content.
  */
 /**
  * @typedef {Object} ContentLink link data.
  * @property {string} URL url of the link.
  * @property {string} text text of the link.
  */
+//#endregion definitions
 //#region Content ContentManager
 // get project data => create project content => create {@link ContentManager} for project data/content
+
+const displayEvent = "display";
+class DisplayEvent extends CustomEvent {
+  /**
+   * dispatched if display status changed
+   * @param {boolean} opened if opened (true) or closed (false)
+   */
+  constructor(opened) {
+    super(displayEvent, {
+      detail: {
+        open: opened,
+      },
+    });
+  }
+}
 
 const ContOpenClass = "ContOpen";
 const ContCompressedClass = "ContentCompressed";
@@ -166,7 +185,7 @@ fetch("./content/content.json")
     (data) => {
       /**
        * Holds data for ContentManager
-       * @type {{element: HTMLElement, tags: string[]}}
+       * @type {[{element: HTMLElement, tags: string[]}]}
        */
       const elements = [];
 
@@ -181,6 +200,7 @@ fetch("./content/content.json")
         );
         return;
       }
+      // TODO: move variables to where they are used.
       /**
        * @type {ContentData}
        */
@@ -193,14 +213,10 @@ fetch("./content/content.json")
          * @type {string}
          */
         dateEnd,
-        imgData,
         /**
          * @type {HTMLDivElement}
          */
         newClone,
-        _newImg,
-        _newImgDesc,
-        contMain,
         dateText;
 
       /**
@@ -208,7 +224,13 @@ fetch("./content/content.json")
        * @param {InputEvent} ev
        */
       const toggleDisp = function (ev) {
-        MyHTML.toggleClass(ev.currentTarget.parentElement, ContOpenClass);
+        const parent = ev.currentTarget.parentElement;
+        MyHTML.toggleClass(parent, ContOpenClass);
+
+        //dispatch display event with new display status.
+        MyHTML.getChildById(parent, "content-iframe").dispatchEvent(
+          new DisplayEvent(parent.classList.contains(ContOpenClass)),
+        );
       };
 
       const regN = new RegExp("[\r\n]");
@@ -217,9 +239,7 @@ fetch("./content/content.json")
       //add all projects
       for (let i = 0; i < data.content.length; i++) {
         entry = data.content[i];
-
         newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
-        contMain = MyHTML.getChildById(newClone, "content-main");
 
         //save to list for content manager
         elements.push({ element: newClone, tags: entry.tags });
@@ -266,50 +286,22 @@ fetch("./content/content.json")
         //#endregion status
         //#region content
 
-        for (let ii = 0; ii < entry.content.length; ii++) {
-          content = entry.content[ii];
+        if (entry.iFrameSrc) {
+          /**
+           * @type {HTMLIFrameElement}
+           */
+          const iframe = MyHTML.getChildById(newClone, "content-iframe");
 
-          switch (content.type) {
-            case "image":
-              // <img id="content-img" src="" alt="placeholder image" />
-              //       <p id="content-img-description">EEEEE</p>
+          //add on load resizing
+          iframe.addEventListener("load", (ev) =>
+            iFrameResize(ev.currentTarget),
+          );
+          iframe.addEventListener(displayEvent, (ev) => {
+            if (ev.detail.open) iFrameResize(ev.currentTarget);
+          });
 
-              _newImg = document.createElement("img");
-              _newImgDesc = document.createElement("p");
-
-              _newImg.src = content.URL;
-              _newImg.alt = content.alt;
-              _newImgDesc.innerText = content.alt;
-
-              contMain.append(_newImg);
-              contMain.append(_newImgDesc);
-
-              break;
-            case "text":
-              let elem;
-
-              content.text.split(regN).forEach((txt) => {
-                if (txt.length == 0) {
-                  //split multi line breaks into separate paragraphs
-                  contMain.append(document.createElement("br"));
-                } else {
-                  //generate paragraph elements for each text section
-                  elem = document.createElement("p");
-
-                  elem.appendChild(document.createTextNode(txt));
-                  contMain.append(elem);
-                }
-              });
-
-              break;
-            default:
-              console.error(
-                "Content type not implemented!",
-                entry.headline,
-                content,
-              );
-              break;
-          }
+          //add source
+          iframe.src = entry.iFrameSrc;
         }
 
         //#endregion content
@@ -370,7 +362,6 @@ fetch("./content/content.json")
 
           //enable and disable no projects found message.
           if (num == 0) {
-            console.log("CM no content");
             MyDisplay.enable(document.getElementById("projects-empty"));
           } else {
             MyDisplay.disable(document.getElementById("projects-empty"));
@@ -418,21 +409,3 @@ fetch("./content/content.json")
   );
 
 //#endregion
-//#region iframes
-
-/**
- *
- * @param {HTMLIFrameElement} frame
- */
-function resizeIFrame(frame) {
-  frame.style.height = frame.contentDocument.body.scrollHeight + "px";
-}
-
-//make all iframe seamless resize automatically
-for (const element of document.getElementsByClassName("iframe-seamless")) {
-  element.addEventListener("load", (ev) => {
-    ev.target.style.height = ev.target.contentDocument.body.scrollHeight + "px";
-  });
-}
-
-//#endregion iframes
