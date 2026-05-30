@@ -3,8 +3,10 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-// TODO: fold not displayed projects. remove 
+// TODO: fold not displayed projects. remove
 // TODO: replace more let with const
+
+// TODO: can I use HTML files for the main text, which I can link in the content.json?
 
 const MouseEventToOpen = "pointerup";
 
@@ -416,3 +418,21 @@ fetch("./content/content.json")
   );
 
 //#endregion
+//#region iframes
+
+/**
+ *
+ * @param {HTMLIFrameElement} frame
+ */
+function resizeIFrame(frame) {
+  frame.style.height = frame.contentDocument.body.scrollHeight + "px";
+}
+
+//make all iframe seamless resize automatically
+for (const element of document.getElementsByClassName("iframe-seamless")) {
+  element.addEventListener("load", (ev) => {
+    ev.target.style.height = ev.target.contentDocument.body.scrollHeight + "px";
+  });
+}
+
+//#endregion iframes

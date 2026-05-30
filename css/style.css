@@ -262,35 +262,21 @@ a.delink {
 /* #endregion text unify*/
 
 /* #endregion -utility classes */
-
-.lvl-filtered:not(.active) {
-  display: none;
-}
-
-/* #region about */
-
-#about > p {
-  width: 100%;
-  text-align: justify;
-}
-
-/* #endregion about */
+/* #region general*/
 
 h1,
 h2,
-h3
-/* ,h4,
-h5,
-h6  */ {
+h3 {
   color: var(--colHeading);
 }
 section {
   margin-top: 1em;
 }
-
-/* emphasis element */
 em {
   color: var(--colHighlight);
+}
+a {
+  color: var(--colLink);
 }
 
 /* all article normal text paragraphs */
@@ -305,11 +291,17 @@ article header + * {
   margin-top: 1em;
 }
 
-a {
-  color: var(--colLink);
+iframe.iframe-seamless {
+  border: none;
+  width: 100%;
 }
 
+/* #endregion general*/
 /* #region lvl filter*/
+
+.lvl-filtered:not(.active) {
+  display: none;
+}
 
 .lvl-filter {
   color: var(--colLvlFilter);
@@ -418,30 +410,18 @@ nav ul li,
   /* align-items: flex-end; */
   align-items: flex-start;
 }
-
 #project-status {
   text-align: end;
   /* flex: 0 1; */
 }
 
-/* #projects > article > div > p:not(img + p) {
-  border: red solid 1px;
-} */
-
 /* #region closing content block */
-/* disabling all content except for headers */
-
-/* #projects article.content-filtered {
-  transition: height 2s;
-  overflow: hidden;
-} */
 #projects .ContentCompressed {
   display: none;
 }
 #projects .ContOpen .ContentCompressed {
   display: block;
 }
-
 /* #endregion closing content block */
 
 /* img */
@@ -475,6 +455,11 @@ nav ul li,
 
 /* #endregion projects */
 /* #region about */
+
+#about > p {
+  width: 100%;
+  text-align: justify;
+}
 
 /* #endregion about */
 
