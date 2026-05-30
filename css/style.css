@@ -364,11 +364,11 @@ nav ul li,
 /* #endregion filter and topics */
 /* #region main section */
 
-#main {
+main {
   max-width: 600px;
 }
 
-#main > header {
+main > header {
   position: sticky;
   top: 0px;
   background: var(--colBG);
@@ -627,7 +627,7 @@ nav ul li,
   grid-area: foot;
 }
 
-#main {
+main {
   display: grid;
   gap: 0px var(--gridGap);
 
@@ -639,10 +639,10 @@ nav ul li,
     var(--grid2row)
     auto;
 }
-#main > header {
+main > header {
   grid-area: head;
 }
-#main > :not(header) {
+main > :not(header) {
   grid-area: main;
 }
 
