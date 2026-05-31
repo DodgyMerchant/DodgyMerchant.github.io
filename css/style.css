@@ -551,6 +551,8 @@ iframe.iframe-seamless {
   }
 }
 
+/* BUG: 800px width is doing funny layout things. */
+
 /* filter on the sides */
 @media (min-width: 430px) and (max-width: 800px) {
   #base {
@@ -580,7 +582,7 @@ iframe.iframe-seamless {
 }
 
 /* full view */
-@media (min-width: 801px) {
+@media (min-width: 800px) {
   #base {
     grid-template-areas:
       "title ."
