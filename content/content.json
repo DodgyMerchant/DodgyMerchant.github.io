@@ -38,6 +38,37 @@
   ],
   "content": [
     {
+      "headline": "HANDS",
+      "sub": "Lovecraftian Extreme Rock Paper Scissors.",
+      "tags": [
+        "game",
+        "code",
+        "GameMaker",
+        "GameMakerLang.",
+        "game-design",
+        "system-design",
+        "game-programming",
+        "ai-programming",
+        "gameplay-engineer",
+        "technical-art",
+        "asset-art",
+        "visual-design"
+      ],
+      "dateStart": "2021",
+      "language": "english",
+      "status": "stopped",
+      "iFrameSrc": "/content/HANDS/HANDS.html",
+      "footer": {
+        "repo": "https://github.com/DodgyMerchant/HANDS",
+        "links": [
+          {
+            "text": "Project GIFs: ",
+            "URL": "https://gfycat.com/@hiro_hunter/collections/Y5j3siTT/hands"
+          }
+        ]
+      }
+    },
+    {
       "headline": "Future Mind Campaign",
       "sub": "DesignDesigning a fictional universities campaign.",
       "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
@@ -79,7 +110,7 @@
       "sub": "A better modding tool for Zero Sievert.",
       "tags": ["other", "system-design", "GDScript", "Godot"],
       "dateStart": "2024",
-      "language":"english",
+      "language": "english",
       "status": "paused",
       "iFrameSrc": "/content/ZeroSievertGNRv2/ZeroSievertGNRv2.html",
       "footer": {
@@ -93,67 +124,11 @@
       }
     },
     {
-      "headline": "HANDS",
-      "sub": "Lovecraftian Extreme Rock Paper Scissors.",
-      "tags": [
-        "game",
-        "code",
-        "GameMaker",
-        "GameMakerLang.",
-        "game-design",
-        "system-design",
-        "game-programming",
-        "ai-programming",
-        "gameplay-engineer",
-        "technical-art",
-        "asset-art",
-        "visual-design"
-      ],
-      "dateStart": "2021",
-      "status": "stopped",
-      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
-      "content": [
-        {
-          "type": "image",
-          "URL": "./content/HANDS.gif",
-          "alt": "A GIF of my game, HANDS. Rock Paper Scissors but weird."
-        },
-        {
-          "type": "text",
-          "text": "This Game Project was made in Game Maker 2, as a personal project in my free time, started in 2021.\n\nFor Hands, I started out with 2 Ideas.\nI have a deep respect for games simple rule sets, so I wanted to explore that.\nAdditionally, I dislike making my own assets, but I'm never content with 3rd party assets.\nSo I wanted to test how far I could make it with just 1ish sprite.\n\nGod is dead, and all that's left is his corpse, angels and some fading souls.\nYou have the chance to ascend to godhood to take the empty throne, but thy must take the trial of hands.\n\nBorrowing from Judaist beliefs, the space of existence is inside god, who is dead.\nSo I wanted to make every bit of the game feel as weird as possible.\nIn many design decisions, I oriented my design around the feeling you would get when viewing a living organism from the inside.\nWhich everything being in motion constantly and reacting to your actions with more writhing, and pulsing.\n\nGameplay wise, early on I thought about basic rock paper scissors with some minor modification. This proved, far more difficult, than imagined. Altering one thing would throw out the balance of another.\n\nAt the moment, the gameplay is still in early stages.\nAll rules are configurable, so one can create their own game within limitations.\nAfter some more work, I would publish this version.\nWith the intent to hopefully find the best version of the rules with the feedback.\n\nEarly on, I tried to find ways to build the game without using text, which wasn't feasible.\nI may revisit this idea. I would love to make the game so otherworldly that every second with it feels alienating. And forgoing a normalcy such as text would certainly work towards this alienation.\n\nAfter telling some of my colleagues about the game, one noted how much it sounded like a simple fighting game.\nI was surprised by that comparison, but they were completely right.\nOwing to me having absolutely no experience with fighting games, I didn't see the obvious comparison."
-        }
-      ],
-      "footer": {
-        "repo": "https://github.com/DodgyMerchant/HANDS",
-        "links": [
-          {
-            "text": "Project GIFs: ",
-            "URL": "https://gfycat.com/@hiro_hunter/collections/Y5j3siTT/hands"
-          }
-        ]
-      }
-    },
-    {
       "headline": "This Website",
       "sub": "My portfolio website.",
       "tags": ["website", "code", "HTML", "CSS", "JavaScript", "visual-design"],
-      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
-      "content": [
-        {
-          "type": "image",
-          "URL": "content/Website1.png",
-          "alt": "A picture of this exact Website. The first, retired version."
-        },
-        {
-          "type": "image",
-          "URL": "content/Website2.png",
-          "alt": "A picture of this exact Website. The second, current version."
-        },
-        {
-          "type": "text",
-          "text": "This project was started as an assignment for my university class “Medien Informatik 2” in my second semester of University.\n\nThe first version I identified with the least, but was functionally well done.\n\nI accept that I will never be completely happy with the portfolio I use."
-        }
-      ],
+      "language": "english",
+      "iFrameSrc": "content/MyWebsite/MyWebsite.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/DodgyMerchant.github.io",
         "links": []
@@ -165,22 +140,17 @@
       "tags": ["website", "code", "HTML", "CSS", "JavaScript", "system-design"],
       "dateStart": "2022",
       "dateEnd": "2023",
+      "language": "german",
       "status": "completed",
-      "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
-      "content": [
-        {
-          "type": "image",
-          "URL": "./content/HistoryWebsite1.png",
-          "alt": "A picture of the History Websites main interface.\nIt consits of the interactive map that displays population movements, 2 UI-panels and the controls below the map."
-        },
-        {
-          "type": "text",
-          "text": "An interactive Map that displayed population movements.\nBorn from the will to make horrendous history maps better.\nA lot of things can be configured, making it instantly superior to commonly used map graphics.\nDisplayed timespan can be changed, objects can be filtered by topic and interacted with.\n\nAll data is pulled from a Google sheet and converted."
-        }
-      ],
+      "iFrameSrc": "/content/HistoricMovementWebsite/HistoricMovementWebsite.html",
       "footer": {
-        "repo": "",
-        "links": []
+        "repo": "https://github.com/DodgyMerchant/HistoryWebsite",
+        "links": [
+          {
+            "text": "Project Website: ",
+            "URL": "./projects/"
+          }
+        ]
       }
     },
     {
@@ -205,6 +175,7 @@
       ],
       "dateStart": "2021",
       "dateEnd": "unfinished",
+      "language": "english",
       "status": "stopped",
       "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
@@ -233,6 +204,7 @@
         "level-design"
       ],
       "dateEnd": "2022",
+      "language": "german",
       "status": "completed",
       "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
@@ -257,6 +229,7 @@
       "tags": ["code", "Java", "system-design"],
       "dateStart": "2022",
       "dateEnd": "2022",
+      "language": "german",
       "status": "completed",
       "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [
@@ -289,6 +262,7 @@
       ],
       "dateStart": "2022",
       "dateEnd": "2022",
+      "language": "german",
       "status": "completed",
       "iFrameSrc": "/content/FutureMindCampaign/FutureMindCampaign.html",
       "content": [

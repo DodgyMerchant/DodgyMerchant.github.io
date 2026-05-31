@@ -8,9 +8,14 @@ import MyTemplate from "../myJS/MyTemplate.js";
 
 // BUG: resizing the window wont scale the iframes with it.
 
+/**
+ *used mouse event to open/close sections. like filters & projects.
+ */
 const MouseEventToOpen = "pointerup";
 
 //#region iframes
+
+const IFautoResizeClass = "iframe-autoResize";
 
 /**
  * resizes {@link HTMLIFrameElement} to its content size.
@@ -19,6 +24,18 @@ const MouseEventToOpen = "pointerup";
 function iFrameResize(el) {
   el.style.height = el.contentDocument.documentElement.scrollHeight + "px";
 }
+
+/*
+ * iFrames need to be resized if the view resizes. *sigh*
+ */
+new ResizeObserver((entries, observer) => {
+  console.log("Resize!");
+
+  //get all iframes that want updates
+  for (const iframe of document.getElementsByClassName("iframe-seamless")) {
+    // TODO: add resize call of some kind.
+  }
+}).observe(document.body);
 
 //#endregion iframes
 //#region URL parameters
@@ -165,6 +182,7 @@ class DisplayEvent extends CustomEvent {
    */
   constructor(opened) {
     super(displayEvent, {
+      bubbles: false,
       detail: {
         open: opened,
       },
@@ -224,10 +242,16 @@ fetch("./content/content.json")
        * @param {InputEvent} ev
        */
       const toggleDisp = function (ev) {
+        /**
+         * @type {HTMLElement}
+         */
         const parent = ev.currentTarget.parentElement;
         MyHTML.toggleClass(parent, ContOpenClass);
 
         //dispatch display event with new display status.
+        // parent.dispatchEvent(
+        //   new DisplayEvent(parent.classList.contains(ContOpenClass)),
+        // );
         MyHTML.getChildById(parent, "content-iframe").dispatchEvent(
           new DisplayEvent(parent.classList.contains(ContOpenClass)),
         );
@@ -293,12 +317,22 @@ fetch("./content/content.json")
           const iframe = MyHTML.getChildById(newClone, "content-iframe");
 
           //add on load resizing
-          iframe.addEventListener("load", (ev) =>
-            iFrameResize(ev.currentTarget),
+          iframe.addEventListener(
+            "load",
+            (ev) => iFrameResize(ev.currentTarget),
+            {
+              //TODO: verify if a one time event is useful here. Only relevant if the iframe is visible on page load.
+              once: true,
+            },
           );
-          iframe.addEventListener(displayEvent, (ev) => {
-            if (ev.detail.open) iFrameResize(ev.currentTarget);
-          });
+          iframe.addEventListener(
+            displayEvent,
+            (ev) => {
+              console.log("Display event got!");
+              if (ev.detail.open) iFrameResize(ev.currentTarget);
+            },
+            { capture: true },
+          );
 
           //add source
           iframe.src = entry.iFrameSrc;
