@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
+/* TODO: color scheme switcher for accessability. button: my theme (purple, blue) | night (black, white) | day (white, black) */
+
 :root {
   --fontFooter: normal 0.8em "Courier Prime", monospace;
 
@@ -8,9 +10,9 @@
   --cpDeepPurple: rgb(48, 6, 48);
   --cpViolentViolet: #290c5e;
   --cpLightBlue: aqua;
-  /* --cpLightBlue2: rgb(27, 127, 167); */
   --cpBlue: rgb(57, 179, 219);
-  --cpMuteBlue: rgba(57, 179, 219, 0.688); /* rgba(57, 179, 219, 0.5); */
+  --cpMuteBlue: rgba(57, 179, 219, 0.688);
+
   /* #endregion colors */
   /* #region use case */
 
@@ -26,7 +28,6 @@
   --colText: var(--cpBlue);
 
   /* filter A=active H=hovered*/
-  /* --colFilter: var(--colText); */
   --colLvlFilter: var(--colHighlight);
   --colContFilter: var(--cpMuteBlue);
   --colFilterH: var(--colHighlight);
@@ -35,7 +36,6 @@
 
   --colProjNum: var(--colImportant);
 
-  /* --colLink: var(--colImportant); */
   --colLink: var(--colHighlight);
 
   /* content */
@@ -88,7 +88,7 @@ body {
   /* background-repeat: no-repeat;
   background-attachment: fixed; */
 
-  /* TODO: make page factor in scrollbar with */
+  /* TODO: make page factor in scrollbar width, remove content <p> right margin */
   scrollbar-gutter: stable; /* reserves space for scrollbar even when not visible */
 }
 
@@ -380,11 +380,20 @@ main > header {
 
 /* all article normal text paragraphs */
 article p:not(img + p):not(header p):not(footer p),
-#project-page p:not(img + p):not(header p):not(footer p) {
+#project-page p:not(img + p):not(header p),
+#project-page ul {
+  line-height: normal;
   margin-bottom: 1em;
   margin-right: 0.5em;
-  /* text-align: justify; */
-  /* border: red solid 1px; */
+}
+
+#project-page ul {
+  margin-left: 1em;
+}
+#project-page ul li {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-bottom: 0.5em;
 }
 
 /* #region projects*/

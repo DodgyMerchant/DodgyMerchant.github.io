@@ -6,8 +6,6 @@ import MyTemplate from "../myJS/MyTemplate.js";
 // TODO: fold not displayed projects. remove
 // TODO: replace more let with const
 
-// BUG: resizing the window wont scale the iframes with it.
-
 /**
  *used mouse event to open/close sections. like filters & projects.
  */
@@ -19,23 +17,29 @@ const IFautoResizeClass = "iframe-autoResize";
 
 /**
  * resizes {@link HTMLIFrameElement} to its content size.
- * @param {HTMLIFrameElement} el
+ * @param {Event} ev
  */
-function iFrameResize(el) {
-  el.style.height = el.contentDocument.documentElement.scrollHeight + "px";
+function iFrameResize(ev) {
+  console.log("resize call: ");
+  //if im being displayed
+  if (MyDisplay.get(ev.target) != "none") {
+    console.log("Resizing iFrame", ev);
+    ev.target.style.height =
+      // ev.target.contentDocument.documentElement.scrollHeight + "px";
+      ev.target.contentDocument.body.scrollHeight + "px";
+  }
 }
 
 /*
  * iFrames need to be resized if the view resizes. *sigh*
  */
 new ResizeObserver((entries, observer) => {
-  console.log("Resize!");
 
   //get all iframes that want updates
-  for (const iframe of document.getElementsByClassName("iframe-seamless")) {
-    // TODO: add resize call of some kind.
+  for (const iframe of document.getElementsByClassName(IFautoResizeClass)) {
+    iframe.dispatchEvent(new Event("resize"));
   }
-}).observe(document.body);
+}).observe(document.documentElement);
 
 //#endregion iframes
 //#region URL parameters
@@ -174,7 +178,7 @@ for (let i = 0; i < collection.length; i++) {
 //#region Content ContentManager
 // get project data => create project content => create {@link ContentManager} for project data/content
 
-const displayEvent = "display";
+const displayEvent = "displayChange";
 class DisplayEvent extends CustomEvent {
   /**
    * dispatched if display status changed
@@ -249,13 +253,13 @@ fetch("./content/content.json")
         MyHTML.toggleClass(parent, ContOpenClass);
 
         //dispatch display event with new display status.
-        // parent.dispatchEvent(
-        //   new DisplayEvent(parent.classList.contains(ContOpenClass)),
-        // );
+        // couldn't get capturing to work, so direct dispatch.
         MyHTML.getChildById(parent, "content-iframe").dispatchEvent(
           new DisplayEvent(parent.classList.contains(ContOpenClass)),
         );
       };
+
+      iFrameResize;
 
       const regN = new RegExp("[\r\n]");
       let content;
@@ -268,12 +272,15 @@ fetch("./content/content.json")
         //save to list for content manager
         elements.push({ element: newClone, tags: entry.tags });
 
+        //#region headline + sub
+
         //headline
         MyHTML.getChildById(newClone, "content-headline").innerText =
           entry.headline;
         //sub headline
         MyHTML.getChildById(newClone, "content-subLine").innerText = entry.sub;
 
+        //#endregion headline + sub
         //#region date
 
         dateStart = entry.dateStart;
@@ -310,33 +317,20 @@ fetch("./content/content.json")
         //#endregion status
         //#region content
 
-        if (entry.iFrameSrc) {
-          /**
-           * @type {HTMLIFrameElement}
-           */
-          const iframe = MyHTML.getChildById(newClone, "content-iframe");
+        /**
+         * @type {HTMLIFrameElement}
+         */
+        const iframe = MyHTML.getChildById(newClone, "content-iframe");
 
-          //add on load resizing
-          iframe.addEventListener(
-            "load",
-            (ev) => iFrameResize(ev.currentTarget),
-            {
-              //TODO: verify if a one time event is useful here. Only relevant if the iframe is visible on page load.
-              once: true,
-            },
-          );
-          iframe.addEventListener(
-            displayEvent,
-            (ev) => {
-              console.log("Display event got!");
-              if (ev.detail.open) iFrameResize(ev.currentTarget);
-            },
-            { capture: true },
-          );
+        // add on load resizing
+        iframe.addEventListener("load", iFrameResize);
+        // add on parent display change
+        iframe.addEventListener(displayEvent, iFrameResize);
+        // add on resize event
+        iframe.addEventListener("resize", iFrameResize);
 
-          //add source
-          iframe.src = entry.iFrameSrc;
-        }
+        //add source
+        iframe.src = entry.iFrameSrc;
 
         //#endregion content
         //#region footer

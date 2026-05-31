@@ -14,17 +14,12 @@ const MyDispPropName = "--rememberDisplay";
 export default class MyDisplay {
   //#region setup
   /**
-   *
+   * Sets display property to existing display value.
    * @param {HTMLElement} el
    * @returns {string}
    */
   static setup(el) {
-    // style is set
-    if (el.style.display) return el.style.display;
-
-    // no direct style set for display
-    //saving display val to direct display
-    const display = window.getComputedStyle(el).display;
+    const display = this.get(el);
     this.set(el, display);
     return display;
   }
@@ -40,6 +35,7 @@ export default class MyDisplay {
     if (rememberDisplay) return rememberDisplay;
 
     // if no remembrance is setup, check different sources for style and set it.
+    this.setup(el);
     const disp = this.get(el);
     let newValue; // this val will be set as remember value
     if (disp != "none") {
@@ -116,7 +112,11 @@ export default class MyDisplay {
    * @returns {String}
    */
   static get(el) {
-    return this.setup(el);
+    if (el.style.display) return el.style.display;
+
+    // no direct style set for display
+    //saving display val to direct display
+    return window.getComputedStyle(el).display;
   }
   /**
    * Set style display property of the {@link HTMLElement}
