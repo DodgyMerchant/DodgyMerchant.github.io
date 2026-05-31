@@ -1,3 +1,6 @@
 [submodule "projects/MI1Website"]
-	path = projects/MI1Website
+	path = content/FutureMindCampaign/project
 	url = https://github.com/DodgyMerchant/MI1Website
+[submodule "content/HistoricMovementWebsite/project"]
+	path = content/HistoricMovementWebsite/project
+	url = https://github.com/DodgyMerchant/HistoryWebsite.git
