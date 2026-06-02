@@ -3,7 +3,7 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-// TODO: fold not displayed projects. remove
+// NEXT: fold not displayed projects. remove
 // TODO: replace more let with const
 
 /**
@@ -20,13 +20,9 @@ const IFautoResizeClass = "iframe-autoResize";
  * @param {Event} ev
  */
 function iFrameResize(ev) {
-  console.log("resize call: ");
   //if im being displayed
   if (MyDisplay.get(ev.target) != "none") {
-    console.log("Resizing iFrame", ev);
-    ev.target.style.height =
-      // ev.target.contentDocument.documentElement.scrollHeight + "px";
-      ev.target.contentDocument.body.scrollHeight + "px";
+    ev.target.style.height = ev.target.contentDocument.body.scrollHeight + "px";
   }
 }
 
@@ -34,7 +30,6 @@ function iFrameResize(ev) {
  * iFrames need to be resized if the view resizes. *sigh*
  */
 new ResizeObserver((entries, observer) => {
-
   //get all iframes that want updates
   for (const iframe of document.getElementsByClassName(IFautoResizeClass)) {
     iframe.dispatchEvent(new Event("resize"));
@@ -54,7 +49,7 @@ const urlKeys = {
   },
 };
 
-// TODO: get filters from the URL and apply them to the filterInit value in the ContentManager constructor.
+// TODO: get filters from the URL and apply them to the tagListInit value in the ContentManager constructor.
 // window.location.replace() // no reload
 // history.replaceState()
 // history.pushState()
@@ -97,6 +92,7 @@ new ContentManager(
   undefined,
   undefined,
   1,
+  undefined,
   [urlParam.get(urlKeys.category.key) ?? categoryDefault],
   false,
 );
@@ -407,7 +403,7 @@ fetch("./content/content.json")
           for (let i = 0; i < subSections.length; i++) {
             subSection = subSections.item(i);
             heading = subSection.previousElementSibling;
-            //check if section has a header its a header
+            //check if section has a header
             if (!headingList.includes(heading.nodeName))
               //end early if no previous heading present
               continue;
@@ -430,6 +426,7 @@ fetch("./content/content.json")
         },
         undefined,
         undefined,
+        "all",
         ["all"],
       );
       //#endregion
