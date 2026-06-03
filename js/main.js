@@ -2,8 +2,10 @@ import ContentManager from "../myJS/MyContent.js";
 import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
+/**
+ * @import
+ */
 
-// NEXT: fold not displayed projects. remove
 // TODO: replace more let with const
 
 /**
@@ -89,6 +91,7 @@ new ContentManager(
   "active",
   "lvl-filtered",
   "active",
+  undefined,
   undefined,
   undefined,
   1,
@@ -248,7 +251,7 @@ fetch("./content/content.json")
         const parent = ev.currentTarget.parentElement;
         MyHTML.toggleClass(parent, ContOpenClass);
 
-        //dispatch display event with new display status.
+        // dispatch display event with new display status.
         // couldn't get capturing to work, so direct dispatch.
         MyHTML.getChildById(parent, "content-iframe").dispatchEvent(
           new DisplayEvent(parent.classList.contains(ContOpenClass)),
@@ -369,7 +372,6 @@ fetch("./content/content.json")
           MouseEventToOpen,
           toggleDisp,
         );
-        // _newClone.firstElementChild.addEventListener("pointerdown", toggleDisp);
       }
 
       //#endregion generate content
@@ -425,6 +427,22 @@ fetch("./content/content.json")
           //#endregion active/highlited subsections
         },
         undefined,
+        (content) => {
+          //#region fold project if not displayed.
+
+          if (
+            !content.active &&
+            MyHTML.hasAnyClass(content.target, ContOpenClass)
+          )
+            toggleDisp(
+              //fake event, scuffed I know.
+              {
+                currentTarget: { parentElement: content.target },
+              },
+            );
+
+          //#endregion
+        },
         undefined,
         "all",
         ["all"],

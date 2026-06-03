@@ -1,7 +1,7 @@
 /**
  * @file Collection of code that manages content.
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 import MyTags from "../myJS/MyTags.js";
@@ -9,8 +9,7 @@ import MyHTML from "./MyHTML.js";
 import MyArr from "./MyArr.js";
 
 /**
- * Tracks and manages its content.
- * Content is a HTML element.
+ * Tracks and manages its Filtered HTMLElement.
  */
 class Content {
   /**
@@ -27,6 +26,15 @@ class Content {
    * @type {string[]}
    */
   tags;
+
+  /**
+   * @callback FilteredCallback Function called by the {@link Content} Object after being enabled/disabled through the {@link ContentManager}.
+   * @param {Content} content the content element.
+   */
+  /**
+   *
+   */
+  callback;
 
   _active = false;
   get active() {
@@ -50,22 +58,25 @@ class Content {
       // );
       MyHTML.removeClass(this.target, this.manager.filteredClassActive);
     }
+    this.callback(this);
   }
 
   /**
-   *
+   * Tracks and manages its Filtered HTMLElement.
    * @param {ContentManager} manager
    * @param {HTMLElement} target
    * @param {string[]} tags
+   * @param {FilteredCallback} callback
    */
-  constructor(manager, target, tags) {
+  constructor(manager, target, tags, callback) {
     this.manager = manager;
     this.target = target;
     this.tags = tags;
+    this.callback = callback.bind(this);
   }
 }
 
-/*
+/* Naming Scheme
 Filter = an intractable HTMLElement that applies its tags to filter Content elements.
 Filtered = HTMLElements that will displayed depending on the overlap of their tags with the active tag list.
 Tag = a singular tag.
@@ -130,7 +141,6 @@ export default class ContentManager {
   /**
    * Callback function type used on every user interaction with a registered filter element.
    * @callback FilterCallback Callback used on filter interaction.
-   * @this ContentManager
    * @param {HTMLElement} ev Event targeting the filter element.
    * @param {boolean} newState Boolean that conveys if relating filters are active (true) or inactive (false).
    * @param {string[]} tags Tag of the target HTMLElement.
@@ -172,9 +182,11 @@ export default class ContentManager {
    */
   filteredDispList = [];
 
+  //#endregion filtered
+  //#region tags and filters
+
   /**
    * @callback ApplyCallback Function called after every update to the tag list.
-   * @this ContentManager
    * @param {number} number number of results after filter application.
    * @param {Content[]} displayedList List of Content Objects that should be displayed with current active filter..
    * @param {import("../myJS/MyTags.js").TagBehavior} behavior Tag Filtering behavior that determines if a Filtered Object/Element should be displayed.
@@ -186,9 +198,6 @@ export default class ContentManager {
    * @type {ApplyCallback | undefined}
    */
   applyCallback;
-
-  //#endregion filtered
-  //#region tags and filters
 
   /**
    * @type {string} Class name of the "all" tag class.
@@ -222,13 +231,14 @@ export default class ContentManager {
    * @param {string | undefined} filterClassActive Name of the class set to a filter if its tags are in use. Used to Highlight active filters.
    * @param {string} filteredClassName HTML class name of a content/filtered HTML element.
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
-   * @param {ApplyCallback=} [applyCallback=undefined] Callback function called after every update to the tag list. Useful to set the number of found objects into an element.
-   * @param {FilterCallback=} [filterCallback=()=>void] Callback function used on every user interaction with a registered filter element. Defaults to a {@link FilterCallback} that calls {@link TagListApply}.
+   * @param {ApplyCallback} [applyCallback=undefined] Callback function called after every update to the tag list. Useful to set the number of found objects into an element.
+   * @param {FilterCallback} [filterCallback=() => void] Callback function used on every user interaction with a registered filter element. Defaults to a {@link FilterCallback} that calls {@link TagListApply}.
+   * @param {FilteredCallback} [filteredCallback=() => {}] Function called by the {@link Content} Object after being enabled/disabled through the {@link ContentManager}.
    * @param {number} [tagListNumMax=-1] Maximum number of filters. Defaults to -1 for infinite.
    * @param {string} [allClassName="all"] Class name of the "all" class.
    * @param {string[]} [tagListInit=[allClassName]] Tags to apply on initialization. defaults to "all".
-   * @param {boolean=} [zeroSelect=true] If the system allows the unselecting of the last filters resulting in an empty list. Defaults to true.
-   * @param {boolean=} [tagFallback=true] If the system should apply the tag fallback list if no tags are selected. Defaults to true.
+   * @param {boolean} [zeroSelect=true] If the system allows the unselecting of the last filters resulting in an empty list. Defaults to true.
+   * @param {boolean} [tagFallback=true] If the system should apply the tag fallback list if no tags are selected. Defaults to true.
    * @param {string[]} [tagFallbackList=[allClassName]] Tag list to use as fallback. The fallback list is used if the tag list is empty. Defaults to "all".
    * @param {import("../myJS/MyTags.js").TagBehavior=} [filteredBehavior="match"] Behavior determining if Filtered receive active class. Defaults to "match".
    * @param {import("../myJS/MyTags.js").TagBehavior=} [filterBehavior="all"] Behavior determining if Filters receive active class. Defaults to "all".
@@ -243,6 +253,7 @@ export default class ContentManager {
     filterCallback = () => {
       this.TagListApply();
     },
+    filteredCallback = () => {},
     tagListNumMax = -1,
     allClassName = "all",
     tagListInit = [allClassName],
@@ -275,7 +286,9 @@ export default class ContentManager {
 
     elements.forEach((element) => {
       //add new content Obj to manager.
-      this.contentList.push(new Content(this, element.element, element.tags));
+      this.contentList.push(
+        new Content(this, element.element, element.tags, filteredCallback),
+      );
     });
 
     this.applyCallback = applyCallback;
