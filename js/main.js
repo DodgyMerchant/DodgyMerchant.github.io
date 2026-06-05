@@ -113,8 +113,8 @@ const collection = document.getElementsByClassName(filterFoldClass);
  * @param {PointerEvent} ev
  */
 const filterGroupCallback = (ev) => {
-  let heading = ev.currentTarget;
-  let filterGroup = heading.nextElementSibling;
+  const heading = ev.currentTarget;
+  const filterGroup = heading.nextElementSibling;
 
   // toggles the display status of the filter group
   MyHTML.toggleClass(filterGroup, filterOpenClass);
@@ -192,8 +192,9 @@ class DisplayEvent extends CustomEvent {
 
 const ContOpenClass = "ContOpen";
 const ContCompressedClass = "ContentCompressed";
+const ContentPath = "./content/content.json";
 
-fetch("./content/content.json")
+fetch(ContentPath)
   .then((results) => results.json())
   .then(
     /**
@@ -201,6 +202,8 @@ fetch("./content/content.json")
      * @returns
      */
     (data) => {
+      const content = data.content;
+
       /**
        * Holds data for ContentManager
        * @type {[{element: HTMLElement, tags: string[]}]}
@@ -218,24 +221,6 @@ fetch("./content/content.json")
         );
         return;
       }
-      // TODO: move variables to where they are used.
-      /**
-       * @type {ContentData}
-       */
-      let entry;
-      /**
-       * @type {string}
-       */
-      let dateStart,
-        /**
-         * @type {string}
-         */
-        dateEnd,
-        /**
-         * @type {HTMLDivElement}
-         */
-        newClone,
-        dateText;
 
       /**
        * Toggles the display of the project entry {@link HTMLElement} that is the {@link InputEvent}.
@@ -255,14 +240,31 @@ fetch("./content/content.json")
         );
       };
 
-      iFrameResize;
-
       const regN = new RegExp("[\r\n]");
-      let content;
+      let /**
+         * @type {ContentData}
+         */
+        entry,
+        /**
+         * @type {HTMLDivElement}
+         */
+        newClone,
+        /**
+         * @type {string}
+         */
+        dateStart,
+        /**
+         * @type {string}
+         */
+        dateEnd,
+        /**
+         * @type {string}
+         */
+        dateText;
 
       //add all projects
-      for (let i = 0; i < data.content.length; i++) {
-        entry = data.content[i];
+      for (let i = 0; i < content.length; i++) {
+        entry = content[i];
         newClone = MyTemplate.addTemplate(contDest, contTemp)[0];
 
         //save to list for content manager
@@ -402,22 +404,22 @@ fetch("./content/content.json")
           for (let i = 0; i < subSections.length; i++) {
             subSection = subSections.item(i);
             heading = subSection.previousElementSibling;
-            //check if section has a header
+            // Check if section has a header
             if (!headingList.includes(heading.nodeName))
-              //end early if no previous heading present
+              // End early if no previous heading present
               continue;
-            //find any child filter that is active
-            let ii;
-            for (ii = 0; ii < subSection.children.length; ii++) {
-              //if filter is active
+            // Find any child filter that is active
+            let ii; // Needed after loop
+            for (let ii = 0; ii < subSection.children.length; ii++) {
+              // If filter is active
               if (subSection.children[ii].classList.contains("active")) {
-                //Give heading active if not present, and end this loop
+                // Give heading active if not present, and end this loop
                 heading.classList.add("active");
                 break;
               }
             }
 
-            //remove active class if no children are active
+            // Remove active class if no children are active
             if (ii >= subSection.children.length)
               heading.classList.remove("active");
           }
@@ -432,7 +434,7 @@ fetch("./content/content.json")
             MyHTML.hasAnyClass(content.target, ContOpenClass)
           )
             toggleDisp(
-              //fake event, scuffed I know.
+              // Fake event, scuffed I know.
               {
                 currentTarget: { parentElement: content.target },
               },
