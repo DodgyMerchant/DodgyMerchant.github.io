@@ -6,7 +6,7 @@
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 /**
- * @typedef {"one" | "all" | "match" | "complete" | "exact"} TagBehavior refer to behavior map or MyTags Class for explainaition of individual behaviors.
+ * @typedef {"one" | "all" | "match" | "complete" | "exact"} TagBehavior refer to behavior map or MyTags Class for explanation of individual behaviors.
  */
 /**
  * Tag or filter logic handling class.
@@ -15,14 +15,14 @@
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 export default class MyTags {
-  /* Filter Logic explainaition
+  /* Filter Logic explanation
   
   complete  = all tags in the target are matched to tags in the filter.
 
   match     = all tags in the filter are matched to tags in the target.
 
 	target  filter
-	"one":       one or more mathcing tags
+	"one":       one or more matching tags
 	true   ["a", "x"] ["a", "y"]                       true =  incomplete  mismatch
 	false  ["a", "x"] ["c", "y"]                       false = incomplete  mismatch
 	"all":       all target tags are in the filter
@@ -75,7 +75,7 @@ export default class MyTags {
    */
   // prettier-ignore
   static TagBehaviorMap = new Map([
-        ["one", "Displays all objects with atleast one matching tags."],
+        ["one", "Displays all objects with at least one matching tags."],
         ["all", "Displays all objects with all their tags matching."],
         ["exact","Displays all objects that have the exact same tags as used in the filter. All, not more or less."],
     ]);
@@ -85,7 +85,7 @@ export default class MyTags {
    */
   // prettier-ignore
   static TagBehaviorMapExt = new Map([
-        ["one",       "Displays all objects with atleast one matching tag."],
+        ["one",       "Displays all objects with at least one matching tag."],
         ["all",       "Displays all objects that have all their tags in the filter."],
         ["match",     "Displays all objects that have matching and no mismatching tags in the filter."],
         ["complete",  "Displays all objects that have no mismatching tags unless all tags are contained in the filter"],
@@ -93,7 +93,7 @@ export default class MyTags {
     ]);
 
   /**
-   * Checks if target tags correspont to the filter tags using given behavior.
+   * Checks if target tags correspond to the filter tags using given behavior.
    * If target tag list is empty will only be drawn if the filter tags are also empty.
    * @param {string[]=} targetTags List of Tags belonging to the target.
    * @param {string[]=} filterTags List of Tags to filter by. If no tags are given it will always return true.
@@ -101,35 +101,26 @@ export default class MyTags {
    * @returns {boolean}
    */
   static Compare(targetTags, filterTags, behavior) {
-    let o, f, Otag, Ftag;
-
-    let trgEmpty = targetTags.length == 0;
-    let tagEmpty = !filterTags || filterTags.length == 0;
+    const trgEmpty = targetTags.length == 0;
+    const tagEmpty = !filterTags || filterTags.length == 0;
 
     if (!trgEmpty && !tagEmpty) {
       switch (behavior) {
-        case "one":
-          //look for one match
+        case "one": // look for one match
+          let o, OTag, FTag;
 
-          for (f = 0; f < filterTags.length; f++) {
-            Ftag = filterTags[f];
+          for (let f = 0; f < filterTags.length; f++) {
+            FTag = filterTags[f];
             for (o = 0; o < targetTags.length; o++) {
-              Otag = targetTags[o];
+              OTag = targetTags[o];
 
-              if (Otag == Ftag) {
+              if (OTag == FTag) {
                 return true;
               }
             }
           }
           return false;
         case "all":
-          //all target tags must be in the filter tags
-          // for (let i = 0; i < filterTags.length; i++) {
-          // 	if (!targetTags.includes(filterTags[i])) {
-          // 		return false;
-          // 	}
-          // }
-
           return this._cc(targetTags, filterTags);
         case "match":
           return this._cm(targetTags, filterTags);
@@ -141,41 +132,12 @@ export default class MyTags {
             return false;
           return true;
         case "exact":
-          //#region old
-          // //looks for the exact same tags
-          // feed = false;
-
-          // //early exit if tag number isnt equal
-          // if (targetTags.length != filterTags.length) return false;
-
-          // for (o = 0; o < targetTags.length; o++) {
-          // 	Otag = targetTags[o];
-          // 	for (f = 0; f < filterTags.length; f++) {
-          // 		Ftag = filterTags[f];
-
-          // 		if (Ftag == Otag) {
-          // 			feed = true;
-          // 			break;
-          // 		}
-          // 	}
-
-          // 	if (!feed) {
-          // 		return false;
-          // 	} else {
-          // 		feed = false;
-          // 	}
-          // }
-
-          // return true;
-
-          //#endregion old
-
           return (
             this._cc(targetTags, filterTags) && this._cm(targetTags, filterTags)
           );
       }
     } else {
-      //if object tag list empty only draw if filter list is also empty
+      // if object tag list empty only true if filter list is also empty.
       if (trgEmpty) {
         if (tagEmpty) return true;
         else return false;
