@@ -3,8 +3,6 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
-// TODO: replace more let with const
-
 /**
  *used mouse event to open/close sections. like filters & projects.
  */
