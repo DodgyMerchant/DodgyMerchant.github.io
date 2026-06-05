@@ -2,9 +2,6 @@ import ContentManager from "../myJS/MyContent.js";
 import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
-/**
- * @import
- */
 
 // TODO: replace more let with const
 
@@ -266,7 +263,7 @@ fetch("./content/content.json")
       //add all projects
       for (let i = 0; i < data.content.length; i++) {
         entry = data.content[i];
-        newClone = MyTemplate.addTemplate(contTemp, contDest)[0];
+        newClone = MyTemplate.addTemplate(contDest, contTemp)[0];
 
         //save to list for content manager
         elements.push({ element: newClone, tags: entry.tags });
@@ -349,8 +346,8 @@ fetch("./content/content.json")
           for (let i = 0; i < entry.footer.links.length; i++) {
             linkObj = entry.footer.links[i];
             link = MyTemplate.addTemplate(
-              document.getElementById("template-ContLink"),
               MyHTML.getChildById(newClone, "content-links"),
+              document.getElementById("template-ContLink"),
             )[0];
             link.firstChild.textContent = linkObj.text;
             link.firstElementChild.innerText = linkObj.URL;

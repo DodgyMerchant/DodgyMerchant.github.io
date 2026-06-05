@@ -1,20 +1,20 @@
-// TODO: replace non changing let with const
-
 // check for Template support
 const supportsTemplate = new Boolean(
   document.createElement("Template").content,
 );
+
 // continue or exit
 if (supportsTemplate) {
-  console.log("Your browser supports Template!");
 } else {
-  console.error("Your browser does NOT support Template!!!");
+  alert(
+    "Notice:\n\nYour Browser is far out of date.\nThis will cause most of this websites content to display incorrectly.\n\nMeaning large parts wont display at all.",
+  );
 }
 
 /**
  * HTML template element handling class.
  * Has only static functions.
- * @version 1.1.0
+ * @version 1.2.0
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  */
 export default class MyTemplate {
@@ -30,32 +30,39 @@ export default class MyTemplate {
   }
 
   /**
-   * Clers of all child elements.
-   * @param {HTMLElement} parEl
+   * Clears element of all its child elements.
+   * @param {HTMLElement} htmlElement
    */
-  static clearAll(parEl) {
-    let _child = parEl.firstElementChild;
+  static clearAll(htmlElement) {
+    const _child = htmlElement.firstElementChild;
     while (_child) {
-      parEl.removeChild(_child);
-      _child = parEl.firstElementChild;
+      htmlElement.removeChild(_child);
+      _child = htmlElement.firstElementChild;
     }
   }
 
-  static addChild(child, target) {
-    return target.appendChild(child);
+  /**
+   * Adds child to parent as a child.
+   * @param {HTMLElement} parent Parent element to add child to.
+   * @param {HTMLElement} child Child element to add to parent.
+   * @returns {HTMLElement} Returns parent element for chaining.
+   */
+  static addChild(parent, child) {
+    return parent.appendChild(child);
   }
   /**
-   * Adds all template children to target element and returns a list of all added elelemnts.
-   * @param {HTMLTemplateElement} template
-   * @param {HTMLElement} target
-   * @returns {Element[]}
+   * Adds all children of provided template element to target the element.
+   * Returns a list of all added child elements.
+   * @param {HTMLElement} parent Parent {@link HTMLElement} to add children to.
+   * @param {HTMLTemplateElement} template Template which {@link HTMLElement} children element to add.
+   * @returns {Element[]} List of added elements.
    */
-  static addTemplate(template, target) {
-    let list = [];
-    let temp = this.create(template);
+  static addTemplate(parent, template) {
+    const list = [];
+    const newTemplate = this.create(template);
     do {
-      list.push(this.addChild(temp.firstElementChild, target));
-    } while (temp.childElementCount > 0);
+      list.push(this.addChild(parent, newTemplate.firstElementChild));
+    } while (newTemplate.childElementCount > 0);
 
     return list;
   }

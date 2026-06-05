@@ -1,5 +1,3 @@
-// TODO: replace non changing let with const
-
 /**
  * @file tag or filter logic handling class.
  * Tags are strings that have to be an exact match.
