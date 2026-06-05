@@ -3,13 +3,20 @@
  * @author Dodgy_Merchant <admin@dodgymerchant.dev>
  * @version 3.0.0
  */
-
 import MyTags from "../myJS/MyTags.js";
 import MyHTML from "./MyHTML.js";
 import MyArr from "./MyArr.js";
 
+/* Naming Scheme
+ * Filter = an intractable HTMLElement that applies its tags to filter Content elements.
+ * Filtered = HTMLElements that will displayed depending on the overlap of their tags with the active tag list.
+ * Tag = a singular tag.
+ * Tag List = a list of tags used to filter Filtered elements.
+ * Content = a management object used with Filtered elements.
+ */
+
 /**
- * Tracks and manages its Filtered HTMLElement.
+ * Class to track and manage its HTMLElement.
  */
 class Content {
   /**
@@ -28,7 +35,7 @@ class Content {
   tags;
 
   /**
-   * @callback FilteredCallback Function called by the {@link Content} Object after being enabled/disabled through the {@link ContentManager}.
+   * @callback FilteredCallback Function called by the {@link ContentManager.Content} Object after being enabled/disabled through the {@link ContentManager}.
    * @param {Content} content the content element.
    */
   /**
@@ -76,18 +83,15 @@ class Content {
   }
 }
 
-/* Naming Scheme
-Filter = an intractable HTMLElement that applies its tags to filter Content elements.
-Filtered = HTMLElements that will displayed depending on the overlap of their tags with the active tag list.
-Tag = a singular tag.
-Tag List = a list of tags used to filter Filtered elements.
-Content = a management object used with Filtered elements.
-*/
-
 /**
  * ContentManager Object.
  */
 export default class ContentManager {
+  /**
+   * Class to track and manage its HTMLElement.
+   */
+  static Content = Content;
+
   //#region filter elements
 
   /**
@@ -212,6 +216,7 @@ export default class ContentManager {
 
   //#endregion filtered
   //#region Content Objects
+
   /**
    * @type {Content[]}
    */
@@ -233,7 +238,7 @@ export default class ContentManager {
    * @param {string} filteredClassActive Name of the class set to a filtered object if is can be displayed.
    * @param {ApplyCallback} [applyCallback=undefined] Callback function called after every update to the tag list. Useful to set the number of found objects into an element.
    * @param {FilterCallback} [filterCallback=() => void] Callback function used on every user interaction with a registered filter element. Defaults to a {@link FilterCallback} that calls {@link TagListApply}.
-   * @param {FilteredCallback} [filteredCallback=() => {}] Function called by the {@link Content} Object after being enabled/disabled through the {@link ContentManager}.
+   * @param {FilteredCallback} [filteredCallback=() => {}] Function called by the {@link ContentManager.Content} Object after being enabled/disabled through the {@link ContentManager}.
    * @param {number} [tagListNumMax=-1] Maximum number of filters. Defaults to -1 for infinite.
    * @param {string} [allClassName="all"] Class name of the "all" class.
    * @param {string[]} [tagListInit=[allClassName]] Tags to apply on initialization. defaults to "all".
@@ -287,7 +292,12 @@ export default class ContentManager {
     elements.forEach((element) => {
       //add new content Obj to manager.
       this.contentList.push(
-        new Content(this, element.element, element.tags, filteredCallback),
+        new ContentManager.Content(
+          this,
+          element.element,
+          element.tags,
+          filteredCallback,
+        ),
       );
     });
 
@@ -386,7 +396,7 @@ export default class ContentManager {
    * @returns {boolean}
    */
   TagCheck(element, filterTags, behavior) {
-    if (element instanceof Content) {
+    if (element instanceof ContentManager.Content) {
       return MyTags.Compare(
         element.tags,
         filterTags,
