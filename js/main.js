@@ -3,12 +3,14 @@ import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
 import MyTemplate from "../myJS/MyTemplate.js";
 
+// TODO: Project folding indicator. Sketch is in Obsidian.
+
 /**
  *used mouse event to open/close sections. like filters & projects.
  */
 const MouseEventToOpen = "pointerup";
 
-//#region iframes
+//#region HTML iframes
 
 const IFautoResizeClass = "iframe-autoResize";
 
@@ -35,52 +37,192 @@ new ResizeObserver((entries, observer) => {
 
 //#endregion iframes
 //#region URL parameters
-const urlKeys = {
-  category: {
-    key: "c",
+
+// NEXT: get filters from the URL and apply them to the tagListInit value in the ContentManager constructor.
+// [x]: url => tags
+// [ ]: tags => url
+
+// TODO: export url manager system into own file.
+
+class URLManager {
+  /**
+   * URL parameter interface
+   * @type {URLSearchParams}
+   */
+  _searchParam;
+  /**
+   *
+   * @param {URLSearchParams} urlSearchParam
+   */
+  constructor(urlSearchParam) {
+    this._searchParam = urlSearchParam;
+  }
+  /**
+   * Set key value pair of url.
+   * @param {string} key
+   * @param {string} value
+   */
+  set(key, value) {
+    this._searchParam.set(key, value);
+    console.log("searchParam value updated!", key, value);
+
+    // TODO: update location and history
+  }
+  /**
+   * Get value of key parameter.
+   * @param {string} key Key of the returned value.
+   * @returns {string}
+   */
+  get(key) {
+    // TODO: decode uri
+
+    return this._searchParam.get(key);
+  }
+}
+/**
+ * Tracks one specific url property.
+ */
+class URLTracker extends URLManager {
+  /**
+   * Identifier string of managed property.
+   * @type {string}
+   */
+  key;
+  /**
+   * The default tag applied on load, if no other is provided in the url parameters.
+   * @type {string}
+   */
+  fallback;
+  /**
+   * Dictionary of values.
+   * @type {{ [key: string]: string }}
+   * */
+  tags;
+  /**
+   *
+   * @param {URLSearchParams} urlSearchParam
+   * @param {string} key
+   * @param {string} fallback default value
+   * @param {{ [key: string]: string }} tags Dictionary of values.
+   */
+  constructor(urlSearchParam, key, fallback, tags) {
+    super(urlSearchParam);
+    this.key = key;
+    this.fallback = fallback;
+    this.tags = tags;
+  }
+  /** Resets the filter to default state. */
+  reset() {
+    this.set(this.fallback);
+  }
+  /**
+   * Set value of managed url property.
+   * @param {string} value value to set.
+   */
+  set(value) {
+    super.set(this.key, value);
+  }
+  /**
+   * Returns the managed properties value from the url.
+   * @returns {string}
+   */
+  get() {
+    return super.get(this.key);
+  }
+}
+/**
+ * Tracks one specific URL property with multiple values.
+ */
+class URLTrackerMulti extends URLTracker {
+  /**
+   * @type {string}
+   */
+  separator;
+  /**
+   *
+   * @param {URLSearchParams} urlSearchParam
+   * @param {string} key
+   * @param {string} fallback default value
+   * @param {{ [key: string]: string }} tags Dictionary of values.
+   * @param {string} separator string that separates values.
+   */
+  constructor(urlSearchParam, key, fallback, tags, separator) {
+    super(urlSearchParam, key, fallback, tags);
+
+    this.separator = separator;
+  }
+  /**
+   * Set list of values to managed url property.
+   * @param {string[] | string} value key to set filter to
+   */
+  set(value) {
+    if (!Array.isArray(value)) value = [value];
+
+    super.set(value.join(this.separator));
+  }
+  /**
+   * Returns the managed properties list of values from the url.
+   * @returns {string[]}
+   */
+  get() {
+    return super.get()?.split(this.separator);
+  }
+}
+
+const _sp = new URLSearchParams(window.location.search);
+const UrlObj = {
+  /**
+   * @type {URLTracker}
+   */
+  category: new URLTracker(_sp, "c", "about", {
     about: "about",
     projects: "projects",
-  },
-  filter: {
-    key: "f",
+    other: "other",
+  }),
+  /**
+   * @type {URLTrackerMulti}
+   */
+  filter: new URLTrackerMulti(_sp, "f", "all", {}, ","),
+  getUrlBase: () => {
+    return window.location.origin + window.location.pathname;
   },
 };
 
-// TODO: get filters from the URL and apply them to the tagListInit value in the ContentManager constructor.
+// full URL
+// window.location.origin + window.location.pathname + window.location.search
+// UrlObj.GetUrlBase() + window.location.search
+
 // window.location.replace() // no reload
 // history.replaceState()
 // history.pushState()
 
-/**
- * URL parameter interface
- */
-const urlParam = new URLSearchParams(window.location.search);
+// history.replaceState();
 
-//category
-urlParam.get(urlKeys.category.key);
-//filter
-urlParam.get(urlKeys.filter)?.split("+");
+if (!UrlObj.category.get()) {
+  UrlObj.category.reset();
+}
+const tags = UrlObj.filter.get();
+// if no tags
+if (!tags) {
+  // set default filter
+  UrlObj.filter.reset();
+}
 
-urlKeys.category.projects;
+console.log(UrlObj.category._searchParam, UrlObj.filter.get());
 
 //#endregion  URL parameters
 //#region category, Top level ContentManager
-
-/**
- * The default category to apply on load, if no other is provided
- */
-const categoryDefault = urlKeys.category.about;
 
 // Create ContentManager to manage top level displayed sections: about / projects
 new ContentManager(
   // prettier-ignore
   [
-    { element: document.getElementById("about"), tags: [urlKeys.category.about] },
-    { element: document.getElementById("about-head"), tags: [urlKeys.category.about] },
-    { element: document.getElementById("about-aside"), tags: [urlKeys.category.about] },
-    { element: document.getElementById("projects"), tags: [urlKeys.category.projects] },
-    { element: document.getElementById("projects-head"), tags: [urlKeys.category.projects] },
-    { element: document.getElementById("projects-nav"), tags: [urlKeys.category.projects] },
+    { element: document.getElementById("about"), tags: [UrlObj.category.tags.about] },
+    { element: document.getElementById("about-head"), tags: [UrlObj.category.tags.about] },
+    { element: document.getElementById("about-aside"), tags: [UrlObj.category.tags.about] },
+    { element: document.getElementById("projects"), tags: [UrlObj.category.tags.projects] },
+    { element: document.getElementById("projects-head"), tags: [UrlObj.category.tags.projects] },
+    { element: document.getElementById("projects-nav"), tags: [UrlObj.category.tags.projects] },
   ],
   "lvl-filter",
   "active",
@@ -91,7 +233,7 @@ new ContentManager(
   undefined,
   1,
   undefined,
-  [urlParam.get(urlKeys.category.key) ?? categoryDefault],
+  [UrlObj.category.get() ?? UrlObj.category.fallback],
   false,
 );
 
@@ -441,8 +583,8 @@ fetch(ContentPath)
           //#endregion
         },
         undefined,
-        "all",
-        ["all"],
+        UrlObj.filter.fallback,
+        UrlObj.filter.get() ?? [UrlObj.filter.fallback],
       );
       //#endregion
     },
