@@ -41,34 +41,34 @@ The language the project is in.
 
 ```json
 {
-    "headline": "HANDS",
-    "sub": "Lovecraftian Extreme Rock Paper Scissors.",
-    "tags": [
-        "game",
-        "code",
-        "GameMaker",
-        "GameMakerLang.",
-        "game-design",
-        "system-design",
-        "game-programming",
-        "ai-programming",
-        "gameplay-engineer",
-        "technical-art",
-        "asset-art",
-        "visual-design"
-    ],
-    "dateStart": "2021",
-    "language": "english",
-    "status": "stopped",
-    "iFrameSrc": "/content/HANDS/HANDS.html",
-    "footer": {
-        "repo": "https://github.com/DodgyMerchant/HANDS",
-        "links": [
-            {
-                "text": "Project GIFs: ",
-                "URL": "https://gfycat.com/@hiro_hunter/collections/Y5j3siTT/hands"
-            }
-        ]
-    }
+"headline": "HANDS",
+"sub": "Lovecraftian Extreme Rock Paper Scissors.",
+"tags": [
+    "game",
+    "code",
+    "GameMaker",
+    "GameMakerLang.",
+    "game-design",
+    "system-design",
+    "game-programming",
+    "ai-programming",
+    "gameplay-engineer",
+    "technical-art",
+    "asset-art",
+    "visual-design"
+],
+"dateStart": "2021",
+"language": "english",
+"status": "discontinued",
+"iFrameSrc": "/content/HANDS/HANDS.html",
+"footer": {
+    "repo": "https://github.com/DodgyMerchant/HANDS",
+    "links": [
+        {
+            "text": "Project GIFs: ",
+            "URL": "https://gfycat.com/@hiro_hunter/collections/Y5j3siTT/hands"
+        }
+    ]
+}
 },
 ```

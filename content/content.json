@@ -34,7 +34,7 @@
     "paused indefinitely",
     "paused",
     "unfinished",
-    "stopped"
+    "discontinued"
   ],
   "content": [
     {
@@ -56,7 +56,7 @@
       ],
       "dateStart": "2021",
       "language": "english",
-      "status": "stopped",
+      "status": "discontinued",
       "iFrameSrc": "/content/HANDS/HANDS.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/HANDS",
@@ -176,7 +176,7 @@
       "dateStart": "2021",
       "dateEnd": "unfinished",
       "language": "english",
-      "status": "stopped",
+      "status": "discontinued",
       "iFrameSrc": "/content/SPITE/SPITE.html",
       "footer": {
         "repo": "https://github.com/DodgyMerchant/SPITE_GM",
