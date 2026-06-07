@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 /* TODO: color scheme switcher for accessability. button: my theme (purple, blue) | night (black, white) | day (white, black) */
+/* NEXT: make page factor in scrollbar width, remove content <p> right margin */
+/* TODO: look into replacing viewport with dynamic viewport unit: vh vw with dvh dvw */
 
 :root {
   --fontFooter: normal 0.8em "Courier Prime", monospace;
@@ -56,12 +58,10 @@ html {
   font-size: 100%;
   box-sizing: border-box;
   font-family: var(--fontText);
-  min-height: 100%;
   scroll-behavior: smooth;
 }
 html p,
 html br {
-  /* line-height: normal; */
   line-height: 1.5rem;
 }
 
@@ -84,12 +84,6 @@ body {
   margin: 0 auto;
   padding: 0;
   height: 100%;
-  background: var(--colBG);
-  /* background-repeat: no-repeat;
-  background-attachment: fixed; */
-
-  /* TODO: make page factor in scrollbar width, remove content <p> right margin */
-  scrollbar-gutter: stable; /* reserves space for scrollbar even when not visible */
 }
 
 img {
@@ -269,6 +263,15 @@ a.delink {
 /* #endregion -utility classes */
 /* #region general*/
 
+body {
+  background: var(--colBG);
+  scrollbar-gutter: stable; /* reserves space for scrollbar even when not visible */
+}
+
+#base {
+  min-height: 100dvh;
+}
+
 h1,
 h2,
 h3 {
@@ -384,7 +387,6 @@ article p:not(img + p):not(header p):not(footer p),
 #project-page ul {
   line-height: normal;
   margin-bottom: 1em;
-  margin-right: 0.5em;
 }
 
 #project-page ul {
@@ -416,7 +418,8 @@ iframe.iframe-seamless {
 
 /* all content including no found message */
 #projects > article {
-  --dist: min(2vmin, 1em);
+  /* project outer spacing */
+  --dist: 0.75em;
   padding-left: var(--dist);
   border-left: var(--borderCont);
   border-bottom: var(--borderCont);
@@ -490,10 +493,6 @@ iframe.iframe-seamless {
 
 #base > footer {
   font: var(--fontFooter);
-  height: 100%;
-  width: 100%;
-  /* position: sticky;
-  bottom: 0; */
   background: var(--colBG);
   border-top: var(--gridGap) var(--colBG) solid;
 }
@@ -513,7 +512,6 @@ iframe.iframe-seamless {
 /* #region layout*/
 
 #base {
-  height: 100vh;
   display: grid;
   --gridGap: 0.5em;
   --grid2row: 7em;
@@ -552,14 +550,14 @@ iframe.iframe-seamless {
 }
 
 /* filter on the sides */
-@media (min-width: 430px) and (max-width: 800px) {
+@media (min-width: 550px) and (max-width: 800px) {
   #base {
     grid-template-areas:
       ". title"
       "topics main"
       "dataPanel main"
       "foot foot";
-    grid-template-columns: 12em 1fr;
+    grid-template-columns: max-content 1fr;
     grid-template-rows:
       max-content
       var(--grid2row)
@@ -600,7 +598,7 @@ iframe.iframe-seamless {
 }
 
 /* sticky filter if screen is big enough */
-@media (min-width: 430px) and (min-height: 400px) {
+@media (min-width: 550px) and (min-height: 400px) {
   #dataPanel > * {
     position: sticky;
     top: 0px;
@@ -641,6 +639,7 @@ iframe.iframe-seamless {
 #dataPanel {
   grid-area: dataPanel;
   text-align: end;
+  min-width: 10.5em;
 }
 #base > main {
   grid-area: main;
