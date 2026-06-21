@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 /* TODO: color scheme switcher for accessability. button: my theme (purple, blue) | night (black, white) | day (white, black) */
-/* NEXT: make page factor in scrollbar width, remove content <p> right margin */
+/* TODO: make page factor in scrollbar width, remove content <p> right margin */
 /* TODO: look into replacing viewport with dynamic viewport unit: vh vw with dvh dvw */
 
 :root {

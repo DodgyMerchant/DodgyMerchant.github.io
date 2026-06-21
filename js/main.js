@@ -1,4 +1,3 @@
-import MyArr from "../myJS/MyArr.js";
 import ContentManager from "../myJS/MyContent.js";
 import MyDisplay from "../myJS/MyDisplay.js";
 import MyHTML from "../myJS/MyHTML.js";
@@ -127,11 +126,6 @@ fetch(ContentPath)
     (data) => {
       //#region URL parameters
 
-      // NEXT: get filters from the URL and apply them to the tagListInit value in the ContentManager constructor.
-      // [x]: url => tags
-      // [x]: url => ur
-      // [ ]: tags => url
-
       const _sp = new URLSearchParams(window.location.search);
       const UrlObj = {
         /** @type {URLTagTracker} */
@@ -151,9 +145,8 @@ fetch(ContentPath)
           _sp,
           "f",
           ["all"],
-          Object.fromEntries < String > data.tags.map((s) => [s, s]),
+          Object.fromEntries(data.tags.map((s) => [s, s])),
           false,
-          ",",
         ),
       };
 
@@ -175,7 +168,11 @@ fetch(ContentPath)
         "active",
         "lvl-filtered",
         "active",
-        undefined,
+        (manager) => {
+          //BUG: setting history doesn't update on navigate back/forward.
+          //set URL from category.
+          UrlObj.category.set(manager.activeTags[0]);
+        },
         undefined,
         undefined,
         1,
@@ -369,7 +366,7 @@ fetch(ContentPath)
         "active",
         "content-filtered",
         "active",
-        (num, _displayedList, _behavior, _className) => {
+        (manager, num, _displayedList, _behavior, _className) => {
           //#region no projects found message
           // TODO: look if making Project not found message a feature makes sense.
 
@@ -412,6 +409,8 @@ fetch(ContentPath)
               heading.classList.remove("active");
           }
           //#endregion active/highlited subsections
+
+          UrlObj.filter.set(manager.activeTags);
         },
         undefined,
         (content) => {
@@ -432,7 +431,7 @@ fetch(ContentPath)
         },
         undefined,
         UrlObj.filter.fallback,
-        UrlObj.filter.get() ?? [UrlObj.filter.fallback],
+        UrlObj.filter.get() ?? UrlObj.filter.fallback,
       );
       //#endregion
     },

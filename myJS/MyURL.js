@@ -1,4 +1,5 @@
 import MyArr from "./MyArr.js";
+import MyTags from "./MyTags.js";
 
 // TODO: to URL Trackers need tag lists by default? wouldn't that be an additional feature for another class?
 
@@ -20,22 +21,12 @@ export class URLManager {
    * Updates Window {@link Location}.
    * @param {string} key Key to set value to.
    * @param {string} value Value to assign
-   * @param {boolean} [history=false] If the new location should be added to user history.
+   * @param {boolean} [historyOverride=false] If the new location should be added to user history.
    */
-  set(key, value, history = false) {
+  set(key, value, historyOverride = false) {
     this._searchParam.set(key, value);
 
-    // full URL
-    // window.location.origin + window.location.pathname + "?" + window.location.search
-    // UrlObj.GetUrlBase() + "?" + window.location.search
-
-    // window.location.assign() // reload, history
-    // window.location.replace() // reload, no history
-    // history.replaceState()
-    // history.pushState()
-
-    // history.replaceState();
-    this.updateURL(`?${this._searchParam.toString()}`, history);
+    this.updateURL(`?${this._searchParam.toString()}`, historyOverride);
   }
   /**
    * Get value of key parameter.
@@ -105,7 +96,14 @@ export class URLTagTracker extends URLManager {
     this.tags = tags;
     this.updateHistory = updateHistory;
 
-    this.set(this.validate(this.get()), false);
+    const urlTag = this.get() ?? this.fallback;
+    const validTag = this.validate(urlTag);
+
+    // a string is just an array. *sigh*.
+    // if url tag isnt valid, change it.
+    if (!MyTags.Compare(urlTag, validTag, "exact")) {
+      this.set(validTag, false);
+    }
   }
   /** Resets the filter to default state. */
   reset() {
@@ -124,18 +122,22 @@ export class URLTagTracker extends URLManager {
   }
   /**
    * Set value of managed url property.
+   * Automatically decodes the URI.
    * @param {string} value value to set.
-   * @param {boolean} [history=this.updateHistory] If the new location should be added to user history. Defaults to setting.
+   * @param {boolean} [historyOverride=this.updateHistory] If the new location should be added to user history. Defaults to setting.
    */
   set(value, historyOverride = this.updateHistory) {
-    super.set(this.key, value, history);
+    this._searchParam.set(this.key, encodeURIComponent(value));
+
+    this.updateURL(`?${this._searchParam.toString()}`, historyOverride);
   }
   /**
    * Returns the managed properties value from the url.
+   * Automatically encodes the URI.
    * @returns {string | null}
    */
   get() {
-    return super.get(this.key);
+    return decodeURIComponent(this._searchParam.get(this.key));
   }
 }
 /**
@@ -150,24 +152,6 @@ export class URLTagTrackerMulti extends URLTagTracker {
    */
   fallback;
 
-  /**
-   * @type {string}
-   */
-  separator;
-  /**
-   * @extends
-   * @param {URLSearchParams} urlSearchParam
-   * @param {string} key
-   * @param {string[]} fallback default value
-   * @param {{ [key: string]: string }} tags Dictionary of values.
-   * @param {boolean} updateHistory If the history should be automatically updated.
-   * @param {string} separator string that separates values.
-   */
-  constructor(urlSearchParam, key, fallback, tags, updateHistory, separator) {
-    super(urlSearchParam, key, fallback, tags, updateHistory);
-
-    this.separator = separator;
-  }
   /**
    * @override
    * @param {string[]} values
@@ -192,19 +176,23 @@ export class URLTagTrackerMulti extends URLTagTracker {
   }
   /**
    * Set list of values to managed url property.
+   * Automatically encodes the URI.
    * @override
    * @param {string[]} values
-   * @param {boolean} [history=this.updateHistory] If the new location should be added to user history. Defaults to setting.
+   * @param {boolean} [historyOverride=this.updateHistory] If the new location should be added to user history. Defaults to setting.
    */
-  set(values, history = this.updateHistory) {
-    super.set(values.map(encodeURIComponent).join(this.separator), history);
+  set(values, historyOverride = this.updateHistory) {
+    this._searchParam.set(this.key, values.map(encodeURIComponent).join(","));
+
+    this.updateURL(`?${this._searchParam.toString()}`, historyOverride);
   }
   /**
    * Returns the managed properties list of values from the url.
+   * Automatically decodes the URI.
    * @override
    * @returns {string[] | null}
    */
   get() {
-    return super.get()?.split(this.separator);
+    return this._searchParam.get(this.key)?.split(",").map(decodeURIComponent);
   }
 }

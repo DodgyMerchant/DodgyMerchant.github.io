@@ -145,6 +145,11 @@ export default class MyTags {
     }
   }
 
+  /**
+   * @param {string[]} t
+   * @param {string[]} f
+   * @returns {boolean}
+   */
   static _cc(t, f) {
     // check for completion
 
@@ -157,6 +162,12 @@ export default class MyTags {
     }
     return true;
   }
+  /**
+   *
+   * @param {string[]} t
+   * @param {string[]} f
+   * @returns {boolean}
+   */
   static _cm(t, f) {
     // check for matching
 

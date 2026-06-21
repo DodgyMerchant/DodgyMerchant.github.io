@@ -145,6 +145,7 @@ export default class ContentManager {
   /**
    * Callback function type used on every user interaction with a registered filter element.
    * @callback FilterCallback Callback used on filter interaction.
+   * @param {ContentManager} manager The {@link ContentManager}.
    * @param {HTMLElement} ev Event targeting the filter element.
    * @param {boolean} newState Boolean that conveys if relating filters are active (true) or inactive (false).
    * @param {string[]} tags Tag of the target HTMLElement.
@@ -191,6 +192,7 @@ export default class ContentManager {
 
   /**
    * @callback ApplyCallback Function called after every update to the tag list.
+   * @param {ContentManager} manager The {@link ContentManager}.
    * @param {number} number number of results after filter application.
    * @param {Content[]} displayedList List of Content Objects that should be displayed with current active filter..
    * @param {import("../myJS/MyTags.js").TagBehavior} behavior Tag Filtering behavior that determines if a Filtered Object/Element should be displayed.
@@ -379,6 +381,7 @@ export default class ContentManager {
     //callback
     if (this.applyCallback)
       this.applyCallback(
+        this,
         this.filteredDispList.length,
         this.filteredDispList,
         this.filteredBehavior,
@@ -446,7 +449,7 @@ export default class ContentManager {
 
         if (this.filterCallback)
           // call function with
-          this.filterCallback(ev, !check, tags);
+          this.filterCallback(this, ev, !check, tags);
       });
 
       // right mouse button, activate only this tag
@@ -456,7 +459,7 @@ export default class ContentManager {
         const tags = this.getTags(ev.target);
         this.activeTags = tags;
 
-        if (this.filterCallback) this.filterCallback(ev, true, tags);
+        if (this.filterCallback) this.filterCallback(this, ev, true, tags);
       });
     } else {
       // "all" button
@@ -467,7 +470,7 @@ export default class ContentManager {
         this.activeTags = [this.allClassName];
 
         if (this.filterCallback)
-          this.filterCallback(ev, true, this.getTags(ev.currentTarget));
+          this.filterCallback(this, ev, true, this.getTags(ev.currentTarget));
       };
 
       // left mouse button
