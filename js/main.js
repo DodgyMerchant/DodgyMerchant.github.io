@@ -380,35 +380,6 @@ fetch(ContentPath)
           //#region projects found counter
           document.getElementById("projects-number").innerText = num.toString();
           //#endregion projects found counter
-          //#region active/highlited subsections
-
-          //search all sub section for active filters and turn headings active
-          const subSections = document.getElementsByClassName("subFilter");
-          const headingList = ["H2", "H3", "H4", "H5", "H6"];
-          let subSection, heading;
-          for (let i = 0; i < subSections.length; i++) {
-            subSection = subSections.item(i);
-            heading = subSection.previousElementSibling;
-            // Check if section has a header
-            if (!headingList.includes(heading.nodeName))
-              // End early if no previous heading present
-              continue;
-            // Find any child filter that is active
-            let ii; // Needed after loop
-            for (let ii = 0; ii < subSection.children.length; ii++) {
-              // If filter is active
-              if (subSection.children[ii].classList.contains("active")) {
-                // Give heading active if not present, and end this loop
-                heading.classList.add("active");
-                break;
-              }
-            }
-
-            // Remove active class if no children are active
-            if (ii >= subSection.children.length)
-              heading.classList.remove("active");
-          }
-          //#endregion active/highlited subsections
 
           UrlObj.filter.set(manager.activeTags);
         },

@@ -350,7 +350,9 @@ nav ul li,
 .content-filter {
   color: var(--colContFilter);
 }
-#projects-nav > h3.active,
+/* #projects-nav > h3.active, */
+#projects-nav > h3:has(+ ul > li.active),
+/* #projects-nav > h3 + ul, */
 .content-filter.active {
   color: var(--colFilterA);
   text-decoration: underline;
