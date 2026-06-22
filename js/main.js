@@ -5,6 +5,7 @@ import MyTemplate from "../myJS/MyTemplate.js";
 import { URLTagTracker, URLTagTrackerMulti } from "../myJS/MyURL.js";
 
 // TODO: Project folding indicator. Sketch is in Obsidian.
+// TODO: link tags to url with project tag selected.
 
 /**
  *used mouse event to open/close sections. like filters & projects.
@@ -71,7 +72,7 @@ const filterGroupCallback = (ev) => {
  * @param {boolean} open
  */
 const filterHeadingUpdate = (el, open) => {
-  el.firstElementChild.innerText = open ? filterOpenDec : filterClosedDec;
+  el.firstElementChild.innerHTML = open ? filterOpenDec : filterClosedDec;
 };
 
 /**
@@ -110,7 +111,7 @@ for (let i = 0; i < collection.length; i++) {
  * @property {string} text text of the link.
  */
 //#endregion definitions
-// get project data => create project content => create {@link ContentManager} for project data/content
+//#region  get project data => create project content => create {@link ContentManager} for project data/content
 
 const ContOpenClass = "ContOpen";
 const ContCompressedClass = "ContentCompressed";
@@ -121,7 +122,6 @@ fetch(ContentPath)
   .then(
     /**
      * @param {{content: ContentData[], tags: string[], allStatus: string[]}} data
-     * @returns
      */
     (data) => {
       //#region URL parameters
@@ -407,3 +407,4 @@ fetch(ContentPath)
       //#endregion
     },
   );
+//#endregion
